@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Animaciones personalizadas ─────────────────────────────────── */
+
+@keyframes blob-morph {
+  0%,
+  100% {
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%;
+  }
+  25% {
+    border-radius: 40% 60% 30% 70% / 60% 40% 70% 50%;
+  }
+  50% {
+    border-radius: 50% 50% 60% 40% / 40% 70% 50% 60%;
+  }
+  75% {
+    border-radius: 70% 30% 50% 50% / 70% 40% 60% 50%;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: var(--sticker-rotate, rotate(0deg)) translateY(0px);
+  }
+  50% {
+    transform: var(--sticker-rotate, rotate(0deg)) translateY(-10px);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Clases de utilidad ─────────────────────────────────────────── */
+
+.animate-blob {
+  animation: blob-morph 10s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+.animate-float-delay-1 {
+  animation: float-slow 6s ease-in-out infinite 0.8s;
+}
+
+.animate-float-delay-2 {
+  animation: float-slow 4.5s ease-in-out infinite 1.6s;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+  opacity: 0;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* ── Scroll suave ───────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Botón CTA wiggle ───────────────────────────────────────────── */
+
+@keyframes cta-wiggle {
+  0%, 70%, 100% { transform: translateX(0); }
+  72%           { transform: translateX(-5px); }
+  75%           { transform: translateX(5px); }
+  78%           { transform: translateX(-4px); }
+  81%           { transform: translateX(4px); }
+  84%           { transform: translateX(-2px); }
+  87%           { transform: translateX(2px); }
+  90%           { transform: translateX(0); }
+}
+
+.animate-cta-wiggle {
+  animation: cta-wiggle 4s ease-in-out infinite;
+}
+
+/* ── Carrusel sin scrollbar ─────────────────────────────────────── */
+
+.menu-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Grain texture overlay ──────────────────────────────────────── */
+
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 150px 150px;
+}
