@@ -9,7 +9,7 @@ import Image from "next/image";
    Right: Collage de 3 platos + stickers flotantes
 ──────────────────────────────────────────────────────────────────── */
 
-const AVATARS = ["#b7d9a0", "#ffd580", "#a8c5f0"];
+const EMOJIS = ["😊", "🧑", "👩"];
 
 export function HeroSection() {
   return (
@@ -19,13 +19,7 @@ export function HeroSection() {
     >
       {/* Patrón de marca como textura de fondo */}
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: "url('/patterns/patron-negro.png')",
-          backgroundSize: "700px",
-          backgroundRepeat: "repeat",
-          opacity: 0.05,
-        }}
+        className="absolute inset-0 pointer-events-none bg-[url('/patterns/patron-negro.png')] bg-[length:700px] bg-repeat opacity-[0.05]"
       />
       <div className="max-w-[1200px] mx-auto w-full px-6 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-center">
@@ -51,18 +45,17 @@ export function HeroSection() {
 
             {/* H1 */}
             <h1
-              className="animate-fade-up-delay-1 leading-[0.95] tracking-tight mb-6 font-ibrand"
+              className="animate-fade-up-delay-1 leading-[0.95] tracking-tight mb-6 font-ibrand font-normal"
               style={{
                 fontSize: "clamp(2.8rem, 5.5vw, 5.2rem)",
                 color: "#144400",
-                fontWeight: 400,
               }}
             >
               Ahora{" "}
               <span className="whitespace-nowrap relative inline-block">
                 comer bien,
                 <svg
-                  style={{ bottom: "-8px", left: 0 }} className="absolute w-full h-[12px] overflow-visible"
+                  className="absolute -bottom-2 left-0 w-full h-[12px] overflow-visible"
                   viewBox="0 0 300 12"
                   preserveAspectRatio="none"
                   fill="none"
@@ -84,16 +77,15 @@ export function HeroSection() {
 
             {/* Subtítulo */}
             <p
-              className="animate-fade-up-delay-2 font-medium leading-relaxed mb-10 max-w-[460px] font-poppins"
+              className="animate-fade-up-delay-2 font-medium leading-relaxed mb-10 max-w-[460px] font-poppins opacity-[0.65]"
               style={{
                 fontSize: "clamp(1rem, 1.5vw, 1.15rem)",
                 color: "#144400",
-                opacity: 0.65,
               }}
             >
               Comida real, cocinada a fuego lento, lista para devorar toda la
               semana.{" "}
-              <strong style={{ opacity: 1, color: "#144400" }}>
+              <strong className="opacity-100" style={{ color: "#144400" }}>
                 Cero estrés.
               </strong>
             </p>
@@ -102,8 +94,8 @@ export function HeroSection() {
             <div className="animate-fade-up-delay-3 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <a
                 href="/menu"
-                className="group flex items-center gap-3 font-bold rounded-full border-0 cursor-pointer transition-all duration-300 no-underline font-poppins inline-flex"
-                style={{ backgroundColor: "#FFB000", color: "#144400", padding: "14px 28px", boxShadow: "0 8px 32px rgba(255, 176, 0, 0.4)" }}
+                className="group flex items-center gap-3 px-7 py-3.5 font-bold rounded-full border-0 cursor-pointer transition-all duration-300 no-underline font-poppins inline-flex"
+                style={{ backgroundColor: "#FFB000", color: "#144400", boxShadow: "0 8px 32px rgba(255, 176, 0, 0.4)" }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement;
                   el.style.transform = "translateY(-3px) scale(1.02)";
@@ -136,8 +128,8 @@ export function HeroSection() {
               </a>
 
               <span
-                className="text-sm font-semibold font-poppins"
-                style={{ color: "#144400", opacity: 0.5 }}
+                className="text-sm font-semibold font-poppins opacity-50"
+                style={{ color: "#144400" }}
               >
                 Sin permanencia ✌️
               </span>
@@ -146,12 +138,12 @@ export function HeroSection() {
             {/* Social proof */}
             <div className="animate-fade-up-delay-3 flex items-center gap-3 mt-10">
               <div className="flex">
-                {AVATARS.map((bg, i) => (
+                {EMOJIS.map((emoji, i) => (
                   <div
                     key={i}
                     className="w-9 h-9 rounded-full flex items-center justify-center text-base font-bold relative"
                   >
-                    {["😊", "🧑", "👩"][i]}
+                    {emoji}
                   </div>
                 ))}
               </div>
@@ -164,8 +156,8 @@ export function HeroSection() {
                   ))}
                 </div>
                 <span
-                  className="text-xs font-semibold font-poppins"
-                  style={{ color: "#144400", opacity: 0.65 }}
+                  className="text-xs font-semibold font-poppins opacity-[0.65]"
+                  style={{ color: "#144400" }}
                 >
                   +4.800 clientes felices esta semana
                 </span>
@@ -176,118 +168,90 @@ export function HeroSection() {
           {/* ═══════════════════════════════════
               RIGHT — Collage 3 platos
           ═══════════════════════════════════ */}
-          <div
-            className="animate-scale-in relative mx-auto w-[500px] h-[500px]"
-          >
-            {/* Blob de fondo */}
-            <div
-              className="absolute animate-blob w-[420px] h-[420px]"
-            />
-            <div
-              className="absolute animate-blob w-[300px] h-[300px]"
-            />
+          {/* Wrapper responsivo: 320px mobile → 500px desktop */}
+          <div className="animate-scale-in relative mx-auto w-[320px] h-[320px] md:w-[500px] md:h-[500px]">
+            <div className="absolute top-0 left-0 w-[500px] h-[500px] origin-top-left scale-[0.64] md:scale-100">
+              {/* Blob de fondo */}
+              <div className="absolute animate-blob w-[420px] h-[420px]" />
+              <div className="absolute animate-blob w-[300px] h-[300px]" />
 
-            {/* ── Plato 1 — GRANDE, ancla visual (hero-plate) ── */}
-            <div
-              className="absolute w-[260px] h-[260px] rounded-full overflow-hidden z-[10]"
-              style={{ top: "80px", left: "60px" }}
-            >
-              <Image
-                src="/images/hero-plate.png"
-                alt="Plato principal twonutris"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 260px, 520px"
-                quality={92}
-                priority
-              />
+              {/* ── Plato 1 — GRANDE, ancla visual (hero-plate) ── */}
+              <div
+                className="absolute w-[260px] h-[260px] rounded-full overflow-hidden z-[10]"
+                style={{ top: "80px", left: "60px" }}
+              >
+                <Image
+                  src="/images/hero-plate.png"
+                  alt="Plato principal twonutris"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 260px, 520px"
+                  quality={92}
+                  priority
+                />
+              </div>
+
+              {/* ── Plato 2 — MEDIANO, abajo a la derecha (beef stir fry) ── */}
+              <div
+                className="absolute w-[195px] h-[195px] rounded-full overflow-hidden z-[9]"
+                style={{ bottom: "40px", right: "20px" }}
+              >
+                <Image
+                  src="/images/plate-2.png"
+                  alt="Plato de carne twonutris"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 195px, 390px"
+                  quality={92}
+                />
+              </div>
+
+              {/* ── Plato 3 — PEQUEÑO, arriba a la derecha (ensalada) ── */}
+              <div
+                className="absolute w-[150px] h-[150px] rounded-full overflow-hidden z-[11]"
+                style={{ top: "20px", right: "40px" }}
+              >
+                <Image
+                  src="/images/plate-3.png"
+                  alt="Ensalada twonutris"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 150px, 300px"
+                  quality={92}
+                />
+              </div>
+
+              {/* ── Sticker 1 — Sin conservantes ── */}
+              <div
+                className="absolute animate-float z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white -rotate-6 shadow-[0_8px_24px_rgba(0,0,0,0.10)]"
+                style={{ top: "130px", left: "-20px", color: "#144400" }}
+              >
+                <span className="text-base">🥦</span>
+                <span>Sin conservantes</span>
+              </div>
+
+              {/* ── Sticker 2 — Calentar y listo ── */}
+              <div
+                className="absolute animate-float-delay-1 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white rotate-[4deg] shadow-[0_8px_24px_rgba(0,0,0,0.10)]"
+                style={{ top: "16px", left: "130px", color: "#144400" }}
+              >
+                <span className="text-base">🔥</span>
+                <span>Calentar y listo</span>
+              </div>
+
+              {/* ── Sticker 3 — Delivery semanal ── */}
+              <div
+                className="absolute animate-float-delay-2 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white -rotate-3 shadow-[0_8px_24px_rgba(0,0,0,0.10)]"
+                style={{ bottom: "28px", left: "16px", color: "#144400" }}
+              >
+                <span className="text-base">🛵</span>
+                <span>Delivery semanal</span>
+              </div>
+
+              {/* Dots decorativos */}
+              <div className="absolute w-3 h-3 rounded-full z-[5]" />
+              <div className="absolute w-2 h-2 rounded-full z-[5]" />
             </div>
-
-            {/* ── Plato 2 — MEDIANO, abajo a la derecha (beef stir fry) ── */}
-            <div
-              className="absolute w-[195px] h-[195px] rounded-full overflow-hidden z-[9]"
-              style={{ bottom: "40px", right: "20px" }}
-            >
-              <Image
-                src="/images/plate-2.png"
-                alt="Plato de carne twonutris"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 195px, 390px"
-                quality={92}
-              />
-            </div>
-
-            {/* ── Plato 3 — PEQUEÑO, arriba a la derecha (ensalada) ── */}
-            <div
-              className="absolute w-[150px] h-[150px] rounded-full overflow-hidden z-[11]"
-              style={{ top: "20px", right: "40px" }}
-            >
-              <Image
-                src="/images/plate-3.png"
-                alt="Ensalada twonutris"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 150px, 300px"
-                quality={92}
-              />
-            </div>
-
-            {/* ── Sticker 1 — Sin conservantes (izquierda del plato grande) ── */}
-            <div
-              className="absolute animate-float z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white"
-              style={{
-                top: "130px",
-                left: "-20px",
-                transform: "rotate(-6deg)",
-                color: "#144400",
-                boxShadow: "0 8px 24px rgba(0,0,0,0.10)",
-                ["--sticker-rotate" as string]: "rotate(-6deg)",
-              }}
-            >
-              <span className="text-base">🥦</span>
-              <span>Sin conservantes</span>
-            </div>
-
-            {/* ── Sticker 2 — Calentar y listo (entre plato grande y pequeño) ── */}
-            <div
-              className="absolute animate-float-delay-1 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white"
-              style={{
-                top: "16px",
-                left: "130px",
-                transform: "rotate(4deg)",
-                color: "#144400",
-                boxShadow: "0 8px 24px rgba(0,0,0,0.10)",
-                ["--sticker-rotate" as string]: "rotate(4deg)",
-              }}
-            >
-              <span className="text-base">🔥</span>
-              <span>Calentar y listo</span>
-            </div>
-
-            {/* ── Sticker 3 — Delivery semanal (bajo plato grande) ── */}
-            <div
-              className="absolute animate-float-delay-2 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white"
-              style={{
-                bottom: "28px",
-                left: "16px",
-                transform: "rotate(-3deg)",
-                color: "#144400",
-                boxShadow: "0 8px 24px rgba(0,0,0,0.10)",
-                ["--sticker-rotate" as string]: "rotate(-3deg)",
-              }}
-            >
-              <span className="text-base">🛵</span>
-              <span>Delivery semanal</span>
-            </div>
-
-            {/* Dots decorativos */}
-            <div
-              className="absolute w-3 h-3 rounded-full z-[5]"
-            />
-            <div
-              className="absolute w-2 h-2 rounded-full z-[5]"
-            />
           </div>
 
         </div>
