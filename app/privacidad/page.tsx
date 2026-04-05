@@ -1,6 +1,18 @@
 import { Navbar } from "@/components/Navbar";
 
-const SECTIONS = [
+interface PrivacyItem {
+  subtitle: string | null;
+  text: string;
+  highlight?: boolean;
+}
+
+interface PrivacySection {
+  num: string;
+  title: string;
+  items: PrivacyItem[];
+}
+
+const SECTIONS: PrivacySection[] = [
   {
     num: "1",
     title: "Responsable",
