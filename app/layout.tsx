@@ -61,8 +61,8 @@ export const metadata: Metadata = {
     images: ["/icons/Imagotipo.png"],
   },
   icons: {
-    icon: "/icons/Imagotipo.png",
-    apple: "/icons/Imagotipo.png",
+    icon: "/icons/Isotipo.png",
+    apple: "/icons/Isotipo.png",
   },
   alternates: {
     canonical: BASE_URL,
