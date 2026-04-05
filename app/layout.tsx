@@ -17,12 +17,12 @@ const ibrand = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "twonutris — Tu chef y tu nutri en un solo táper",
+  title: "twonutris",
   description:
     "Comida real, cocinada a fuego lento, lista para devorar toda la semana. Cero estrés.",
   icons: {
-    icon: "/icons/isotipo.png",
-    apple: "/icons/isotipo.png",
+    icon: "/icons/Isotipo.png",
+    apple: "/icons/Isotipo.png",
   },
 };
 
