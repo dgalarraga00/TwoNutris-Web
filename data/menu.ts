@@ -82,7 +82,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mar-p3",
     name: "Falafel clásico",
-    image: "/images/Fotos-menu/Falafel clásico .png",
+    image: "/images/Fotos-menu/Falafel clasico.png",
     weight: 340, calories: 750,
     macros: { protein: 25, carbs: 80, fat: 38 },
     allergens: ["Huevo", "Sésamo", "Apio"],
@@ -126,7 +126,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "jue-p1",
     name: "Pollo cajún con arroz",
-    image: "/images/Fotos-menu/Pollo cajún con arroz.png",
+    image: "/images/Fotos-menu/Pollo cajun con arroz.png",
     weight: 300, calories: 452,
     macros: { protein: 24, carbs: 44, fat: 20 },
     allergens: ["Apio", "Mostaza"],
@@ -136,7 +136,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "jue-p2",
     name: "Fideuá de camarón",
-    image: "/images/Fotos-menu/Fideua de camarón.png",
+    image: "/images/Fotos-menu/Fideua de camaron.png",
     weight: 360, calories: 496,
     macros: { protein: 34, carbs: 62, fat: 12 },
     allergens: ["Mariscos", "Gluten"],
@@ -158,7 +158,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "vie-p1",
     name: "Rigatoni con salsa boletus y jamón",
-    image: "/images/Fotos-menu/Rigatoni con salsa boletus y jamón.png",
+    image: "/images/Fotos-menu/Rigatoni con salsa boletus y jamon.png",
     weight: 450, calories: 756,
     macros: { protein: 27, carbs: 97, fat: 25 },
     allergens: ["Gluten", "Lácteos", "Sulfitos"],
@@ -189,10 +189,10 @@ export const weeklyMenu: MenuItem[] = [
   /* ── ENSALADAS ───────────────────────────────────────────────── */
 
   { id: "lun-e1", name: "Choclito fresco", image: "/images/Fotos-menu/Choclito fresco.png", weight: 150, calories: 65, macros: { protein: 2, carbs: 12, fat: 0 }, allergens: ["Maíz"], ingredients: "Este plato está hecho con: Ensalada fresca y sustanciosa que combina choclo cocido tierno (granos de maíz), mezclado con vainitas verdes picadas y cubos de tomate riñón sin semillas. Se completa con plumas de cebolla paiteña previamente curtida en limón y sal.\n\n*Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.", category: "ensalada", day: "lunes" },
-  { id: "lun-e2", name: "Piña Huerto", image: "/images/Fotos-menu/Piña Huerto.png", weight: 120, calories: 35, macros: { protein: 0, carbs: 8, fat: 0 }, allergens: [], ingredients: "Este plato está hecho con: Ensalada ligera y refrescante sobre una base de hojas suaves de lechuga de seda. Combina la frescura del pepino con cáscara y el toque crocante del pimiento verde fresco, contrastando con cubos de piña natural que aportan dulzor y acidez tropical.\n\n*Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.", category: "ensalada", day: "lunes" },
+  { id: "lun-e2", name: "Piña Huerto", image: "/images/Fotos-menu/Pina Huerto.png", weight: 120, calories: 35, macros: { protein: 0, carbs: 8, fat: 0 }, allergens: [], ingredients: "Este plato está hecho con: Ensalada ligera y refrescante sobre una base de hojas suaves de lechuga de seda. Combina la frescura del pepino con cáscara y el toque crocante del pimiento verde fresco, contrastando con cubos de piña natural que aportan dulzor y acidez tropical.\n\n*Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.", category: "ensalada", day: "lunes" },
 
   { id: "mar-e1", name: "Coleslaw Quiteño", image: "/images/Fotos-menu/La granosa.png", weight: 130, calories: 40, macros: { protein: 1, carbs: 9, fat: 0 }, allergens: ["Apio"], ingredients: "Este plato está hecho con: Col blanca rallada finamente y zanahoria rallada, apio picado pequeño para un toque aromático y crujiente, y manzana roja nacional (picada con su cáscara) que equilibra los sabores vegetales con un contraste dulce.\n\n*Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.", category: "ensalada", day: "martes" },
-  { id: "mar-e2", name: "La granosa", image: "/images/Fotos-menu/Coleslaw Quiteño.png", weight: 130, calories: 55, macros: { protein: 3, carbs: 9, fat: 0 }, allergens: ["Leguminosas"], ingredients: "Este plato está hecho con: Ensalada nutritiva con base de hojas de espinaca troceadas y láminas finas de zuquini crudo, que aportan una textura crujiente y delicada. Se combina con la frescura del tomate cherry y garbanzos cocidos, que añaden textura harinosa agradable y valor proteico.\n\n*Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.", category: "ensalada", day: "martes" },
+  { id: "mar-e2", name: "La granosa", image: "/images/Fotos-menu/Coleslaw Quiteno.png", weight: 130, calories: 55, macros: { protein: 3, carbs: 9, fat: 0 }, allergens: ["Leguminosas"], ingredients: "Este plato está hecho con: Ensalada nutritiva con base de hojas de espinaca troceadas y láminas finas de zuquini crudo, que aportan una textura crujiente y delicada. Se combina con la frescura del tomate cherry y garbanzos cocidos, que añaden textura harinosa agradable y valor proteico.\n\n*Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.", category: "ensalada", day: "martes" },
 
   { id: "mie-e1", name: "Flores del campo", image: "/images/Fotos-menu/Flores del campo.png", weight: 130, calories: 42, macros: { protein: 2, carbs: 8, fat: 0 }, allergens: ["Sulfitos"], ingredients: "Este plato está hecho con: Floretes pequeños de brócoli y coliflor blanqueados al punto para mantener su textura firme. Se añade color y frescura con pimiento rojo picado finamente, y se equilibra con el toque dulce de las pasas negras que contrastan con los vegetales crucíferos.\n\n*Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.", category: "ensalada", day: "miercoles" },
   { id: "mie-e2", name: "Hoja fuerte", image: "/images/Fotos-menu/Hoja fuerte.png", weight: 130, calories: 50, macros: { protein: 3, carbs: 9, fat: 0 }, allergens: ["Leguminosas"], ingredients: "Este plato está hecho con: Ensalada rústica y nutritiva basada en acelga fresca (con sus tallos y hojas troceados y blanqueados). Gana frescura con láminas de rábano y rodajas finas de zanahoria. Se completa con lentejas cocidas al dente que aportan cuerpo y textura al plato.\n\n*Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.", category: "ensalada", day: "miercoles" },
@@ -207,7 +207,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "pos-3",
     name: "Mix de Frutas Frescas (Del día)",
-    image: "/images/Fotos-menu/Mix de Frutas Frescas (Solo Sandía).png",
+    image: "/images/Fotos-menu/Mix de Frutas Frescas (Solo Sandia).png",
     weight: 130, calories: 70,
     macros: { protein: 0, carbs: 15, fat: 0 },
     allergens: [],
@@ -227,7 +227,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "pos-2",
     name: "Pastel de Plátano",
-    image: "/images/Fotos-menu/Pastel de Plátano.png",
+    image: "/images/Fotos-menu/Pastel de Platano.png",
     weight: 85, calories: 340,
     macros: { protein: 5, carbs: 56, fat: 13 },
     allergens: ["Gluten", "Huevo", "Lácteos", "Frutos secos"],

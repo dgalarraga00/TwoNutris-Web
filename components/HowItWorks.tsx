@@ -39,7 +39,7 @@ function BigFeatureCard() {
 
   return (
     <div
-      className="relative rounded-3xl overflow-hidden flex flex-col justify-between cursor-default transition-transform duration-300 hover:scale-[1.01] min-h-[420px]"
+      className="relative rounded-3xl overflow-hidden flex flex-col justify-between cursor-default transition-transform duration-300 hover:scale-[1.01] min-h-[420px] p-8"
       style={{ backgroundColor: "#144400" }}
       onMouseEnter={() => {
         if (blobRef.current)
@@ -284,23 +284,23 @@ function TreasureMapSteps() {
           aria-hidden="true"
         >
           <path
-            d="M 124 70 C 124 170, 574 170, 574 270 C 574 370, 124 370, 124 470"
+            d="M 179 70 C 179 170, 755 170, 755 270 C 755 370, 179 370, 179 470"
             fill="none"
             stroke="rgba(20, 68, 0, 0.05)"
             strokeWidth="14"
             strokeLinecap="round"
           />
           <path
-            d="M 124 70 C 124 170, 574 170, 574 270 C 574 370, 124 370, 124 470"
+            d="M 179 70 C 179 170, 755 170, 755 270 C 755 370, 179 370, 179 470"
             fill="none"
             stroke="rgba(20, 68, 0, 0.2)"
             strokeWidth="2.5"
             strokeLinecap="round"
             strokeDasharray="8 9"
           />
-          <circle cx="124" cy="70"  r="5" fill="#FFB000" />
-          <circle cx="574" cy="270" r="5" fill="#FFB000" />
-          <circle cx="124" cy="470" r="5" fill="#FFB000" />
+          <circle cx="179" cy="70"  r="5" fill="#FFB000" />
+          <circle cx="755" cy="270" r="5" fill="#FFB000" />
+          <circle cx="179" cy="470" r="5" fill="#FFB000" />
         </svg>
 
         {STEPS.map((step, i) => (

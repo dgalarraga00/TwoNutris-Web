@@ -161,6 +161,7 @@ export default function SobreNosotrosPage() {
         <div className="px-4 my-8">
           <div
             className="max-w-[1200px] mx-auto px-8 md:px-14 py-14 relative overflow-hidden rounded-[3rem]"
+            style={{ backgroundColor: "#FFFBE4" }}
           >
             {/* Blob decorativo */}
             <div

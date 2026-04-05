@@ -103,6 +103,7 @@ export function HeroSection() {
               <a
                 href="/menu"
                 className="group flex items-center gap-3 font-bold rounded-full border-0 cursor-pointer transition-all duration-300 no-underline font-poppins inline-flex"
+                style={{ backgroundColor: "#FFB000", color: "#144400", padding: "14px 28px", boxShadow: "0 8px 32px rgba(255, 176, 0, 0.4)" }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement;
                   el.style.transform = "translateY(-3px) scale(1.02)";

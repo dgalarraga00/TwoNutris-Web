@@ -256,6 +256,7 @@ export function Planes() {
           <button
             type="button"
             className="flex-shrink-0 px-7 py-3.5 rounded-full text-sm font-bold border-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] font-poppins no-underline"
+            style={{ backgroundColor: "#144400", color: "#FFFBE4" }}
             onClick={() => window.location.href = "/empresas"}
           >
             Ver planes empresariales
