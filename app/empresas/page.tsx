@@ -252,7 +252,7 @@ export default function EmpresasPage() {
                         </svg>
                       </div>
                       <div>
-                        <p className="text-sm font-bold mb-0.5 font-poppins bg-white">
+                        <p className="text-sm font-bold mb-0.5 font-poppins text-white">
                           {title}
                         </p>
                         <p className="text-xs leading-relaxed font-poppins" style={{ color: "rgba(255,255,255,0.5)" }}>
