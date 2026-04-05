@@ -190,6 +190,7 @@ export function HeroSection() {
             {/* ── Plato 1 — GRANDE, ancla visual (hero-plate) ── */}
             <div
               className="absolute w-[260px] h-[260px] rounded-full overflow-hidden z-[10]"
+              style={{ top: "80px", left: "60px" }}
             >
               <Image
                 src="/images/hero-plate.png"
@@ -205,6 +206,7 @@ export function HeroSection() {
             {/* ── Plato 2 — MEDIANO, abajo a la derecha (beef stir fry) ── */}
             <div
               className="absolute w-[195px] h-[195px] rounded-full overflow-hidden z-[9]"
+              style={{ bottom: "40px", right: "20px" }}
             >
               <Image
                 src="/images/plate-2.png"
@@ -219,6 +221,7 @@ export function HeroSection() {
             {/* ── Plato 3 — PEQUEÑO, arriba a la derecha (ensalada) ── */}
             <div
               className="absolute w-[150px] h-[150px] rounded-full overflow-hidden z-[11]"
+              style={{ top: "20px", right: "40px" }}
             >
               <Image
                 src="/images/plate-3.png"
