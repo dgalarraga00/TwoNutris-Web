@@ -16,14 +16,95 @@ const ibrand = localFont({
   display: "swap",
 });
 
+const BASE_URL = "https://home.twonutris.net";
+
 export const metadata: Metadata = {
-  title: "twonutris",
-  description:
-    "Comida real, cocinada a fuego lento, lista para devorar toda la semana. Cero estrés.",
-  icons: {
-    icon: "/icons/Isotipo.png",
-    apple: "/icons/Isotipo.png",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "TwoNutris | Alimentación a tu medida",
+    template: "%s | TwoNutris",
   },
+  description:
+    "Comida real, cocinada a fuego lento, lista para devorar toda la semana. Meal prep saludable con delivery en Quito. Cero estrés.",
+  keywords: [
+    "comida saludable",
+    "meal prep Quito",
+    "delivery de comida",
+    "planes nutricionales",
+    "TwoNutris",
+    "comida a domicilio Quito",
+  ],
+  authors: [{ name: "TwoNutris" }],
+  creator: "TwoNutris",
+  openGraph: {
+    type: "website",
+    locale: "es_EC",
+    url: BASE_URL,
+    siteName: "TwoNutris",
+    title: "TwoNutris | Alimentación a tu medida",
+    description:
+      "Comida real, cocinada a fuego lento, lista para devorar toda la semana. Meal prep saludable con delivery en Quito.",
+    images: [
+      {
+        url: "/icons/Imagotipo.png",
+        width: 1200,
+        height: 630,
+        alt: "TwoNutris — Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TwoNutris | Alimentación a tu medida",
+    description:
+      "Comida real, cocinada a fuego lento, lista para devorar toda la semana. Meal prep saludable con delivery en Quito.",
+    images: ["/icons/Imagotipo.png"],
+  },
+  icons: {
+    icon: "/icons/Imagotipo.png",
+    apple: "/icons/Imagotipo.png",
+  },
+  alternates: {
+    canonical: BASE_URL,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FoodEstablishment",
+  name: "TwoNutris",
+  url: "https://home.twonutris.net",
+  description:
+    "Comida real, cocinada a fuego lento, con delivery semanal en Quito. Meal prep saludable sin estrés.",
+  image: "https://home.twonutris.net/icons/Imagotipo.png",
+  servesCuisine: "Saludable, Meal Prep",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Quito",
+    addressRegion: "Pichincha",
+    addressCountry: "EC",
+  },
+  areaServed: [
+    "Quito Norte",
+    "Quito Centro",
+    "Quito Sur",
+    "Cumbayá",
+    "Tumbaco",
+    "Valle de los Chillos",
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Menú Semanal TwoNutris",
+    url: "https://home.twonutris.net/menu",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    telephone: "+593983392007",
+    availableLanguage: "Spanish",
+  },
+  sameAs: ["https://www.instagram.com/twonutris"],
 };
 
 export default function RootLayout({
@@ -33,6 +114,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${poppins.variable} ${ibrand.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className="grain font-poppins antialiased"
         style={{ backgroundColor: "#FFFBE4" }}

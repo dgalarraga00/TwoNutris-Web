@@ -1,6 +1,27 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 
-const SECTIONS = [
+interface TermsItem {
+  subtitle: string;
+  text: string;
+}
+
+interface TermsSection {
+  num: string;
+  title: string;
+  items: TermsItem[];
+}
+
+export const metadata: Metadata = {
+  title: "Términos y Condiciones",
+  description:
+    "Leé los términos y condiciones del servicio de TwoNutris. Todo lo que necesitás saber sobre el uso de la plataforma.",
+  alternates: {
+    canonical: "https://home.twonutris.net/terminos",
+  },
+};
+
+const SECTIONS: TermsSection[] = [
   {
     num: "1",
     title: "Uso de la App y Sistema de Créditos",
@@ -254,6 +275,7 @@ export default function TerminosPage() {
           <a
             href="mailto:info@twonutris.net"
             className="inline-flex items-center px-7 py-3 rounded-full text-sm font-bold transition-all duration-200 hover:scale-[1.03] font-poppins no-underline"
+            style={{ backgroundColor: "#FFB000", color: "#144400" }}
           >
             Contactar a TwoNutris
           </a>

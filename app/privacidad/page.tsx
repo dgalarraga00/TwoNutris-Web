@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
+
+export const metadata: Metadata = {
+  title: "Política de Privacidad",
+  description:
+    "Conocé cómo TwoNutris recopila, usa y protege tu información personal. Comprometidos con tu privacidad.",
+  alternates: {
+    canonical: "https://home.twonutris.net/privacidad",
+  },
+};
 
 interface PrivacyItem {
   subtitle: string | null;
@@ -171,6 +181,7 @@ export default function PrivacidadPage() {
             <a
               href="mailto:info@twonutris.net"
               className="inline-flex items-center px-7 py-3 rounded-full text-sm font-bold transition-all duration-200 hover:scale-[1.03] font-poppins no-underline"
+              style={{ backgroundColor: "#FFB000", color: "#144400" }}
             >
               Contactar a TwoNutris
             </a>
