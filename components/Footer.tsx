@@ -115,7 +115,7 @@ export function Footer({ onManageCookies }: { onManageCookies: () => void }) {
               Síguenos
             </span>
             <Image
-              src="/icons/isotipo.png"
+              src="/icons/Isotipo.png"
               alt="twonutris"
               width={80}
               height={80}

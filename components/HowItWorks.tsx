@@ -40,6 +40,7 @@ function BigFeatureCard() {
   return (
     <div
       className="relative rounded-3xl overflow-hidden flex flex-col justify-between cursor-default transition-transform duration-300 hover:scale-[1.01] min-h-[420px]"
+      style={{ backgroundColor: "#144400" }}
       onMouseEnter={() => {
         if (blobRef.current)
           blobRef.current.style.borderRadius = "40% 60% 70% 30% / 40% 70% 30% 60%";
@@ -306,6 +307,7 @@ function TreasureMapSteps() {
           <div
             key={step.title}
             className="absolute w-[220px] z-[10]"
+            style={{ left: positions[i].left, top: positions[i].top }}
           >
             <StepCard {...step} />
           </div>

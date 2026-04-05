@@ -153,6 +153,7 @@ export function HomepageMenuShowcase() {
   return (
     <section
       className="py-24 overflow-hidden relative rounded-t-[2.5rem] -mt-10"
+      style={{ backgroundColor: "#144400" }}
     >
       {/* Blob decorativo fondo */}
       <div
