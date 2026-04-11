@@ -26,7 +26,6 @@ export const ALLERGEN_MAP: Record<string, { icon: LucideIcon; label: string }> =
 
 export function DishModal({ plate, onClose }: { plate: MenuItem; onClose: () => void }) {
   const stats = [
-    { label: "PESO",  value: `${plate.weight}g` },
     { label: "KCAL",  value: `${plate.calories}` },
     { label: "G",     value: `${plate.macros.fat}g` },
     { label: "CH",    value: `${plate.macros.carbs}g` },
@@ -35,8 +34,7 @@ export function DishModal({ plate, onClose }: { plate: MenuItem; onClose: () => 
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.55)", backdropFilter: "blur(4px)" }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/55 backdrop-blur"
       onClick={onClose}
     >
       <div
@@ -104,8 +102,8 @@ export function DishModal({ plate, onClose }: { plate: MenuItem; onClose: () => 
 
           {/* Stats */}
           <div
-            className="grid rounded-2xl"
-            style={{ gridTemplateColumns: `repeat(${stats.length}, 1fr)`, border: "1px solid #e5e7eb" }}
+            className="grid rounded-2xl border border-gray-200"
+            style={{ gridTemplateColumns: `repeat(${stats.length}, 1fr)` }}
           >
             {stats.map(({ label, value }, i) => (
               <div
@@ -116,7 +114,7 @@ export function DishModal({ plate, onClose }: { plate: MenuItem; onClose: () => 
                 <span className="text-sm font-bold leading-none font-poppins text-gray-900">
                   {value}
                 </span>
-                <span className="mt-1.5 font-medium font-poppins text-gray-400" style={{ fontSize: "10px" }}>
+                <span className="mt-1.5 font-medium font-poppins text-gray-400 text-[10px]">
                   {label}
                 </span>
               </div>
@@ -129,8 +127,7 @@ export function DishModal({ plate, onClose }: { plate: MenuItem; onClose: () => 
               Ingredientes
             </span>
             <p
-              className="text-sm leading-relaxed rounded-2xl p-4 whitespace-pre-line font-poppins bg-gray-50 text-gray-700"
-              style={{ border: "1px solid #e5e7eb" }}
+              className="text-sm leading-relaxed rounded-2xl p-4 whitespace-pre-line font-poppins bg-gray-50 text-gray-700 border border-gray-200"
             >
               {plate.ingredients}
             </p>
