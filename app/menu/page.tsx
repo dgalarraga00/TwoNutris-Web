@@ -165,7 +165,7 @@ function CategorySection({
 function getWeekRange() {
   const now = new Date();
   const day = now.getDay();
-  const diffToMonday = day === 0 ? -6 : 1 - day;
+  const diffToMonday = day === 0 ? 1 : day === 6 ? 2 : 1 - day;
   const monday = new Date(now);
   monday.setDate(now.getDate() + diffToMonday);
   const friday = new Date(monday);
