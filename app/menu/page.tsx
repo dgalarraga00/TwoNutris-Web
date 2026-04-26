@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Flame, Leaf, Salad, Cookie } from "lucide-react";
+import { Flame, Leaf, Salad, Cookie, CalendarOff } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
@@ -15,11 +15,10 @@ function DishCard({ plate, onClick }: { plate: MenuItem; onClick: () => void }) 
     <button
       type="button"
       onClick={onClick}
-      className="group text-left flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 w-full bg-white"
+      className="group text-left flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 w-full bg-white cursor-pointer"
       style={{
         boxShadow: "0 2px 12px rgba(20,68,0,0.07)",
         border: "1px solid rgba(20,68,0,0.06)",
-        cursor: "pointer",
       }}
     >
       <div className="relative w-full overflow-hidden aspect-[4/3]">
@@ -27,8 +26,7 @@ function DishCard({ plate, onClick }: { plate: MenuItem; onClick: () => void }) 
           src={plate.image}
           alt={plate.name}
           fill
-          style={{ transition: "transform 0.4s ease" }}
-          className="group-hover:scale-105 object-cover"
+          className="group-hover:scale-105 object-cover transition-transform duration-[400ms] ease-in-out"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
           quality={90}
         />
@@ -53,16 +51,16 @@ function DishCard({ plate, onClick }: { plate: MenuItem; onClick: () => void }) 
           style={{ backgroundColor: "#FFFBE4", color: "#144400" }}
         >
           <span>P {plate.macros.protein}g</span>
-          <span style={{ opacity: 0.3 }}>·</span>
+          <span className="opacity-30">·</span>
           <span>C {plate.macros.carbs}g</span>
-          <span style={{ opacity: 0.3 }}>·</span>
+          <span className="opacity-30">·</span>
           <span>G {plate.macros.fat}g</span>
         </div>
       </div>
 
       <div className="flex items-center gap-1.5 px-3 py-2.5" style={{ borderTop: "1px solid rgba(20,68,0,0.06)" }}>
         {plate.allergens.length === 0 ? (
-          <span className="text-xs font-poppins" style={{ color: "#144400", opacity: 0.3 }}>
+          <span className="text-xs font-poppins opacity-30" style={{ color: "#144400" }}>
             Sin alérgenos
           </span>
         ) : (
@@ -130,28 +128,49 @@ function CategorySection({
       ) : (
         /* Platos principales y ensaladas: por día */
         <div className="flex flex-col gap-8">
-          {DAYS.map(({ key, label }) => {
+          {DAYS.map(({ key, label, holiday }) => {
             const dayItems = items.filter((p) => p.day === key);
-            if (dayItems.length === 0) return null;
+            const isEmpty = dayItems.length === 0;
             return (
               <div key={key} className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
                 {/* Etiqueta del día */}
-                <div
-                  className="flex-shrink-0 flex items-center justify-center rounded-2xl px-4 py-2 md:py-3 md:w-28 text-center min-w-[88px]"
-                >
+                <div className="flex-shrink-0 flex items-center justify-center rounded-2xl px-4 py-2 md:py-3 md:w-28 text-center min-w-[88px]">
                   <span
                     className="text-sm font-bold font-poppins"
-                    style={{ color: "#144400" }}
+                    style={{ color: isEmpty ? "rgba(20,68,0,0.35)" : "#144400" }}
                   >
                     {label}
                   </span>
                 </div>
-                {/* Platos del día */}
-                <div className={`grid gap-4 flex-1 w-full ${category === "ensalada" ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"}`}>
-                  {dayItems.map((p) => (
-                    <DishCard key={p.id} plate={p} onClick={() => onSelect(p)} />
-                  ))}
-                </div>
+                {isEmpty && holiday ? (
+                  /* Banner feriado */
+                  <div
+                    className="flex-1 w-full flex items-center gap-5 px-6 py-5 rounded-2xl"
+                    style={{ backgroundColor: "#FFFBE4", border: "1.5px dashed #FFB000" }}
+                  >
+                    <div
+                      className="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl"
+                      style={{ backgroundColor: "#FFB000" }}
+                    >
+                      <CalendarOff size={20} strokeWidth={2} style={{ color: "#144400" }} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold font-poppins" style={{ color: "#144400" }}>
+                        Feriado Nacional
+                      </p>
+                      <p className="text-xs font-poppins mt-0.5" style={{ color: "#144400", opacity: 0.55 }}>
+                        Este día no trabajamos. ¡Nos vemos la próxima semana!
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  /* Platos del día */
+                  <div className={`grid gap-4 flex-1 w-full ${category === "ensalada" ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"}`}>
+                    {dayItems.map((p) => (
+                      <DishCard key={p.id} plate={p} onClick={() => onSelect(p)} />
+                    ))}
+                  </div>
+                )}
               </div>
             );
           })}
