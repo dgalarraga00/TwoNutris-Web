@@ -3,12 +3,14 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import { X, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useCart } from "./CartProvider";
 import { MIN_ORDER } from "@/lib/catalog";
 
 export function CartSlideOver() {
   const router = useRouter();
+  const pathname = usePathname();
+  const isCheckout = pathname.startsWith("/checkout");
   const {
     items,
     total,
@@ -40,6 +42,8 @@ export function CartSlideOver() {
 
   const progress = Math.min((total / MIN_ORDER) * 100, 100);
   const remaining = Math.max(MIN_ORDER - total, 0);
+
+  if (isCheckout) return null;
 
   return (
     <>
