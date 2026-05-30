@@ -50,10 +50,9 @@ function LoginForm() {
           password,
         });
         if (error) throw error;
-        router.push(next);
-        router.refresh();
+        window.location.href = `/auth/redirect?next=${encodeURIComponent(next)}`;
       } else {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -61,6 +60,10 @@ function LoginForm() {
           },
         });
         if (error) throw error;
+        if (data.user?.identities?.length === 0) {
+          setError("Ya existe una cuenta con ese email. Iniciá sesión.");
+          return;
+        }
         setSuccess(
           "¡Cuenta creada! Revisá tu email para confirmar tu cuenta."
         );

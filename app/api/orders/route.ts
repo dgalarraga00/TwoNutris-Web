@@ -1,17 +1,17 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { prisma } from "@/lib/prisma";
-import { KUSHKI_BASE_URL } from "@/utils/kushki";
+import { calculateDeliveryDate } from "@/lib/delivery";
 
 interface OrderPayload {
   items: { id: string; name: string; price: number; quantity: number }[];
   deliveryAddress: string;
   deliveryInstructions?: string;
-  deliveryZone: "URBAN" | "PERIPHERAL";
-  kushkiToken: string;
+  fullName?: string;
+  phone?: string;
 }
 
-const DELIVERY_FEE = { URBAN: 3, PERIPHERAL: 4 };
+const DELIVERY_FEE = 3;
 
 export async function POST(request: Request) {
   try {
@@ -25,64 +25,51 @@ export async function POST(request: Request) {
     }
 
     const body: OrderPayload = await request.json();
-    const { items, deliveryAddress, deliveryInstructions, deliveryZone, kushkiToken } = body;
+    const {
+      items,
+      deliveryAddress,
+      deliveryInstructions,
+      fullName,
+      phone,
+    } = body;
 
     if (!items?.length) {
       return NextResponse.json({ error: "Carrito vacío" }, { status: 400 });
     }
 
-    const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
-    const delivery = DELIVERY_FEE[deliveryZone];
-    const total = subtotal + delivery;
-
-    // Cobro via Kushki (server-side)
-    if (process.env.KUSHKI_PRIVATE_KEY) {
-      const kushkiRes = await fetch(
-        `${KUSHKI_BASE_URL}/card/v1/charges`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Private_Merchant_Id: process.env.KUSHKI_PRIVATE_KEY,
-          },
-          body: JSON.stringify({
-            token: { token: kushkiToken },
-            amount: {
-              subtotalIva: 0,
-              subtotalIva0: total,
-              iva: 0,
-              currency: "USD",
-            },
-            metadata: { orderedBy: user.email },
-          }),
-        }
+    if (!deliveryAddress?.trim()) {
+      return NextResponse.json(
+        { error: "Dirección de entrega requerida" },
+        { status: 400 }
       );
-
-      if (!kushkiRes.ok) {
-        const err = await kushkiRes.json() as { message?: string };
-        return NextResponse.json(
-          { error: err.message ?? "Error en el pago" },
-          { status: 402 }
-        );
-      }
     }
 
-    // Upsert perfil
+    const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
+    const delivery = DELIVERY_FEE;
+    const commission = Math.round((subtotal + delivery) * 0.0575 * 100) / 100;
+    const total = subtotal + delivery + commission;
+
+    const profileUpdate: { fullName?: string; whatsapp?: string } = {};
+    if (fullName) profileUpdate.fullName = fullName;
+    if (phone) profileUpdate.whatsapp = phone;
+
     await prisma.profile.upsert({
       where: { id: user.id },
-      update: {},
-      create: { id: user.id, fullName: user.email },
+      update: profileUpdate,
+      create: { id: user.id, fullName: fullName ?? user.email ?? "", whatsapp: phone ?? null },
     });
 
-    // Crear orden
+    const deliveryDate = calculateDeliveryDate();
+
+    // Crear orden en estado PENDING — se confirma cuando PayPhone lo aprueba
     const order = await prisma.order.create({
       data: {
         profileId: user.id,
         status: "PENDING",
         total,
-        deliveryAddress,
-        deliveryInstructions: deliveryInstructions ?? null,
-        kushkiToken,
+        deliveryAddress: deliveryAddress.trim(),
+        deliveryInstructions: deliveryInstructions?.trim() ?? null,
+        deliveryDate,
         items: {
           create: items.map((i) => ({
             dishId: i.id,
@@ -94,9 +81,11 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json({ orderId: order.id });
+    const amountCents = Math.round(total * 100);
+
+    return NextResponse.json({ orderId: order.id, amountCents });
   } catch (err) {
-    console.error("[orders]", err);
+    console.error("[orders POST]", err);
     return NextResponse.json({ error: "Error interno" }, { status: 500 });
   }
 }

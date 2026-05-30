@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { X, Microwave, ChevronDown, UtensilsCrossed } from "lucide-react";
+import { X, Microwave, ChevronDown, UtensilsCrossed, ClipboardList } from "lucide-react";
 import { useState, useEffect } from "react";
 import { CatalogDish, DishType } from "@/lib/catalog";
-import { ALLERGEN_MAP } from "@/components/DishModal";
+import { ALLERGEN_MAP } from "@/lib/allergens";
 import { Leaf } from "lucide-react";
 
 function Accordion({
@@ -35,7 +35,7 @@ function Accordion({
         />
       </button>
       {open && (
-        <div className="px-4 py-3 max-h-40 overflow-y-scroll text-sm leading-relaxed font-poppins text-gray-700 whitespace-pre-line bg-white">
+        <div className="px-4 py-3 max-h-56 overflow-y-auto text-sm leading-relaxed font-poppins text-gray-700 whitespace-pre-line bg-white">
           {children}
         </div>
       )}
@@ -175,6 +175,88 @@ export function DishDetailModal({
           >
             {dish.ingredients}
           </Accordion>
+
+          {/* Tabla nutrimental — desplegable, sólo cuando hay datos extendidos */}
+          {dish.extendedNutrition && (
+            <Accordion
+              title="Tabla nutrimental"
+              icon={<ClipboardList size={15} className="text-leaf" />}
+              defaultOpen={false}
+            >
+              <table className="w-full text-xs font-poppins">
+                <tbody>
+                  {dish.extendedNutrition.servingSize != null && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-1.5 text-gray-500">Tamaño de porción</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">
+                        {dish.extendedNutrition.servingSize}{dish.extendedNutrition.servingUnit ?? "g"}
+                      </td>
+                    </tr>
+                  )}
+                  {dish.macros.fat > 0 && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-1.5 text-gray-500">Grasa total</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">{dish.macros.fat}g</td>
+                    </tr>
+                  )}
+                  {dish.extendedNutrition.fatSaturated != null && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-1.5 pl-4 text-gray-400">Grasa saturada</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">{dish.extendedNutrition.fatSaturated}g</td>
+                    </tr>
+                  )}
+                  {dish.extendedNutrition.fatTrans != null && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-1.5 pl-4 text-gray-400">Grasa trans</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">{dish.extendedNutrition.fatTrans}g</td>
+                    </tr>
+                  )}
+                  {dish.extendedNutrition.cholesterol != null && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-1.5 text-gray-500">Colesterol</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">{dish.extendedNutrition.cholesterol}mg</td>
+                    </tr>
+                  )}
+                  {dish.extendedNutrition.sodium != null && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-1.5 text-gray-500">Sodio</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">{dish.extendedNutrition.sodium}mg</td>
+                    </tr>
+                  )}
+                  {dish.macros.carbs > 0 && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-1.5 text-gray-500">Carbohidratos</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">{dish.macros.carbs}g</td>
+                    </tr>
+                  )}
+                  {dish.extendedNutrition.fiber != null && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-1.5 pl-4 text-gray-400">Fibra</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">{dish.extendedNutrition.fiber}g</td>
+                    </tr>
+                  )}
+                  {dish.extendedNutrition.sugarTotal != null && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-1.5 pl-4 text-gray-400">Azúcares totales</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">{dish.extendedNutrition.sugarTotal}g</td>
+                    </tr>
+                  )}
+                  {dish.extendedNutrition.sugarAdded != null && (
+                    <tr className="border-b border-gray-100">
+                      <td className="py-1.5 pl-4 text-gray-400">Azúcares añadidos</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">{dish.extendedNutrition.sugarAdded}g</td>
+                    </tr>
+                  )}
+                  {dish.macros.protein > 0 && (
+                    <tr>
+                      <td className="py-1.5 text-gray-500">Proteínas</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">{dish.macros.protein}g</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </Accordion>
+          )}
 
           {/* Modo de empleo — desplegable */}
           <Accordion

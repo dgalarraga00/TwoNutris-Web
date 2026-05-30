@@ -6,7 +6,8 @@ import { Flame, Leaf, Salad, Cookie, CalendarOff } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
-import { DishModal, ALLERGEN_MAP } from "@/components/DishModal";
+import { DishModal } from "@/components/DishModal";
+import { ALLERGEN_MAP } from "@/lib/allergens";
 import { weeklyMenu, DAYS, type MenuItem, type CategoryKey } from "@/data/menu";
 
 /* ── Tarjeta de plato ───────────────────────────────────────────── */

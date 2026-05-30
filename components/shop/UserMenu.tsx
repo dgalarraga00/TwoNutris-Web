@@ -28,8 +28,7 @@ export function UserMenu({ email }: Props) {
   async function handleLogout() {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.push("/pedir");
-    router.refresh();
+    window.location.href = "/login";
   }
 
   const initial = email[0]?.toUpperCase() ?? "U";

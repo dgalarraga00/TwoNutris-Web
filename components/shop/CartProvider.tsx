@@ -28,7 +28,8 @@ type Action =
   | { type: "INCREMENT"; id: string }
   | { type: "DECREMENT"; id: string }
   | { type: "OPEN" }
-  | { type: "CLOSE" };
+  | { type: "CLOSE" }
+  | { type: "CLEAR" };
 
 function cartReducer(state: CartState, action: Action): CartState {
   switch (action.type) {
@@ -78,6 +79,8 @@ function cartReducer(state: CartState, action: Action): CartState {
       return { ...state, isOpen: true };
     case "CLOSE":
       return { ...state, isOpen: false };
+    case "CLEAR":
+      return { ...state, items: [] };
     default:
       return state;
   }
@@ -96,6 +99,7 @@ interface CartCtx {
   incrementItem: (id: string) => void;
   decrementItem: (id: string) => void;
   getQuantity: (id: string) => number;
+  clearCart: () => void;
 }
 
 const CartContext = createContext<CartCtx | null>(null);
@@ -166,6 +170,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     decrementItem: (id) => dispatch({ type: "DECREMENT", id }),
     getQuantity: (id) =>
       state.items.find((i) => i.id === id)?.quantity ?? 0,
+    clearCart: () => dispatch({ type: "CLEAR" }),
   };
 
   return <CartContext.Provider value={ctx}>{children}</CartContext.Provider>;

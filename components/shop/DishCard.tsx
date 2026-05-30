@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Minus, Plus, Flame, Beef, Wheat, Droplets } from "lucide-react";
 import { CatalogDish, DishType } from "@/lib/catalog";
-import { ALLERGEN_MAP } from "@/components/DishModal";
+import { ALLERGEN_MAP } from "@/lib/allergens";
 import { Leaf } from "lucide-react";
 import { useCart } from "./CartProvider";
 

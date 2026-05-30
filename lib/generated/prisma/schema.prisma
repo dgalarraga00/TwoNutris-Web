@@ -1,0 +1,208 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ───────────────────────────────────────────────────────
+
+enum DishCategory {
+  VEGETARIANO
+  LOW_CARB
+  NORMAL
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+}
+
+// ─── Modelos ─────────────────────────────────────────────────────
+
+/// Enlazado 1:1 con auth.users de Supabase
+model Profile {
+  id        String   @id @db.Uuid
+  fullName  String?  @map("full_name")
+  whatsapp  String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  addresses Address[]
+  orders    Order[]
+  weeklyBox WeeklyBox?
+
+  @@map("profiles")
+}
+
+model Address {
+  id           String   @id @default(uuid()) @db.Uuid
+  profileId    String   @map("profile_id") @db.Uuid
+  label        String?
+  street       String
+  instructions String?
+  isDefault    Boolean  @default(false) @map("is_default")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  orders  Order[]
+
+  @@map("addresses")
+}
+
+model Dish {
+  id           String       @id @default(uuid()) @db.Uuid
+  name         String
+  description  String
+  image        String?
+  category     DishCategory
+  premiumLevel Int          @default(0) @map("premium_level")
+  calories     Int?
+  protein      Float?
+  carbs        Float?
+  fat          Float?
+  allergens    String[]
+  weekStart    DateTime     @map("week_start")
+  isActive     Boolean      @default(true) @map("is_active")
+  createdAt    DateTime     @default(now()) @map("created_at")
+
+  boxItems BoxItem[]
+
+  @@map("dishes")
+}
+
+/// Carrito en curso — uno por usuario, mutable
+model WeeklyBox {
+  id        String   @id @default(uuid()) @db.Uuid
+  profileId String   @unique @map("profile_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  profile Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  items   BoxItem[]
+
+  @@map("weekly_boxes")
+}
+
+model BoxItem {
+  id        String   @id @default(uuid()) @db.Uuid
+  boxId     String   @map("box_id") @db.Uuid
+  dishId    String   @map("dish_id") @db.Uuid
+  quantity  Int      @default(1)
+  unitPrice Float    @map("unit_price")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  box  WeeklyBox @relation(fields: [boxId], references: [id], onDelete: Cascade)
+  dish Dish      @relation(fields: [dishId], references: [id])
+
+  @@map("box_items")
+}
+
+/// Pedido finalizado — inmutable
+model Order {
+  id                    String      @id @default(uuid()) @db.Uuid
+  profileId             String      @map("profile_id") @db.Uuid
+  addressId             String?     @map("address_id") @db.Uuid
+  status                OrderStatus @default(PENDING)
+  total                 Float
+  deliveryAddress       String      @map("delivery_address")
+  deliveryInstructions  String?     @map("delivery_instructions")
+  payphoneTransactionId String?     @map("payphone_transaction_id")
+  deliveryDate          DateTime?   @map("delivery_date")
+  createdAt             DateTime    @default(now()) @map("created_at")
+  updatedAt             DateTime    @updatedAt @map("updated_at")
+
+  profile Profile     @relation(fields: [profileId], references: [id])
+  address Address?    @relation(fields: [addressId], references: [id])
+  items   OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String   @id @default(uuid()) @db.Uuid
+  orderId   String   @map("order_id") @db.Uuid
+  dishId    String   @map("dish_id")
+  dishName  String   @map("dish_name")
+  quantity  Int
+  unitPrice Float    @map("unit_price")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_items")
+}
+
+enum DishTemplateCategory {
+  CLASICO
+  LOW_CARB
+  VEGETARIANO
+  PREMIUM
+}
+
+enum WeeklyMenuStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model DishTemplate {
+  id           String               @id @default(uuid()) @db.Uuid
+  name         String
+  description  String
+  image        String?
+  category     DishTemplateCategory
+  price        Float                @default(6.75)
+  calories     Int?
+  protein      Float?
+  carbs        Float?
+  fat          Float?
+  ingredients  String?
+  allergens    String[]             @default([])
+  servingSize  Float?               @map("serving_size")
+  servingUnit  String?              @map("serving_unit")
+  fatSaturated Float?               @map("fat_saturated")
+  fatTrans     Float?               @map("fat_trans")
+  cholesterol  Float?
+  sodium       Float?
+  fiber        Float?
+  sugarTotal   Float?               @map("sugar_total")
+  sugarAdded   Float?               @map("sugar_added")
+  isActive     Boolean              @default(true) @map("is_active")
+  createdAt    DateTime             @default(now()) @map("created_at")
+  updatedAt    DateTime             @updatedAt @map("updated_at")
+
+  weeklyMenuItems WeeklyMenuItem[]
+
+  @@map("dish_templates")
+}
+
+model WeeklyMenu {
+  id        String           @id @default(uuid()) @db.Uuid
+  weekStart DateTime         @map("week_start")
+  weekEnd   DateTime         @map("week_end")
+  status    WeeklyMenuStatus @default(DRAFT)
+  createdAt DateTime         @default(now()) @map("created_at")
+  updatedAt DateTime         @updatedAt @map("updated_at")
+
+  items WeeklyMenuItem[]
+
+  @@map("weekly_menus")
+}
+
+model WeeklyMenuItem {
+  id       String @id @default(uuid()) @db.Uuid
+  menuId   String @map("menu_id") @db.Uuid
+  dishId   String @map("dish_id") @db.Uuid
+  position Int    @default(0)
+
+  menu WeeklyMenu   @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  dish DishTemplate @relation(fields: [dishId], references: [id])
+
+  @@unique([menuId, dishId])
+  @@map("weekly_menu_items")
+}

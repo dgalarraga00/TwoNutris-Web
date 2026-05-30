@@ -10,7 +10,8 @@ import {
   Flame,
 } from "lucide-react";
 import { weeklyMenu, type MenuItem } from "@/data/menu";
-import { DishModal, ALLERGEN_MAP } from "@/components/DishModal";
+import { DishModal } from "@/components/DishModal";
+import { ALLERGEN_MAP } from "@/lib/allergens";
 
 /* ── Tarjeta de platillo ────────────────────────────────────────── */
 function DishCard({

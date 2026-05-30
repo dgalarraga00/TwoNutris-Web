@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { ConfirmacionClient } from "./ConfirmacionClient";
 
 export const metadata = {
-  title: "Pedido confirmado | TwoNutris",
+  title: "Resultado del pago | TwoNutris",
 };
 
 export default function ConfirmacionPage() {

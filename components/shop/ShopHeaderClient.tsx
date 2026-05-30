@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ShoppingBag, LogIn } from "lucide-react";
 import { useCart } from "./CartProvider";
@@ -18,11 +19,15 @@ export function ShopHeaderClient({ userEmail }: Props) {
   return (
     <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur-sm border-b border-leaf/10">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="font-ibrand text-2xl text-leaf hover:opacity-80 transition-opacity flex-shrink-0"
-        >
-          TwoNutris
+        <Link href="/" className="flex-shrink-0 hover:opacity-80 transition-opacity">
+          <Image
+            src="/icons/logo.png"
+            alt="twonutris"
+            width={120}
+            height={40}
+            className="h-14 w-auto"
+            priority
+          />
         </Link>
 
         <div className="flex items-center gap-2">

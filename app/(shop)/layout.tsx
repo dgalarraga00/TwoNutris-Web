@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { CartProvider } from "@/components/shop/CartProvider";
 import { CartSlideOver } from "@/components/shop/CartSlideOver";
 import { ShopHeader } from "@/components/shop/ShopHeader";
+import { WhatsAppButton } from "@/components/shop/WhatsAppButton";
 
 export default function ShopLayout({ children }: { children: ReactNode }) {
   return (
@@ -11,6 +12,7 @@ export default function ShopLayout({ children }: { children: ReactNode }) {
         <main>{children}</main>
       </div>
       <CartSlideOver />
+      <WhatsAppButton />
     </CartProvider>
   );
 }

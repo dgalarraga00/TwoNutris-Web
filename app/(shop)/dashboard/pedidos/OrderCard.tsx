@@ -1,6 +1,6 @@
 "use client";
 
-import { Order, OrderItem, OrderStatus } from "@/app/generated/prisma";
+import { Order, OrderItem, OrderStatus } from "@/lib/generated/prisma";
 import { MapPin, Clock, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
@@ -10,16 +10,16 @@ interface OrderWithItems extends Order {
 
 const STATUS_LABEL: Record<OrderStatus, string> = {
   PENDING: "Pendiente",
-  PREPARING: "En preparación",
-  SHIPPED: "En camino",
-  DELIVERED: "Entregado",
+  PAID: "Pagado",
+  FAILED: "Pago fallido",
+  CANCELLED: "Cancelado",
 };
 
 const STATUS_STYLE: Record<OrderStatus, string> = {
-  PENDING: "bg-amber/20 text-amber-700",
-  PREPARING: "bg-blue-50 text-blue-700",
-  SHIPPED: "bg-purple-50 text-purple-700",
-  DELIVERED: "bg-leaf/10 text-leaf",
+  PENDING: "bg-amber-50 text-amber-700",
+  PAID: "bg-leaf/10 text-leaf",
+  FAILED: "bg-red-50 text-red-600",
+  CANCELLED: "bg-gray-100 text-gray-500",
 };
 
 export function OrderCard({ order }: { order: OrderWithItems }) {
@@ -91,10 +91,6 @@ export function OrderCard({ order }: { order: OrderWithItems }) {
           </ul>
 
           <div className="border-t border-gray-100 pt-3 flex flex-col gap-1.5 text-sm font-poppins">
-            <div className="flex justify-between text-gray-500">
-              <span>Subtotal</span>
-              <span>${(order.total - (order.total >= 24 ? 4 : 3)).toFixed(2)}</span>
-            </div>
             <div className="flex justify-between font-bold text-gray-900">
               <span>Total pagado</span>
               <span>${order.total.toFixed(2)}</span>

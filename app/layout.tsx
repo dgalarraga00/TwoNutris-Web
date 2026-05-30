@@ -113,7 +113,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={`${poppins.variable} ${ibrand.variable}`}>
+    <html lang="es" className={`${poppins.variable} ${ibrand.variable}`} data-scroll-behavior="smooth">
       <head>
         <script
           type="application/ld+json"
