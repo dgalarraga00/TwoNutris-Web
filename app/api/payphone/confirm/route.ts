@@ -39,6 +39,9 @@ export async function POST(request: Request) {
         status: true,
         total: true,
         deliveryAddress: true,
+        taxIdType: true,
+        taxId: true,
+        invoiceNumber: true,
         items: { select: { dishName: true, quantity: true, unitPrice: true } },
         profile: { select: { fullName: true, whatsapp: true } },
       },
@@ -74,11 +77,14 @@ export async function POST(request: Request) {
     if (approved) {
       emitDatilInvoice({
         id: existingOrder.id,
+        invoiceNumber: existingOrder.invoiceNumber,
         total: existingOrder.total,
         deliveryAddress: existingOrder.deliveryAddress,
         customerEmail: user.email ?? "",
         customerName: existingOrder.profile?.fullName,
         customerPhone: existingOrder.profile?.whatsapp,
+        taxIdType: existingOrder.taxIdType,
+        taxId: existingOrder.taxId,
         items: existingOrder.items,
       }).catch((err) => console.error("[datil] error al emitir factura:", err));
 

@@ -1,16 +1,19 @@
-const DATIL_API_URL = "https://app.datil.co/api/v2/invoices/issues";
+const DATIL_API_URL = "https://link.datil.co/invoices/issue";
 
 const EMISOR = {
   ruc: "1751880533001",
-  nombre: "PONCE ZULETA CAMILA",
+  razon_social: "PONCE ZULETA CAMILA",
   nombre_comercial: "TwoNutris",
   direccion: "AMERICA N36-229 Y AV.NACIONES UNIDAS, QUITO, PICHINCHA",
   obligado_contabilidad: false,
-  contribuyente_especial: "",
-  tipo_proveedor: "01",
+  establecimiento: {
+    codigo: "001",
+    punto_emision: "002",
+    direccion: "AMERICA N36-229 Y AV.NACIONES UNIDAS, QUITO, PICHINCHA",
+  },
 } as const;
 
-const IVA_CODE = 2;
+const IVA_CODE = "2";
 const IVA_PCT_CODE = "4"; // 15% desde 2024
 const IVA_RATE = 0.15;
 
@@ -26,14 +29,19 @@ function buildLineItem(descripcion: string, precioConIvaUnit: number, cantidad: 
   const unitSin = sinIva(precioConIvaUnit);
   const totalSin = r2(unitSin * cantidad);
   const ivaVal = r2(totalSin * IVA_RATE);
+  const codigo = descripcion
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-zA-Z0-9]/g, "_")
+    .toLowerCase()
+    .slice(0, 25);
   return {
     cantidad,
-    codigo_principal: descripcion.slice(0, 25).replace(/\s+/g, "_").toLowerCase(),
+    codigo_principal: codigo,
     descripcion,
     precio_unitario: unitSin,
     descuento: 0,
-    precio_unitario_subtotal: unitSin,
-    detalles_adicionales: {},
+    precio_total_sin_impuestos: totalSin,
     impuestos: [
       {
         codigo: IVA_CODE,
@@ -48,11 +56,14 @@ function buildLineItem(descripcion: string, precioConIvaUnit: number, cantidad: 
 
 export interface InvoiceOrder {
   id: string;
+  invoiceNumber: number;
   total: number;
   deliveryAddress: string;
   customerEmail: string;
   customerName?: string | null;
   customerPhone?: string | null;
+  taxIdType: string;
+  taxId: string;
   items: { dishName: string; quantity: number; unitPrice: number }[];
 }
 
@@ -64,11 +75,7 @@ export async function emitDatilInvoice(order: InvoiceOrder): Promise<void> {
   }
 
   const now = new Date();
-  const fechaEmision = [
-    String(now.getDate()).padStart(2, "0"),
-    String(now.getMonth() + 1).padStart(2, "0"),
-    now.getFullYear(),
-  ].join("/");
+  const fechaEmision = now.toISOString();
 
   const itemsSubtotal = r2(
     order.items.reduce((s, i) => s + i.unitPrice * i.quantity, 0)
@@ -87,15 +94,16 @@ export async function emitDatilInvoice(order: InvoiceOrder): Promise<void> {
   const payload = {
     ambiente: process.env.NODE_ENV === "production" ? 2 : 1,
     tipo_emision: 1,
+    secuencial: order.invoiceNumber,
     fecha_emision: fechaEmision,
     moneda: "USD",
     emisor: EMISOR,
-    receptor: {
-      razon_social: order.customerName?.toUpperCase() ?? "CONSUMIDOR FINAL",
-      tipo_identificacion: "07",
-      identificacion: "9999999999999",
+    comprador: {
+      razon_social: order.customerName?.toUpperCase() ?? order.customerEmail.toUpperCase(),
+      tipo_identificacion: order.taxIdType,
+      identificacion: order.taxId,
       email: order.customerEmail,
-      telefono: order.customerPhone ?? "",
+      ...(order.customerPhone ? { telefono: order.customerPhone } : {}),
       direccion: order.deliveryAddress,
     },
     totales: {
@@ -113,7 +121,7 @@ export async function emitDatilInvoice(order: InvoiceOrder): Promise<void> {
       ],
     },
     items: lineItems,
-    pagos: [{ medio: "20", total: importeTotal, plazo: 0, unidad_tiempo: "dias" }],
+    pagos: [{ medio: "20", total: importeTotal }],
     informacion_adicional: { "Pedido #": order.id },
   };
 
@@ -121,7 +129,8 @@ export async function emitDatilInvoice(order: InvoiceOrder): Promise<void> {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Api-Key": apiKey,
+      "X-Key": apiKey,
+      "X-Password": process.env.DATIL_CERT_PASSWORD ?? "",
     },
     body: JSON.stringify(payload),
   });

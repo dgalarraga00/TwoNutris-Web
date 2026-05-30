@@ -19,26 +19,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Profile = $Result.DefaultSelection<Prisma.$ProfilePayload>
 /**
- * Model Address
- * 
- */
-export type Address = $Result.DefaultSelection<Prisma.$AddressPayload>
-/**
- * Model Dish
- * 
- */
-export type Dish = $Result.DefaultSelection<Prisma.$DishPayload>
-/**
- * Model WeeklyBox
- * Carrito en curso — uno por usuario, mutable
- */
-export type WeeklyBox = $Result.DefaultSelection<Prisma.$WeeklyBoxPayload>
-/**
- * Model BoxItem
- * 
- */
-export type BoxItem = $Result.DefaultSelection<Prisma.$BoxItemPayload>
-/**
  * Model Order
  * Pedido finalizado — inmutable
  */
@@ -68,16 +48,7 @@ export type WeeklyMenuItem = $Result.DefaultSelection<Prisma.$WeeklyMenuItemPayl
  * Enums
  */
 export namespace $Enums {
-  export const DishCategory: {
-  VEGETARIANO: 'VEGETARIANO',
-  LOW_CARB: 'LOW_CARB',
-  NORMAL: 'NORMAL'
-};
-
-export type DishCategory = (typeof DishCategory)[keyof typeof DishCategory]
-
-
-export const OrderStatus: {
+  export const OrderStatus: {
   PENDING: 'PENDING',
   PAID: 'PAID',
   FAILED: 'FAILED',
@@ -106,10 +77,6 @@ export const WeeklyMenuStatus: {
 export type WeeklyMenuStatus = (typeof WeeklyMenuStatus)[keyof typeof WeeklyMenuStatus]
 
 }
-
-export type DishCategory = $Enums.DishCategory
-
-export const DishCategory: typeof $Enums.DishCategory
 
 export type OrderStatus = $Enums.OrderStatus
 
@@ -253,46 +220,6 @@ export class PrismaClient<
     * ```
     */
   get profile(): Prisma.ProfileDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.address`: Exposes CRUD operations for the **Address** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Addresses
-    * const addresses = await prisma.address.findMany()
-    * ```
-    */
-  get address(): Prisma.AddressDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.dish`: Exposes CRUD operations for the **Dish** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Dishes
-    * const dishes = await prisma.dish.findMany()
-    * ```
-    */
-  get dish(): Prisma.DishDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.weeklyBox`: Exposes CRUD operations for the **WeeklyBox** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more WeeklyBoxes
-    * const weeklyBoxes = await prisma.weeklyBox.findMany()
-    * ```
-    */
-  get weeklyBox(): Prisma.WeeklyBoxDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.boxItem`: Exposes CRUD operations for the **BoxItem** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more BoxItems
-    * const boxItems = await prisma.boxItem.findMany()
-    * ```
-    */
-  get boxItem(): Prisma.BoxItemDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.order`: Exposes CRUD operations for the **Order** model.
@@ -778,10 +705,6 @@ export namespace Prisma {
 
   export const ModelName: {
     Profile: 'Profile',
-    Address: 'Address',
-    Dish: 'Dish',
-    WeeklyBox: 'WeeklyBox',
-    BoxItem: 'BoxItem',
     Order: 'Order',
     OrderItem: 'OrderItem',
     DishTemplate: 'DishTemplate',
@@ -802,7 +725,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "profile" | "address" | "dish" | "weeklyBox" | "boxItem" | "order" | "orderItem" | "dishTemplate" | "weeklyMenu" | "weeklyMenuItem"
+      modelProps: "profile" | "order" | "orderItem" | "dishTemplate" | "weeklyMenu" | "weeklyMenuItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -877,302 +800,6 @@ export namespace Prisma {
           count: {
             args: Prisma.ProfileCountArgs<ExtArgs>
             result: $Utils.Optional<ProfileCountAggregateOutputType> | number
-          }
-        }
-      }
-      Address: {
-        payload: Prisma.$AddressPayload<ExtArgs>
-        fields: Prisma.AddressFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.AddressFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.AddressFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
-          }
-          findFirst: {
-            args: Prisma.AddressFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.AddressFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
-          }
-          findMany: {
-            args: Prisma.AddressFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload>[]
-          }
-          create: {
-            args: Prisma.AddressCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
-          }
-          createMany: {
-            args: Prisma.AddressCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.AddressCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload>[]
-          }
-          delete: {
-            args: Prisma.AddressDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
-          }
-          update: {
-            args: Prisma.AddressUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
-          }
-          deleteMany: {
-            args: Prisma.AddressDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.AddressUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.AddressUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload>[]
-          }
-          upsert: {
-            args: Prisma.AddressUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
-          }
-          aggregate: {
-            args: Prisma.AddressAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAddress>
-          }
-          groupBy: {
-            args: Prisma.AddressGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AddressGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.AddressCountArgs<ExtArgs>
-            result: $Utils.Optional<AddressCountAggregateOutputType> | number
-          }
-        }
-      }
-      Dish: {
-        payload: Prisma.$DishPayload<ExtArgs>
-        fields: Prisma.DishFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.DishFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.DishFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload>
-          }
-          findFirst: {
-            args: Prisma.DishFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.DishFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload>
-          }
-          findMany: {
-            args: Prisma.DishFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload>[]
-          }
-          create: {
-            args: Prisma.DishCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload>
-          }
-          createMany: {
-            args: Prisma.DishCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.DishCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload>[]
-          }
-          delete: {
-            args: Prisma.DishDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload>
-          }
-          update: {
-            args: Prisma.DishUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload>
-          }
-          deleteMany: {
-            args: Prisma.DishDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.DishUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.DishUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload>[]
-          }
-          upsert: {
-            args: Prisma.DishUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DishPayload>
-          }
-          aggregate: {
-            args: Prisma.DishAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDish>
-          }
-          groupBy: {
-            args: Prisma.DishGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DishGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.DishCountArgs<ExtArgs>
-            result: $Utils.Optional<DishCountAggregateOutputType> | number
-          }
-        }
-      }
-      WeeklyBox: {
-        payload: Prisma.$WeeklyBoxPayload<ExtArgs>
-        fields: Prisma.WeeklyBoxFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.WeeklyBoxFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.WeeklyBoxFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload>
-          }
-          findFirst: {
-            args: Prisma.WeeklyBoxFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.WeeklyBoxFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload>
-          }
-          findMany: {
-            args: Prisma.WeeklyBoxFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload>[]
-          }
-          create: {
-            args: Prisma.WeeklyBoxCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload>
-          }
-          createMany: {
-            args: Prisma.WeeklyBoxCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.WeeklyBoxCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload>[]
-          }
-          delete: {
-            args: Prisma.WeeklyBoxDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload>
-          }
-          update: {
-            args: Prisma.WeeklyBoxUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload>
-          }
-          deleteMany: {
-            args: Prisma.WeeklyBoxDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.WeeklyBoxUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.WeeklyBoxUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload>[]
-          }
-          upsert: {
-            args: Prisma.WeeklyBoxUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WeeklyBoxPayload>
-          }
-          aggregate: {
-            args: Prisma.WeeklyBoxAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateWeeklyBox>
-          }
-          groupBy: {
-            args: Prisma.WeeklyBoxGroupByArgs<ExtArgs>
-            result: $Utils.Optional<WeeklyBoxGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.WeeklyBoxCountArgs<ExtArgs>
-            result: $Utils.Optional<WeeklyBoxCountAggregateOutputType> | number
-          }
-        }
-      }
-      BoxItem: {
-        payload: Prisma.$BoxItemPayload<ExtArgs>
-        fields: Prisma.BoxItemFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.BoxItemFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.BoxItemFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload>
-          }
-          findFirst: {
-            args: Prisma.BoxItemFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.BoxItemFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload>
-          }
-          findMany: {
-            args: Prisma.BoxItemFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload>[]
-          }
-          create: {
-            args: Prisma.BoxItemCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload>
-          }
-          createMany: {
-            args: Prisma.BoxItemCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.BoxItemCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload>[]
-          }
-          delete: {
-            args: Prisma.BoxItemDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload>
-          }
-          update: {
-            args: Prisma.BoxItemUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload>
-          }
-          deleteMany: {
-            args: Prisma.BoxItemDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.BoxItemUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.BoxItemUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload>[]
-          }
-          upsert: {
-            args: Prisma.BoxItemUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoxItemPayload>
-          }
-          aggregate: {
-            args: Prisma.BoxItemAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateBoxItem>
-          }
-          groupBy: {
-            args: Prisma.BoxItemGroupByArgs<ExtArgs>
-            result: $Utils.Optional<BoxItemGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.BoxItemCountArgs<ExtArgs>
-            result: $Utils.Optional<BoxItemCountAggregateOutputType> | number
           }
         }
       }
@@ -1655,10 +1282,6 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     profile?: ProfileOmit
-    address?: AddressOmit
-    dish?: DishOmit
-    weeklyBox?: WeeklyBoxOmit
-    boxItem?: BoxItemOmit
     order?: OrderOmit
     orderItem?: OrderItemOmit
     dishTemplate?: DishTemplateOmit
@@ -1744,12 +1367,10 @@ export namespace Prisma {
    */
 
   export type ProfileCountOutputType = {
-    addresses: number
     orders: number
   }
 
   export type ProfileCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    addresses?: boolean | ProfileCountOutputTypeCountAddressesArgs
     orders?: boolean | ProfileCountOutputTypeCountOrdersArgs
   }
 
@@ -1767,108 +1388,8 @@ export namespace Prisma {
   /**
    * ProfileCountOutputType without action
    */
-  export type ProfileCountOutputTypeCountAddressesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AddressWhereInput
-  }
-
-  /**
-   * ProfileCountOutputType without action
-   */
   export type ProfileCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderWhereInput
-  }
-
-
-  /**
-   * Count Type AddressCountOutputType
-   */
-
-  export type AddressCountOutputType = {
-    orders: number
-  }
-
-  export type AddressCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    orders?: boolean | AddressCountOutputTypeCountOrdersArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * AddressCountOutputType without action
-   */
-  export type AddressCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AddressCountOutputType
-     */
-    select?: AddressCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * AddressCountOutputType without action
-   */
-  export type AddressCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OrderWhereInput
-  }
-
-
-  /**
-   * Count Type DishCountOutputType
-   */
-
-  export type DishCountOutputType = {
-    boxItems: number
-  }
-
-  export type DishCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    boxItems?: boolean | DishCountOutputTypeCountBoxItemsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * DishCountOutputType without action
-   */
-  export type DishCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DishCountOutputType
-     */
-    select?: DishCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * DishCountOutputType without action
-   */
-  export type DishCountOutputTypeCountBoxItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BoxItemWhereInput
-  }
-
-
-  /**
-   * Count Type WeeklyBoxCountOutputType
-   */
-
-  export type WeeklyBoxCountOutputType = {
-    items: number
-  }
-
-  export type WeeklyBoxCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    items?: boolean | WeeklyBoxCountOutputTypeCountItemsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * WeeklyBoxCountOutputType without action
-   */
-  export type WeeklyBoxCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBoxCountOutputType
-     */
-    select?: WeeklyBoxCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * WeeklyBoxCountOutputType without action
-   */
-  export type WeeklyBoxCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BoxItemWhereInput
   }
 
 
@@ -2133,9 +1654,7 @@ export namespace Prisma {
     whatsapp?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    addresses?: boolean | Profile$addressesArgs<ExtArgs>
     orders?: boolean | Profile$ordersArgs<ExtArgs>
-    weeklyBox?: boolean | Profile$weeklyBoxArgs<ExtArgs>
     _count?: boolean | ProfileCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["profile"]>
 
@@ -2165,9 +1684,7 @@ export namespace Prisma {
 
   export type ProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "whatsapp" | "createdAt" | "updatedAt", ExtArgs["result"]["profile"]>
   export type ProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    addresses?: boolean | Profile$addressesArgs<ExtArgs>
     orders?: boolean | Profile$ordersArgs<ExtArgs>
-    weeklyBox?: boolean | Profile$weeklyBoxArgs<ExtArgs>
     _count?: boolean | ProfileCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProfileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2176,9 +1693,7 @@ export namespace Prisma {
   export type $ProfilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Profile"
     objects: {
-      addresses: Prisma.$AddressPayload<ExtArgs>[]
       orders: Prisma.$OrderPayload<ExtArgs>[]
-      weeklyBox: Prisma.$WeeklyBoxPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2580,9 +2095,7 @@ export namespace Prisma {
    */
   export interface Prisma__ProfileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    addresses<T extends Profile$addressesArgs<ExtArgs> = {}>(args?: Subset<T, Profile$addressesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orders<T extends Profile$ordersArgs<ExtArgs> = {}>(args?: Subset<T, Profile$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    weeklyBox<T extends Profile$weeklyBoxArgs<ExtArgs> = {}>(args?: Subset<T, Profile$weeklyBoxArgs<ExtArgs>>): Prisma__WeeklyBoxClient<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3010,30 +2523,6 @@ export namespace Prisma {
   }
 
   /**
-   * Profile.addresses
-   */
-  export type Profile$addressesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    where?: AddressWhereInput
-    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[]
-    cursor?: AddressWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AddressScalarFieldEnum | AddressScalarFieldEnum[]
-  }
-
-  /**
    * Profile.orders
    */
   export type Profile$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3058,25 +2547,6 @@ export namespace Prisma {
   }
 
   /**
-   * Profile.weeklyBox
-   */
-  export type Profile$weeklyBoxArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-    where?: WeeklyBoxWhereInput
-  }
-
-  /**
    * Profile without action
    */
   export type ProfileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3096,4565 +2566,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Address
-   */
-
-  export type AggregateAddress = {
-    _count: AddressCountAggregateOutputType | null
-    _min: AddressMinAggregateOutputType | null
-    _max: AddressMaxAggregateOutputType | null
-  }
-
-  export type AddressMinAggregateOutputType = {
-    id: string | null
-    profileId: string | null
-    label: string | null
-    street: string | null
-    instructions: string | null
-    isDefault: boolean | null
-    createdAt: Date | null
-  }
-
-  export type AddressMaxAggregateOutputType = {
-    id: string | null
-    profileId: string | null
-    label: string | null
-    street: string | null
-    instructions: string | null
-    isDefault: boolean | null
-    createdAt: Date | null
-  }
-
-  export type AddressCountAggregateOutputType = {
-    id: number
-    profileId: number
-    label: number
-    street: number
-    instructions: number
-    isDefault: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type AddressMinAggregateInputType = {
-    id?: true
-    profileId?: true
-    label?: true
-    street?: true
-    instructions?: true
-    isDefault?: true
-    createdAt?: true
-  }
-
-  export type AddressMaxAggregateInputType = {
-    id?: true
-    profileId?: true
-    label?: true
-    street?: true
-    instructions?: true
-    isDefault?: true
-    createdAt?: true
-  }
-
-  export type AddressCountAggregateInputType = {
-    id?: true
-    profileId?: true
-    label?: true
-    street?: true
-    instructions?: true
-    isDefault?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type AddressAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Address to aggregate.
-     */
-    where?: AddressWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Addresses to fetch.
-     */
-    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: AddressWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Addresses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Addresses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Addresses
-    **/
-    _count?: true | AddressCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: AddressMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: AddressMaxAggregateInputType
-  }
-
-  export type GetAddressAggregateType<T extends AddressAggregateArgs> = {
-        [P in keyof T & keyof AggregateAddress]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateAddress[P]>
-      : GetScalarType<T[P], AggregateAddress[P]>
-  }
-
-
-
-
-  export type AddressGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AddressWhereInput
-    orderBy?: AddressOrderByWithAggregationInput | AddressOrderByWithAggregationInput[]
-    by: AddressScalarFieldEnum[] | AddressScalarFieldEnum
-    having?: AddressScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: AddressCountAggregateInputType | true
-    _min?: AddressMinAggregateInputType
-    _max?: AddressMaxAggregateInputType
-  }
-
-  export type AddressGroupByOutputType = {
-    id: string
-    profileId: string
-    label: string | null
-    street: string
-    instructions: string | null
-    isDefault: boolean
-    createdAt: Date
-    _count: AddressCountAggregateOutputType | null
-    _min: AddressMinAggregateOutputType | null
-    _max: AddressMaxAggregateOutputType | null
-  }
-
-  type GetAddressGroupByPayload<T extends AddressGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<AddressGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof AddressGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AddressGroupByOutputType[P]>
-            : GetScalarType<T[P], AddressGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type AddressSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    profileId?: boolean
-    label?: boolean
-    street?: boolean
-    instructions?: boolean
-    isDefault?: boolean
-    createdAt?: boolean
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-    orders?: boolean | Address$ordersArgs<ExtArgs>
-    _count?: boolean | AddressCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["address"]>
-
-  export type AddressSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    profileId?: boolean
-    label?: boolean
-    street?: boolean
-    instructions?: boolean
-    isDefault?: boolean
-    createdAt?: boolean
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["address"]>
-
-  export type AddressSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    profileId?: boolean
-    label?: boolean
-    street?: boolean
-    instructions?: boolean
-    isDefault?: boolean
-    createdAt?: boolean
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["address"]>
-
-  export type AddressSelectScalar = {
-    id?: boolean
-    profileId?: boolean
-    label?: boolean
-    street?: boolean
-    instructions?: boolean
-    isDefault?: boolean
-    createdAt?: boolean
-  }
-
-  export type AddressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "label" | "street" | "instructions" | "isDefault" | "createdAt", ExtArgs["result"]["address"]>
-  export type AddressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-    orders?: boolean | Address$ordersArgs<ExtArgs>
-    _count?: boolean | AddressCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type AddressIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-  }
-  export type AddressIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-  }
-
-  export type $AddressPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Address"
-    objects: {
-      profile: Prisma.$ProfilePayload<ExtArgs>
-      orders: Prisma.$OrderPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      profileId: string
-      label: string | null
-      street: string
-      instructions: string | null
-      isDefault: boolean
-      createdAt: Date
-    }, ExtArgs["result"]["address"]>
-    composites: {}
-  }
-
-  type AddressGetPayload<S extends boolean | null | undefined | AddressDefaultArgs> = $Result.GetResult<Prisma.$AddressPayload, S>
-
-  type AddressCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AddressFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AddressCountAggregateInputType | true
-    }
-
-  export interface AddressDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Address'], meta: { name: 'Address' } }
-    /**
-     * Find zero or one Address that matches the filter.
-     * @param {AddressFindUniqueArgs} args - Arguments to find a Address
-     * @example
-     * // Get one Address
-     * const address = await prisma.address.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends AddressFindUniqueArgs>(args: SelectSubset<T, AddressFindUniqueArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Address that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {AddressFindUniqueOrThrowArgs} args - Arguments to find a Address
-     * @example
-     * // Get one Address
-     * const address = await prisma.address.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends AddressFindUniqueOrThrowArgs>(args: SelectSubset<T, AddressFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Address that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddressFindFirstArgs} args - Arguments to find a Address
-     * @example
-     * // Get one Address
-     * const address = await prisma.address.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends AddressFindFirstArgs>(args?: SelectSubset<T, AddressFindFirstArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Address that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddressFindFirstOrThrowArgs} args - Arguments to find a Address
-     * @example
-     * // Get one Address
-     * const address = await prisma.address.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends AddressFindFirstOrThrowArgs>(args?: SelectSubset<T, AddressFindFirstOrThrowArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Addresses that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddressFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Addresses
-     * const addresses = await prisma.address.findMany()
-     * 
-     * // Get first 10 Addresses
-     * const addresses = await prisma.address.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const addressWithIdOnly = await prisma.address.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends AddressFindManyArgs>(args?: SelectSubset<T, AddressFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Address.
-     * @param {AddressCreateArgs} args - Arguments to create a Address.
-     * @example
-     * // Create one Address
-     * const Address = await prisma.address.create({
-     *   data: {
-     *     // ... data to create a Address
-     *   }
-     * })
-     * 
-     */
-    create<T extends AddressCreateArgs>(args: SelectSubset<T, AddressCreateArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Addresses.
-     * @param {AddressCreateManyArgs} args - Arguments to create many Addresses.
-     * @example
-     * // Create many Addresses
-     * const address = await prisma.address.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends AddressCreateManyArgs>(args?: SelectSubset<T, AddressCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Addresses and returns the data saved in the database.
-     * @param {AddressCreateManyAndReturnArgs} args - Arguments to create many Addresses.
-     * @example
-     * // Create many Addresses
-     * const address = await prisma.address.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Addresses and only return the `id`
-     * const addressWithIdOnly = await prisma.address.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends AddressCreateManyAndReturnArgs>(args?: SelectSubset<T, AddressCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Address.
-     * @param {AddressDeleteArgs} args - Arguments to delete one Address.
-     * @example
-     * // Delete one Address
-     * const Address = await prisma.address.delete({
-     *   where: {
-     *     // ... filter to delete one Address
-     *   }
-     * })
-     * 
-     */
-    delete<T extends AddressDeleteArgs>(args: SelectSubset<T, AddressDeleteArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Address.
-     * @param {AddressUpdateArgs} args - Arguments to update one Address.
-     * @example
-     * // Update one Address
-     * const address = await prisma.address.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends AddressUpdateArgs>(args: SelectSubset<T, AddressUpdateArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Addresses.
-     * @param {AddressDeleteManyArgs} args - Arguments to filter Addresses to delete.
-     * @example
-     * // Delete a few Addresses
-     * const { count } = await prisma.address.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends AddressDeleteManyArgs>(args?: SelectSubset<T, AddressDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Addresses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddressUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Addresses
-     * const address = await prisma.address.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends AddressUpdateManyArgs>(args: SelectSubset<T, AddressUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Addresses and returns the data updated in the database.
-     * @param {AddressUpdateManyAndReturnArgs} args - Arguments to update many Addresses.
-     * @example
-     * // Update many Addresses
-     * const address = await prisma.address.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Addresses and only return the `id`
-     * const addressWithIdOnly = await prisma.address.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends AddressUpdateManyAndReturnArgs>(args: SelectSubset<T, AddressUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Address.
-     * @param {AddressUpsertArgs} args - Arguments to update or create a Address.
-     * @example
-     * // Update or create a Address
-     * const address = await prisma.address.upsert({
-     *   create: {
-     *     // ... data to create a Address
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Address we want to update
-     *   }
-     * })
-     */
-    upsert<T extends AddressUpsertArgs>(args: SelectSubset<T, AddressUpsertArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Addresses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddressCountArgs} args - Arguments to filter Addresses to count.
-     * @example
-     * // Count the number of Addresses
-     * const count = await prisma.address.count({
-     *   where: {
-     *     // ... the filter for the Addresses we want to count
-     *   }
-     * })
-    **/
-    count<T extends AddressCountArgs>(
-      args?: Subset<T, AddressCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], AddressCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Address.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddressAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends AddressAggregateArgs>(args: Subset<T, AddressAggregateArgs>): Prisma.PrismaPromise<GetAddressAggregateType<T>>
-
-    /**
-     * Group by Address.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AddressGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends AddressGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AddressGroupByArgs['orderBy'] }
-        : { orderBy?: AddressGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, AddressGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAddressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Address model
-   */
-  readonly fields: AddressFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Address.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__AddressClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    profile<T extends ProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfileDefaultArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    orders<T extends Address$ordersArgs<ExtArgs> = {}>(args?: Subset<T, Address$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Address model
-   */
-  interface AddressFieldRefs {
-    readonly id: FieldRef<"Address", 'String'>
-    readonly profileId: FieldRef<"Address", 'String'>
-    readonly label: FieldRef<"Address", 'String'>
-    readonly street: FieldRef<"Address", 'String'>
-    readonly instructions: FieldRef<"Address", 'String'>
-    readonly isDefault: FieldRef<"Address", 'Boolean'>
-    readonly createdAt: FieldRef<"Address", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Address findUnique
-   */
-  export type AddressFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    /**
-     * Filter, which Address to fetch.
-     */
-    where: AddressWhereUniqueInput
-  }
-
-  /**
-   * Address findUniqueOrThrow
-   */
-  export type AddressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    /**
-     * Filter, which Address to fetch.
-     */
-    where: AddressWhereUniqueInput
-  }
-
-  /**
-   * Address findFirst
-   */
-  export type AddressFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    /**
-     * Filter, which Address to fetch.
-     */
-    where?: AddressWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Addresses to fetch.
-     */
-    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Addresses.
-     */
-    cursor?: AddressWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Addresses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Addresses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Addresses.
-     */
-    distinct?: AddressScalarFieldEnum | AddressScalarFieldEnum[]
-  }
-
-  /**
-   * Address findFirstOrThrow
-   */
-  export type AddressFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    /**
-     * Filter, which Address to fetch.
-     */
-    where?: AddressWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Addresses to fetch.
-     */
-    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Addresses.
-     */
-    cursor?: AddressWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Addresses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Addresses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Addresses.
-     */
-    distinct?: AddressScalarFieldEnum | AddressScalarFieldEnum[]
-  }
-
-  /**
-   * Address findMany
-   */
-  export type AddressFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    /**
-     * Filter, which Addresses to fetch.
-     */
-    where?: AddressWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Addresses to fetch.
-     */
-    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Addresses.
-     */
-    cursor?: AddressWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Addresses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Addresses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Addresses.
-     */
-    distinct?: AddressScalarFieldEnum | AddressScalarFieldEnum[]
-  }
-
-  /**
-   * Address create
-   */
-  export type AddressCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Address.
-     */
-    data: XOR<AddressCreateInput, AddressUncheckedCreateInput>
-  }
-
-  /**
-   * Address createMany
-   */
-  export type AddressCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Addresses.
-     */
-    data: AddressCreateManyInput | AddressCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Address createManyAndReturn
-   */
-  export type AddressCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * The data used to create many Addresses.
-     */
-    data: AddressCreateManyInput | AddressCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Address update
-   */
-  export type AddressUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Address.
-     */
-    data: XOR<AddressUpdateInput, AddressUncheckedUpdateInput>
-    /**
-     * Choose, which Address to update.
-     */
-    where: AddressWhereUniqueInput
-  }
-
-  /**
-   * Address updateMany
-   */
-  export type AddressUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Addresses.
-     */
-    data: XOR<AddressUpdateManyMutationInput, AddressUncheckedUpdateManyInput>
-    /**
-     * Filter which Addresses to update
-     */
-    where?: AddressWhereInput
-    /**
-     * Limit how many Addresses to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Address updateManyAndReturn
-   */
-  export type AddressUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * The data used to update Addresses.
-     */
-    data: XOR<AddressUpdateManyMutationInput, AddressUncheckedUpdateManyInput>
-    /**
-     * Filter which Addresses to update
-     */
-    where?: AddressWhereInput
-    /**
-     * Limit how many Addresses to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Address upsert
-   */
-  export type AddressUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Address to update in case it exists.
-     */
-    where: AddressWhereUniqueInput
-    /**
-     * In case the Address found by the `where` argument doesn't exist, create a new Address with this data.
-     */
-    create: XOR<AddressCreateInput, AddressUncheckedCreateInput>
-    /**
-     * In case the Address was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<AddressUpdateInput, AddressUncheckedUpdateInput>
-  }
-
-  /**
-   * Address delete
-   */
-  export type AddressDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    /**
-     * Filter which Address to delete.
-     */
-    where: AddressWhereUniqueInput
-  }
-
-  /**
-   * Address deleteMany
-   */
-  export type AddressDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Addresses to delete
-     */
-    where?: AddressWhereInput
-    /**
-     * Limit how many Addresses to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Address.orders
-   */
-  export type Address$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Order
-     */
-    select?: OrderSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Order
-     */
-    omit?: OrderOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OrderInclude<ExtArgs> | null
-    where?: OrderWhereInput
-    orderBy?: OrderOrderByWithRelationInput | OrderOrderByWithRelationInput[]
-    cursor?: OrderWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OrderScalarFieldEnum | OrderScalarFieldEnum[]
-  }
-
-  /**
-   * Address without action
-   */
-  export type AddressDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Dish
-   */
-
-  export type AggregateDish = {
-    _count: DishCountAggregateOutputType | null
-    _avg: DishAvgAggregateOutputType | null
-    _sum: DishSumAggregateOutputType | null
-    _min: DishMinAggregateOutputType | null
-    _max: DishMaxAggregateOutputType | null
-  }
-
-  export type DishAvgAggregateOutputType = {
-    premiumLevel: number | null
-    calories: number | null
-    protein: number | null
-    carbs: number | null
-    fat: number | null
-  }
-
-  export type DishSumAggregateOutputType = {
-    premiumLevel: number | null
-    calories: number | null
-    protein: number | null
-    carbs: number | null
-    fat: number | null
-  }
-
-  export type DishMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    description: string | null
-    image: string | null
-    category: $Enums.DishCategory | null
-    premiumLevel: number | null
-    calories: number | null
-    protein: number | null
-    carbs: number | null
-    fat: number | null
-    weekStart: Date | null
-    isActive: boolean | null
-    createdAt: Date | null
-  }
-
-  export type DishMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    description: string | null
-    image: string | null
-    category: $Enums.DishCategory | null
-    premiumLevel: number | null
-    calories: number | null
-    protein: number | null
-    carbs: number | null
-    fat: number | null
-    weekStart: Date | null
-    isActive: boolean | null
-    createdAt: Date | null
-  }
-
-  export type DishCountAggregateOutputType = {
-    id: number
-    name: number
-    description: number
-    image: number
-    category: number
-    premiumLevel: number
-    calories: number
-    protein: number
-    carbs: number
-    fat: number
-    allergens: number
-    weekStart: number
-    isActive: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type DishAvgAggregateInputType = {
-    premiumLevel?: true
-    calories?: true
-    protein?: true
-    carbs?: true
-    fat?: true
-  }
-
-  export type DishSumAggregateInputType = {
-    premiumLevel?: true
-    calories?: true
-    protein?: true
-    carbs?: true
-    fat?: true
-  }
-
-  export type DishMinAggregateInputType = {
-    id?: true
-    name?: true
-    description?: true
-    image?: true
-    category?: true
-    premiumLevel?: true
-    calories?: true
-    protein?: true
-    carbs?: true
-    fat?: true
-    weekStart?: true
-    isActive?: true
-    createdAt?: true
-  }
-
-  export type DishMaxAggregateInputType = {
-    id?: true
-    name?: true
-    description?: true
-    image?: true
-    category?: true
-    premiumLevel?: true
-    calories?: true
-    protein?: true
-    carbs?: true
-    fat?: true
-    weekStart?: true
-    isActive?: true
-    createdAt?: true
-  }
-
-  export type DishCountAggregateInputType = {
-    id?: true
-    name?: true
-    description?: true
-    image?: true
-    category?: true
-    premiumLevel?: true
-    calories?: true
-    protein?: true
-    carbs?: true
-    fat?: true
-    allergens?: true
-    weekStart?: true
-    isActive?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type DishAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Dish to aggregate.
-     */
-    where?: DishWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Dishes to fetch.
-     */
-    orderBy?: DishOrderByWithRelationInput | DishOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: DishWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Dishes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Dishes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Dishes
-    **/
-    _count?: true | DishCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: DishAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: DishSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: DishMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: DishMaxAggregateInputType
-  }
-
-  export type GetDishAggregateType<T extends DishAggregateArgs> = {
-        [P in keyof T & keyof AggregateDish]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateDish[P]>
-      : GetScalarType<T[P], AggregateDish[P]>
-  }
-
-
-
-
-  export type DishGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DishWhereInput
-    orderBy?: DishOrderByWithAggregationInput | DishOrderByWithAggregationInput[]
-    by: DishScalarFieldEnum[] | DishScalarFieldEnum
-    having?: DishScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: DishCountAggregateInputType | true
-    _avg?: DishAvgAggregateInputType
-    _sum?: DishSumAggregateInputType
-    _min?: DishMinAggregateInputType
-    _max?: DishMaxAggregateInputType
-  }
-
-  export type DishGroupByOutputType = {
-    id: string
-    name: string
-    description: string
-    image: string | null
-    category: $Enums.DishCategory
-    premiumLevel: number
-    calories: number | null
-    protein: number | null
-    carbs: number | null
-    fat: number | null
-    allergens: string[]
-    weekStart: Date
-    isActive: boolean
-    createdAt: Date
-    _count: DishCountAggregateOutputType | null
-    _avg: DishAvgAggregateOutputType | null
-    _sum: DishSumAggregateOutputType | null
-    _min: DishMinAggregateOutputType | null
-    _max: DishMaxAggregateOutputType | null
-  }
-
-  type GetDishGroupByPayload<T extends DishGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<DishGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof DishGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], DishGroupByOutputType[P]>
-            : GetScalarType<T[P], DishGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type DishSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    description?: boolean
-    image?: boolean
-    category?: boolean
-    premiumLevel?: boolean
-    calories?: boolean
-    protein?: boolean
-    carbs?: boolean
-    fat?: boolean
-    allergens?: boolean
-    weekStart?: boolean
-    isActive?: boolean
-    createdAt?: boolean
-    boxItems?: boolean | Dish$boxItemsArgs<ExtArgs>
-    _count?: boolean | DishCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["dish"]>
-
-  export type DishSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    description?: boolean
-    image?: boolean
-    category?: boolean
-    premiumLevel?: boolean
-    calories?: boolean
-    protein?: boolean
-    carbs?: boolean
-    fat?: boolean
-    allergens?: boolean
-    weekStart?: boolean
-    isActive?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["dish"]>
-
-  export type DishSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    description?: boolean
-    image?: boolean
-    category?: boolean
-    premiumLevel?: boolean
-    calories?: boolean
-    protein?: boolean
-    carbs?: boolean
-    fat?: boolean
-    allergens?: boolean
-    weekStart?: boolean
-    isActive?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["dish"]>
-
-  export type DishSelectScalar = {
-    id?: boolean
-    name?: boolean
-    description?: boolean
-    image?: boolean
-    category?: boolean
-    premiumLevel?: boolean
-    calories?: boolean
-    protein?: boolean
-    carbs?: boolean
-    fat?: boolean
-    allergens?: boolean
-    weekStart?: boolean
-    isActive?: boolean
-    createdAt?: boolean
-  }
-
-  export type DishOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "image" | "category" | "premiumLevel" | "calories" | "protein" | "carbs" | "fat" | "allergens" | "weekStart" | "isActive" | "createdAt", ExtArgs["result"]["dish"]>
-  export type DishInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    boxItems?: boolean | Dish$boxItemsArgs<ExtArgs>
-    _count?: boolean | DishCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type DishIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type DishIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $DishPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Dish"
-    objects: {
-      boxItems: Prisma.$BoxItemPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      description: string
-      image: string | null
-      category: $Enums.DishCategory
-      premiumLevel: number
-      calories: number | null
-      protein: number | null
-      carbs: number | null
-      fat: number | null
-      allergens: string[]
-      weekStart: Date
-      isActive: boolean
-      createdAt: Date
-    }, ExtArgs["result"]["dish"]>
-    composites: {}
-  }
-
-  type DishGetPayload<S extends boolean | null | undefined | DishDefaultArgs> = $Result.GetResult<Prisma.$DishPayload, S>
-
-  type DishCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<DishFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: DishCountAggregateInputType | true
-    }
-
-  export interface DishDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Dish'], meta: { name: 'Dish' } }
-    /**
-     * Find zero or one Dish that matches the filter.
-     * @param {DishFindUniqueArgs} args - Arguments to find a Dish
-     * @example
-     * // Get one Dish
-     * const dish = await prisma.dish.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends DishFindUniqueArgs>(args: SelectSubset<T, DishFindUniqueArgs<ExtArgs>>): Prisma__DishClient<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Dish that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {DishFindUniqueOrThrowArgs} args - Arguments to find a Dish
-     * @example
-     * // Get one Dish
-     * const dish = await prisma.dish.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends DishFindUniqueOrThrowArgs>(args: SelectSubset<T, DishFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DishClient<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Dish that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DishFindFirstArgs} args - Arguments to find a Dish
-     * @example
-     * // Get one Dish
-     * const dish = await prisma.dish.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends DishFindFirstArgs>(args?: SelectSubset<T, DishFindFirstArgs<ExtArgs>>): Prisma__DishClient<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Dish that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DishFindFirstOrThrowArgs} args - Arguments to find a Dish
-     * @example
-     * // Get one Dish
-     * const dish = await prisma.dish.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends DishFindFirstOrThrowArgs>(args?: SelectSubset<T, DishFindFirstOrThrowArgs<ExtArgs>>): Prisma__DishClient<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Dishes that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DishFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Dishes
-     * const dishes = await prisma.dish.findMany()
-     * 
-     * // Get first 10 Dishes
-     * const dishes = await prisma.dish.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const dishWithIdOnly = await prisma.dish.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends DishFindManyArgs>(args?: SelectSubset<T, DishFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Dish.
-     * @param {DishCreateArgs} args - Arguments to create a Dish.
-     * @example
-     * // Create one Dish
-     * const Dish = await prisma.dish.create({
-     *   data: {
-     *     // ... data to create a Dish
-     *   }
-     * })
-     * 
-     */
-    create<T extends DishCreateArgs>(args: SelectSubset<T, DishCreateArgs<ExtArgs>>): Prisma__DishClient<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Dishes.
-     * @param {DishCreateManyArgs} args - Arguments to create many Dishes.
-     * @example
-     * // Create many Dishes
-     * const dish = await prisma.dish.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends DishCreateManyArgs>(args?: SelectSubset<T, DishCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Dishes and returns the data saved in the database.
-     * @param {DishCreateManyAndReturnArgs} args - Arguments to create many Dishes.
-     * @example
-     * // Create many Dishes
-     * const dish = await prisma.dish.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Dishes and only return the `id`
-     * const dishWithIdOnly = await prisma.dish.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends DishCreateManyAndReturnArgs>(args?: SelectSubset<T, DishCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Dish.
-     * @param {DishDeleteArgs} args - Arguments to delete one Dish.
-     * @example
-     * // Delete one Dish
-     * const Dish = await prisma.dish.delete({
-     *   where: {
-     *     // ... filter to delete one Dish
-     *   }
-     * })
-     * 
-     */
-    delete<T extends DishDeleteArgs>(args: SelectSubset<T, DishDeleteArgs<ExtArgs>>): Prisma__DishClient<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Dish.
-     * @param {DishUpdateArgs} args - Arguments to update one Dish.
-     * @example
-     * // Update one Dish
-     * const dish = await prisma.dish.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends DishUpdateArgs>(args: SelectSubset<T, DishUpdateArgs<ExtArgs>>): Prisma__DishClient<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Dishes.
-     * @param {DishDeleteManyArgs} args - Arguments to filter Dishes to delete.
-     * @example
-     * // Delete a few Dishes
-     * const { count } = await prisma.dish.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends DishDeleteManyArgs>(args?: SelectSubset<T, DishDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Dishes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DishUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Dishes
-     * const dish = await prisma.dish.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends DishUpdateManyArgs>(args: SelectSubset<T, DishUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Dishes and returns the data updated in the database.
-     * @param {DishUpdateManyAndReturnArgs} args - Arguments to update many Dishes.
-     * @example
-     * // Update many Dishes
-     * const dish = await prisma.dish.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Dishes and only return the `id`
-     * const dishWithIdOnly = await prisma.dish.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends DishUpdateManyAndReturnArgs>(args: SelectSubset<T, DishUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Dish.
-     * @param {DishUpsertArgs} args - Arguments to update or create a Dish.
-     * @example
-     * // Update or create a Dish
-     * const dish = await prisma.dish.upsert({
-     *   create: {
-     *     // ... data to create a Dish
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Dish we want to update
-     *   }
-     * })
-     */
-    upsert<T extends DishUpsertArgs>(args: SelectSubset<T, DishUpsertArgs<ExtArgs>>): Prisma__DishClient<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Dishes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DishCountArgs} args - Arguments to filter Dishes to count.
-     * @example
-     * // Count the number of Dishes
-     * const count = await prisma.dish.count({
-     *   where: {
-     *     // ... the filter for the Dishes we want to count
-     *   }
-     * })
-    **/
-    count<T extends DishCountArgs>(
-      args?: Subset<T, DishCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], DishCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Dish.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DishAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends DishAggregateArgs>(args: Subset<T, DishAggregateArgs>): Prisma.PrismaPromise<GetDishAggregateType<T>>
-
-    /**
-     * Group by Dish.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DishGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends DishGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DishGroupByArgs['orderBy'] }
-        : { orderBy?: DishGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, DishGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDishGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Dish model
-   */
-  readonly fields: DishFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Dish.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__DishClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    boxItems<T extends Dish$boxItemsArgs<ExtArgs> = {}>(args?: Subset<T, Dish$boxItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Dish model
-   */
-  interface DishFieldRefs {
-    readonly id: FieldRef<"Dish", 'String'>
-    readonly name: FieldRef<"Dish", 'String'>
-    readonly description: FieldRef<"Dish", 'String'>
-    readonly image: FieldRef<"Dish", 'String'>
-    readonly category: FieldRef<"Dish", 'DishCategory'>
-    readonly premiumLevel: FieldRef<"Dish", 'Int'>
-    readonly calories: FieldRef<"Dish", 'Int'>
-    readonly protein: FieldRef<"Dish", 'Float'>
-    readonly carbs: FieldRef<"Dish", 'Float'>
-    readonly fat: FieldRef<"Dish", 'Float'>
-    readonly allergens: FieldRef<"Dish", 'String[]'>
-    readonly weekStart: FieldRef<"Dish", 'DateTime'>
-    readonly isActive: FieldRef<"Dish", 'Boolean'>
-    readonly createdAt: FieldRef<"Dish", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Dish findUnique
-   */
-  export type DishFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DishInclude<ExtArgs> | null
-    /**
-     * Filter, which Dish to fetch.
-     */
-    where: DishWhereUniqueInput
-  }
-
-  /**
-   * Dish findUniqueOrThrow
-   */
-  export type DishFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DishInclude<ExtArgs> | null
-    /**
-     * Filter, which Dish to fetch.
-     */
-    where: DishWhereUniqueInput
-  }
-
-  /**
-   * Dish findFirst
-   */
-  export type DishFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DishInclude<ExtArgs> | null
-    /**
-     * Filter, which Dish to fetch.
-     */
-    where?: DishWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Dishes to fetch.
-     */
-    orderBy?: DishOrderByWithRelationInput | DishOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Dishes.
-     */
-    cursor?: DishWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Dishes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Dishes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Dishes.
-     */
-    distinct?: DishScalarFieldEnum | DishScalarFieldEnum[]
-  }
-
-  /**
-   * Dish findFirstOrThrow
-   */
-  export type DishFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DishInclude<ExtArgs> | null
-    /**
-     * Filter, which Dish to fetch.
-     */
-    where?: DishWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Dishes to fetch.
-     */
-    orderBy?: DishOrderByWithRelationInput | DishOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Dishes.
-     */
-    cursor?: DishWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Dishes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Dishes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Dishes.
-     */
-    distinct?: DishScalarFieldEnum | DishScalarFieldEnum[]
-  }
-
-  /**
-   * Dish findMany
-   */
-  export type DishFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DishInclude<ExtArgs> | null
-    /**
-     * Filter, which Dishes to fetch.
-     */
-    where?: DishWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Dishes to fetch.
-     */
-    orderBy?: DishOrderByWithRelationInput | DishOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Dishes.
-     */
-    cursor?: DishWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Dishes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Dishes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Dishes.
-     */
-    distinct?: DishScalarFieldEnum | DishScalarFieldEnum[]
-  }
-
-  /**
-   * Dish create
-   */
-  export type DishCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DishInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Dish.
-     */
-    data: XOR<DishCreateInput, DishUncheckedCreateInput>
-  }
-
-  /**
-   * Dish createMany
-   */
-  export type DishCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Dishes.
-     */
-    data: DishCreateManyInput | DishCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Dish createManyAndReturn
-   */
-  export type DishCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * The data used to create many Dishes.
-     */
-    data: DishCreateManyInput | DishCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Dish update
-   */
-  export type DishUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DishInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Dish.
-     */
-    data: XOR<DishUpdateInput, DishUncheckedUpdateInput>
-    /**
-     * Choose, which Dish to update.
-     */
-    where: DishWhereUniqueInput
-  }
-
-  /**
-   * Dish updateMany
-   */
-  export type DishUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Dishes.
-     */
-    data: XOR<DishUpdateManyMutationInput, DishUncheckedUpdateManyInput>
-    /**
-     * Filter which Dishes to update
-     */
-    where?: DishWhereInput
-    /**
-     * Limit how many Dishes to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Dish updateManyAndReturn
-   */
-  export type DishUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * The data used to update Dishes.
-     */
-    data: XOR<DishUpdateManyMutationInput, DishUncheckedUpdateManyInput>
-    /**
-     * Filter which Dishes to update
-     */
-    where?: DishWhereInput
-    /**
-     * Limit how many Dishes to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Dish upsert
-   */
-  export type DishUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DishInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Dish to update in case it exists.
-     */
-    where: DishWhereUniqueInput
-    /**
-     * In case the Dish found by the `where` argument doesn't exist, create a new Dish with this data.
-     */
-    create: XOR<DishCreateInput, DishUncheckedCreateInput>
-    /**
-     * In case the Dish was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<DishUpdateInput, DishUncheckedUpdateInput>
-  }
-
-  /**
-   * Dish delete
-   */
-  export type DishDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DishInclude<ExtArgs> | null
-    /**
-     * Filter which Dish to delete.
-     */
-    where: DishWhereUniqueInput
-  }
-
-  /**
-   * Dish deleteMany
-   */
-  export type DishDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Dishes to delete
-     */
-    where?: DishWhereInput
-    /**
-     * Limit how many Dishes to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Dish.boxItems
-   */
-  export type Dish$boxItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    where?: BoxItemWhereInput
-    orderBy?: BoxItemOrderByWithRelationInput | BoxItemOrderByWithRelationInput[]
-    cursor?: BoxItemWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BoxItemScalarFieldEnum | BoxItemScalarFieldEnum[]
-  }
-
-  /**
-   * Dish without action
-   */
-  export type DishDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Dish
-     */
-    select?: DishSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Dish
-     */
-    omit?: DishOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DishInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model WeeklyBox
-   */
-
-  export type AggregateWeeklyBox = {
-    _count: WeeklyBoxCountAggregateOutputType | null
-    _min: WeeklyBoxMinAggregateOutputType | null
-    _max: WeeklyBoxMaxAggregateOutputType | null
-  }
-
-  export type WeeklyBoxMinAggregateOutputType = {
-    id: string | null
-    profileId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type WeeklyBoxMaxAggregateOutputType = {
-    id: string | null
-    profileId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type WeeklyBoxCountAggregateOutputType = {
-    id: number
-    profileId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type WeeklyBoxMinAggregateInputType = {
-    id?: true
-    profileId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type WeeklyBoxMaxAggregateInputType = {
-    id?: true
-    profileId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type WeeklyBoxCountAggregateInputType = {
-    id?: true
-    profileId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type WeeklyBoxAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which WeeklyBox to aggregate.
-     */
-    where?: WeeklyBoxWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of WeeklyBoxes to fetch.
-     */
-    orderBy?: WeeklyBoxOrderByWithRelationInput | WeeklyBoxOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: WeeklyBoxWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` WeeklyBoxes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` WeeklyBoxes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned WeeklyBoxes
-    **/
-    _count?: true | WeeklyBoxCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: WeeklyBoxMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: WeeklyBoxMaxAggregateInputType
-  }
-
-  export type GetWeeklyBoxAggregateType<T extends WeeklyBoxAggregateArgs> = {
-        [P in keyof T & keyof AggregateWeeklyBox]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateWeeklyBox[P]>
-      : GetScalarType<T[P], AggregateWeeklyBox[P]>
-  }
-
-
-
-
-  export type WeeklyBoxGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: WeeklyBoxWhereInput
-    orderBy?: WeeklyBoxOrderByWithAggregationInput | WeeklyBoxOrderByWithAggregationInput[]
-    by: WeeklyBoxScalarFieldEnum[] | WeeklyBoxScalarFieldEnum
-    having?: WeeklyBoxScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: WeeklyBoxCountAggregateInputType | true
-    _min?: WeeklyBoxMinAggregateInputType
-    _max?: WeeklyBoxMaxAggregateInputType
-  }
-
-  export type WeeklyBoxGroupByOutputType = {
-    id: string
-    profileId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: WeeklyBoxCountAggregateOutputType | null
-    _min: WeeklyBoxMinAggregateOutputType | null
-    _max: WeeklyBoxMaxAggregateOutputType | null
-  }
-
-  type GetWeeklyBoxGroupByPayload<T extends WeeklyBoxGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<WeeklyBoxGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof WeeklyBoxGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], WeeklyBoxGroupByOutputType[P]>
-            : GetScalarType<T[P], WeeklyBoxGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type WeeklyBoxSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    profileId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-    items?: boolean | WeeklyBox$itemsArgs<ExtArgs>
-    _count?: boolean | WeeklyBoxCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["weeklyBox"]>
-
-  export type WeeklyBoxSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    profileId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["weeklyBox"]>
-
-  export type WeeklyBoxSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    profileId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["weeklyBox"]>
-
-  export type WeeklyBoxSelectScalar = {
-    id?: boolean
-    profileId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type WeeklyBoxOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "createdAt" | "updatedAt", ExtArgs["result"]["weeklyBox"]>
-  export type WeeklyBoxInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-    items?: boolean | WeeklyBox$itemsArgs<ExtArgs>
-    _count?: boolean | WeeklyBoxCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type WeeklyBoxIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-  }
-  export type WeeklyBoxIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    profile?: boolean | ProfileDefaultArgs<ExtArgs>
-  }
-
-  export type $WeeklyBoxPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "WeeklyBox"
-    objects: {
-      profile: Prisma.$ProfilePayload<ExtArgs>
-      items: Prisma.$BoxItemPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      profileId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["weeklyBox"]>
-    composites: {}
-  }
-
-  type WeeklyBoxGetPayload<S extends boolean | null | undefined | WeeklyBoxDefaultArgs> = $Result.GetResult<Prisma.$WeeklyBoxPayload, S>
-
-  type WeeklyBoxCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<WeeklyBoxFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: WeeklyBoxCountAggregateInputType | true
-    }
-
-  export interface WeeklyBoxDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WeeklyBox'], meta: { name: 'WeeklyBox' } }
-    /**
-     * Find zero or one WeeklyBox that matches the filter.
-     * @param {WeeklyBoxFindUniqueArgs} args - Arguments to find a WeeklyBox
-     * @example
-     * // Get one WeeklyBox
-     * const weeklyBox = await prisma.weeklyBox.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends WeeklyBoxFindUniqueArgs>(args: SelectSubset<T, WeeklyBoxFindUniqueArgs<ExtArgs>>): Prisma__WeeklyBoxClient<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one WeeklyBox that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {WeeklyBoxFindUniqueOrThrowArgs} args - Arguments to find a WeeklyBox
-     * @example
-     * // Get one WeeklyBox
-     * const weeklyBox = await prisma.weeklyBox.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends WeeklyBoxFindUniqueOrThrowArgs>(args: SelectSubset<T, WeeklyBoxFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WeeklyBoxClient<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first WeeklyBox that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WeeklyBoxFindFirstArgs} args - Arguments to find a WeeklyBox
-     * @example
-     * // Get one WeeklyBox
-     * const weeklyBox = await prisma.weeklyBox.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends WeeklyBoxFindFirstArgs>(args?: SelectSubset<T, WeeklyBoxFindFirstArgs<ExtArgs>>): Prisma__WeeklyBoxClient<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first WeeklyBox that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WeeklyBoxFindFirstOrThrowArgs} args - Arguments to find a WeeklyBox
-     * @example
-     * // Get one WeeklyBox
-     * const weeklyBox = await prisma.weeklyBox.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends WeeklyBoxFindFirstOrThrowArgs>(args?: SelectSubset<T, WeeklyBoxFindFirstOrThrowArgs<ExtArgs>>): Prisma__WeeklyBoxClient<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more WeeklyBoxes that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WeeklyBoxFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all WeeklyBoxes
-     * const weeklyBoxes = await prisma.weeklyBox.findMany()
-     * 
-     * // Get first 10 WeeklyBoxes
-     * const weeklyBoxes = await prisma.weeklyBox.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const weeklyBoxWithIdOnly = await prisma.weeklyBox.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends WeeklyBoxFindManyArgs>(args?: SelectSubset<T, WeeklyBoxFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a WeeklyBox.
-     * @param {WeeklyBoxCreateArgs} args - Arguments to create a WeeklyBox.
-     * @example
-     * // Create one WeeklyBox
-     * const WeeklyBox = await prisma.weeklyBox.create({
-     *   data: {
-     *     // ... data to create a WeeklyBox
-     *   }
-     * })
-     * 
-     */
-    create<T extends WeeklyBoxCreateArgs>(args: SelectSubset<T, WeeklyBoxCreateArgs<ExtArgs>>): Prisma__WeeklyBoxClient<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many WeeklyBoxes.
-     * @param {WeeklyBoxCreateManyArgs} args - Arguments to create many WeeklyBoxes.
-     * @example
-     * // Create many WeeklyBoxes
-     * const weeklyBox = await prisma.weeklyBox.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends WeeklyBoxCreateManyArgs>(args?: SelectSubset<T, WeeklyBoxCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many WeeklyBoxes and returns the data saved in the database.
-     * @param {WeeklyBoxCreateManyAndReturnArgs} args - Arguments to create many WeeklyBoxes.
-     * @example
-     * // Create many WeeklyBoxes
-     * const weeklyBox = await prisma.weeklyBox.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many WeeklyBoxes and only return the `id`
-     * const weeklyBoxWithIdOnly = await prisma.weeklyBox.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends WeeklyBoxCreateManyAndReturnArgs>(args?: SelectSubset<T, WeeklyBoxCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a WeeklyBox.
-     * @param {WeeklyBoxDeleteArgs} args - Arguments to delete one WeeklyBox.
-     * @example
-     * // Delete one WeeklyBox
-     * const WeeklyBox = await prisma.weeklyBox.delete({
-     *   where: {
-     *     // ... filter to delete one WeeklyBox
-     *   }
-     * })
-     * 
-     */
-    delete<T extends WeeklyBoxDeleteArgs>(args: SelectSubset<T, WeeklyBoxDeleteArgs<ExtArgs>>): Prisma__WeeklyBoxClient<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one WeeklyBox.
-     * @param {WeeklyBoxUpdateArgs} args - Arguments to update one WeeklyBox.
-     * @example
-     * // Update one WeeklyBox
-     * const weeklyBox = await prisma.weeklyBox.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends WeeklyBoxUpdateArgs>(args: SelectSubset<T, WeeklyBoxUpdateArgs<ExtArgs>>): Prisma__WeeklyBoxClient<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more WeeklyBoxes.
-     * @param {WeeklyBoxDeleteManyArgs} args - Arguments to filter WeeklyBoxes to delete.
-     * @example
-     * // Delete a few WeeklyBoxes
-     * const { count } = await prisma.weeklyBox.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends WeeklyBoxDeleteManyArgs>(args?: SelectSubset<T, WeeklyBoxDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more WeeklyBoxes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WeeklyBoxUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many WeeklyBoxes
-     * const weeklyBox = await prisma.weeklyBox.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends WeeklyBoxUpdateManyArgs>(args: SelectSubset<T, WeeklyBoxUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more WeeklyBoxes and returns the data updated in the database.
-     * @param {WeeklyBoxUpdateManyAndReturnArgs} args - Arguments to update many WeeklyBoxes.
-     * @example
-     * // Update many WeeklyBoxes
-     * const weeklyBox = await prisma.weeklyBox.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more WeeklyBoxes and only return the `id`
-     * const weeklyBoxWithIdOnly = await prisma.weeklyBox.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends WeeklyBoxUpdateManyAndReturnArgs>(args: SelectSubset<T, WeeklyBoxUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one WeeklyBox.
-     * @param {WeeklyBoxUpsertArgs} args - Arguments to update or create a WeeklyBox.
-     * @example
-     * // Update or create a WeeklyBox
-     * const weeklyBox = await prisma.weeklyBox.upsert({
-     *   create: {
-     *     // ... data to create a WeeklyBox
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the WeeklyBox we want to update
-     *   }
-     * })
-     */
-    upsert<T extends WeeklyBoxUpsertArgs>(args: SelectSubset<T, WeeklyBoxUpsertArgs<ExtArgs>>): Prisma__WeeklyBoxClient<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of WeeklyBoxes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WeeklyBoxCountArgs} args - Arguments to filter WeeklyBoxes to count.
-     * @example
-     * // Count the number of WeeklyBoxes
-     * const count = await prisma.weeklyBox.count({
-     *   where: {
-     *     // ... the filter for the WeeklyBoxes we want to count
-     *   }
-     * })
-    **/
-    count<T extends WeeklyBoxCountArgs>(
-      args?: Subset<T, WeeklyBoxCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], WeeklyBoxCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a WeeklyBox.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WeeklyBoxAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends WeeklyBoxAggregateArgs>(args: Subset<T, WeeklyBoxAggregateArgs>): Prisma.PrismaPromise<GetWeeklyBoxAggregateType<T>>
-
-    /**
-     * Group by WeeklyBox.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WeeklyBoxGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends WeeklyBoxGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: WeeklyBoxGroupByArgs['orderBy'] }
-        : { orderBy?: WeeklyBoxGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, WeeklyBoxGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWeeklyBoxGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the WeeklyBox model
-   */
-  readonly fields: WeeklyBoxFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for WeeklyBox.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__WeeklyBoxClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    profile<T extends ProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfileDefaultArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    items<T extends WeeklyBox$itemsArgs<ExtArgs> = {}>(args?: Subset<T, WeeklyBox$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the WeeklyBox model
-   */
-  interface WeeklyBoxFieldRefs {
-    readonly id: FieldRef<"WeeklyBox", 'String'>
-    readonly profileId: FieldRef<"WeeklyBox", 'String'>
-    readonly createdAt: FieldRef<"WeeklyBox", 'DateTime'>
-    readonly updatedAt: FieldRef<"WeeklyBox", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * WeeklyBox findUnique
-   */
-  export type WeeklyBoxFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-    /**
-     * Filter, which WeeklyBox to fetch.
-     */
-    where: WeeklyBoxWhereUniqueInput
-  }
-
-  /**
-   * WeeklyBox findUniqueOrThrow
-   */
-  export type WeeklyBoxFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-    /**
-     * Filter, which WeeklyBox to fetch.
-     */
-    where: WeeklyBoxWhereUniqueInput
-  }
-
-  /**
-   * WeeklyBox findFirst
-   */
-  export type WeeklyBoxFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-    /**
-     * Filter, which WeeklyBox to fetch.
-     */
-    where?: WeeklyBoxWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of WeeklyBoxes to fetch.
-     */
-    orderBy?: WeeklyBoxOrderByWithRelationInput | WeeklyBoxOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for WeeklyBoxes.
-     */
-    cursor?: WeeklyBoxWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` WeeklyBoxes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` WeeklyBoxes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of WeeklyBoxes.
-     */
-    distinct?: WeeklyBoxScalarFieldEnum | WeeklyBoxScalarFieldEnum[]
-  }
-
-  /**
-   * WeeklyBox findFirstOrThrow
-   */
-  export type WeeklyBoxFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-    /**
-     * Filter, which WeeklyBox to fetch.
-     */
-    where?: WeeklyBoxWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of WeeklyBoxes to fetch.
-     */
-    orderBy?: WeeklyBoxOrderByWithRelationInput | WeeklyBoxOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for WeeklyBoxes.
-     */
-    cursor?: WeeklyBoxWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` WeeklyBoxes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` WeeklyBoxes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of WeeklyBoxes.
-     */
-    distinct?: WeeklyBoxScalarFieldEnum | WeeklyBoxScalarFieldEnum[]
-  }
-
-  /**
-   * WeeklyBox findMany
-   */
-  export type WeeklyBoxFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-    /**
-     * Filter, which WeeklyBoxes to fetch.
-     */
-    where?: WeeklyBoxWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of WeeklyBoxes to fetch.
-     */
-    orderBy?: WeeklyBoxOrderByWithRelationInput | WeeklyBoxOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing WeeklyBoxes.
-     */
-    cursor?: WeeklyBoxWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` WeeklyBoxes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` WeeklyBoxes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of WeeklyBoxes.
-     */
-    distinct?: WeeklyBoxScalarFieldEnum | WeeklyBoxScalarFieldEnum[]
-  }
-
-  /**
-   * WeeklyBox create
-   */
-  export type WeeklyBoxCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-    /**
-     * The data needed to create a WeeklyBox.
-     */
-    data: XOR<WeeklyBoxCreateInput, WeeklyBoxUncheckedCreateInput>
-  }
-
-  /**
-   * WeeklyBox createMany
-   */
-  export type WeeklyBoxCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many WeeklyBoxes.
-     */
-    data: WeeklyBoxCreateManyInput | WeeklyBoxCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * WeeklyBox createManyAndReturn
-   */
-  export type WeeklyBoxCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * The data used to create many WeeklyBoxes.
-     */
-    data: WeeklyBoxCreateManyInput | WeeklyBoxCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * WeeklyBox update
-   */
-  export type WeeklyBoxUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-    /**
-     * The data needed to update a WeeklyBox.
-     */
-    data: XOR<WeeklyBoxUpdateInput, WeeklyBoxUncheckedUpdateInput>
-    /**
-     * Choose, which WeeklyBox to update.
-     */
-    where: WeeklyBoxWhereUniqueInput
-  }
-
-  /**
-   * WeeklyBox updateMany
-   */
-  export type WeeklyBoxUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update WeeklyBoxes.
-     */
-    data: XOR<WeeklyBoxUpdateManyMutationInput, WeeklyBoxUncheckedUpdateManyInput>
-    /**
-     * Filter which WeeklyBoxes to update
-     */
-    where?: WeeklyBoxWhereInput
-    /**
-     * Limit how many WeeklyBoxes to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * WeeklyBox updateManyAndReturn
-   */
-  export type WeeklyBoxUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * The data used to update WeeklyBoxes.
-     */
-    data: XOR<WeeklyBoxUpdateManyMutationInput, WeeklyBoxUncheckedUpdateManyInput>
-    /**
-     * Filter which WeeklyBoxes to update
-     */
-    where?: WeeklyBoxWhereInput
-    /**
-     * Limit how many WeeklyBoxes to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * WeeklyBox upsert
-   */
-  export type WeeklyBoxUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-    /**
-     * The filter to search for the WeeklyBox to update in case it exists.
-     */
-    where: WeeklyBoxWhereUniqueInput
-    /**
-     * In case the WeeklyBox found by the `where` argument doesn't exist, create a new WeeklyBox with this data.
-     */
-    create: XOR<WeeklyBoxCreateInput, WeeklyBoxUncheckedCreateInput>
-    /**
-     * In case the WeeklyBox was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<WeeklyBoxUpdateInput, WeeklyBoxUncheckedUpdateInput>
-  }
-
-  /**
-   * WeeklyBox delete
-   */
-  export type WeeklyBoxDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-    /**
-     * Filter which WeeklyBox to delete.
-     */
-    where: WeeklyBoxWhereUniqueInput
-  }
-
-  /**
-   * WeeklyBox deleteMany
-   */
-  export type WeeklyBoxDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which WeeklyBoxes to delete
-     */
-    where?: WeeklyBoxWhereInput
-    /**
-     * Limit how many WeeklyBoxes to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * WeeklyBox.items
-   */
-  export type WeeklyBox$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    where?: BoxItemWhereInput
-    orderBy?: BoxItemOrderByWithRelationInput | BoxItemOrderByWithRelationInput[]
-    cursor?: BoxItemWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BoxItemScalarFieldEnum | BoxItemScalarFieldEnum[]
-  }
-
-  /**
-   * WeeklyBox without action
-   */
-  export type WeeklyBoxDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WeeklyBox
-     */
-    select?: WeeklyBoxSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the WeeklyBox
-     */
-    omit?: WeeklyBoxOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WeeklyBoxInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model BoxItem
-   */
-
-  export type AggregateBoxItem = {
-    _count: BoxItemCountAggregateOutputType | null
-    _avg: BoxItemAvgAggregateOutputType | null
-    _sum: BoxItemSumAggregateOutputType | null
-    _min: BoxItemMinAggregateOutputType | null
-    _max: BoxItemMaxAggregateOutputType | null
-  }
-
-  export type BoxItemAvgAggregateOutputType = {
-    quantity: number | null
-    unitPrice: number | null
-  }
-
-  export type BoxItemSumAggregateOutputType = {
-    quantity: number | null
-    unitPrice: number | null
-  }
-
-  export type BoxItemMinAggregateOutputType = {
-    id: string | null
-    boxId: string | null
-    dishId: string | null
-    quantity: number | null
-    unitPrice: number | null
-    createdAt: Date | null
-  }
-
-  export type BoxItemMaxAggregateOutputType = {
-    id: string | null
-    boxId: string | null
-    dishId: string | null
-    quantity: number | null
-    unitPrice: number | null
-    createdAt: Date | null
-  }
-
-  export type BoxItemCountAggregateOutputType = {
-    id: number
-    boxId: number
-    dishId: number
-    quantity: number
-    unitPrice: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type BoxItemAvgAggregateInputType = {
-    quantity?: true
-    unitPrice?: true
-  }
-
-  export type BoxItemSumAggregateInputType = {
-    quantity?: true
-    unitPrice?: true
-  }
-
-  export type BoxItemMinAggregateInputType = {
-    id?: true
-    boxId?: true
-    dishId?: true
-    quantity?: true
-    unitPrice?: true
-    createdAt?: true
-  }
-
-  export type BoxItemMaxAggregateInputType = {
-    id?: true
-    boxId?: true
-    dishId?: true
-    quantity?: true
-    unitPrice?: true
-    createdAt?: true
-  }
-
-  export type BoxItemCountAggregateInputType = {
-    id?: true
-    boxId?: true
-    dishId?: true
-    quantity?: true
-    unitPrice?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type BoxItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BoxItem to aggregate.
-     */
-    where?: BoxItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoxItems to fetch.
-     */
-    orderBy?: BoxItemOrderByWithRelationInput | BoxItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: BoxItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoxItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoxItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned BoxItems
-    **/
-    _count?: true | BoxItemCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: BoxItemAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: BoxItemSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: BoxItemMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: BoxItemMaxAggregateInputType
-  }
-
-  export type GetBoxItemAggregateType<T extends BoxItemAggregateArgs> = {
-        [P in keyof T & keyof AggregateBoxItem]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateBoxItem[P]>
-      : GetScalarType<T[P], AggregateBoxItem[P]>
-  }
-
-
-
-
-  export type BoxItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BoxItemWhereInput
-    orderBy?: BoxItemOrderByWithAggregationInput | BoxItemOrderByWithAggregationInput[]
-    by: BoxItemScalarFieldEnum[] | BoxItemScalarFieldEnum
-    having?: BoxItemScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: BoxItemCountAggregateInputType | true
-    _avg?: BoxItemAvgAggregateInputType
-    _sum?: BoxItemSumAggregateInputType
-    _min?: BoxItemMinAggregateInputType
-    _max?: BoxItemMaxAggregateInputType
-  }
-
-  export type BoxItemGroupByOutputType = {
-    id: string
-    boxId: string
-    dishId: string
-    quantity: number
-    unitPrice: number
-    createdAt: Date
-    _count: BoxItemCountAggregateOutputType | null
-    _avg: BoxItemAvgAggregateOutputType | null
-    _sum: BoxItemSumAggregateOutputType | null
-    _min: BoxItemMinAggregateOutputType | null
-    _max: BoxItemMaxAggregateOutputType | null
-  }
-
-  type GetBoxItemGroupByPayload<T extends BoxItemGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<BoxItemGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof BoxItemGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], BoxItemGroupByOutputType[P]>
-            : GetScalarType<T[P], BoxItemGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type BoxItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    boxId?: boolean
-    dishId?: boolean
-    quantity?: boolean
-    unitPrice?: boolean
-    createdAt?: boolean
-    box?: boolean | WeeklyBoxDefaultArgs<ExtArgs>
-    dish?: boolean | DishDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["boxItem"]>
-
-  export type BoxItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    boxId?: boolean
-    dishId?: boolean
-    quantity?: boolean
-    unitPrice?: boolean
-    createdAt?: boolean
-    box?: boolean | WeeklyBoxDefaultArgs<ExtArgs>
-    dish?: boolean | DishDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["boxItem"]>
-
-  export type BoxItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    boxId?: boolean
-    dishId?: boolean
-    quantity?: boolean
-    unitPrice?: boolean
-    createdAt?: boolean
-    box?: boolean | WeeklyBoxDefaultArgs<ExtArgs>
-    dish?: boolean | DishDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["boxItem"]>
-
-  export type BoxItemSelectScalar = {
-    id?: boolean
-    boxId?: boolean
-    dishId?: boolean
-    quantity?: boolean
-    unitPrice?: boolean
-    createdAt?: boolean
-  }
-
-  export type BoxItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "boxId" | "dishId" | "quantity" | "unitPrice" | "createdAt", ExtArgs["result"]["boxItem"]>
-  export type BoxItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    box?: boolean | WeeklyBoxDefaultArgs<ExtArgs>
-    dish?: boolean | DishDefaultArgs<ExtArgs>
-  }
-  export type BoxItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    box?: boolean | WeeklyBoxDefaultArgs<ExtArgs>
-    dish?: boolean | DishDefaultArgs<ExtArgs>
-  }
-  export type BoxItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    box?: boolean | WeeklyBoxDefaultArgs<ExtArgs>
-    dish?: boolean | DishDefaultArgs<ExtArgs>
-  }
-
-  export type $BoxItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "BoxItem"
-    objects: {
-      box: Prisma.$WeeklyBoxPayload<ExtArgs>
-      dish: Prisma.$DishPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      boxId: string
-      dishId: string
-      quantity: number
-      unitPrice: number
-      createdAt: Date
-    }, ExtArgs["result"]["boxItem"]>
-    composites: {}
-  }
-
-  type BoxItemGetPayload<S extends boolean | null | undefined | BoxItemDefaultArgs> = $Result.GetResult<Prisma.$BoxItemPayload, S>
-
-  type BoxItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<BoxItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: BoxItemCountAggregateInputType | true
-    }
-
-  export interface BoxItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BoxItem'], meta: { name: 'BoxItem' } }
-    /**
-     * Find zero or one BoxItem that matches the filter.
-     * @param {BoxItemFindUniqueArgs} args - Arguments to find a BoxItem
-     * @example
-     * // Get one BoxItem
-     * const boxItem = await prisma.boxItem.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends BoxItemFindUniqueArgs>(args: SelectSubset<T, BoxItemFindUniqueArgs<ExtArgs>>): Prisma__BoxItemClient<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one BoxItem that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {BoxItemFindUniqueOrThrowArgs} args - Arguments to find a BoxItem
-     * @example
-     * // Get one BoxItem
-     * const boxItem = await prisma.boxItem.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends BoxItemFindUniqueOrThrowArgs>(args: SelectSubset<T, BoxItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BoxItemClient<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BoxItem that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoxItemFindFirstArgs} args - Arguments to find a BoxItem
-     * @example
-     * // Get one BoxItem
-     * const boxItem = await prisma.boxItem.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends BoxItemFindFirstArgs>(args?: SelectSubset<T, BoxItemFindFirstArgs<ExtArgs>>): Prisma__BoxItemClient<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BoxItem that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoxItemFindFirstOrThrowArgs} args - Arguments to find a BoxItem
-     * @example
-     * // Get one BoxItem
-     * const boxItem = await prisma.boxItem.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends BoxItemFindFirstOrThrowArgs>(args?: SelectSubset<T, BoxItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__BoxItemClient<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more BoxItems that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoxItemFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all BoxItems
-     * const boxItems = await prisma.boxItem.findMany()
-     * 
-     * // Get first 10 BoxItems
-     * const boxItems = await prisma.boxItem.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const boxItemWithIdOnly = await prisma.boxItem.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends BoxItemFindManyArgs>(args?: SelectSubset<T, BoxItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a BoxItem.
-     * @param {BoxItemCreateArgs} args - Arguments to create a BoxItem.
-     * @example
-     * // Create one BoxItem
-     * const BoxItem = await prisma.boxItem.create({
-     *   data: {
-     *     // ... data to create a BoxItem
-     *   }
-     * })
-     * 
-     */
-    create<T extends BoxItemCreateArgs>(args: SelectSubset<T, BoxItemCreateArgs<ExtArgs>>): Prisma__BoxItemClient<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many BoxItems.
-     * @param {BoxItemCreateManyArgs} args - Arguments to create many BoxItems.
-     * @example
-     * // Create many BoxItems
-     * const boxItem = await prisma.boxItem.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends BoxItemCreateManyArgs>(args?: SelectSubset<T, BoxItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many BoxItems and returns the data saved in the database.
-     * @param {BoxItemCreateManyAndReturnArgs} args - Arguments to create many BoxItems.
-     * @example
-     * // Create many BoxItems
-     * const boxItem = await prisma.boxItem.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many BoxItems and only return the `id`
-     * const boxItemWithIdOnly = await prisma.boxItem.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends BoxItemCreateManyAndReturnArgs>(args?: SelectSubset<T, BoxItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a BoxItem.
-     * @param {BoxItemDeleteArgs} args - Arguments to delete one BoxItem.
-     * @example
-     * // Delete one BoxItem
-     * const BoxItem = await prisma.boxItem.delete({
-     *   where: {
-     *     // ... filter to delete one BoxItem
-     *   }
-     * })
-     * 
-     */
-    delete<T extends BoxItemDeleteArgs>(args: SelectSubset<T, BoxItemDeleteArgs<ExtArgs>>): Prisma__BoxItemClient<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one BoxItem.
-     * @param {BoxItemUpdateArgs} args - Arguments to update one BoxItem.
-     * @example
-     * // Update one BoxItem
-     * const boxItem = await prisma.boxItem.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends BoxItemUpdateArgs>(args: SelectSubset<T, BoxItemUpdateArgs<ExtArgs>>): Prisma__BoxItemClient<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more BoxItems.
-     * @param {BoxItemDeleteManyArgs} args - Arguments to filter BoxItems to delete.
-     * @example
-     * // Delete a few BoxItems
-     * const { count } = await prisma.boxItem.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends BoxItemDeleteManyArgs>(args?: SelectSubset<T, BoxItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BoxItems.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoxItemUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many BoxItems
-     * const boxItem = await prisma.boxItem.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends BoxItemUpdateManyArgs>(args: SelectSubset<T, BoxItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BoxItems and returns the data updated in the database.
-     * @param {BoxItemUpdateManyAndReturnArgs} args - Arguments to update many BoxItems.
-     * @example
-     * // Update many BoxItems
-     * const boxItem = await prisma.boxItem.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more BoxItems and only return the `id`
-     * const boxItemWithIdOnly = await prisma.boxItem.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends BoxItemUpdateManyAndReturnArgs>(args: SelectSubset<T, BoxItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one BoxItem.
-     * @param {BoxItemUpsertArgs} args - Arguments to update or create a BoxItem.
-     * @example
-     * // Update or create a BoxItem
-     * const boxItem = await prisma.boxItem.upsert({
-     *   create: {
-     *     // ... data to create a BoxItem
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the BoxItem we want to update
-     *   }
-     * })
-     */
-    upsert<T extends BoxItemUpsertArgs>(args: SelectSubset<T, BoxItemUpsertArgs<ExtArgs>>): Prisma__BoxItemClient<$Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of BoxItems.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoxItemCountArgs} args - Arguments to filter BoxItems to count.
-     * @example
-     * // Count the number of BoxItems
-     * const count = await prisma.boxItem.count({
-     *   where: {
-     *     // ... the filter for the BoxItems we want to count
-     *   }
-     * })
-    **/
-    count<T extends BoxItemCountArgs>(
-      args?: Subset<T, BoxItemCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], BoxItemCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a BoxItem.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoxItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends BoxItemAggregateArgs>(args: Subset<T, BoxItemAggregateArgs>): Prisma.PrismaPromise<GetBoxItemAggregateType<T>>
-
-    /**
-     * Group by BoxItem.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoxItemGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends BoxItemGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: BoxItemGroupByArgs['orderBy'] }
-        : { orderBy?: BoxItemGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, BoxItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBoxItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the BoxItem model
-   */
-  readonly fields: BoxItemFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for BoxItem.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__BoxItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    box<T extends WeeklyBoxDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WeeklyBoxDefaultArgs<ExtArgs>>): Prisma__WeeklyBoxClient<$Result.GetResult<Prisma.$WeeklyBoxPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    dish<T extends DishDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DishDefaultArgs<ExtArgs>>): Prisma__DishClient<$Result.GetResult<Prisma.$DishPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the BoxItem model
-   */
-  interface BoxItemFieldRefs {
-    readonly id: FieldRef<"BoxItem", 'String'>
-    readonly boxId: FieldRef<"BoxItem", 'String'>
-    readonly dishId: FieldRef<"BoxItem", 'String'>
-    readonly quantity: FieldRef<"BoxItem", 'Int'>
-    readonly unitPrice: FieldRef<"BoxItem", 'Float'>
-    readonly createdAt: FieldRef<"BoxItem", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * BoxItem findUnique
-   */
-  export type BoxItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    /**
-     * Filter, which BoxItem to fetch.
-     */
-    where: BoxItemWhereUniqueInput
-  }
-
-  /**
-   * BoxItem findUniqueOrThrow
-   */
-  export type BoxItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    /**
-     * Filter, which BoxItem to fetch.
-     */
-    where: BoxItemWhereUniqueInput
-  }
-
-  /**
-   * BoxItem findFirst
-   */
-  export type BoxItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    /**
-     * Filter, which BoxItem to fetch.
-     */
-    where?: BoxItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoxItems to fetch.
-     */
-    orderBy?: BoxItemOrderByWithRelationInput | BoxItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BoxItems.
-     */
-    cursor?: BoxItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoxItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoxItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BoxItems.
-     */
-    distinct?: BoxItemScalarFieldEnum | BoxItemScalarFieldEnum[]
-  }
-
-  /**
-   * BoxItem findFirstOrThrow
-   */
-  export type BoxItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    /**
-     * Filter, which BoxItem to fetch.
-     */
-    where?: BoxItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoxItems to fetch.
-     */
-    orderBy?: BoxItemOrderByWithRelationInput | BoxItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BoxItems.
-     */
-    cursor?: BoxItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoxItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoxItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BoxItems.
-     */
-    distinct?: BoxItemScalarFieldEnum | BoxItemScalarFieldEnum[]
-  }
-
-  /**
-   * BoxItem findMany
-   */
-  export type BoxItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    /**
-     * Filter, which BoxItems to fetch.
-     */
-    where?: BoxItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoxItems to fetch.
-     */
-    orderBy?: BoxItemOrderByWithRelationInput | BoxItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing BoxItems.
-     */
-    cursor?: BoxItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoxItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoxItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BoxItems.
-     */
-    distinct?: BoxItemScalarFieldEnum | BoxItemScalarFieldEnum[]
-  }
-
-  /**
-   * BoxItem create
-   */
-  export type BoxItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    /**
-     * The data needed to create a BoxItem.
-     */
-    data: XOR<BoxItemCreateInput, BoxItemUncheckedCreateInput>
-  }
-
-  /**
-   * BoxItem createMany
-   */
-  export type BoxItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many BoxItems.
-     */
-    data: BoxItemCreateManyInput | BoxItemCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * BoxItem createManyAndReturn
-   */
-  export type BoxItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * The data used to create many BoxItems.
-     */
-    data: BoxItemCreateManyInput | BoxItemCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * BoxItem update
-   */
-  export type BoxItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    /**
-     * The data needed to update a BoxItem.
-     */
-    data: XOR<BoxItemUpdateInput, BoxItemUncheckedUpdateInput>
-    /**
-     * Choose, which BoxItem to update.
-     */
-    where: BoxItemWhereUniqueInput
-  }
-
-  /**
-   * BoxItem updateMany
-   */
-  export type BoxItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update BoxItems.
-     */
-    data: XOR<BoxItemUpdateManyMutationInput, BoxItemUncheckedUpdateManyInput>
-    /**
-     * Filter which BoxItems to update
-     */
-    where?: BoxItemWhereInput
-    /**
-     * Limit how many BoxItems to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * BoxItem updateManyAndReturn
-   */
-  export type BoxItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * The data used to update BoxItems.
-     */
-    data: XOR<BoxItemUpdateManyMutationInput, BoxItemUncheckedUpdateManyInput>
-    /**
-     * Filter which BoxItems to update
-     */
-    where?: BoxItemWhereInput
-    /**
-     * Limit how many BoxItems to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * BoxItem upsert
-   */
-  export type BoxItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    /**
-     * The filter to search for the BoxItem to update in case it exists.
-     */
-    where: BoxItemWhereUniqueInput
-    /**
-     * In case the BoxItem found by the `where` argument doesn't exist, create a new BoxItem with this data.
-     */
-    create: XOR<BoxItemCreateInput, BoxItemUncheckedCreateInput>
-    /**
-     * In case the BoxItem was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<BoxItemUpdateInput, BoxItemUncheckedUpdateInput>
-  }
-
-  /**
-   * BoxItem delete
-   */
-  export type BoxItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-    /**
-     * Filter which BoxItem to delete.
-     */
-    where: BoxItemWhereUniqueInput
-  }
-
-  /**
-   * BoxItem deleteMany
-   */
-  export type BoxItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BoxItems to delete
-     */
-    where?: BoxItemWhereInput
-    /**
-     * Limit how many BoxItems to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * BoxItem without action
-   */
-  export type BoxItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoxItem
-     */
-    select?: BoxItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoxItem
-     */
-    omit?: BoxItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoxItemInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Order
    */
 
@@ -7668,22 +2579,26 @@ export namespace Prisma {
 
   export type OrderAvgAggregateOutputType = {
     total: number | null
+    invoiceNumber: number | null
   }
 
   export type OrderSumAggregateOutputType = {
     total: number | null
+    invoiceNumber: number | null
   }
 
   export type OrderMinAggregateOutputType = {
     id: string | null
     profileId: string | null
-    addressId: string | null
     status: $Enums.OrderStatus | null
     total: number | null
     deliveryAddress: string | null
     deliveryInstructions: string | null
     payphoneTransactionId: string | null
     deliveryDate: Date | null
+    taxIdType: string | null
+    taxId: string | null
+    invoiceNumber: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7691,13 +2606,15 @@ export namespace Prisma {
   export type OrderMaxAggregateOutputType = {
     id: string | null
     profileId: string | null
-    addressId: string | null
     status: $Enums.OrderStatus | null
     total: number | null
     deliveryAddress: string | null
     deliveryInstructions: string | null
     payphoneTransactionId: string | null
     deliveryDate: Date | null
+    taxIdType: string | null
+    taxId: string | null
+    invoiceNumber: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7705,13 +2622,15 @@ export namespace Prisma {
   export type OrderCountAggregateOutputType = {
     id: number
     profileId: number
-    addressId: number
     status: number
     total: number
     deliveryAddress: number
     deliveryInstructions: number
     payphoneTransactionId: number
     deliveryDate: number
+    taxIdType: number
+    taxId: number
+    invoiceNumber: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7720,22 +2639,26 @@ export namespace Prisma {
 
   export type OrderAvgAggregateInputType = {
     total?: true
+    invoiceNumber?: true
   }
 
   export type OrderSumAggregateInputType = {
     total?: true
+    invoiceNumber?: true
   }
 
   export type OrderMinAggregateInputType = {
     id?: true
     profileId?: true
-    addressId?: true
     status?: true
     total?: true
     deliveryAddress?: true
     deliveryInstructions?: true
     payphoneTransactionId?: true
     deliveryDate?: true
+    taxIdType?: true
+    taxId?: true
+    invoiceNumber?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7743,13 +2666,15 @@ export namespace Prisma {
   export type OrderMaxAggregateInputType = {
     id?: true
     profileId?: true
-    addressId?: true
     status?: true
     total?: true
     deliveryAddress?: true
     deliveryInstructions?: true
     payphoneTransactionId?: true
     deliveryDate?: true
+    taxIdType?: true
+    taxId?: true
+    invoiceNumber?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7757,13 +2682,15 @@ export namespace Prisma {
   export type OrderCountAggregateInputType = {
     id?: true
     profileId?: true
-    addressId?: true
     status?: true
     total?: true
     deliveryAddress?: true
     deliveryInstructions?: true
     payphoneTransactionId?: true
     deliveryDate?: true
+    taxIdType?: true
+    taxId?: true
+    invoiceNumber?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -7858,13 +2785,15 @@ export namespace Prisma {
   export type OrderGroupByOutputType = {
     id: string
     profileId: string
-    addressId: string | null
     status: $Enums.OrderStatus
     total: number
     deliveryAddress: string
     deliveryInstructions: string | null
     payphoneTransactionId: string | null
     deliveryDate: Date | null
+    taxIdType: string
+    taxId: string
+    invoiceNumber: number
     createdAt: Date
     updatedAt: Date
     _count: OrderCountAggregateOutputType | null
@@ -7891,17 +2820,18 @@ export namespace Prisma {
   export type OrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     profileId?: boolean
-    addressId?: boolean
     status?: boolean
     total?: boolean
     deliveryAddress?: boolean
     deliveryInstructions?: boolean
     payphoneTransactionId?: boolean
     deliveryDate?: boolean
+    taxIdType?: boolean
+    taxId?: boolean
+    invoiceNumber?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
-    address?: boolean | Order$addressArgs<ExtArgs>
     items?: boolean | Order$itemsArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
@@ -7909,82 +2839,84 @@ export namespace Prisma {
   export type OrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     profileId?: boolean
-    addressId?: boolean
     status?: boolean
     total?: boolean
     deliveryAddress?: boolean
     deliveryInstructions?: boolean
     payphoneTransactionId?: boolean
     deliveryDate?: boolean
+    taxIdType?: boolean
+    taxId?: boolean
+    invoiceNumber?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
-    address?: boolean | Order$addressArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     profileId?: boolean
-    addressId?: boolean
     status?: boolean
     total?: boolean
     deliveryAddress?: boolean
     deliveryInstructions?: boolean
     payphoneTransactionId?: boolean
     deliveryDate?: boolean
+    taxIdType?: boolean
+    taxId?: boolean
+    invoiceNumber?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
-    address?: boolean | Order$addressArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectScalar = {
     id?: boolean
     profileId?: boolean
-    addressId?: boolean
     status?: boolean
     total?: boolean
     deliveryAddress?: boolean
     deliveryInstructions?: boolean
     payphoneTransactionId?: boolean
     deliveryDate?: boolean
+    taxIdType?: boolean
+    taxId?: boolean
+    invoiceNumber?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "addressId" | "status" | "total" | "deliveryAddress" | "deliveryInstructions" | "payphoneTransactionId" | "deliveryDate" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "status" | "total" | "deliveryAddress" | "deliveryInstructions" | "payphoneTransactionId" | "deliveryDate" | "taxIdType" | "taxId" | "invoiceNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
-    address?: boolean | Order$addressArgs<ExtArgs>
     items?: boolean | Order$itemsArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
-    address?: boolean | Order$addressArgs<ExtArgs>
   }
   export type OrderIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
-    address?: boolean | Order$addressArgs<ExtArgs>
   }
 
   export type $OrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Order"
     objects: {
       profile: Prisma.$ProfilePayload<ExtArgs>
-      address: Prisma.$AddressPayload<ExtArgs> | null
       items: Prisma.$OrderItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       profileId: string
-      addressId: string | null
       status: $Enums.OrderStatus
       total: number
       deliveryAddress: string
       deliveryInstructions: string | null
       payphoneTransactionId: string | null
       deliveryDate: Date | null
+      taxIdType: string
+      taxId: string
+      invoiceNumber: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["order"]>
@@ -8382,7 +3314,6 @@ export namespace Prisma {
   export interface Prisma__OrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     profile<T extends ProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfileDefaultArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    address<T extends Order$addressArgs<ExtArgs> = {}>(args?: Subset<T, Order$addressArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     items<T extends Order$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Order$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8415,13 +3346,15 @@ export namespace Prisma {
   interface OrderFieldRefs {
     readonly id: FieldRef<"Order", 'String'>
     readonly profileId: FieldRef<"Order", 'String'>
-    readonly addressId: FieldRef<"Order", 'String'>
     readonly status: FieldRef<"Order", 'OrderStatus'>
     readonly total: FieldRef<"Order", 'Float'>
     readonly deliveryAddress: FieldRef<"Order", 'String'>
     readonly deliveryInstructions: FieldRef<"Order", 'String'>
     readonly payphoneTransactionId: FieldRef<"Order", 'String'>
     readonly deliveryDate: FieldRef<"Order", 'DateTime'>
+    readonly taxIdType: FieldRef<"Order", 'String'>
+    readonly taxId: FieldRef<"Order", 'String'>
+    readonly invoiceNumber: FieldRef<"Order", 'Int'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly updatedAt: FieldRef<"Order", 'DateTime'>
   }
@@ -8822,25 +3755,6 @@ export namespace Prisma {
      * Limit how many Orders to delete.
      */
     limit?: number
-  }
-
-  /**
-   * Order.address
-   */
-  export type Order$addressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Address
-     */
-    select?: AddressSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Address
-     */
-    omit?: AddressOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AddressInclude<ExtArgs> | null
-    where?: AddressWhereInput
   }
 
   /**
@@ -13618,71 +8532,18 @@ export namespace Prisma {
   export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
 
 
-  export const AddressScalarFieldEnum: {
-    id: 'id',
-    profileId: 'profileId',
-    label: 'label',
-    street: 'street',
-    instructions: 'instructions',
-    isDefault: 'isDefault',
-    createdAt: 'createdAt'
-  };
-
-  export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
-
-
-  export const DishScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    description: 'description',
-    image: 'image',
-    category: 'category',
-    premiumLevel: 'premiumLevel',
-    calories: 'calories',
-    protein: 'protein',
-    carbs: 'carbs',
-    fat: 'fat',
-    allergens: 'allergens',
-    weekStart: 'weekStart',
-    isActive: 'isActive',
-    createdAt: 'createdAt'
-  };
-
-  export type DishScalarFieldEnum = (typeof DishScalarFieldEnum)[keyof typeof DishScalarFieldEnum]
-
-
-  export const WeeklyBoxScalarFieldEnum: {
-    id: 'id',
-    profileId: 'profileId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type WeeklyBoxScalarFieldEnum = (typeof WeeklyBoxScalarFieldEnum)[keyof typeof WeeklyBoxScalarFieldEnum]
-
-
-  export const BoxItemScalarFieldEnum: {
-    id: 'id',
-    boxId: 'boxId',
-    dishId: 'dishId',
-    quantity: 'quantity',
-    unitPrice: 'unitPrice',
-    createdAt: 'createdAt'
-  };
-
-  export type BoxItemScalarFieldEnum = (typeof BoxItemScalarFieldEnum)[keyof typeof BoxItemScalarFieldEnum]
-
-
   export const OrderScalarFieldEnum: {
     id: 'id',
     profileId: 'profileId',
-    addressId: 'addressId',
     status: 'status',
     total: 'total',
     deliveryAddress: 'deliveryAddress',
     deliveryInstructions: 'deliveryInstructions',
     payphoneTransactionId: 'payphoneTransactionId',
     deliveryDate: 'deliveryDate',
+    taxIdType: 'taxIdType',
+    taxId: 'taxId',
+    invoiceNumber: 'invoiceNumber',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -13813,37 +8674,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
+   * Reference to a field of type 'OrderStatus'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus'>
     
 
 
   /**
-   * Reference to a field of type 'DishCategory'
+   * Reference to a field of type 'OrderStatus[]'
    */
-  export type EnumDishCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DishCategory'>
-    
-
-
-  /**
-   * Reference to a field of type 'DishCategory[]'
-   */
-  export type ListEnumDishCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DishCategory[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus[]'>
     
 
 
@@ -13862,16 +8702,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'OrderStatus'
+   * Reference to a field of type 'Int'
    */
-  export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
-   * Reference to a field of type 'OrderStatus[]'
+   * Reference to a field of type 'Int[]'
    */
-  export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus[]'>
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -13886,6 +8726,13 @@ export namespace Prisma {
    * Reference to a field of type 'DishTemplateCategory[]'
    */
   export type ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DishTemplateCategory[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -13915,9 +8762,7 @@ export namespace Prisma {
     whatsapp?: StringNullableFilter<"Profile"> | string | null
     createdAt?: DateTimeFilter<"Profile"> | Date | string
     updatedAt?: DateTimeFilter<"Profile"> | Date | string
-    addresses?: AddressListRelationFilter
     orders?: OrderListRelationFilter
-    weeklyBox?: XOR<WeeklyBoxNullableScalarRelationFilter, WeeklyBoxWhereInput> | null
   }
 
   export type ProfileOrderByWithRelationInput = {
@@ -13926,9 +8771,7 @@ export namespace Prisma {
     whatsapp?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    addresses?: AddressOrderByRelationAggregateInput
     orders?: OrderOrderByRelationAggregateInput
-    weeklyBox?: WeeklyBoxOrderByWithRelationInput
   }
 
   export type ProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -13940,9 +8783,7 @@ export namespace Prisma {
     whatsapp?: StringNullableFilter<"Profile"> | string | null
     createdAt?: DateTimeFilter<"Profile"> | Date | string
     updatedAt?: DateTimeFilter<"Profile"> | Date | string
-    addresses?: AddressListRelationFilter
     orders?: OrderListRelationFilter
-    weeklyBox?: XOR<WeeklyBoxNullableScalarRelationFilter, WeeklyBoxWhereInput> | null
   }, "id">
 
   export type ProfileOrderByWithAggregationInput = {
@@ -13967,328 +8808,42 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Profile"> | Date | string
   }
 
-  export type AddressWhereInput = {
-    AND?: AddressWhereInput | AddressWhereInput[]
-    OR?: AddressWhereInput[]
-    NOT?: AddressWhereInput | AddressWhereInput[]
-    id?: UuidFilter<"Address"> | string
-    profileId?: UuidFilter<"Address"> | string
-    label?: StringNullableFilter<"Address"> | string | null
-    street?: StringFilter<"Address"> | string
-    instructions?: StringNullableFilter<"Address"> | string | null
-    isDefault?: BoolFilter<"Address"> | boolean
-    createdAt?: DateTimeFilter<"Address"> | Date | string
-    profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
-    orders?: OrderListRelationFilter
-  }
-
-  export type AddressOrderByWithRelationInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    label?: SortOrderInput | SortOrder
-    street?: SortOrder
-    instructions?: SortOrderInput | SortOrder
-    isDefault?: SortOrder
-    createdAt?: SortOrder
-    profile?: ProfileOrderByWithRelationInput
-    orders?: OrderOrderByRelationAggregateInput
-  }
-
-  export type AddressWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: AddressWhereInput | AddressWhereInput[]
-    OR?: AddressWhereInput[]
-    NOT?: AddressWhereInput | AddressWhereInput[]
-    profileId?: UuidFilter<"Address"> | string
-    label?: StringNullableFilter<"Address"> | string | null
-    street?: StringFilter<"Address"> | string
-    instructions?: StringNullableFilter<"Address"> | string | null
-    isDefault?: BoolFilter<"Address"> | boolean
-    createdAt?: DateTimeFilter<"Address"> | Date | string
-    profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
-    orders?: OrderListRelationFilter
-  }, "id">
-
-  export type AddressOrderByWithAggregationInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    label?: SortOrderInput | SortOrder
-    street?: SortOrder
-    instructions?: SortOrderInput | SortOrder
-    isDefault?: SortOrder
-    createdAt?: SortOrder
-    _count?: AddressCountOrderByAggregateInput
-    _max?: AddressMaxOrderByAggregateInput
-    _min?: AddressMinOrderByAggregateInput
-  }
-
-  export type AddressScalarWhereWithAggregatesInput = {
-    AND?: AddressScalarWhereWithAggregatesInput | AddressScalarWhereWithAggregatesInput[]
-    OR?: AddressScalarWhereWithAggregatesInput[]
-    NOT?: AddressScalarWhereWithAggregatesInput | AddressScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"Address"> | string
-    profileId?: UuidWithAggregatesFilter<"Address"> | string
-    label?: StringNullableWithAggregatesFilter<"Address"> | string | null
-    street?: StringWithAggregatesFilter<"Address"> | string
-    instructions?: StringNullableWithAggregatesFilter<"Address"> | string | null
-    isDefault?: BoolWithAggregatesFilter<"Address"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"Address"> | Date | string
-  }
-
-  export type DishWhereInput = {
-    AND?: DishWhereInput | DishWhereInput[]
-    OR?: DishWhereInput[]
-    NOT?: DishWhereInput | DishWhereInput[]
-    id?: UuidFilter<"Dish"> | string
-    name?: StringFilter<"Dish"> | string
-    description?: StringFilter<"Dish"> | string
-    image?: StringNullableFilter<"Dish"> | string | null
-    category?: EnumDishCategoryFilter<"Dish"> | $Enums.DishCategory
-    premiumLevel?: IntFilter<"Dish"> | number
-    calories?: IntNullableFilter<"Dish"> | number | null
-    protein?: FloatNullableFilter<"Dish"> | number | null
-    carbs?: FloatNullableFilter<"Dish"> | number | null
-    fat?: FloatNullableFilter<"Dish"> | number | null
-    allergens?: StringNullableListFilter<"Dish">
-    weekStart?: DateTimeFilter<"Dish"> | Date | string
-    isActive?: BoolFilter<"Dish"> | boolean
-    createdAt?: DateTimeFilter<"Dish"> | Date | string
-    boxItems?: BoxItemListRelationFilter
-  }
-
-  export type DishOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    image?: SortOrderInput | SortOrder
-    category?: SortOrder
-    premiumLevel?: SortOrder
-    calories?: SortOrderInput | SortOrder
-    protein?: SortOrderInput | SortOrder
-    carbs?: SortOrderInput | SortOrder
-    fat?: SortOrderInput | SortOrder
-    allergens?: SortOrder
-    weekStart?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-    boxItems?: BoxItemOrderByRelationAggregateInput
-  }
-
-  export type DishWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: DishWhereInput | DishWhereInput[]
-    OR?: DishWhereInput[]
-    NOT?: DishWhereInput | DishWhereInput[]
-    name?: StringFilter<"Dish"> | string
-    description?: StringFilter<"Dish"> | string
-    image?: StringNullableFilter<"Dish"> | string | null
-    category?: EnumDishCategoryFilter<"Dish"> | $Enums.DishCategory
-    premiumLevel?: IntFilter<"Dish"> | number
-    calories?: IntNullableFilter<"Dish"> | number | null
-    protein?: FloatNullableFilter<"Dish"> | number | null
-    carbs?: FloatNullableFilter<"Dish"> | number | null
-    fat?: FloatNullableFilter<"Dish"> | number | null
-    allergens?: StringNullableListFilter<"Dish">
-    weekStart?: DateTimeFilter<"Dish"> | Date | string
-    isActive?: BoolFilter<"Dish"> | boolean
-    createdAt?: DateTimeFilter<"Dish"> | Date | string
-    boxItems?: BoxItemListRelationFilter
-  }, "id">
-
-  export type DishOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    image?: SortOrderInput | SortOrder
-    category?: SortOrder
-    premiumLevel?: SortOrder
-    calories?: SortOrderInput | SortOrder
-    protein?: SortOrderInput | SortOrder
-    carbs?: SortOrderInput | SortOrder
-    fat?: SortOrderInput | SortOrder
-    allergens?: SortOrder
-    weekStart?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-    _count?: DishCountOrderByAggregateInput
-    _avg?: DishAvgOrderByAggregateInput
-    _max?: DishMaxOrderByAggregateInput
-    _min?: DishMinOrderByAggregateInput
-    _sum?: DishSumOrderByAggregateInput
-  }
-
-  export type DishScalarWhereWithAggregatesInput = {
-    AND?: DishScalarWhereWithAggregatesInput | DishScalarWhereWithAggregatesInput[]
-    OR?: DishScalarWhereWithAggregatesInput[]
-    NOT?: DishScalarWhereWithAggregatesInput | DishScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"Dish"> | string
-    name?: StringWithAggregatesFilter<"Dish"> | string
-    description?: StringWithAggregatesFilter<"Dish"> | string
-    image?: StringNullableWithAggregatesFilter<"Dish"> | string | null
-    category?: EnumDishCategoryWithAggregatesFilter<"Dish"> | $Enums.DishCategory
-    premiumLevel?: IntWithAggregatesFilter<"Dish"> | number
-    calories?: IntNullableWithAggregatesFilter<"Dish"> | number | null
-    protein?: FloatNullableWithAggregatesFilter<"Dish"> | number | null
-    carbs?: FloatNullableWithAggregatesFilter<"Dish"> | number | null
-    fat?: FloatNullableWithAggregatesFilter<"Dish"> | number | null
-    allergens?: StringNullableListFilter<"Dish">
-    weekStart?: DateTimeWithAggregatesFilter<"Dish"> | Date | string
-    isActive?: BoolWithAggregatesFilter<"Dish"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"Dish"> | Date | string
-  }
-
-  export type WeeklyBoxWhereInput = {
-    AND?: WeeklyBoxWhereInput | WeeklyBoxWhereInput[]
-    OR?: WeeklyBoxWhereInput[]
-    NOT?: WeeklyBoxWhereInput | WeeklyBoxWhereInput[]
-    id?: UuidFilter<"WeeklyBox"> | string
-    profileId?: UuidFilter<"WeeklyBox"> | string
-    createdAt?: DateTimeFilter<"WeeklyBox"> | Date | string
-    updatedAt?: DateTimeFilter<"WeeklyBox"> | Date | string
-    profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
-    items?: BoxItemListRelationFilter
-  }
-
-  export type WeeklyBoxOrderByWithRelationInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    profile?: ProfileOrderByWithRelationInput
-    items?: BoxItemOrderByRelationAggregateInput
-  }
-
-  export type WeeklyBoxWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    profileId?: string
-    AND?: WeeklyBoxWhereInput | WeeklyBoxWhereInput[]
-    OR?: WeeklyBoxWhereInput[]
-    NOT?: WeeklyBoxWhereInput | WeeklyBoxWhereInput[]
-    createdAt?: DateTimeFilter<"WeeklyBox"> | Date | string
-    updatedAt?: DateTimeFilter<"WeeklyBox"> | Date | string
-    profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
-    items?: BoxItemListRelationFilter
-  }, "id" | "profileId">
-
-  export type WeeklyBoxOrderByWithAggregationInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: WeeklyBoxCountOrderByAggregateInput
-    _max?: WeeklyBoxMaxOrderByAggregateInput
-    _min?: WeeklyBoxMinOrderByAggregateInput
-  }
-
-  export type WeeklyBoxScalarWhereWithAggregatesInput = {
-    AND?: WeeklyBoxScalarWhereWithAggregatesInput | WeeklyBoxScalarWhereWithAggregatesInput[]
-    OR?: WeeklyBoxScalarWhereWithAggregatesInput[]
-    NOT?: WeeklyBoxScalarWhereWithAggregatesInput | WeeklyBoxScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"WeeklyBox"> | string
-    profileId?: UuidWithAggregatesFilter<"WeeklyBox"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"WeeklyBox"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"WeeklyBox"> | Date | string
-  }
-
-  export type BoxItemWhereInput = {
-    AND?: BoxItemWhereInput | BoxItemWhereInput[]
-    OR?: BoxItemWhereInput[]
-    NOT?: BoxItemWhereInput | BoxItemWhereInput[]
-    id?: UuidFilter<"BoxItem"> | string
-    boxId?: UuidFilter<"BoxItem"> | string
-    dishId?: UuidFilter<"BoxItem"> | string
-    quantity?: IntFilter<"BoxItem"> | number
-    unitPrice?: FloatFilter<"BoxItem"> | number
-    createdAt?: DateTimeFilter<"BoxItem"> | Date | string
-    box?: XOR<WeeklyBoxScalarRelationFilter, WeeklyBoxWhereInput>
-    dish?: XOR<DishScalarRelationFilter, DishWhereInput>
-  }
-
-  export type BoxItemOrderByWithRelationInput = {
-    id?: SortOrder
-    boxId?: SortOrder
-    dishId?: SortOrder
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    createdAt?: SortOrder
-    box?: WeeklyBoxOrderByWithRelationInput
-    dish?: DishOrderByWithRelationInput
-  }
-
-  export type BoxItemWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: BoxItemWhereInput | BoxItemWhereInput[]
-    OR?: BoxItemWhereInput[]
-    NOT?: BoxItemWhereInput | BoxItemWhereInput[]
-    boxId?: UuidFilter<"BoxItem"> | string
-    dishId?: UuidFilter<"BoxItem"> | string
-    quantity?: IntFilter<"BoxItem"> | number
-    unitPrice?: FloatFilter<"BoxItem"> | number
-    createdAt?: DateTimeFilter<"BoxItem"> | Date | string
-    box?: XOR<WeeklyBoxScalarRelationFilter, WeeklyBoxWhereInput>
-    dish?: XOR<DishScalarRelationFilter, DishWhereInput>
-  }, "id">
-
-  export type BoxItemOrderByWithAggregationInput = {
-    id?: SortOrder
-    boxId?: SortOrder
-    dishId?: SortOrder
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    createdAt?: SortOrder
-    _count?: BoxItemCountOrderByAggregateInput
-    _avg?: BoxItemAvgOrderByAggregateInput
-    _max?: BoxItemMaxOrderByAggregateInput
-    _min?: BoxItemMinOrderByAggregateInput
-    _sum?: BoxItemSumOrderByAggregateInput
-  }
-
-  export type BoxItemScalarWhereWithAggregatesInput = {
-    AND?: BoxItemScalarWhereWithAggregatesInput | BoxItemScalarWhereWithAggregatesInput[]
-    OR?: BoxItemScalarWhereWithAggregatesInput[]
-    NOT?: BoxItemScalarWhereWithAggregatesInput | BoxItemScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"BoxItem"> | string
-    boxId?: UuidWithAggregatesFilter<"BoxItem"> | string
-    dishId?: UuidWithAggregatesFilter<"BoxItem"> | string
-    quantity?: IntWithAggregatesFilter<"BoxItem"> | number
-    unitPrice?: FloatWithAggregatesFilter<"BoxItem"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"BoxItem"> | Date | string
-  }
-
   export type OrderWhereInput = {
     AND?: OrderWhereInput | OrderWhereInput[]
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
     id?: UuidFilter<"Order"> | string
     profileId?: UuidFilter<"Order"> | string
-    addressId?: UuidNullableFilter<"Order"> | string | null
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
     total?: FloatFilter<"Order"> | number
     deliveryAddress?: StringFilter<"Order"> | string
     deliveryInstructions?: StringNullableFilter<"Order"> | string | null
     payphoneTransactionId?: StringNullableFilter<"Order"> | string | null
     deliveryDate?: DateTimeNullableFilter<"Order"> | Date | string | null
+    taxIdType?: StringFilter<"Order"> | string
+    taxId?: StringFilter<"Order"> | string
+    invoiceNumber?: IntFilter<"Order"> | number
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
-    address?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null
     items?: OrderItemListRelationFilter
   }
 
   export type OrderOrderByWithRelationInput = {
     id?: SortOrder
     profileId?: SortOrder
-    addressId?: SortOrderInput | SortOrder
     status?: SortOrder
     total?: SortOrder
     deliveryAddress?: SortOrder
     deliveryInstructions?: SortOrderInput | SortOrder
     payphoneTransactionId?: SortOrderInput | SortOrder
     deliveryDate?: SortOrderInput | SortOrder
+    taxIdType?: SortOrder
+    taxId?: SortOrder
+    invoiceNumber?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     profile?: ProfileOrderByWithRelationInput
-    address?: AddressOrderByWithRelationInput
     items?: OrderItemOrderByRelationAggregateInput
   }
 
@@ -14298,30 +8853,33 @@ export namespace Prisma {
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
     profileId?: UuidFilter<"Order"> | string
-    addressId?: UuidNullableFilter<"Order"> | string | null
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
     total?: FloatFilter<"Order"> | number
     deliveryAddress?: StringFilter<"Order"> | string
     deliveryInstructions?: StringNullableFilter<"Order"> | string | null
     payphoneTransactionId?: StringNullableFilter<"Order"> | string | null
     deliveryDate?: DateTimeNullableFilter<"Order"> | Date | string | null
+    taxIdType?: StringFilter<"Order"> | string
+    taxId?: StringFilter<"Order"> | string
+    invoiceNumber?: IntFilter<"Order"> | number
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
-    address?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null
     items?: OrderItemListRelationFilter
   }, "id">
 
   export type OrderOrderByWithAggregationInput = {
     id?: SortOrder
     profileId?: SortOrder
-    addressId?: SortOrderInput | SortOrder
     status?: SortOrder
     total?: SortOrder
     deliveryAddress?: SortOrder
     deliveryInstructions?: SortOrderInput | SortOrder
     payphoneTransactionId?: SortOrderInput | SortOrder
     deliveryDate?: SortOrderInput | SortOrder
+    taxIdType?: SortOrder
+    taxId?: SortOrder
+    invoiceNumber?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: OrderCountOrderByAggregateInput
@@ -14337,13 +8895,15 @@ export namespace Prisma {
     NOT?: OrderScalarWhereWithAggregatesInput | OrderScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Order"> | string
     profileId?: UuidWithAggregatesFilter<"Order"> | string
-    addressId?: UuidNullableWithAggregatesFilter<"Order"> | string | null
     status?: EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
     total?: FloatWithAggregatesFilter<"Order"> | number
     deliveryAddress?: StringWithAggregatesFilter<"Order"> | string
     deliveryInstructions?: StringNullableWithAggregatesFilter<"Order"> | string | null
     payphoneTransactionId?: StringNullableWithAggregatesFilter<"Order"> | string | null
     deliveryDate?: DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
+    taxIdType?: StringWithAggregatesFilter<"Order"> | string
+    taxId?: StringWithAggregatesFilter<"Order"> | string
+    invoiceNumber?: IntWithAggregatesFilter<"Order"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
   }
@@ -14689,9 +9249,7 @@ export namespace Prisma {
     whatsapp?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    addresses?: AddressCreateNestedManyWithoutProfileInput
     orders?: OrderCreateNestedManyWithoutProfileInput
-    weeklyBox?: WeeklyBoxCreateNestedOneWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateInput = {
@@ -14700,9 +9258,7 @@ export namespace Prisma {
     whatsapp?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    addresses?: AddressUncheckedCreateNestedManyWithoutProfileInput
     orders?: OrderUncheckedCreateNestedManyWithoutProfileInput
-    weeklyBox?: WeeklyBoxUncheckedCreateNestedOneWithoutProfileInput
   }
 
   export type ProfileUpdateInput = {
@@ -14711,9 +9267,7 @@ export namespace Prisma {
     whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    addresses?: AddressUpdateManyWithoutProfileNestedInput
     orders?: OrderUpdateManyWithoutProfileNestedInput
-    weeklyBox?: WeeklyBoxUpdateOneWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateInput = {
@@ -14722,9 +9276,7 @@ export namespace Prisma {
     whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    addresses?: AddressUncheckedUpdateManyWithoutProfileNestedInput
     orders?: OrderUncheckedUpdateManyWithoutProfileNestedInput
-    weeklyBox?: WeeklyBoxUncheckedUpdateOneWithoutProfileNestedInput
   }
 
   export type ProfileCreateManyInput = {
@@ -14751,315 +9303,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AddressCreateInput = {
-    id?: string
-    label?: string | null
-    street: string
-    instructions?: string | null
-    isDefault?: boolean
-    createdAt?: Date | string
-    profile: ProfileCreateNestedOneWithoutAddressesInput
-    orders?: OrderCreateNestedManyWithoutAddressInput
-  }
-
-  export type AddressUncheckedCreateInput = {
-    id?: string
-    profileId: string
-    label?: string | null
-    street: string
-    instructions?: string | null
-    isDefault?: boolean
-    createdAt?: Date | string
-    orders?: OrderUncheckedCreateNestedManyWithoutAddressInput
-  }
-
-  export type AddressUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    street?: StringFieldUpdateOperationsInput | string
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    profile?: ProfileUpdateOneRequiredWithoutAddressesNestedInput
-    orders?: OrderUpdateManyWithoutAddressNestedInput
-  }
-
-  export type AddressUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    profileId?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    street?: StringFieldUpdateOperationsInput | string
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    orders?: OrderUncheckedUpdateManyWithoutAddressNestedInput
-  }
-
-  export type AddressCreateManyInput = {
-    id?: string
-    profileId: string
-    label?: string | null
-    street: string
-    instructions?: string | null
-    isDefault?: boolean
-    createdAt?: Date | string
-  }
-
-  export type AddressUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    street?: StringFieldUpdateOperationsInput | string
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AddressUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    profileId?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    street?: StringFieldUpdateOperationsInput | string
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DishCreateInput = {
-    id?: string
-    name: string
-    description: string
-    image?: string | null
-    category: $Enums.DishCategory
-    premiumLevel?: number
-    calories?: number | null
-    protein?: number | null
-    carbs?: number | null
-    fat?: number | null
-    allergens?: DishCreateallergensInput | string[]
-    weekStart: Date | string
-    isActive?: boolean
-    createdAt?: Date | string
-    boxItems?: BoxItemCreateNestedManyWithoutDishInput
-  }
-
-  export type DishUncheckedCreateInput = {
-    id?: string
-    name: string
-    description: string
-    image?: string | null
-    category: $Enums.DishCategory
-    premiumLevel?: number
-    calories?: number | null
-    protein?: number | null
-    carbs?: number | null
-    fat?: number | null
-    allergens?: DishCreateallergensInput | string[]
-    weekStart: Date | string
-    isActive?: boolean
-    createdAt?: Date | string
-    boxItems?: BoxItemUncheckedCreateNestedManyWithoutDishInput
-  }
-
-  export type DishUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    category?: EnumDishCategoryFieldUpdateOperationsInput | $Enums.DishCategory
-    premiumLevel?: IntFieldUpdateOperationsInput | number
-    calories?: NullableIntFieldUpdateOperationsInput | number | null
-    protein?: NullableFloatFieldUpdateOperationsInput | number | null
-    carbs?: NullableFloatFieldUpdateOperationsInput | number | null
-    fat?: NullableFloatFieldUpdateOperationsInput | number | null
-    allergens?: DishUpdateallergensInput | string[]
-    weekStart?: DateTimeFieldUpdateOperationsInput | Date | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    boxItems?: BoxItemUpdateManyWithoutDishNestedInput
-  }
-
-  export type DishUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    category?: EnumDishCategoryFieldUpdateOperationsInput | $Enums.DishCategory
-    premiumLevel?: IntFieldUpdateOperationsInput | number
-    calories?: NullableIntFieldUpdateOperationsInput | number | null
-    protein?: NullableFloatFieldUpdateOperationsInput | number | null
-    carbs?: NullableFloatFieldUpdateOperationsInput | number | null
-    fat?: NullableFloatFieldUpdateOperationsInput | number | null
-    allergens?: DishUpdateallergensInput | string[]
-    weekStart?: DateTimeFieldUpdateOperationsInput | Date | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    boxItems?: BoxItemUncheckedUpdateManyWithoutDishNestedInput
-  }
-
-  export type DishCreateManyInput = {
-    id?: string
-    name: string
-    description: string
-    image?: string | null
-    category: $Enums.DishCategory
-    premiumLevel?: number
-    calories?: number | null
-    protein?: number | null
-    carbs?: number | null
-    fat?: number | null
-    allergens?: DishCreateallergensInput | string[]
-    weekStart: Date | string
-    isActive?: boolean
-    createdAt?: Date | string
-  }
-
-  export type DishUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    category?: EnumDishCategoryFieldUpdateOperationsInput | $Enums.DishCategory
-    premiumLevel?: IntFieldUpdateOperationsInput | number
-    calories?: NullableIntFieldUpdateOperationsInput | number | null
-    protein?: NullableFloatFieldUpdateOperationsInput | number | null
-    carbs?: NullableFloatFieldUpdateOperationsInput | number | null
-    fat?: NullableFloatFieldUpdateOperationsInput | number | null
-    allergens?: DishUpdateallergensInput | string[]
-    weekStart?: DateTimeFieldUpdateOperationsInput | Date | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DishUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    category?: EnumDishCategoryFieldUpdateOperationsInput | $Enums.DishCategory
-    premiumLevel?: IntFieldUpdateOperationsInput | number
-    calories?: NullableIntFieldUpdateOperationsInput | number | null
-    protein?: NullableFloatFieldUpdateOperationsInput | number | null
-    carbs?: NullableFloatFieldUpdateOperationsInput | number | null
-    fat?: NullableFloatFieldUpdateOperationsInput | number | null
-    allergens?: DishUpdateallergensInput | string[]
-    weekStart?: DateTimeFieldUpdateOperationsInput | Date | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type WeeklyBoxCreateInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    profile: ProfileCreateNestedOneWithoutWeeklyBoxInput
-    items?: BoxItemCreateNestedManyWithoutBoxInput
-  }
-
-  export type WeeklyBoxUncheckedCreateInput = {
-    id?: string
-    profileId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    items?: BoxItemUncheckedCreateNestedManyWithoutBoxInput
-  }
-
-  export type WeeklyBoxUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    profile?: ProfileUpdateOneRequiredWithoutWeeklyBoxNestedInput
-    items?: BoxItemUpdateManyWithoutBoxNestedInput
-  }
-
-  export type WeeklyBoxUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    profileId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: BoxItemUncheckedUpdateManyWithoutBoxNestedInput
-  }
-
-  export type WeeklyBoxCreateManyInput = {
-    id?: string
-    profileId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type WeeklyBoxUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type WeeklyBoxUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    profileId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoxItemCreateInput = {
-    id?: string
-    quantity?: number
-    unitPrice: number
-    createdAt?: Date | string
-    box: WeeklyBoxCreateNestedOneWithoutItemsInput
-    dish: DishCreateNestedOneWithoutBoxItemsInput
-  }
-
-  export type BoxItemUncheckedCreateInput = {
-    id?: string
-    boxId: string
-    dishId: string
-    quantity?: number
-    unitPrice: number
-    createdAt?: Date | string
-  }
-
-  export type BoxItemUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    box?: WeeklyBoxUpdateOneRequiredWithoutItemsNestedInput
-    dish?: DishUpdateOneRequiredWithoutBoxItemsNestedInput
-  }
-
-  export type BoxItemUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    boxId?: StringFieldUpdateOperationsInput | string
-    dishId?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoxItemCreateManyInput = {
-    id?: string
-    boxId: string
-    dishId: string
-    quantity?: number
-    unitPrice: number
-    createdAt?: Date | string
-  }
-
-  export type BoxItemUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoxItemUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    boxId?: StringFieldUpdateOperationsInput | string
-    dishId?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type OrderCreateInput = {
     id?: string
     status?: $Enums.OrderStatus
@@ -15068,23 +9311,27 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    taxIdType: string
+    taxId: string
+    invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     profile: ProfileCreateNestedOneWithoutOrdersInput
-    address?: AddressCreateNestedOneWithoutOrdersInput
     items?: OrderItemCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateInput = {
     id?: string
     profileId: string
-    addressId?: string | null
     status?: $Enums.OrderStatus
     total: number
     deliveryAddress: string
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    taxIdType: string
+    taxId: string
+    invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -15098,23 +9345,27 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    taxIdType?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     profile?: ProfileUpdateOneRequiredWithoutOrdersNestedInput
-    address?: AddressUpdateOneWithoutOrdersNestedInput
     items?: OrderItemUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     profileId?: StringFieldUpdateOperationsInput | string
-    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     total?: FloatFieldUpdateOperationsInput | number
     deliveryAddress?: StringFieldUpdateOperationsInput | string
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    taxIdType?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -15123,13 +9374,15 @@ export namespace Prisma {
   export type OrderCreateManyInput = {
     id?: string
     profileId: string
-    addressId?: string | null
     status?: $Enums.OrderStatus
     total: number
     deliveryAddress: string
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    taxIdType: string
+    taxId: string
+    invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15142,6 +9395,9 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    taxIdType?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15149,13 +9405,15 @@ export namespace Prisma {
   export type OrderUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     profileId?: StringFieldUpdateOperationsInput | string
-    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     total?: FloatFieldUpdateOperationsInput | number
     deliveryAddress?: StringFieldUpdateOperationsInput | string
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    taxIdType?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15574,30 +9832,15 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type AddressListRelationFilter = {
-    every?: AddressWhereInput
-    some?: AddressWhereInput
-    none?: AddressWhereInput
-  }
-
   export type OrderListRelationFilter = {
     every?: OrderWhereInput
     some?: OrderWhereInput
     none?: OrderWhereInput
   }
 
-  export type WeeklyBoxNullableScalarRelationFilter = {
-    is?: WeeklyBoxWhereInput | null
-    isNot?: WeeklyBoxWhereInput | null
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
-  }
-
-  export type AddressOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type OrderOrderByRelationAggregateInput = {
@@ -15675,6 +9918,24 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type EnumOrderStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -15690,9 +9951,26 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type ProfileScalarRelationFilter = {
@@ -15700,34 +9978,98 @@ export namespace Prisma {
     isNot?: ProfileWhereInput
   }
 
-  export type AddressCountOrderByAggregateInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    label?: SortOrder
-    street?: SortOrder
-    instructions?: SortOrder
-    isDefault?: SortOrder
-    createdAt?: SortOrder
+  export type OrderItemListRelationFilter = {
+    every?: OrderItemWhereInput
+    some?: OrderItemWhereInput
+    none?: OrderItemWhereInput
   }
 
-  export type AddressMaxOrderByAggregateInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    label?: SortOrder
-    street?: SortOrder
-    instructions?: SortOrder
-    isDefault?: SortOrder
-    createdAt?: SortOrder
+  export type OrderItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
-  export type AddressMinOrderByAggregateInput = {
+  export type OrderCountOrderByAggregateInput = {
     id?: SortOrder
     profileId?: SortOrder
-    label?: SortOrder
-    street?: SortOrder
-    instructions?: SortOrder
-    isDefault?: SortOrder
+    status?: SortOrder
+    total?: SortOrder
+    deliveryAddress?: SortOrder
+    deliveryInstructions?: SortOrder
+    payphoneTransactionId?: SortOrder
+    deliveryDate?: SortOrder
+    taxIdType?: SortOrder
+    taxId?: SortOrder
+    invoiceNumber?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OrderAvgOrderByAggregateInput = {
+    total?: SortOrder
+    invoiceNumber?: SortOrder
+  }
+
+  export type OrderMaxOrderByAggregateInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    status?: SortOrder
+    total?: SortOrder
+    deliveryAddress?: SortOrder
+    deliveryInstructions?: SortOrder
+    payphoneTransactionId?: SortOrder
+    deliveryDate?: SortOrder
+    taxIdType?: SortOrder
+    taxId?: SortOrder
+    invoiceNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OrderMinOrderByAggregateInput = {
+    id?: SortOrder
+    profileId?: SortOrder
+    status?: SortOrder
+    total?: SortOrder
+    deliveryAddress?: SortOrder
+    deliveryInstructions?: SortOrder
+    payphoneTransactionId?: SortOrder
+    deliveryDate?: SortOrder
+    taxIdType?: SortOrder
+    taxId?: SortOrder
+    invoiceNumber?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OrderSumOrderByAggregateInput = {
+    total?: SortOrder
+    invoiceNumber?: SortOrder
+  }
+
+  export type EnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOrderStatusFilter<$PrismaModel>
+    _max?: NestedEnumOrderStatusFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -15748,145 +10090,18 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type EnumDishCategoryFilter<$PrismaModel = never> = {
-    equals?: $Enums.DishCategory | EnumDishCategoryFieldRefInput<$PrismaModel>
-    in?: $Enums.DishCategory[] | ListEnumDishCategoryFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DishCategory[] | ListEnumDishCategoryFieldRefInput<$PrismaModel>
-    not?: NestedEnumDishCategoryFilter<$PrismaModel> | $Enums.DishCategory
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
-  export type BoxItemListRelationFilter = {
-    every?: BoxItemWhereInput
-    some?: BoxItemWhereInput
-    none?: BoxItemWhereInput
-  }
-
-  export type BoxItemOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type DishCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    image?: SortOrder
-    category?: SortOrder
-    premiumLevel?: SortOrder
-    calories?: SortOrder
-    protein?: SortOrder
-    carbs?: SortOrder
-    fat?: SortOrder
-    allergens?: SortOrder
-    weekStart?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type DishAvgOrderByAggregateInput = {
-    premiumLevel?: SortOrder
-    calories?: SortOrder
-    protein?: SortOrder
-    carbs?: SortOrder
-    fat?: SortOrder
-  }
-
-  export type DishMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    image?: SortOrder
-    category?: SortOrder
-    premiumLevel?: SortOrder
-    calories?: SortOrder
-    protein?: SortOrder
-    carbs?: SortOrder
-    fat?: SortOrder
-    weekStart?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type DishMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    image?: SortOrder
-    category?: SortOrder
-    premiumLevel?: SortOrder
-    calories?: SortOrder
-    protein?: SortOrder
-    carbs?: SortOrder
-    fat?: SortOrder
-    weekStart?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type DishSumOrderByAggregateInput = {
-    premiumLevel?: SortOrder
-    calories?: SortOrder
-    protein?: SortOrder
-    carbs?: SortOrder
-    fat?: SortOrder
-  }
-
-  export type EnumDishCategoryWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.DishCategory | EnumDishCategoryFieldRefInput<$PrismaModel>
-    in?: $Enums.DishCategory[] | ListEnumDishCategoryFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DishCategory[] | ListEnumDishCategoryFieldRefInput<$PrismaModel>
-    not?: NestedEnumDishCategoryWithAggregatesFilter<$PrismaModel> | $Enums.DishCategory
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumDishCategoryFilter<$PrismaModel>
-    _max?: NestedEnumDishCategoryFilter<$PrismaModel>
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -15903,267 +10118,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type WeeklyBoxCountOrderByAggregateInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type WeeklyBoxMaxOrderByAggregateInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type WeeklyBoxMinOrderByAggregateInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type WeeklyBoxScalarRelationFilter = {
-    is?: WeeklyBoxWhereInput
-    isNot?: WeeklyBoxWhereInput
-  }
-
-  export type DishScalarRelationFilter = {
-    is?: DishWhereInput
-    isNot?: DishWhereInput
-  }
-
-  export type BoxItemCountOrderByAggregateInput = {
-    id?: SortOrder
-    boxId?: SortOrder
-    dishId?: SortOrder
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type BoxItemAvgOrderByAggregateInput = {
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-  }
-
-  export type BoxItemMaxOrderByAggregateInput = {
-    id?: SortOrder
-    boxId?: SortOrder
-    dishId?: SortOrder
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type BoxItemMinOrderByAggregateInput = {
-    id?: SortOrder
-    boxId?: SortOrder
-    dishId?: SortOrder
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type BoxItemSumOrderByAggregateInput = {
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-  }
-
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type UuidNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type EnumOrderStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type AddressNullableScalarRelationFilter = {
-    is?: AddressWhereInput | null
-    isNot?: AddressWhereInput | null
-  }
-
-  export type OrderItemListRelationFilter = {
-    every?: OrderItemWhereInput
-    some?: OrderItemWhereInput
-    none?: OrderItemWhereInput
-  }
-
-  export type OrderItemOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OrderCountOrderByAggregateInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    addressId?: SortOrder
-    status?: SortOrder
-    total?: SortOrder
-    deliveryAddress?: SortOrder
-    deliveryInstructions?: SortOrder
-    payphoneTransactionId?: SortOrder
-    deliveryDate?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type OrderAvgOrderByAggregateInput = {
-    total?: SortOrder
-  }
-
-  export type OrderMaxOrderByAggregateInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    addressId?: SortOrder
-    status?: SortOrder
-    total?: SortOrder
-    deliveryAddress?: SortOrder
-    deliveryInstructions?: SortOrder
-    payphoneTransactionId?: SortOrder
-    deliveryDate?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type OrderMinOrderByAggregateInput = {
-    id?: SortOrder
-    profileId?: SortOrder
-    addressId?: SortOrder
-    status?: SortOrder
-    total?: SortOrder
-    deliveryAddress?: SortOrder
-    deliveryInstructions?: SortOrder
-    payphoneTransactionId?: SortOrder
-    deliveryDate?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type OrderSumOrderByAggregateInput = {
-    total?: SortOrder
-  }
-
-  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type EnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumOrderStatusFilter<$PrismaModel>
-    _max?: NestedEnumOrderStatusFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type OrderScalarRelationFilter = {
@@ -16216,6 +10170,41 @@ export namespace Prisma {
     in?: $Enums.DishTemplateCategory[] | ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel>
     notIn?: $Enums.DishTemplateCategory[] | ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel>
     not?: NestedEnumDishTemplateCategoryFilter<$PrismaModel> | $Enums.DishTemplateCategory
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type WeeklyMenuItemListRelationFilter = {
@@ -16349,6 +10338,46 @@ export namespace Prisma {
     _max?: NestedEnumDishTemplateCategoryFilter<$PrismaModel>
   }
 
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type EnumWeeklyMenuStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.WeeklyMenuStatus | EnumWeeklyMenuStatusFieldRefInput<$PrismaModel>
     in?: $Enums.WeeklyMenuStatus[] | ListEnumWeeklyMenuStatusFieldRefInput<$PrismaModel>
@@ -16437,13 +10466,6 @@ export namespace Prisma {
     position?: SortOrder
   }
 
-  export type AddressCreateNestedManyWithoutProfileInput = {
-    create?: XOR<AddressCreateWithoutProfileInput, AddressUncheckedCreateWithoutProfileInput> | AddressCreateWithoutProfileInput[] | AddressUncheckedCreateWithoutProfileInput[]
-    connectOrCreate?: AddressCreateOrConnectWithoutProfileInput | AddressCreateOrConnectWithoutProfileInput[]
-    createMany?: AddressCreateManyProfileInputEnvelope
-    connect?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
-  }
-
   export type OrderCreateNestedManyWithoutProfileInput = {
     create?: XOR<OrderCreateWithoutProfileInput, OrderUncheckedCreateWithoutProfileInput> | OrderCreateWithoutProfileInput[] | OrderUncheckedCreateWithoutProfileInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutProfileInput | OrderCreateOrConnectWithoutProfileInput[]
@@ -16451,30 +10473,11 @@ export namespace Prisma {
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
-  export type WeeklyBoxCreateNestedOneWithoutProfileInput = {
-    create?: XOR<WeeklyBoxCreateWithoutProfileInput, WeeklyBoxUncheckedCreateWithoutProfileInput>
-    connectOrCreate?: WeeklyBoxCreateOrConnectWithoutProfileInput
-    connect?: WeeklyBoxWhereUniqueInput
-  }
-
-  export type AddressUncheckedCreateNestedManyWithoutProfileInput = {
-    create?: XOR<AddressCreateWithoutProfileInput, AddressUncheckedCreateWithoutProfileInput> | AddressCreateWithoutProfileInput[] | AddressUncheckedCreateWithoutProfileInput[]
-    connectOrCreate?: AddressCreateOrConnectWithoutProfileInput | AddressCreateOrConnectWithoutProfileInput[]
-    createMany?: AddressCreateManyProfileInputEnvelope
-    connect?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
-  }
-
   export type OrderUncheckedCreateNestedManyWithoutProfileInput = {
     create?: XOR<OrderCreateWithoutProfileInput, OrderUncheckedCreateWithoutProfileInput> | OrderCreateWithoutProfileInput[] | OrderUncheckedCreateWithoutProfileInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutProfileInput | OrderCreateOrConnectWithoutProfileInput[]
     createMany?: OrderCreateManyProfileInputEnvelope
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-  }
-
-  export type WeeklyBoxUncheckedCreateNestedOneWithoutProfileInput = {
-    create?: XOR<WeeklyBoxCreateWithoutProfileInput, WeeklyBoxUncheckedCreateWithoutProfileInput>
-    connectOrCreate?: WeeklyBoxCreateOrConnectWithoutProfileInput
-    connect?: WeeklyBoxWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -16487,20 +10490,6 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type AddressUpdateManyWithoutProfileNestedInput = {
-    create?: XOR<AddressCreateWithoutProfileInput, AddressUncheckedCreateWithoutProfileInput> | AddressCreateWithoutProfileInput[] | AddressUncheckedCreateWithoutProfileInput[]
-    connectOrCreate?: AddressCreateOrConnectWithoutProfileInput | AddressCreateOrConnectWithoutProfileInput[]
-    upsert?: AddressUpsertWithWhereUniqueWithoutProfileInput | AddressUpsertWithWhereUniqueWithoutProfileInput[]
-    createMany?: AddressCreateManyProfileInputEnvelope
-    set?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
-    disconnect?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
-    delete?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
-    connect?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
-    update?: AddressUpdateWithWhereUniqueWithoutProfileInput | AddressUpdateWithWhereUniqueWithoutProfileInput[]
-    updateMany?: AddressUpdateManyWithWhereWithoutProfileInput | AddressUpdateManyWithWhereWithoutProfileInput[]
-    deleteMany?: AddressScalarWhereInput | AddressScalarWhereInput[]
   }
 
   export type OrderUpdateManyWithoutProfileNestedInput = {
@@ -16517,30 +10506,6 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
-  export type WeeklyBoxUpdateOneWithoutProfileNestedInput = {
-    create?: XOR<WeeklyBoxCreateWithoutProfileInput, WeeklyBoxUncheckedCreateWithoutProfileInput>
-    connectOrCreate?: WeeklyBoxCreateOrConnectWithoutProfileInput
-    upsert?: WeeklyBoxUpsertWithoutProfileInput
-    disconnect?: WeeklyBoxWhereInput | boolean
-    delete?: WeeklyBoxWhereInput | boolean
-    connect?: WeeklyBoxWhereUniqueInput
-    update?: XOR<XOR<WeeklyBoxUpdateToOneWithWhereWithoutProfileInput, WeeklyBoxUpdateWithoutProfileInput>, WeeklyBoxUncheckedUpdateWithoutProfileInput>
-  }
-
-  export type AddressUncheckedUpdateManyWithoutProfileNestedInput = {
-    create?: XOR<AddressCreateWithoutProfileInput, AddressUncheckedCreateWithoutProfileInput> | AddressCreateWithoutProfileInput[] | AddressUncheckedCreateWithoutProfileInput[]
-    connectOrCreate?: AddressCreateOrConnectWithoutProfileInput | AddressCreateOrConnectWithoutProfileInput[]
-    upsert?: AddressUpsertWithWhereUniqueWithoutProfileInput | AddressUpsertWithWhereUniqueWithoutProfileInput[]
-    createMany?: AddressCreateManyProfileInputEnvelope
-    set?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
-    disconnect?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
-    delete?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
-    connect?: AddressWhereUniqueInput | AddressWhereUniqueInput[]
-    update?: AddressUpdateWithWhereUniqueWithoutProfileInput | AddressUpdateWithWhereUniqueWithoutProfileInput[]
-    updateMany?: AddressUpdateManyWithWhereWithoutProfileInput | AddressUpdateManyWithWhereWithoutProfileInput[]
-    deleteMany?: AddressScalarWhereInput | AddressScalarWhereInput[]
-  }
-
   export type OrderUncheckedUpdateManyWithoutProfileNestedInput = {
     create?: XOR<OrderCreateWithoutProfileInput, OrderUncheckedCreateWithoutProfileInput> | OrderCreateWithoutProfileInput[] | OrderUncheckedCreateWithoutProfileInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutProfileInput | OrderCreateOrConnectWithoutProfileInput[]
@@ -16555,257 +10520,10 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
-  export type WeeklyBoxUncheckedUpdateOneWithoutProfileNestedInput = {
-    create?: XOR<WeeklyBoxCreateWithoutProfileInput, WeeklyBoxUncheckedCreateWithoutProfileInput>
-    connectOrCreate?: WeeklyBoxCreateOrConnectWithoutProfileInput
-    upsert?: WeeklyBoxUpsertWithoutProfileInput
-    disconnect?: WeeklyBoxWhereInput | boolean
-    delete?: WeeklyBoxWhereInput | boolean
-    connect?: WeeklyBoxWhereUniqueInput
-    update?: XOR<XOR<WeeklyBoxUpdateToOneWithWhereWithoutProfileInput, WeeklyBoxUpdateWithoutProfileInput>, WeeklyBoxUncheckedUpdateWithoutProfileInput>
-  }
-
-  export type ProfileCreateNestedOneWithoutAddressesInput = {
-    create?: XOR<ProfileCreateWithoutAddressesInput, ProfileUncheckedCreateWithoutAddressesInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutAddressesInput
-    connect?: ProfileWhereUniqueInput
-  }
-
-  export type OrderCreateNestedManyWithoutAddressInput = {
-    create?: XOR<OrderCreateWithoutAddressInput, OrderUncheckedCreateWithoutAddressInput> | OrderCreateWithoutAddressInput[] | OrderUncheckedCreateWithoutAddressInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutAddressInput | OrderCreateOrConnectWithoutAddressInput[]
-    createMany?: OrderCreateManyAddressInputEnvelope
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-  }
-
-  export type OrderUncheckedCreateNestedManyWithoutAddressInput = {
-    create?: XOR<OrderCreateWithoutAddressInput, OrderUncheckedCreateWithoutAddressInput> | OrderCreateWithoutAddressInput[] | OrderUncheckedCreateWithoutAddressInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutAddressInput | OrderCreateOrConnectWithoutAddressInput[]
-    createMany?: OrderCreateManyAddressInputEnvelope
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type ProfileUpdateOneRequiredWithoutAddressesNestedInput = {
-    create?: XOR<ProfileCreateWithoutAddressesInput, ProfileUncheckedCreateWithoutAddressesInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutAddressesInput
-    upsert?: ProfileUpsertWithoutAddressesInput
-    connect?: ProfileWhereUniqueInput
-    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutAddressesInput, ProfileUpdateWithoutAddressesInput>, ProfileUncheckedUpdateWithoutAddressesInput>
-  }
-
-  export type OrderUpdateManyWithoutAddressNestedInput = {
-    create?: XOR<OrderCreateWithoutAddressInput, OrderUncheckedCreateWithoutAddressInput> | OrderCreateWithoutAddressInput[] | OrderUncheckedCreateWithoutAddressInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutAddressInput | OrderCreateOrConnectWithoutAddressInput[]
-    upsert?: OrderUpsertWithWhereUniqueWithoutAddressInput | OrderUpsertWithWhereUniqueWithoutAddressInput[]
-    createMany?: OrderCreateManyAddressInputEnvelope
-    set?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    update?: OrderUpdateWithWhereUniqueWithoutAddressInput | OrderUpdateWithWhereUniqueWithoutAddressInput[]
-    updateMany?: OrderUpdateManyWithWhereWithoutAddressInput | OrderUpdateManyWithWhereWithoutAddressInput[]
-    deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
-  }
-
-  export type OrderUncheckedUpdateManyWithoutAddressNestedInput = {
-    create?: XOR<OrderCreateWithoutAddressInput, OrderUncheckedCreateWithoutAddressInput> | OrderCreateWithoutAddressInput[] | OrderUncheckedCreateWithoutAddressInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutAddressInput | OrderCreateOrConnectWithoutAddressInput[]
-    upsert?: OrderUpsertWithWhereUniqueWithoutAddressInput | OrderUpsertWithWhereUniqueWithoutAddressInput[]
-    createMany?: OrderCreateManyAddressInputEnvelope
-    set?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-    update?: OrderUpdateWithWhereUniqueWithoutAddressInput | OrderUpdateWithWhereUniqueWithoutAddressInput[]
-    updateMany?: OrderUpdateManyWithWhereWithoutAddressInput | OrderUpdateManyWithWhereWithoutAddressInput[]
-    deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
-  }
-
-  export type DishCreateallergensInput = {
-    set: string[]
-  }
-
-  export type BoxItemCreateNestedManyWithoutDishInput = {
-    create?: XOR<BoxItemCreateWithoutDishInput, BoxItemUncheckedCreateWithoutDishInput> | BoxItemCreateWithoutDishInput[] | BoxItemUncheckedCreateWithoutDishInput[]
-    connectOrCreate?: BoxItemCreateOrConnectWithoutDishInput | BoxItemCreateOrConnectWithoutDishInput[]
-    createMany?: BoxItemCreateManyDishInputEnvelope
-    connect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-  }
-
-  export type BoxItemUncheckedCreateNestedManyWithoutDishInput = {
-    create?: XOR<BoxItemCreateWithoutDishInput, BoxItemUncheckedCreateWithoutDishInput> | BoxItemCreateWithoutDishInput[] | BoxItemUncheckedCreateWithoutDishInput[]
-    connectOrCreate?: BoxItemCreateOrConnectWithoutDishInput | BoxItemCreateOrConnectWithoutDishInput[]
-    createMany?: BoxItemCreateManyDishInputEnvelope
-    connect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-  }
-
-  export type EnumDishCategoryFieldUpdateOperationsInput = {
-    set?: $Enums.DishCategory
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type DishUpdateallergensInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type BoxItemUpdateManyWithoutDishNestedInput = {
-    create?: XOR<BoxItemCreateWithoutDishInput, BoxItemUncheckedCreateWithoutDishInput> | BoxItemCreateWithoutDishInput[] | BoxItemUncheckedCreateWithoutDishInput[]
-    connectOrCreate?: BoxItemCreateOrConnectWithoutDishInput | BoxItemCreateOrConnectWithoutDishInput[]
-    upsert?: BoxItemUpsertWithWhereUniqueWithoutDishInput | BoxItemUpsertWithWhereUniqueWithoutDishInput[]
-    createMany?: BoxItemCreateManyDishInputEnvelope
-    set?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    disconnect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    delete?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    connect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    update?: BoxItemUpdateWithWhereUniqueWithoutDishInput | BoxItemUpdateWithWhereUniqueWithoutDishInput[]
-    updateMany?: BoxItemUpdateManyWithWhereWithoutDishInput | BoxItemUpdateManyWithWhereWithoutDishInput[]
-    deleteMany?: BoxItemScalarWhereInput | BoxItemScalarWhereInput[]
-  }
-
-  export type BoxItemUncheckedUpdateManyWithoutDishNestedInput = {
-    create?: XOR<BoxItemCreateWithoutDishInput, BoxItemUncheckedCreateWithoutDishInput> | BoxItemCreateWithoutDishInput[] | BoxItemUncheckedCreateWithoutDishInput[]
-    connectOrCreate?: BoxItemCreateOrConnectWithoutDishInput | BoxItemCreateOrConnectWithoutDishInput[]
-    upsert?: BoxItemUpsertWithWhereUniqueWithoutDishInput | BoxItemUpsertWithWhereUniqueWithoutDishInput[]
-    createMany?: BoxItemCreateManyDishInputEnvelope
-    set?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    disconnect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    delete?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    connect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    update?: BoxItemUpdateWithWhereUniqueWithoutDishInput | BoxItemUpdateWithWhereUniqueWithoutDishInput[]
-    updateMany?: BoxItemUpdateManyWithWhereWithoutDishInput | BoxItemUpdateManyWithWhereWithoutDishInput[]
-    deleteMany?: BoxItemScalarWhereInput | BoxItemScalarWhereInput[]
-  }
-
-  export type ProfileCreateNestedOneWithoutWeeklyBoxInput = {
-    create?: XOR<ProfileCreateWithoutWeeklyBoxInput, ProfileUncheckedCreateWithoutWeeklyBoxInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutWeeklyBoxInput
-    connect?: ProfileWhereUniqueInput
-  }
-
-  export type BoxItemCreateNestedManyWithoutBoxInput = {
-    create?: XOR<BoxItemCreateWithoutBoxInput, BoxItemUncheckedCreateWithoutBoxInput> | BoxItemCreateWithoutBoxInput[] | BoxItemUncheckedCreateWithoutBoxInput[]
-    connectOrCreate?: BoxItemCreateOrConnectWithoutBoxInput | BoxItemCreateOrConnectWithoutBoxInput[]
-    createMany?: BoxItemCreateManyBoxInputEnvelope
-    connect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-  }
-
-  export type BoxItemUncheckedCreateNestedManyWithoutBoxInput = {
-    create?: XOR<BoxItemCreateWithoutBoxInput, BoxItemUncheckedCreateWithoutBoxInput> | BoxItemCreateWithoutBoxInput[] | BoxItemUncheckedCreateWithoutBoxInput[]
-    connectOrCreate?: BoxItemCreateOrConnectWithoutBoxInput | BoxItemCreateOrConnectWithoutBoxInput[]
-    createMany?: BoxItemCreateManyBoxInputEnvelope
-    connect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-  }
-
-  export type ProfileUpdateOneRequiredWithoutWeeklyBoxNestedInput = {
-    create?: XOR<ProfileCreateWithoutWeeklyBoxInput, ProfileUncheckedCreateWithoutWeeklyBoxInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutWeeklyBoxInput
-    upsert?: ProfileUpsertWithoutWeeklyBoxInput
-    connect?: ProfileWhereUniqueInput
-    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutWeeklyBoxInput, ProfileUpdateWithoutWeeklyBoxInput>, ProfileUncheckedUpdateWithoutWeeklyBoxInput>
-  }
-
-  export type BoxItemUpdateManyWithoutBoxNestedInput = {
-    create?: XOR<BoxItemCreateWithoutBoxInput, BoxItemUncheckedCreateWithoutBoxInput> | BoxItemCreateWithoutBoxInput[] | BoxItemUncheckedCreateWithoutBoxInput[]
-    connectOrCreate?: BoxItemCreateOrConnectWithoutBoxInput | BoxItemCreateOrConnectWithoutBoxInput[]
-    upsert?: BoxItemUpsertWithWhereUniqueWithoutBoxInput | BoxItemUpsertWithWhereUniqueWithoutBoxInput[]
-    createMany?: BoxItemCreateManyBoxInputEnvelope
-    set?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    disconnect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    delete?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    connect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    update?: BoxItemUpdateWithWhereUniqueWithoutBoxInput | BoxItemUpdateWithWhereUniqueWithoutBoxInput[]
-    updateMany?: BoxItemUpdateManyWithWhereWithoutBoxInput | BoxItemUpdateManyWithWhereWithoutBoxInput[]
-    deleteMany?: BoxItemScalarWhereInput | BoxItemScalarWhereInput[]
-  }
-
-  export type BoxItemUncheckedUpdateManyWithoutBoxNestedInput = {
-    create?: XOR<BoxItemCreateWithoutBoxInput, BoxItemUncheckedCreateWithoutBoxInput> | BoxItemCreateWithoutBoxInput[] | BoxItemUncheckedCreateWithoutBoxInput[]
-    connectOrCreate?: BoxItemCreateOrConnectWithoutBoxInput | BoxItemCreateOrConnectWithoutBoxInput[]
-    upsert?: BoxItemUpsertWithWhereUniqueWithoutBoxInput | BoxItemUpsertWithWhereUniqueWithoutBoxInput[]
-    createMany?: BoxItemCreateManyBoxInputEnvelope
-    set?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    disconnect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    delete?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    connect?: BoxItemWhereUniqueInput | BoxItemWhereUniqueInput[]
-    update?: BoxItemUpdateWithWhereUniqueWithoutBoxInput | BoxItemUpdateWithWhereUniqueWithoutBoxInput[]
-    updateMany?: BoxItemUpdateManyWithWhereWithoutBoxInput | BoxItemUpdateManyWithWhereWithoutBoxInput[]
-    deleteMany?: BoxItemScalarWhereInput | BoxItemScalarWhereInput[]
-  }
-
-  export type WeeklyBoxCreateNestedOneWithoutItemsInput = {
-    create?: XOR<WeeklyBoxCreateWithoutItemsInput, WeeklyBoxUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: WeeklyBoxCreateOrConnectWithoutItemsInput
-    connect?: WeeklyBoxWhereUniqueInput
-  }
-
-  export type DishCreateNestedOneWithoutBoxItemsInput = {
-    create?: XOR<DishCreateWithoutBoxItemsInput, DishUncheckedCreateWithoutBoxItemsInput>
-    connectOrCreate?: DishCreateOrConnectWithoutBoxItemsInput
-    connect?: DishWhereUniqueInput
-  }
-
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type WeeklyBoxUpdateOneRequiredWithoutItemsNestedInput = {
-    create?: XOR<WeeklyBoxCreateWithoutItemsInput, WeeklyBoxUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: WeeklyBoxCreateOrConnectWithoutItemsInput
-    upsert?: WeeklyBoxUpsertWithoutItemsInput
-    connect?: WeeklyBoxWhereUniqueInput
-    update?: XOR<XOR<WeeklyBoxUpdateToOneWithWhereWithoutItemsInput, WeeklyBoxUpdateWithoutItemsInput>, WeeklyBoxUncheckedUpdateWithoutItemsInput>
-  }
-
-  export type DishUpdateOneRequiredWithoutBoxItemsNestedInput = {
-    create?: XOR<DishCreateWithoutBoxItemsInput, DishUncheckedCreateWithoutBoxItemsInput>
-    connectOrCreate?: DishCreateOrConnectWithoutBoxItemsInput
-    upsert?: DishUpsertWithoutBoxItemsInput
-    connect?: DishWhereUniqueInput
-    update?: XOR<XOR<DishUpdateToOneWithWhereWithoutBoxItemsInput, DishUpdateWithoutBoxItemsInput>, DishUncheckedUpdateWithoutBoxItemsInput>
-  }
-
   export type ProfileCreateNestedOneWithoutOrdersInput = {
     create?: XOR<ProfileCreateWithoutOrdersInput, ProfileUncheckedCreateWithoutOrdersInput>
     connectOrCreate?: ProfileCreateOrConnectWithoutOrdersInput
     connect?: ProfileWhereUniqueInput
-  }
-
-  export type AddressCreateNestedOneWithoutOrdersInput = {
-    create?: XOR<AddressCreateWithoutOrdersInput, AddressUncheckedCreateWithoutOrdersInput>
-    connectOrCreate?: AddressCreateOrConnectWithoutOrdersInput
-    connect?: AddressWhereUniqueInput
   }
 
   export type OrderItemCreateNestedManyWithoutOrderInput = {
@@ -16826,8 +10544,24 @@ export namespace Prisma {
     set?: $Enums.OrderStatus
   }
 
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type ProfileUpdateOneRequiredWithoutOrdersNestedInput = {
@@ -16836,16 +10570,6 @@ export namespace Prisma {
     upsert?: ProfileUpsertWithoutOrdersInput
     connect?: ProfileWhereUniqueInput
     update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutOrdersInput, ProfileUpdateWithoutOrdersInput>, ProfileUncheckedUpdateWithoutOrdersInput>
-  }
-
-  export type AddressUpdateOneWithoutOrdersNestedInput = {
-    create?: XOR<AddressCreateWithoutOrdersInput, AddressUncheckedCreateWithoutOrdersInput>
-    connectOrCreate?: AddressCreateOrConnectWithoutOrdersInput
-    upsert?: AddressUpsertWithoutOrdersInput
-    disconnect?: AddressWhereInput | boolean
-    delete?: AddressWhereInput | boolean
-    connect?: AddressWhereUniqueInput
-    update?: XOR<XOR<AddressUpdateToOneWithWhereWithoutOrdersInput, AddressUpdateWithoutOrdersInput>, AddressUncheckedUpdateWithoutOrdersInput>
   }
 
   export type OrderItemUpdateManyWithoutOrderNestedInput = {
@@ -16912,9 +10636,29 @@ export namespace Prisma {
     set?: $Enums.DishTemplateCategory
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type DishTemplateUpdateallergensInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type WeeklyMenuItemUpdateManyWithoutDishNestedInput = {
@@ -17136,9 +10880,59 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOrderStatusFilter<$PrismaModel>
+    _max?: NestedEnumOrderStatusFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -17158,40 +10952,18 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type NestedEnumDishCategoryFilter<$PrismaModel = never> = {
-    equals?: $Enums.DishCategory | EnumDishCategoryFieldRefInput<$PrismaModel>
-    in?: $Enums.DishCategory[] | ListEnumDishCategoryFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DishCategory[] | ListEnumDishCategoryFieldRefInput<$PrismaModel>
-    not?: NestedEnumDishCategoryFilter<$PrismaModel> | $Enums.DishCategory
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumDishCategoryWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.DishCategory | EnumDishCategoryFieldRefInput<$PrismaModel>
-    in?: $Enums.DishCategory[] | ListEnumDishCategoryFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DishCategory[] | ListEnumDishCategoryFieldRefInput<$PrismaModel>
-    not?: NestedEnumDishCategoryWithAggregatesFilter<$PrismaModel> | $Enums.DishCategory
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumDishCategoryFilter<$PrismaModel>
-    _max?: NestedEnumDishCategoryFilter<$PrismaModel>
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -17210,15 +10982,37 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type NestedEnumDishTemplateCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.DishTemplateCategory | EnumDishTemplateCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.DishTemplateCategory[] | ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DishTemplateCategory[] | ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumDishTemplateCategoryFilter<$PrismaModel> | $Enums.DishTemplateCategory
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedEnumDishTemplateCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DishTemplateCategory | EnumDishTemplateCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.DishTemplateCategory[] | ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DishTemplateCategory[] | ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumDishTemplateCategoryWithAggregatesFilter<$PrismaModel> | $Enums.DishTemplateCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDishTemplateCategoryFilter<$PrismaModel>
+    _max?: NestedEnumDishTemplateCategoryFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -17253,104 +11047,12 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type NestedUuidNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumOrderStatusFilter<$PrismaModel>
-    _max?: NestedEnumOrderStatusFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedEnumDishTemplateCategoryFilter<$PrismaModel = never> = {
-    equals?: $Enums.DishTemplateCategory | EnumDishTemplateCategoryFieldRefInput<$PrismaModel>
-    in?: $Enums.DishTemplateCategory[] | ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DishTemplateCategory[] | ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel>
-    not?: NestedEnumDishTemplateCategoryFilter<$PrismaModel> | $Enums.DishTemplateCategory
-  }
-
-  export type NestedEnumDishTemplateCategoryWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.DishTemplateCategory | EnumDishTemplateCategoryFieldRefInput<$PrismaModel>
-    in?: $Enums.DishTemplateCategory[] | ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DishTemplateCategory[] | ListEnumDishTemplateCategoryFieldRefInput<$PrismaModel>
-    not?: NestedEnumDishTemplateCategoryWithAggregatesFilter<$PrismaModel> | $Enums.DishTemplateCategory
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumDishTemplateCategoryFilter<$PrismaModel>
-    _max?: NestedEnumDishTemplateCategoryFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumWeeklyMenuStatusFilter<$PrismaModel = never> = {
@@ -17370,36 +11072,6 @@ export namespace Prisma {
     _max?: NestedEnumWeeklyMenuStatusFilter<$PrismaModel>
   }
 
-  export type AddressCreateWithoutProfileInput = {
-    id?: string
-    label?: string | null
-    street: string
-    instructions?: string | null
-    isDefault?: boolean
-    createdAt?: Date | string
-    orders?: OrderCreateNestedManyWithoutAddressInput
-  }
-
-  export type AddressUncheckedCreateWithoutProfileInput = {
-    id?: string
-    label?: string | null
-    street: string
-    instructions?: string | null
-    isDefault?: boolean
-    createdAt?: Date | string
-    orders?: OrderUncheckedCreateNestedManyWithoutAddressInput
-  }
-
-  export type AddressCreateOrConnectWithoutProfileInput = {
-    where: AddressWhereUniqueInput
-    create: XOR<AddressCreateWithoutProfileInput, AddressUncheckedCreateWithoutProfileInput>
-  }
-
-  export type AddressCreateManyProfileInputEnvelope = {
-    data: AddressCreateManyProfileInput | AddressCreateManyProfileInput[]
-    skipDuplicates?: boolean
-  }
-
   export type OrderCreateWithoutProfileInput = {
     id?: string
     status?: $Enums.OrderStatus
@@ -17408,21 +11080,25 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    taxIdType: string
+    taxId: string
+    invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    address?: AddressCreateNestedOneWithoutOrdersInput
     items?: OrderItemCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutProfileInput = {
     id?: string
-    addressId?: string | null
     status?: $Enums.OrderStatus
     total: number
     deliveryAddress: string
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    taxIdType: string
+    taxId: string
+    invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -17436,54 +11112,6 @@ export namespace Prisma {
   export type OrderCreateManyProfileInputEnvelope = {
     data: OrderCreateManyProfileInput | OrderCreateManyProfileInput[]
     skipDuplicates?: boolean
-  }
-
-  export type WeeklyBoxCreateWithoutProfileInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    items?: BoxItemCreateNestedManyWithoutBoxInput
-  }
-
-  export type WeeklyBoxUncheckedCreateWithoutProfileInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    items?: BoxItemUncheckedCreateNestedManyWithoutBoxInput
-  }
-
-  export type WeeklyBoxCreateOrConnectWithoutProfileInput = {
-    where: WeeklyBoxWhereUniqueInput
-    create: XOR<WeeklyBoxCreateWithoutProfileInput, WeeklyBoxUncheckedCreateWithoutProfileInput>
-  }
-
-  export type AddressUpsertWithWhereUniqueWithoutProfileInput = {
-    where: AddressWhereUniqueInput
-    update: XOR<AddressUpdateWithoutProfileInput, AddressUncheckedUpdateWithoutProfileInput>
-    create: XOR<AddressCreateWithoutProfileInput, AddressUncheckedCreateWithoutProfileInput>
-  }
-
-  export type AddressUpdateWithWhereUniqueWithoutProfileInput = {
-    where: AddressWhereUniqueInput
-    data: XOR<AddressUpdateWithoutProfileInput, AddressUncheckedUpdateWithoutProfileInput>
-  }
-
-  export type AddressUpdateManyWithWhereWithoutProfileInput = {
-    where: AddressScalarWhereInput
-    data: XOR<AddressUpdateManyMutationInput, AddressUncheckedUpdateManyWithoutProfileInput>
-  }
-
-  export type AddressScalarWhereInput = {
-    AND?: AddressScalarWhereInput | AddressScalarWhereInput[]
-    OR?: AddressScalarWhereInput[]
-    NOT?: AddressScalarWhereInput | AddressScalarWhereInput[]
-    id?: UuidFilter<"Address"> | string
-    profileId?: UuidFilter<"Address"> | string
-    label?: StringNullableFilter<"Address"> | string | null
-    street?: StringFilter<"Address"> | string
-    instructions?: StringNullableFilter<"Address"> | string | null
-    isDefault?: BoolFilter<"Address"> | boolean
-    createdAt?: DateTimeFilter<"Address"> | Date | string
   }
 
   export type OrderUpsertWithWhereUniqueWithoutProfileInput = {
@@ -17508,430 +11136,17 @@ export namespace Prisma {
     NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
     id?: UuidFilter<"Order"> | string
     profileId?: UuidFilter<"Order"> | string
-    addressId?: UuidNullableFilter<"Order"> | string | null
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
     total?: FloatFilter<"Order"> | number
     deliveryAddress?: StringFilter<"Order"> | string
     deliveryInstructions?: StringNullableFilter<"Order"> | string | null
     payphoneTransactionId?: StringNullableFilter<"Order"> | string | null
     deliveryDate?: DateTimeNullableFilter<"Order"> | Date | string | null
+    taxIdType?: StringFilter<"Order"> | string
+    taxId?: StringFilter<"Order"> | string
+    invoiceNumber?: IntFilter<"Order"> | number
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
-  }
-
-  export type WeeklyBoxUpsertWithoutProfileInput = {
-    update: XOR<WeeklyBoxUpdateWithoutProfileInput, WeeklyBoxUncheckedUpdateWithoutProfileInput>
-    create: XOR<WeeklyBoxCreateWithoutProfileInput, WeeklyBoxUncheckedCreateWithoutProfileInput>
-    where?: WeeklyBoxWhereInput
-  }
-
-  export type WeeklyBoxUpdateToOneWithWhereWithoutProfileInput = {
-    where?: WeeklyBoxWhereInput
-    data: XOR<WeeklyBoxUpdateWithoutProfileInput, WeeklyBoxUncheckedUpdateWithoutProfileInput>
-  }
-
-  export type WeeklyBoxUpdateWithoutProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: BoxItemUpdateManyWithoutBoxNestedInput
-  }
-
-  export type WeeklyBoxUncheckedUpdateWithoutProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: BoxItemUncheckedUpdateManyWithoutBoxNestedInput
-  }
-
-  export type ProfileCreateWithoutAddressesInput = {
-    id: string
-    fullName?: string | null
-    whatsapp?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    orders?: OrderCreateNestedManyWithoutProfileInput
-    weeklyBox?: WeeklyBoxCreateNestedOneWithoutProfileInput
-  }
-
-  export type ProfileUncheckedCreateWithoutAddressesInput = {
-    id: string
-    fullName?: string | null
-    whatsapp?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    orders?: OrderUncheckedCreateNestedManyWithoutProfileInput
-    weeklyBox?: WeeklyBoxUncheckedCreateNestedOneWithoutProfileInput
-  }
-
-  export type ProfileCreateOrConnectWithoutAddressesInput = {
-    where: ProfileWhereUniqueInput
-    create: XOR<ProfileCreateWithoutAddressesInput, ProfileUncheckedCreateWithoutAddressesInput>
-  }
-
-  export type OrderCreateWithoutAddressInput = {
-    id?: string
-    status?: $Enums.OrderStatus
-    total: number
-    deliveryAddress: string
-    deliveryInstructions?: string | null
-    payphoneTransactionId?: string | null
-    deliveryDate?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    profile: ProfileCreateNestedOneWithoutOrdersInput
-    items?: OrderItemCreateNestedManyWithoutOrderInput
-  }
-
-  export type OrderUncheckedCreateWithoutAddressInput = {
-    id?: string
-    profileId: string
-    status?: $Enums.OrderStatus
-    total: number
-    deliveryAddress: string
-    deliveryInstructions?: string | null
-    payphoneTransactionId?: string | null
-    deliveryDate?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
-  }
-
-  export type OrderCreateOrConnectWithoutAddressInput = {
-    where: OrderWhereUniqueInput
-    create: XOR<OrderCreateWithoutAddressInput, OrderUncheckedCreateWithoutAddressInput>
-  }
-
-  export type OrderCreateManyAddressInputEnvelope = {
-    data: OrderCreateManyAddressInput | OrderCreateManyAddressInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ProfileUpsertWithoutAddressesInput = {
-    update: XOR<ProfileUpdateWithoutAddressesInput, ProfileUncheckedUpdateWithoutAddressesInput>
-    create: XOR<ProfileCreateWithoutAddressesInput, ProfileUncheckedCreateWithoutAddressesInput>
-    where?: ProfileWhereInput
-  }
-
-  export type ProfileUpdateToOneWithWhereWithoutAddressesInput = {
-    where?: ProfileWhereInput
-    data: XOR<ProfileUpdateWithoutAddressesInput, ProfileUncheckedUpdateWithoutAddressesInput>
-  }
-
-  export type ProfileUpdateWithoutAddressesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    orders?: OrderUpdateManyWithoutProfileNestedInput
-    weeklyBox?: WeeklyBoxUpdateOneWithoutProfileNestedInput
-  }
-
-  export type ProfileUncheckedUpdateWithoutAddressesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    orders?: OrderUncheckedUpdateManyWithoutProfileNestedInput
-    weeklyBox?: WeeklyBoxUncheckedUpdateOneWithoutProfileNestedInput
-  }
-
-  export type OrderUpsertWithWhereUniqueWithoutAddressInput = {
-    where: OrderWhereUniqueInput
-    update: XOR<OrderUpdateWithoutAddressInput, OrderUncheckedUpdateWithoutAddressInput>
-    create: XOR<OrderCreateWithoutAddressInput, OrderUncheckedCreateWithoutAddressInput>
-  }
-
-  export type OrderUpdateWithWhereUniqueWithoutAddressInput = {
-    where: OrderWhereUniqueInput
-    data: XOR<OrderUpdateWithoutAddressInput, OrderUncheckedUpdateWithoutAddressInput>
-  }
-
-  export type OrderUpdateManyWithWhereWithoutAddressInput = {
-    where: OrderScalarWhereInput
-    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutAddressInput>
-  }
-
-  export type BoxItemCreateWithoutDishInput = {
-    id?: string
-    quantity?: number
-    unitPrice: number
-    createdAt?: Date | string
-    box: WeeklyBoxCreateNestedOneWithoutItemsInput
-  }
-
-  export type BoxItemUncheckedCreateWithoutDishInput = {
-    id?: string
-    boxId: string
-    quantity?: number
-    unitPrice: number
-    createdAt?: Date | string
-  }
-
-  export type BoxItemCreateOrConnectWithoutDishInput = {
-    where: BoxItemWhereUniqueInput
-    create: XOR<BoxItemCreateWithoutDishInput, BoxItemUncheckedCreateWithoutDishInput>
-  }
-
-  export type BoxItemCreateManyDishInputEnvelope = {
-    data: BoxItemCreateManyDishInput | BoxItemCreateManyDishInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type BoxItemUpsertWithWhereUniqueWithoutDishInput = {
-    where: BoxItemWhereUniqueInput
-    update: XOR<BoxItemUpdateWithoutDishInput, BoxItemUncheckedUpdateWithoutDishInput>
-    create: XOR<BoxItemCreateWithoutDishInput, BoxItemUncheckedCreateWithoutDishInput>
-  }
-
-  export type BoxItemUpdateWithWhereUniqueWithoutDishInput = {
-    where: BoxItemWhereUniqueInput
-    data: XOR<BoxItemUpdateWithoutDishInput, BoxItemUncheckedUpdateWithoutDishInput>
-  }
-
-  export type BoxItemUpdateManyWithWhereWithoutDishInput = {
-    where: BoxItemScalarWhereInput
-    data: XOR<BoxItemUpdateManyMutationInput, BoxItemUncheckedUpdateManyWithoutDishInput>
-  }
-
-  export type BoxItemScalarWhereInput = {
-    AND?: BoxItemScalarWhereInput | BoxItemScalarWhereInput[]
-    OR?: BoxItemScalarWhereInput[]
-    NOT?: BoxItemScalarWhereInput | BoxItemScalarWhereInput[]
-    id?: UuidFilter<"BoxItem"> | string
-    boxId?: UuidFilter<"BoxItem"> | string
-    dishId?: UuidFilter<"BoxItem"> | string
-    quantity?: IntFilter<"BoxItem"> | number
-    unitPrice?: FloatFilter<"BoxItem"> | number
-    createdAt?: DateTimeFilter<"BoxItem"> | Date | string
-  }
-
-  export type ProfileCreateWithoutWeeklyBoxInput = {
-    id: string
-    fullName?: string | null
-    whatsapp?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    addresses?: AddressCreateNestedManyWithoutProfileInput
-    orders?: OrderCreateNestedManyWithoutProfileInput
-  }
-
-  export type ProfileUncheckedCreateWithoutWeeklyBoxInput = {
-    id: string
-    fullName?: string | null
-    whatsapp?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    addresses?: AddressUncheckedCreateNestedManyWithoutProfileInput
-    orders?: OrderUncheckedCreateNestedManyWithoutProfileInput
-  }
-
-  export type ProfileCreateOrConnectWithoutWeeklyBoxInput = {
-    where: ProfileWhereUniqueInput
-    create: XOR<ProfileCreateWithoutWeeklyBoxInput, ProfileUncheckedCreateWithoutWeeklyBoxInput>
-  }
-
-  export type BoxItemCreateWithoutBoxInput = {
-    id?: string
-    quantity?: number
-    unitPrice: number
-    createdAt?: Date | string
-    dish: DishCreateNestedOneWithoutBoxItemsInput
-  }
-
-  export type BoxItemUncheckedCreateWithoutBoxInput = {
-    id?: string
-    dishId: string
-    quantity?: number
-    unitPrice: number
-    createdAt?: Date | string
-  }
-
-  export type BoxItemCreateOrConnectWithoutBoxInput = {
-    where: BoxItemWhereUniqueInput
-    create: XOR<BoxItemCreateWithoutBoxInput, BoxItemUncheckedCreateWithoutBoxInput>
-  }
-
-  export type BoxItemCreateManyBoxInputEnvelope = {
-    data: BoxItemCreateManyBoxInput | BoxItemCreateManyBoxInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ProfileUpsertWithoutWeeklyBoxInput = {
-    update: XOR<ProfileUpdateWithoutWeeklyBoxInput, ProfileUncheckedUpdateWithoutWeeklyBoxInput>
-    create: XOR<ProfileCreateWithoutWeeklyBoxInput, ProfileUncheckedCreateWithoutWeeklyBoxInput>
-    where?: ProfileWhereInput
-  }
-
-  export type ProfileUpdateToOneWithWhereWithoutWeeklyBoxInput = {
-    where?: ProfileWhereInput
-    data: XOR<ProfileUpdateWithoutWeeklyBoxInput, ProfileUncheckedUpdateWithoutWeeklyBoxInput>
-  }
-
-  export type ProfileUpdateWithoutWeeklyBoxInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    addresses?: AddressUpdateManyWithoutProfileNestedInput
-    orders?: OrderUpdateManyWithoutProfileNestedInput
-  }
-
-  export type ProfileUncheckedUpdateWithoutWeeklyBoxInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    addresses?: AddressUncheckedUpdateManyWithoutProfileNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutProfileNestedInput
-  }
-
-  export type BoxItemUpsertWithWhereUniqueWithoutBoxInput = {
-    where: BoxItemWhereUniqueInput
-    update: XOR<BoxItemUpdateWithoutBoxInput, BoxItemUncheckedUpdateWithoutBoxInput>
-    create: XOR<BoxItemCreateWithoutBoxInput, BoxItemUncheckedCreateWithoutBoxInput>
-  }
-
-  export type BoxItemUpdateWithWhereUniqueWithoutBoxInput = {
-    where: BoxItemWhereUniqueInput
-    data: XOR<BoxItemUpdateWithoutBoxInput, BoxItemUncheckedUpdateWithoutBoxInput>
-  }
-
-  export type BoxItemUpdateManyWithWhereWithoutBoxInput = {
-    where: BoxItemScalarWhereInput
-    data: XOR<BoxItemUpdateManyMutationInput, BoxItemUncheckedUpdateManyWithoutBoxInput>
-  }
-
-  export type WeeklyBoxCreateWithoutItemsInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    profile: ProfileCreateNestedOneWithoutWeeklyBoxInput
-  }
-
-  export type WeeklyBoxUncheckedCreateWithoutItemsInput = {
-    id?: string
-    profileId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type WeeklyBoxCreateOrConnectWithoutItemsInput = {
-    where: WeeklyBoxWhereUniqueInput
-    create: XOR<WeeklyBoxCreateWithoutItemsInput, WeeklyBoxUncheckedCreateWithoutItemsInput>
-  }
-
-  export type DishCreateWithoutBoxItemsInput = {
-    id?: string
-    name: string
-    description: string
-    image?: string | null
-    category: $Enums.DishCategory
-    premiumLevel?: number
-    calories?: number | null
-    protein?: number | null
-    carbs?: number | null
-    fat?: number | null
-    allergens?: DishCreateallergensInput | string[]
-    weekStart: Date | string
-    isActive?: boolean
-    createdAt?: Date | string
-  }
-
-  export type DishUncheckedCreateWithoutBoxItemsInput = {
-    id?: string
-    name: string
-    description: string
-    image?: string | null
-    category: $Enums.DishCategory
-    premiumLevel?: number
-    calories?: number | null
-    protein?: number | null
-    carbs?: number | null
-    fat?: number | null
-    allergens?: DishCreateallergensInput | string[]
-    weekStart: Date | string
-    isActive?: boolean
-    createdAt?: Date | string
-  }
-
-  export type DishCreateOrConnectWithoutBoxItemsInput = {
-    where: DishWhereUniqueInput
-    create: XOR<DishCreateWithoutBoxItemsInput, DishUncheckedCreateWithoutBoxItemsInput>
-  }
-
-  export type WeeklyBoxUpsertWithoutItemsInput = {
-    update: XOR<WeeklyBoxUpdateWithoutItemsInput, WeeklyBoxUncheckedUpdateWithoutItemsInput>
-    create: XOR<WeeklyBoxCreateWithoutItemsInput, WeeklyBoxUncheckedCreateWithoutItemsInput>
-    where?: WeeklyBoxWhereInput
-  }
-
-  export type WeeklyBoxUpdateToOneWithWhereWithoutItemsInput = {
-    where?: WeeklyBoxWhereInput
-    data: XOR<WeeklyBoxUpdateWithoutItemsInput, WeeklyBoxUncheckedUpdateWithoutItemsInput>
-  }
-
-  export type WeeklyBoxUpdateWithoutItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    profile?: ProfileUpdateOneRequiredWithoutWeeklyBoxNestedInput
-  }
-
-  export type WeeklyBoxUncheckedUpdateWithoutItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    profileId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DishUpsertWithoutBoxItemsInput = {
-    update: XOR<DishUpdateWithoutBoxItemsInput, DishUncheckedUpdateWithoutBoxItemsInput>
-    create: XOR<DishCreateWithoutBoxItemsInput, DishUncheckedCreateWithoutBoxItemsInput>
-    where?: DishWhereInput
-  }
-
-  export type DishUpdateToOneWithWhereWithoutBoxItemsInput = {
-    where?: DishWhereInput
-    data: XOR<DishUpdateWithoutBoxItemsInput, DishUncheckedUpdateWithoutBoxItemsInput>
-  }
-
-  export type DishUpdateWithoutBoxItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    category?: EnumDishCategoryFieldUpdateOperationsInput | $Enums.DishCategory
-    premiumLevel?: IntFieldUpdateOperationsInput | number
-    calories?: NullableIntFieldUpdateOperationsInput | number | null
-    protein?: NullableFloatFieldUpdateOperationsInput | number | null
-    carbs?: NullableFloatFieldUpdateOperationsInput | number | null
-    fat?: NullableFloatFieldUpdateOperationsInput | number | null
-    allergens?: DishUpdateallergensInput | string[]
-    weekStart?: DateTimeFieldUpdateOperationsInput | Date | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DishUncheckedUpdateWithoutBoxItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    category?: EnumDishCategoryFieldUpdateOperationsInput | $Enums.DishCategory
-    premiumLevel?: IntFieldUpdateOperationsInput | number
-    calories?: NullableIntFieldUpdateOperationsInput | number | null
-    protein?: NullableFloatFieldUpdateOperationsInput | number | null
-    carbs?: NullableFloatFieldUpdateOperationsInput | number | null
-    fat?: NullableFloatFieldUpdateOperationsInput | number | null
-    allergens?: DishUpdateallergensInput | string[]
-    weekStart?: DateTimeFieldUpdateOperationsInput | Date | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProfileCreateWithoutOrdersInput = {
@@ -17940,8 +11155,6 @@ export namespace Prisma {
     whatsapp?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    addresses?: AddressCreateNestedManyWithoutProfileInput
-    weeklyBox?: WeeklyBoxCreateNestedOneWithoutProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutOrdersInput = {
@@ -17950,38 +11163,11 @@ export namespace Prisma {
     whatsapp?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    addresses?: AddressUncheckedCreateNestedManyWithoutProfileInput
-    weeklyBox?: WeeklyBoxUncheckedCreateNestedOneWithoutProfileInput
   }
 
   export type ProfileCreateOrConnectWithoutOrdersInput = {
     where: ProfileWhereUniqueInput
     create: XOR<ProfileCreateWithoutOrdersInput, ProfileUncheckedCreateWithoutOrdersInput>
-  }
-
-  export type AddressCreateWithoutOrdersInput = {
-    id?: string
-    label?: string | null
-    street: string
-    instructions?: string | null
-    isDefault?: boolean
-    createdAt?: Date | string
-    profile: ProfileCreateNestedOneWithoutAddressesInput
-  }
-
-  export type AddressUncheckedCreateWithoutOrdersInput = {
-    id?: string
-    profileId: string
-    label?: string | null
-    street: string
-    instructions?: string | null
-    isDefault?: boolean
-    createdAt?: Date | string
-  }
-
-  export type AddressCreateOrConnectWithoutOrdersInput = {
-    where: AddressWhereUniqueInput
-    create: XOR<AddressCreateWithoutOrdersInput, AddressUncheckedCreateWithoutOrdersInput>
   }
 
   export type OrderItemCreateWithoutOrderInput = {
@@ -18029,8 +11215,6 @@ export namespace Prisma {
     whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    addresses?: AddressUpdateManyWithoutProfileNestedInput
-    weeklyBox?: WeeklyBoxUpdateOneWithoutProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutOrdersInput = {
@@ -18039,39 +11223,6 @@ export namespace Prisma {
     whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    addresses?: AddressUncheckedUpdateManyWithoutProfileNestedInput
-    weeklyBox?: WeeklyBoxUncheckedUpdateOneWithoutProfileNestedInput
-  }
-
-  export type AddressUpsertWithoutOrdersInput = {
-    update: XOR<AddressUpdateWithoutOrdersInput, AddressUncheckedUpdateWithoutOrdersInput>
-    create: XOR<AddressCreateWithoutOrdersInput, AddressUncheckedCreateWithoutOrdersInput>
-    where?: AddressWhereInput
-  }
-
-  export type AddressUpdateToOneWithWhereWithoutOrdersInput = {
-    where?: AddressWhereInput
-    data: XOR<AddressUpdateWithoutOrdersInput, AddressUncheckedUpdateWithoutOrdersInput>
-  }
-
-  export type AddressUpdateWithoutOrdersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    street?: StringFieldUpdateOperationsInput | string
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    profile?: ProfileUpdateOneRequiredWithoutAddressesNestedInput
-  }
-
-  export type AddressUncheckedUpdateWithoutOrdersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    profileId?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    street?: StringFieldUpdateOperationsInput | string
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderItemUpsertWithWhereUniqueWithoutOrderInput = {
@@ -18111,22 +11262,26 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    taxIdType: string
+    taxId: string
+    invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     profile: ProfileCreateNestedOneWithoutOrdersInput
-    address?: AddressCreateNestedOneWithoutOrdersInput
   }
 
   export type OrderUncheckedCreateWithoutItemsInput = {
     id?: string
     profileId: string
-    addressId?: string | null
     status?: $Enums.OrderStatus
     total: number
     deliveryAddress: string
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    taxIdType: string
+    taxId: string
+    invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18155,22 +11310,26 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    taxIdType?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     profile?: ProfileUpdateOneRequiredWithoutOrdersNestedInput
-    address?: AddressUpdateOneWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     profileId?: StringFieldUpdateOperationsInput | string
-    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     total?: FloatFieldUpdateOperationsInput | number
     deliveryAddress?: StringFieldUpdateOperationsInput | string
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    taxIdType?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18437,55 +11596,19 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AddressCreateManyProfileInput = {
-    id?: string
-    label?: string | null
-    street: string
-    instructions?: string | null
-    isDefault?: boolean
-    createdAt?: Date | string
-  }
-
   export type OrderCreateManyProfileInput = {
     id?: string
-    addressId?: string | null
     status?: $Enums.OrderStatus
     total: number
     deliveryAddress: string
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    taxIdType: string
+    taxId: string
+    invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-  }
-
-  export type AddressUpdateWithoutProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    street?: StringFieldUpdateOperationsInput | string
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    orders?: OrderUpdateManyWithoutAddressNestedInput
-  }
-
-  export type AddressUncheckedUpdateWithoutProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    street?: StringFieldUpdateOperationsInput | string
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    orders?: OrderUncheckedUpdateManyWithoutAddressNestedInput
-  }
-
-  export type AddressUncheckedUpdateManyWithoutProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    street?: StringFieldUpdateOperationsInput | string
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderUpdateWithoutProfileInput = {
@@ -18496,21 +11619,25 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    taxIdType?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    address?: AddressUpdateOneWithoutOrdersNestedInput
     items?: OrderItemUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutProfileInput = {
     id?: StringFieldUpdateOperationsInput | string
-    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     total?: FloatFieldUpdateOperationsInput | number
     deliveryAddress?: StringFieldUpdateOperationsInput | string
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    taxIdType?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -18518,133 +11645,17 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateManyWithoutProfileInput = {
     id?: StringFieldUpdateOperationsInput | string
-    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     total?: FloatFieldUpdateOperationsInput | number
     deliveryAddress?: StringFieldUpdateOperationsInput | string
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    taxIdType?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OrderCreateManyAddressInput = {
-    id?: string
-    profileId: string
-    status?: $Enums.OrderStatus
-    total: number
-    deliveryAddress: string
-    deliveryInstructions?: string | null
-    payphoneTransactionId?: string | null
-    deliveryDate?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type OrderUpdateWithoutAddressInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    total?: FloatFieldUpdateOperationsInput | number
-    deliveryAddress?: StringFieldUpdateOperationsInput | string
-    deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
-    payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
-    deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    profile?: ProfileUpdateOneRequiredWithoutOrdersNestedInput
-    items?: OrderItemUpdateManyWithoutOrderNestedInput
-  }
-
-  export type OrderUncheckedUpdateWithoutAddressInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    profileId?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    total?: FloatFieldUpdateOperationsInput | number
-    deliveryAddress?: StringFieldUpdateOperationsInput | string
-    deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
-    payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
-    deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
-  }
-
-  export type OrderUncheckedUpdateManyWithoutAddressInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    profileId?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    total?: FloatFieldUpdateOperationsInput | number
-    deliveryAddress?: StringFieldUpdateOperationsInput | string
-    deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
-    payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
-    deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoxItemCreateManyDishInput = {
-    id?: string
-    boxId: string
-    quantity?: number
-    unitPrice: number
-    createdAt?: Date | string
-  }
-
-  export type BoxItemUpdateWithoutDishInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    box?: WeeklyBoxUpdateOneRequiredWithoutItemsNestedInput
-  }
-
-  export type BoxItemUncheckedUpdateWithoutDishInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    boxId?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoxItemUncheckedUpdateManyWithoutDishInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    boxId?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoxItemCreateManyBoxInput = {
-    id?: string
-    dishId: string
-    quantity?: number
-    unitPrice: number
-    createdAt?: Date | string
-  }
-
-  export type BoxItemUpdateWithoutBoxInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dish?: DishUpdateOneRequiredWithoutBoxItemsNestedInput
-  }
-
-  export type BoxItemUncheckedUpdateWithoutBoxInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dishId?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoxItemUncheckedUpdateManyWithoutBoxInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dishId?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderItemCreateManyOrderInput = {

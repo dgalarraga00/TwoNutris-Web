@@ -1,8 +1,14 @@
 "use client";
 
 import { useState, useEffect, useMemo, useRef } from "react";
+
+declare global {
+  interface Window {
+    PPaymentButtonBox: new (config: Record<string, unknown>) => { render: (id: string) => void };
+  }
+}
 import { useRouter } from "next/navigation";
-import { ShoppingBag, ChevronRight, Loader2, MapPin, User, Truck } from "lucide-react";
+import { ShoppingBag, ChevronRight, Loader2, MapPin, User, Truck, Receipt } from "lucide-react";
 import { useCart } from "@/components/shop/CartProvider";
 import { PlacesAddressInput } from "@/components/shop/PlacesAddressInput";
 import { calculateDeliveryDate, cutoffDate, formatDeliveryDate } from "@/lib/delivery";
@@ -22,6 +28,9 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
   const [instructions, setInstructions] = useState("");
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
+
+  const [taxIdType, setTaxIdType] = useState("05");
+  const [taxId, setTaxId] = useState("");
 
   const [error, setError] = useState<string | null>(null);
   const [payphoneReady, setPayphoneReady] = useState(false);
@@ -54,8 +63,7 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
 
   useEffect(() => {
     if (!pendingPayment || !payphoneReady) return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const PP = (window as any).PPaymentButtonBox;
+    const PP = window.PPaymentButtonBox;
     if (!PP) { setError("Sistema de pagos no disponible. Recargá la página."); return; }
     new PP({
       token: process.env.NEXT_PUBLIC_PAYPHONE_TOKEN,
@@ -100,6 +108,11 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
       return;
     }
 
+    if (!taxId.trim()) {
+      setError("Ingresá tu número de cédula / RUC para la factura.");
+      return;
+    }
+
     setIsPending(true);
     try {
       const res = await fetch("/api/orders", {
@@ -116,6 +129,8 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
           deliveryInstructions: instructions.trim() || undefined,
           fullName: fullName.trim() || undefined,
           phone: phone.trim() || undefined,
+          taxIdType,
+          taxId: taxId.trim(),
         }),
       });
 
@@ -227,6 +242,42 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
               placeholder="0999999999"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm font-poppins text-gray-900 placeholder-gray-400 focus:outline-none focus:border-leaf transition-colors"
+            />
+          </div>
+        </section>
+
+        {/* Sección: facturación */}
+        <section className="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col gap-4">
+          <div className="flex items-center gap-2">
+            <Receipt size={18} className="text-leaf" />
+            <h2 className="font-bold font-poppins text-gray-900">Datos de facturación</h2>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-semibold font-poppins text-gray-500 uppercase tracking-wide">
+              Tipo de identificación
+            </label>
+            <select
+              value={taxIdType}
+              onChange={(e) => setTaxIdType(e.target.value)}
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm font-poppins text-gray-900 focus:outline-none focus:border-leaf transition-colors bg-white"
+            >
+              <option value="05">Cédula</option>
+              <option value="04">RUC</option>
+              <option value="06">Pasaporte</option>
+            </select>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-semibold font-poppins text-gray-500 uppercase tracking-wide">
+              {taxIdType === "05" ? "Número de cédula" : taxIdType === "04" ? "RUC" : "Número de pasaporte"}
+            </label>
+            <input
+              type="text"
+              placeholder={taxIdType === "05" ? "1234567890" : taxIdType === "04" ? "1234567890001" : "A1234567"}
+              value={taxId}
+              onChange={(e) => setTaxId(e.target.value)}
               className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm font-poppins text-gray-900 placeholder-gray-400 focus:outline-none focus:border-leaf transition-colors"
             />
           </div>

@@ -9,6 +9,8 @@ interface OrderPayload {
   deliveryInstructions?: string;
   fullName?: string;
   phone?: string;
+  taxIdType: string;
+  taxId: string;
 }
 
 const DELIVERY_FEE = 3;
@@ -31,6 +33,8 @@ export async function POST(request: Request) {
       deliveryInstructions,
       fullName,
       phone,
+      taxIdType,
+      taxId,
     } = body;
 
     if (!items?.length) {
@@ -38,10 +42,11 @@ export async function POST(request: Request) {
     }
 
     if (!deliveryAddress?.trim()) {
-      return NextResponse.json(
-        { error: "Dirección de entrega requerida" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Dirección de entrega requerida" }, { status: 400 });
+    }
+
+    if (!taxIdType || !taxId?.trim()) {
+      return NextResponse.json({ error: "Datos de facturación requeridos" }, { status: 400 });
     }
 
     const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
@@ -70,6 +75,8 @@ export async function POST(request: Request) {
         deliveryAddress: deliveryAddress.trim(),
         deliveryInstructions: deliveryInstructions?.trim() ?? null,
         deliveryDate,
+        taxIdType,
+        taxId: taxId.trim(),
         items: {
           create: items.map((i) => ({
             dishId: i.id,

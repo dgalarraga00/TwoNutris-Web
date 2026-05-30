@@ -22,9 +22,11 @@ const TYPE_STYLE: Record<DishType, string> = {
 export function DishCard({
   dish,
   onOpenDetail,
+  priority = false,
 }: {
   dish: CatalogDish;
   onOpenDetail: (dish: CatalogDish) => void;
+  priority?: boolean;
 }) {
   const { getQuantity, addItem, incrementItem, decrementItem } = useCart();
   const qty = getQuantity(dish.id);
@@ -42,6 +44,7 @@ export function DishCard({
           fill
           className="object-cover transition-transform duration-300 hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          priority={priority}
         />
         {/* Badge de tipo */}
         <span

@@ -57,11 +57,12 @@ export function CatalogClient({ dishes }: { dishes: CatalogDish[] }) {
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filtered.map((dish) => (
+        {filtered.map((dish, i) => (
           <DishCard
             key={dish.id}
             dish={dish}
             onOpenDetail={setSelectedDish}
+            priority={i === 0}
           />
         ))}
       </div>
