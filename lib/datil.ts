@@ -99,7 +99,9 @@ export async function emitDatilInvoice(order: InvoiceOrder): Promise<void> {
     moneda: "USD",
     emisor: EMISOR,
     comprador: {
-      razon_social: order.customerName?.toUpperCase() ?? order.customerEmail.toUpperCase(),
+      razon_social: order.taxIdType === "07"
+        ? "CONSUMIDOR FINAL"
+        : (order.customerName?.toUpperCase() ?? order.customerEmail.toUpperCase()),
       tipo_identificacion: order.taxIdType,
       identificacion: order.taxId,
       email: order.customerEmail,
@@ -121,8 +123,8 @@ export async function emitDatilInvoice(order: InvoiceOrder): Promise<void> {
       ],
     },
     items: lineItems,
-    pagos: [{ medio: "20", total: importeTotal }],
-    informacion_adicional: { "Pedido #": order.id },
+    pagos: [{ medio: "tarjeta_credito", total: importeTotal }],
+    informacion_adicional: { Pedido: order.id },
   };
 
   const res = await fetch(DATIL_API_URL, {
