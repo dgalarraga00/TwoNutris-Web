@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 
 /* ─────────────────────────────────────────────────────────────────
@@ -94,18 +92,8 @@ export function HeroSection() {
             <div className="animate-fade-up-delay-3 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <a
                 href="/menu"
-                className="group flex items-center gap-3 px-7 py-3.5 font-bold rounded-full border-0 cursor-pointer transition-all duration-300 no-underline font-poppins inline-flex"
-                style={{ backgroundColor: "#FFB000", color: "#144400", boxShadow: "0 8px 32px rgba(255, 176, 0, 0.4)" }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.transform = "translateY(-3px) scale(1.02)";
-                  el.style.boxShadow = "0 16px 40px rgba(255, 176, 0, 0.55)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.transform = "translateY(0) scale(1)";
-                  el.style.boxShadow = "0 8px 32px rgba(255, 176, 0, 0.4)";
-                }}
+                className="group flex items-center gap-3 px-7 py-3.5 font-bold rounded-full border-0 cursor-pointer transition-all duration-300 no-underline font-poppins inline-flex hover:-translate-y-[3px] hover:scale-[1.02] hover:shadow-[0_16px_40px_rgba(255,176,0,0.55)]"
+                style={{ backgroundColor: "#FFB000", color: "#144400", boxShadow: "0 8px 32px rgba(255,176,0,0.4)" }}
               >
                 Ver los platos de esta semana
                 <span
@@ -177,8 +165,7 @@ export function HeroSection() {
 
               {/* ── Plato 1 — GRANDE, ancla visual (hero-plate) ── */}
               <div
-                className="absolute w-[260px] h-[260px] rounded-full overflow-hidden z-[10]"
-                style={{ top: "80px", left: "60px" }}
+                className="absolute w-[260px] h-[260px] rounded-full overflow-hidden z-[10] top-[80px] left-[60px]"
               >
                 <Image
                   src="/images/hero-plate.png"
@@ -186,15 +173,14 @@ export function HeroSection() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 260px, 520px"
-                  quality={92}
+                  quality={90}
                   priority
                 />
               </div>
 
               {/* ── Plato 2 — MEDIANO, abajo a la derecha (beef stir fry) ── */}
               <div
-                className="absolute w-[195px] h-[195px] rounded-full overflow-hidden z-[9]"
-                style={{ bottom: "40px", right: "20px" }}
+                className="absolute w-[195px] h-[195px] rounded-full overflow-hidden z-[9] bottom-[40px] right-[20px]"
               >
                 <Image
                   src="/images/plate-2.png"
@@ -202,14 +188,13 @@ export function HeroSection() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 195px, 390px"
-                  quality={92}
+                  quality={90}
                 />
               </div>
 
               {/* ── Plato 3 — PEQUEÑO, arriba a la derecha (ensalada) ── */}
               <div
-                className="absolute w-[150px] h-[150px] rounded-full overflow-hidden z-[11]"
-                style={{ top: "20px", right: "40px" }}
+                className="absolute w-[150px] h-[150px] rounded-full overflow-hidden z-[11] top-[20px] right-[40px]"
               >
                 <Image
                   src="/images/plate-3.png"
@@ -217,14 +202,14 @@ export function HeroSection() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 150px, 300px"
-                  quality={92}
+                  quality={90}
                 />
               </div>
 
               {/* ── Sticker 1 — Sin conservantes ── */}
               <div
-                className="absolute animate-float z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white -rotate-6 shadow-[0_8px_24px_rgba(0,0,0,0.10)]"
-                style={{ top: "130px", left: "-20px", color: "#144400" }}
+                className="absolute animate-float z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white -rotate-6 shadow-[0_8px_24px_rgba(0,0,0,0.10)] top-[130px] -left-5"
+                style={{ color: "#144400" }}
               >
                 <span className="text-base">🥦</span>
                 <span>Sin conservantes</span>
@@ -232,8 +217,8 @@ export function HeroSection() {
 
               {/* ── Sticker 2 — Calentar y listo ── */}
               <div
-                className="absolute animate-float-delay-1 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white rotate-[4deg] shadow-[0_8px_24px_rgba(0,0,0,0.10)]"
-                style={{ top: "16px", left: "130px", color: "#144400" }}
+                className="absolute animate-float-delay-1 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white rotate-[4deg] shadow-[0_8px_24px_rgba(0,0,0,0.10)] top-4 left-[130px]"
+                style={{ color: "#144400" }}
               >
                 <span className="text-base">🔥</span>
                 <span>Calentar y listo</span>
@@ -241,8 +226,8 @@ export function HeroSection() {
 
               {/* ── Sticker 3 — Delivery semanal ── */}
               <div
-                className="absolute animate-float-delay-2 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white -rotate-3 shadow-[0_8px_24px_rgba(0,0,0,0.10)]"
-                style={{ bottom: "28px", left: "16px", color: "#144400" }}
+                className="absolute animate-float-delay-2 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-white -rotate-3 shadow-[0_8px_24px_rgba(0,0,0,0.10)] bottom-7 left-4"
+                style={{ color: "#144400" }}
               >
                 <span className="text-base">🛵</span>
                 <span>Delivery semanal</span>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, ShoppingBag, Utensils, Users, LogOut, ChefHat, CalendarDays, Package } from "lucide-react";
@@ -33,10 +34,14 @@ export function AdminNav({ email }: AdminNavProps) {
       {/* ── Sidebar desktop ── */}
       <aside className="hidden md:flex w-56 shrink-0 flex-col bg-white border-r border-gray-200 min-h-screen">
         <div className="px-5 py-6 border-b border-gray-100">
-          <span className="font-poppins font-bold text-leaf text-base leading-tight block">
-            TwoNutris
-          </span>
-          <span className="font-poppins text-xs text-gray-400 mt-0.5 block">
+          <Image
+            src="/icons/logo.png"
+            alt="TwoNutris"
+            width={148}
+            height={48}
+            priority
+          />
+          <span className="font-poppins text-xs text-gray-400 mt-1 block">
             Admin
           </span>
         </div>

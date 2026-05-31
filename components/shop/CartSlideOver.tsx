@@ -25,7 +25,7 @@ export function CartSlideOver() {
 
   function handleCheckout() {
     closeCart();
-    router.push("/login?next=/checkout");
+    router.push("/checkout");
   }
 
   // Bloquea el scroll del body cuando el carrito está abierto

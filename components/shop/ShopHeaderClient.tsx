@@ -23,9 +23,8 @@ export function ShopHeaderClient({ userEmail }: Props) {
           <Image
             src="/icons/logo.png"
             alt="twonutris"
-            width={120}
-            height={40}
-            className="h-14 w-auto"
+            width={148}
+            height={48}
             priority
           />
         </Link>

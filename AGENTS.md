@@ -7,6 +7,7 @@
 
 ## React
 - Use functional components with named exports
+- Exception: `page.tsx` and `layout.tsx` must use `export default` (Next.js App Router requirement)
 - Use "use client" only when necessary
 - Keep components focused and single-purpose
 

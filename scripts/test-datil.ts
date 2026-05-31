@@ -12,17 +12,17 @@ async function main() {
 
   await emitDatilInvoice({
     id: "test-" + Date.now(),
-    invoiceNumber: 2,
+    invoiceNumber: 1000,
     total: 25.00,
     deliveryAddress: "AMERICA N36-229 Y AV.NACIONES UNIDAS, QUITO",
     customerEmail: "dgalarraga00@gmail.com",
     customerName: "David Galarraga",
     customerPhone: "0999999999",
-    taxIdType: "07",
-    taxId: "9999999999999",
+    taxIdType: "05",           // Cédula de ciudadanía
+    taxId: "1721047791",       // Cédula válida Módulo 10 (Pichincha)
     items: [
       { dishName: "Pollo al horno con vegetales", quantity: 2, unitPrice: 10.00 },
-      { dishName: "Ensalada César", quantity: 1, unitPrice: 5.00 },
+      { dishName: "Ensalada Cesar", quantity: 1, unitPrice: 5.00 },
     ],
   });
 

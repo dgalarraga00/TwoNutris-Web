@@ -21,6 +21,7 @@ function LoginForm() {
   const next = searchParams.get("next") ?? "/pedir";
 
   const [mode, setMode] = useState<Mode>("login");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -56,6 +57,7 @@ function LoginForm() {
           email,
           password,
           options: {
+            data: { full_name: name },
             emailRedirectTo: `${window.location.origin}/auth/callback?next=${next}`,
           },
         });
@@ -98,7 +100,7 @@ function LoginForm() {
         {/* Tabs */}
         <div className="flex bg-gray-100 rounded-2xl p-1 mb-6">
           <button
-            onClick={() => { setMode("login"); setError(null); setSuccess(null); }}
+            onClick={() => { setMode("login"); setName(""); setEmail(""); setPassword(""); setError(null); setSuccess(null); }}
             className={`flex-1 py-2 text-sm font-semibold font-poppins rounded-xl transition-all ${
               mode === "login"
                 ? "bg-white text-leaf shadow-sm"
@@ -108,7 +110,7 @@ function LoginForm() {
             Iniciar sesión
           </button>
           <button
-            onClick={() => { setMode("signup"); setError(null); setSuccess(null); }}
+            onClick={() => { setMode("signup"); setName(""); setEmail(""); setPassword(""); setError(null); setSuccess(null); }}
             className={`flex-1 py-2 text-sm font-semibold font-poppins rounded-xl transition-all ${
               mode === "signup"
                 ? "bg-white text-leaf shadow-sm"
@@ -146,6 +148,22 @@ function LoginForm() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {mode === "signup" && (
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-semibold font-poppins text-gray-600">
+                Nombre completo
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Tu nombre completo"
+                required
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm font-poppins text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-leaf/30 focus:border-leaf transition"
+              />
+            </div>
+          )}
+
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-semibold font-poppins text-gray-600">
               Email

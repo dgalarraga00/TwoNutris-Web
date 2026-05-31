@@ -25,7 +25,11 @@ const CATEGORY_LABELS: Record<DishTemplateCategory, string> = {
   PREMIUM: "Premium",
 };
 
-export function DishLibraryClient({ dishes: initialDishes }: { dishes: DishTemplate[] }) {
+interface DishLibraryClientProps {
+  dishes: DishTemplate[];
+}
+
+export function DishLibraryClient({ dishes: initialDishes }: DishLibraryClientProps) {
   const router = useRouter();
   const [dishes, setDishes] = useState(initialDishes);
   const [search, setSearch] = useState("");
@@ -45,14 +49,14 @@ export function DishLibraryClient({ dishes: initialDishes }: { dishes: DishTempl
     await fetch(`/api/admin/dishes/${id}/duplicate`, { method: "POST" });
     router.refresh();
     const res = await fetch("/api/admin/dishes");
-    const updated = await res.json();
+    const updated = (await res.json()) as DishTemplate[];
     setDishes(updated);
   }
 
   async function handleToggle(id: string) {
     await fetch(`/api/admin/dishes/${id}/toggle`, { method: "POST" });
     const res = await fetch("/api/admin/dishes");
-    const updated = await res.json();
+    const updated = (await res.json()) as DishTemplate[];
     setDishes(updated);
   }
 
@@ -132,22 +136,19 @@ export function DishLibraryClient({ dishes: initialDishes }: { dishes: DishTempl
   );
 }
 
-function DishCard({
-  dish,
-  onDuplicate,
-  onToggle,
-  onEdit,
-}: {
+interface DishCardProps {
   dish: DishTemplate;
   onDuplicate: (id: string) => void;
   onToggle: (id: string) => void;
   onEdit: (id: string) => void;
-}) {
+}
+
+function DishCard({ dish, onDuplicate, onToggle, onEdit }: DishCardProps) {
   return (
     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden flex flex-col">
       <div className="relative h-40 bg-gray-100">
         {dish.image ? (
-          <Image src={dish.image} alt={dish.name} fill sizes="80px" className="object-cover" />
+          <Image src={dish.image} alt={dish.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px" quality={90} className="object-cover" />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-100">
             <span className="font-poppins text-xs text-gray-400">Sin imagen</span>
