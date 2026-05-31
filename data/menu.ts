@@ -29,7 +29,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "lun-p1",
     name: "Pollo al chimichurri con papas rústicas",
-    image: "/images/fotos-menu/Pollo al chimichurri con papas rústicas.png",
+    image: "/images/Fotos-menu/Pollo al chimichurri con papas rústicas.png",
     calories: 470,
     macros: { protein: 28, carbs: 35, fat: 24 },
     allergens: ["Sulfitos"],
@@ -39,7 +39,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "lun-p2",
     name: "Cerdo en salsa agridulce con arroz blanco",
-    image: "/images/fotos-menu/Cerdo en salsa agridulce con arroz blanco.png",
+    image: "/images/Fotos-menu/Cerdo en salsa agridulce con arroz blanco.png",
     calories: 496,
     macros: { protein: 28, carbs: 60, fat: 16 },
     allergens: ["Sulfitos", "Sésamo"],
@@ -49,7 +49,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "lun-p3",
     name: "Risotto de champiñones y espárragos con queso mozzarella",
-    image: "/images/fotos-menu/Risotto de champiñones y espárragos con queso mozzarella.png",
+    image: "/images/Fotos-menu/Risotto de champiñones y espárragos con queso mozzarella.png",
     calories: 532,
     macros: { protein: 24, carbs: 55, fat: 24 },
     allergens: ["Lácteos", "Apio"],
@@ -61,7 +61,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mar-p1",
     name: "Albóndigas de pollo a la jardinera con arroz",
-    image: "/images/fotos-menu/Albóndigas de pollo a la jardinera con arroz.jpeg",
+    image: "/images/Fotos-menu/Albóndigas de pollo a la jardinera con arroz.jpeg",
     calories: 495,
     macros: { protein: 28, carbs: 55, fat: 18 },
     allergens: ["Huevo", "Gluten"],
@@ -71,7 +71,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mar-p2",
     name: "Curry de pollo con calabaza y quinoa",
-    image: "/images/fotos-menu/Curry de pollo con calabaza y quinoa.png",
+    image: "/images/Fotos-menu/Curry de pollo con calabaza y quinoa.png",
     calories: 618,
     macros: { protein: 42, carbs: 50, fat: 28 },
     allergens: ["Lácteos", "Apio", "Mostaza"],
@@ -81,7 +81,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mar-p3",
     name: "Tajine de garbanzos con arroz",
-    image: "/images/fotos-menu/Tajine de garbanzos con arroz.png",
+    image: "/images/Fotos-menu/Tajine de garbanzos con arroz.png",
     calories: 606,
     macros: { protein: 20, carbs: 91, fat: 18 },
     allergens: ["Sulfitos", "Frutos secos"],
@@ -93,7 +93,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mie-p1",
     name: "Pollo en salsa de queso con papas",
-    image: "/images/fotos-menu/Pollo en salsa de queso con papas.webp",
+    image: "/images/Fotos-menu/Pollo en salsa de queso con papas.webp",
     calories: 447,
     macros: { protein: 28, carbs: 35, fat: 26 },
     allergens: ["Lácteos", "Sulfitos", "Gluten", "Huevo"],
@@ -103,7 +103,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mie-p2",
     name: "Cerdo en salsa de cebolla y vino con arroz",
-    image: "/images/fotos-menu/Cerdo en salsa de cebolla y vino con arroz.png",
+    image: "/images/Fotos-menu/Cerdo en salsa de cebolla y vino con arroz.png",
     calories: 414,
     macros: { protein: 28, carbs: 35, fat: 36 },
     allergens: ["Sulfitos", "Gluten", "Soya"],
@@ -113,7 +113,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mie-p3",
     name: "Dhal de lentejas con arroz aromático",
-    image: "/images/fotos-menu/Dhal de lentejas con arroz.png",
+    image: "/images/Fotos-menu/Dhal de lentejas con arroz.png",
     calories: 526,
     macros: { protein: 20, carbs: 56, fat: 28 },
     allergens: ["Lácteos", "Mostaza"],
@@ -125,7 +125,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "jue-p1",
     name: "Milanesa de carne con espinaca, queso y camote asado",
-    image: "/images/fotos-menu/Milanesa de carne con espinaca, queso y camote asado.webp",
+    image: "/images/Fotos-menu/Milanesa de carne con espinaca, queso y camote asado.webp",
     calories: 486,
     macros: { protein: 28, carbs: 35, fat: 26 },
     allergens: ["Gluten", "Mostaza", "Huevo", "Lácteos"],
@@ -135,7 +135,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "jue-p2",
     name: "Pollo en salsa piri-piri con arroz",
-    image: "/images/fotos-menu/Pollo en salsa piri-piri con arroz.png",
+    image: "/images/Fotos-menu/Pollo en salsa piri-piri con arroz.png",
     calories: 478,
     macros: { protein: 28, carbs: 35, fat: 24 },
     allergens: ["Sulfitos", "Gluten"],
@@ -145,7 +145,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "jue-p3",
     name: "Curry de tofu con verduras y arroz integral",
-    image: "/images/fotos-menu/Curry de tofu con verduras y arroz integral.png",
+    image: "/images/Fotos-menu/Curry de tofu con verduras y arroz integral.png",
     calories: 673,
     macros: { protein: 15, carbs: 52, fat: 45 },
     allergens: ["Soya", "Mostaza"],
@@ -157,7 +157,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "vie-p1",
     name: "Cazuela de pescado con patacones",
-    image: "/images/fotos-menu/Cazuela de pescado con patacones.png",
+    image: "/images/Fotos-menu/Cazuela de pescado con patacones.png",
     calories: 722,
     macros: { protein: 35, carbs: 60, fat: 38 },
     allergens: ["Pescado", "Mariscos", "Maní"],
@@ -167,7 +167,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "vie-p2",
     name: "Pollo Katsu Japonés con arroz",
-    image: "/images/fotos-menu/Pollo katsu Japones con arroz.png",
+    image: "/images/Fotos-menu/Pollo katsu Japones con arroz.png",
     calories: 570,
     macros: { protein: 28, carbs: 65, fat: 22 },
     allergens: ["Gluten", "Huevo", "Soya", "Sésamo"],
@@ -177,7 +177,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "vie-p3",
     name: "Falafel clásico",
-    image: "/images/fotos-menu/Falafel clásico.png",
+    image: "/images/Fotos-menu/Falafel clásico.png",
     calories: 750,
     macros: { protein: 25, carbs: 80, fat: 38 },
     allergens: ["Huevo", "Sésamo", "Apio"],
@@ -191,7 +191,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "lun-e1",
     name: "Ensalada fresca",
-    image: "/images/fotos-menu/Ensalada Fresca.jpeg",
+    image: "/images/Fotos-menu/Ensalada Fresca.jpeg",
     calories: 20,
     macros: { protein: 0, carbs: 4, fat: 0 },
     allergens: [],
@@ -201,7 +201,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "lun-e2",
     name: "Camote Andino",
-    image: "/images/fotos-menu/Camote Andino.png",
+    image: "/images/Fotos-menu/Camote Andino.png",
     calories: 62,
     macros: { protein: 1, carbs: 14, fat: 0 },
     allergens: [],
@@ -213,7 +213,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mar-e1",
     name: "Ensalada de Remolacha",
-    image: "/images/fotos-menu/Ensalada de remolacha.jpeg",
+    image: "/images/Fotos-menu/Ensalada de remolacha.jpeg",
     calories: 30,
     macros: { protein: 2, carbs: 6, fat: 0 },
     allergens: [],
@@ -223,7 +223,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mar-e2",
     name: "Ensalada de granos",
-    image: "/images/fotos-menu/Ensalada de granos.jpeg",
+    image: "/images/Fotos-menu/Ensalada de granos.jpeg",
     calories: 100,
     macros: { protein: 6, carbs: 20, fat: 2 },
     allergens: [],
@@ -235,7 +235,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mie-e1",
     name: "Ensalada Tricolor",
-    image: "/images/fotos-menu/Ensalada Tricolor .jpeg",
+    image: "/images/Fotos-menu/Ensalada Tricolor .jpeg",
     calories: 32,
     macros: { protein: 1, carbs: 7, fat: 0 },
     allergens: [],
@@ -245,7 +245,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mie-e2",
     name: "Ensalada Verde",
-    image: "/images/fotos-menu/Ensalada Verde.webp",
+    image: "/images/Fotos-menu/Ensalada Verde.webp",
     calories: 15,
     macros: { protein: 1, carbs: 3, fat: 0 },
     allergens: [],
@@ -257,7 +257,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "jue-e1",
     name: "Ensalada de quinoa",
-    image: "/images/fotos-menu/Ensalada de quinoa.jpeg",
+    image: "/images/Fotos-menu/Ensalada de quinoa.jpeg",
     calories: 57,
     macros: { protein: 2, carbs: 10, fat: 1 },
     allergens: ["Leguminosas"],
@@ -267,7 +267,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "jue-e2",
     name: "Ensalada de brócoli",
-    image: "/images/fotos-menu/Ensalada de brócoli.jpeg",
+    image: "/images/Fotos-menu/Ensalada de brócoli.jpeg",
     calories: 22,
     macros: { protein: 1, carbs: 4, fat: 0 },
     allergens: [],
@@ -279,7 +279,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "vie-e1",
     name: "La sencilla",
-    image: "/images/fotos-menu/La sencilla.jpeg",
+    image: "/images/Fotos-menu/La sencilla.jpeg",
     calories: 38,
     macros: { protein: 1, carbs: 8, fat: 0 },
     allergens: ["Pimienta"],
@@ -289,7 +289,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "vie-e2",
     name: "Ensalada Parmesana",
-    image: "/images/fotos-menu/Ensalada Parmesana.jpeg",
+    image: "/images/Fotos-menu/Ensalada Parmesana.jpeg",
     calories: 200,
     macros: { protein: 4, carbs: 10, fat: 16 },
     allergens: ["Lácteos"],
@@ -301,7 +301,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "pos-1",
     name: "Overnight Oats",
-    image: "/images/fotos-menu/Overnight Oats.webp",
+    image: "/images/Fotos-menu/Overnight Oats.webp",
     calories: 188,
     macros: { protein: 7, carbs: 22, fat: 8 },
     allergens: ["Gluten", "Lácteos", "Frutos secos", "Maní", "Sulfitos"],
@@ -311,7 +311,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "pos-2",
     name: "Pastel de calabaza",
-    image: "/images/fotos-menu/Pastel de calabaza.png",
+    image: "/images/Fotos-menu/Pastel de calabaza.png",
     calories: 290,
     macros: { protein: 4, carbs: 38, fat: 14 },
     allergens: ["Gluten", "Huevo"],
