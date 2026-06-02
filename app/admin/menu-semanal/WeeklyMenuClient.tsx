@@ -6,12 +6,12 @@ import Image from "next/image";
 import { X, Search } from "lucide-react";
 import type { DishTemplate, WeeklyMenu, WeeklyMenuItem, WeeklyMenuStatus } from "@/lib/generated/prisma";
 
-type MenuItemWithDish = WeeklyMenuItem & { dish: DishTemplate };
-type MenuWithItems = WeeklyMenu & { items: MenuItemWithDish[] };
+interface MenuItemWithDish extends WeeklyMenuItem { dish: DishTemplate }
+interface MenuWithItems extends WeeklyMenu { items: MenuItemWithDish[] }
 
 const CATEGORY_LABELS: Record<string, string> = {
   CLASICO: "Clásico",
-  LOW_CARB: "Low Carb",
+  LOW_CARB: "Clásico",
   VEGETARIANO: "Vegetariano",
   PREMIUM: "Premium",
 };
@@ -91,7 +91,7 @@ export function WeeklyMenuClient({
         body: JSON.stringify({ weekStart, weekEnd, dishIds: selectedIds }),
       });
       if (!res.ok) {
-        const data = await res.json();
+        const data = await res.json() as { error?: string };
         throw new Error(data.error ?? "Error al guardar");
       }
       setStatus("DRAFT");
@@ -107,10 +107,19 @@ export function WeeklyMenuClient({
     setPublishing(true);
     setError(null);
     try {
-      await saveDraft();
+      const draftRes = await fetch("/api/admin/weekly-menu", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ weekStart, weekEnd, dishIds: selectedIds }),
+      });
+      if (!draftRes.ok) {
+        const data = await draftRes.json() as { error?: string };
+        throw new Error(data.error ?? "Error al guardar el borrador");
+      }
+
       const res = await fetch("/api/admin/weekly-menu/publish", { method: "POST" });
       if (!res.ok) {
-        const data = await res.json();
+        const data = await res.json() as { error?: string };
         throw new Error(data.error ?? "Error al publicar");
       }
       setStatus("PUBLISHED");
@@ -149,20 +158,28 @@ export function WeeklyMenuClient({
           </button>
           <button
             onClick={saveDraft}
-            disabled={saving}
+            disabled={saving || selectedIds.length === 0}
             className="font-poppins text-sm font-semibold px-4 py-2 rounded-xl border border-leaf text-leaf hover:bg-leaf/5 transition-colors disabled:opacity-50"
           >
             {saving ? "Guardando..." : "Guardar borrador"}
           </button>
           <button
             onClick={handlePublish}
-            disabled={publishing || saving}
+            disabled={publishing || saving || selectedIds.length === 0}
             className="font-poppins text-sm font-semibold px-4 py-2 rounded-xl bg-leaf text-cream hover:opacity-90 transition-opacity disabled:opacity-50"
           >
             {publishing ? "Publicando..." : "Publicar"}
           </button>
         </div>
       </div>
+
+      {selectedIds.length === 0 && (
+        <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4">
+          <p className="font-poppins text-sm text-amber-700">
+            El menú no tiene platos. Agregá al menos uno antes de guardar o publicar.
+          </p>
+        </div>
+      )}
 
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4">

@@ -12,9 +12,9 @@ import { ShoppingBag, ChevronRight, Loader2, MapPin, User, Truck, Receipt } from
 import { useCart } from "@/components/shop/CartProvider";
 import { PlacesAddressInput } from "@/components/shop/PlacesAddressInput";
 import { calculateDeliveryDate, cutoffDate, formatDeliveryDate } from "@/lib/delivery";
+import { DELIVERY_FEE } from "@/lib/catalog";
+import type { Zone } from "@/utils/delivery-zones";
 import Image from "next/image";
-
-const DELIVERY_FEE = 3;
 const PAYPHONE_RATE = 0.0575;
 
 export function CheckoutClient({ userEmail }: { userEmail: string }) {
@@ -23,7 +23,6 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
   const [isPending, setIsPending] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  // ── Datos de entrega + cliente ────────────────────────────────────
   const [address, setAddress] = useState("");
   const [instructions, setInstructions] = useState("");
   const [fullName, setFullName] = useState("");
@@ -84,11 +83,10 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
   const commission = Math.round((subtotal + delivery) * PAYPHONE_RATE * 100) / 100;
   const total = subtotal + delivery + commission;
 
-  function handlePlaceSelect(formattedAddress: string, _zone: unknown, _lat: number, _lng: number) {
+  function handlePlaceSelect(formattedAddress: string, _zone: Zone, _lat: number, _lng: number) {
     setAddress(formattedAddress);
   }
 
-  // ── Submit: crear Order PENDING + llamar Prepare + redirigir ──────
   async function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
@@ -122,7 +120,6 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
           items: items.map((i) => ({
             id: i.id,
             name: i.name,
-            price: i.price,
             quantity: i.quantity,
           })),
           deliveryAddress: address.trim(),
@@ -153,7 +150,6 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
     }
   }
 
-  // ── Carrito vacío ─────────────────────────────────────────────────
   if (items.length === 0) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 px-4 text-center">
@@ -169,11 +165,9 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
     );
   }
 
-  // ── Formulario de entrega + datos cliente ─────────────────────────
   return (
     <>
     <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10 items-start">
-      {/* ─── Formulario ─── */}
       <form ref={formRef} onSubmit={handleFormSubmit} className="flex flex-col gap-6">
         {/* Sección: entrega */}
         <section className="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col gap-4">
@@ -307,7 +301,6 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
         </button>
       </form>
 
-      {/* ─── Resumen del pedido ─── */}
       <aside className="sticky top-24 bg-white border border-gray-200 rounded-2xl p-6 flex flex-col gap-5">
         <div className="flex items-center gap-2">
           <ShoppingBag size={18} className="text-leaf" />
@@ -396,7 +389,6 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
       </aside>
     </div>
 
-    {/* ─── Overlay PayPhone Cajita ─── */}
     {pendingPayment && (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
         <div className="bg-white rounded-2xl p-3 sm:p-6 w-full max-w-md shadow-xl relative">

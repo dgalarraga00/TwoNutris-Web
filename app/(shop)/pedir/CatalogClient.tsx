@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { Truck } from "lucide-react";
 import { CatalogDish, DishType, MIN_ORDER } from "@/lib/catalog";
+import { calculateDeliveryDate, cutoffDate, formatDeliveryDate } from "@/lib/delivery";
 import { DishCard } from "@/components/shop/DishCard";
 import { DishDetailModal } from "@/components/shop/DishDetailModal";
 import { useCart } from "@/components/shop/CartProvider";
@@ -11,14 +13,23 @@ type Filter = "TODOS" | DishType;
 const FILTERS: { key: Filter; label: string }[] = [
   { key: "TODOS", label: "Todos" },
   { key: "NORMAL", label: "Clásicos" },
-  { key: "LOW_CARB", label: "Low Carb" },
   { key: "VEGETARIANO", label: "Vegetariano" },
+  { key: "PREMIUM", label: "Premium" },
 ];
 
 export function CatalogClient({ dishes }: { dishes: CatalogDish[] }) {
   const [activeFilter, setActiveFilter] = useState<Filter>("TODOS");
   const [selectedDish, setSelectedDish] = useState<CatalogDish | null>(null);
   const { total, meetsMinimum, openCart, count } = useCart();
+
+  const deliveryLabel = useMemo(() => formatDeliveryDate(calculateDeliveryDate()), []);
+  const cutoffLabel = useMemo(() => {
+    const c = cutoffDate();
+    const days = Math.ceil((c.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+    if (days <= 0) return "Pedí hoy — último día";
+    if (days === 1) return "Cierra mañana";
+    return `Pedí antes del miércoles`;
+  }, []);
 
   const filtered =
     activeFilter === "TODOS"
@@ -35,6 +46,16 @@ export function CatalogClient({ dishes }: { dishes: CatalogDish[] }) {
         <p className="font-poppins text-sm text-gray-500">
           Elegí los platos que querés y armá tu box. Pedido mínimo{" "}
           <span className="font-semibold text-leaf">${MIN_ORDER}</span>.
+        </p>
+      </div>
+
+      {/* Banner de entrega */}
+      <div className="flex items-center gap-3 bg-leaf/5 border border-leaf/20 rounded-2xl px-4 py-3 mb-6">
+        <Truck size={16} className="text-leaf flex-shrink-0" />
+        <p className="font-poppins text-sm text-gray-700">
+          <span className="font-semibold text-leaf">{cutoffLabel}</span>
+          {" · "}
+          Entrega el <span className="font-semibold text-gray-900">{deliveryLabel}</span>
         </p>
       </div>
 

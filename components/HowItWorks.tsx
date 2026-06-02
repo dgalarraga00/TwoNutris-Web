@@ -3,12 +3,6 @@
 import Image from "next/image";
 import { useRef } from "react";
 
-/* ─────────────────────────────────────────────────────────────────
-   HowItWorks — twonutris
-   Sección 1: ¿Por qué twonutris? (layout asimétrico)
-   Sección 2: ¿Cómo funciona?    (3 pasos numerados)
-──────────────────────────────────────────────────────────────────── */
-
 const STEPS = [
   {
     iconSrc: "/icons/menu.png",
@@ -20,7 +14,7 @@ const STEPS = [
   {
     iconSrc: "/icons/food-bag.png",
     title: "Recibe",
-    text: "Te lo llevamos fresco cada día.",
+    text: "Te lo llevamos fresco cada semana.",
     circleBg: "#FFB000",
     rotateDeg: 4,
   },
@@ -53,12 +47,11 @@ function BigFeatureCard() {
       {/* Blob decorativo */}
       <div
         ref={blobRef}
-        className="absolute -bottom-16 -left-16 transition-all duration-700 pointer-events-none bg-leaf-dark"
+        className="absolute -bottom-16 -left-16 transition-all duration-700 pointer-events-none bg-leaf-dark opacity-50"
         style={{
           width: 260,
           height: 260,
           borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
-          opacity: 0.5,
         }}
       />
 
@@ -66,10 +59,8 @@ function BigFeatureCard() {
       <div className="relative z-10 flex flex-col gap-6 h-full justify-between">
         {/* Icono */}
         <div
-          className="flex items-center justify-center rounded-2xl"
+          className="flex items-center justify-center rounded-2xl w-[72px] h-[72px]"
           style={{
-            width: 72,
-            height: 72,
             backgroundColor: "rgba(255, 176, 0, 0.15)",
           }}
         >
@@ -85,10 +76,9 @@ function BigFeatureCard() {
         {/* Texto */}
         <div className="flex flex-col gap-4">
           <h3
-            className="font-ibrand"
+            className="font-ibrand leading-[1.05]"
             style={{
               fontSize: "clamp(2rem, 3.5vw, 3rem)",
-              lineHeight: 1.05,
               color: "#FFFBE4",
             }}
           >
@@ -138,8 +128,8 @@ function SmallFeatureCard({
 
   return (
     <div
-      className="relative rounded-3xl overflow-hidden flex flex-col justify-between cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-      style={{ backgroundColor: bg, padding: "2rem", flex: 1 }}
+      className="relative rounded-3xl overflow-hidden flex flex-col justify-between cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-xl p-8 flex-1"
+      style={{ backgroundColor: bg }}
       onMouseEnter={() => {
         if (blobRef.current)
           blobRef.current.style.borderRadius = "40% 60% 70% 30% / 40% 70% 30% 60%";
@@ -165,10 +155,8 @@ function SmallFeatureCard({
       {/* Contenido */}
       <div className="relative z-10 flex flex-col gap-3">
         <div
-          className="flex items-center justify-center rounded-xl"
+          className="flex items-center justify-center rounded-xl w-[52px] h-[52px]"
           style={{
-            width: 52,
-            height: 52,
             backgroundColor: `${textColor}18`,
           }}
         >
@@ -208,22 +196,11 @@ function StepCard({
     <div className="flex flex-col items-center text-center gap-4">
       {/* Círculo irregular con icono */}
       <div
-        className="relative flex items-center justify-center cursor-default"
-        style={{ width: 140, height: 140 }}
-        onMouseEnter={() => {
-          if (circleRef.current) {
-            circleRef.current.style.transform = `rotate(${rotateDeg + 8}deg) scale(1.06)`;
-          }
-        }}
-        onMouseLeave={() => {
-          if (circleRef.current) {
-            circleRef.current.style.transform = `rotate(${rotateDeg}deg) scale(1)`;
-          }
-        }}
+        className="relative flex items-center justify-center cursor-default w-[140px] h-[140px] group"
       >
         <div
           ref={circleRef}
-          className="absolute inset-0 transition-all duration-500"
+          className="absolute inset-0 transition-all duration-500 group-hover:scale-[1.06]"
           style={{
             borderRadius: "60% 40% 50% 50% / 50% 60% 40% 50%",
             backgroundColor: circleBg,
@@ -323,9 +300,6 @@ export function HowItWorks() {
     <section className="bg-white py-24 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6">
 
-        {/* ══════════════════════════════════════
-            SECCIÓN 1 — ¿Por qué twonutris?
-        ══════════════════════════════════════ */}
         <div className="text-center mb-16">
           <span
             className="inline-block text-xs font-bold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full font-poppins"
@@ -355,9 +329,9 @@ export function HowItWorks() {
           <div className="md:col-span-2 flex flex-col gap-5">
             <SmallFeatureCard
               iconSrc="/icons/food-delivery.png"
-              iconAlt="Entrega diaria"
-              title="Entrega Diaria"
-              text="Tu comida diaria en donde estés. Sin salir a comprar."
+              iconAlt="Entrega semanal"
+              title="Entrega Semanal"
+              text="Tu comida de la semana en la puerta de tu casa. Sin salir a comprar."
               bg="#FFB000"
               textColor="#144400"
               subtextColor="#144400"
@@ -376,11 +350,8 @@ export function HowItWorks() {
           </div>
         </div>
 
-        {/* ══════════════════════════════════════
-            SEPARADOR
-        ══════════════════════════════════════ */}
         <div className="flex items-center gap-4 my-24">
-          <div className="flex-1 h-px" style={{ backgroundColor: "#E5E7EB" }} />
+          <div className="flex-1 h-px bg-gray-200" />
           <div
             className="w-2 h-2 rounded-full flex-shrink-0"
             style={{ backgroundColor: "#FFB000" }}
@@ -393,12 +364,9 @@ export function HowItWorks() {
             className="w-2 h-2 rounded-full flex-shrink-0"
             style={{ backgroundColor: "#FFB000" }}
           />
-          <div className="flex-1 h-px" style={{ backgroundColor: "#E5E7EB" }} />
+          <div className="flex-1 h-px bg-gray-200" />
         </div>
 
-        {/* ══════════════════════════════════════
-            SECCIÓN 2 — ¿Cómo funciona?
-        ══════════════════════════════════════ */}
         <div className="text-center mb-16">
           <h2
             className="text-5xl md:text-6xl mb-4 font-ibrand"
@@ -423,18 +391,14 @@ export function HowItWorks() {
         {/* CTA final */}
         <div className="flex justify-center mt-20">
           <a
-            href="https://www.twonutris.net/registrate"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 font-bold rounded-full border-0 cursor-pointer transition-all duration-300 no-underline font-poppins inline-flex"
+            href="/pedir"
+            className="group flex items-center gap-3 font-bold rounded-full border-0 cursor-pointer transition-all duration-300 no-underline font-poppins inline-flex hover:-translate-y-[3px] hover:scale-[1.02]"
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLElement;
-              el.style.transform = "translateY(-3px) scale(1.02)";
               el.style.boxShadow = "0 16px 40px rgba(255, 176, 0, 0.5)";
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLElement;
-              el.style.transform = "translateY(0) scale(1)";
               el.style.boxShadow = "0 8px 32px rgba(255, 176, 0, 0.35)";
             }}
           >

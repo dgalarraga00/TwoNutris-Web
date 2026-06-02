@@ -142,5 +142,4 @@ export async function emitDatilInvoice(order: InvoiceOrder): Promise<void> {
     throw new Error(`Datil ${res.status}: ${body}`);
   }
 
-  await res.json();
 }

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown, MapPin, Phone, User } from "lucide-react";
+import { Order, OrderItem, OrderStatus, Profile } from "@/lib/generated/prisma";
 
 const MONTHS = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
 
@@ -9,8 +11,6 @@ function fmtDate(d: Date | string): string {
   const pad = (n: number) => n.toString().padStart(2, "0");
   return `${dt.getDate()} ${MONTHS[dt.getMonth()]} ${dt.getFullYear()}, ${pad(dt.getHours())}:${pad(dt.getMinutes())}`;
 }
-import { ChevronDown, MapPin, Phone, User } from "lucide-react";
-import { Order, OrderItem, OrderStatus, Profile } from "@/lib/generated/prisma";
 
 interface OrderWithRelations extends Order {
   items: OrderItem[];

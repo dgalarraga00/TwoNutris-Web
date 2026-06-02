@@ -1,8 +1,7 @@
-export type DishType = "VEGETARIANO" | "LOW_CARB" | "NORMAL";
+export type DishType = "NORMAL" | "VEGETARIANO" | "PREMIUM";
 
-export const BASE_PRICE = 6.75;
-export const PREMIUM_PRICE = 7.75;
 export const MIN_ORDER = 20;
+export const DELIVERY_FEE = 3;
 
 export interface CatalogDish {
   id: string;

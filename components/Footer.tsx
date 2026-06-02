@@ -4,10 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const NAV_LINKS = [
-  { label: "Inicio",                  href: "#" },
-  { label: "Sobre Nosotros",          href: "#" },
-  { label: "Menú",                    href: "#menu" },
-  { label: "Planes",                  href: "#planes" },
+  { label: "Inicio",                  href: "/" },
+  { label: "Sobre Nosotros",          href: "/sobre-nosotros" },
+  { label: "Menú",                    href: "/menu" },
   { label: "twonutris para empresas", href: "/empresas" },
   { label: "Contacto",                href: "#" },
 ];

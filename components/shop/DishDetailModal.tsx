@@ -1,11 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { X, Microwave, ChevronDown, UtensilsCrossed, ClipboardList } from "lucide-react";
+import { X, Microwave, ChevronDown, UtensilsCrossed, ClipboardList, Leaf } from "lucide-react";
 import { useState, useEffect } from "react";
 import { CatalogDish, DishType } from "@/lib/catalog";
 import { ALLERGEN_MAP } from "@/lib/allergens";
-import { Leaf } from "lucide-react";
 
 function Accordion({
   title,
@@ -44,15 +43,15 @@ function Accordion({
 }
 
 const TYPE_LABEL: Record<DishType, string> = {
-  VEGETARIANO: "Vegetariano",
-  LOW_CARB: "Low Carb",
   NORMAL: "Clásico",
+  VEGETARIANO: "Vegetariano",
+  PREMIUM: "Premium",
 };
 
 const TYPE_STYLE: Record<DishType, string> = {
+  NORMAL: "bg-white/80 text-leaf border border-leaf/20",
   VEGETARIANO: "bg-leaf text-cream",
-  LOW_CARB: "bg-amber text-leaf",
-  NORMAL: "bg-gray-100 text-leaf",
+  PREMIUM: "bg-gradient-to-r from-yellow-400 to-amber-500 text-white shadow-md",
 };
 
 const MODO_DE_EMPLEO = `Agujerear el film protector o abrir una esquina y calentar al microondas durante 2:00 - 3:00 minutos a máxima potencia (800w) o verter el contenido del táper en una sartén/olla al fuego para regenerar.
@@ -267,8 +266,6 @@ export function DishDetailModal({
             {MODO_DE_EMPLEO}
           </Accordion>
 
-          <div className="pb-2">
-          </div>
         </div>
       </div>
     </div>

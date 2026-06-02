@@ -3,6 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { prisma } from "@/lib/prisma";
 import { confirmPayphoneTransaction } from "@/utils/payphone";
 import { emitDatilInvoice } from "@/lib/datil";
+import { sendOrderConfirmationEmail } from "@/lib/email";
 
 interface ConfirmPayload {
   id: number;
@@ -87,6 +88,15 @@ export async function POST(request: Request) {
         taxId: existingOrder.taxId,
         items: existingOrder.items,
       }).catch((err) => console.error("[datil] error al emitir factura:", err));
+
+      sendOrderConfirmationEmail({
+        orderId: existingOrder.id,
+        customerName: existingOrder.profile?.fullName,
+        customerEmail: user.email ?? "",
+        items: existingOrder.items,
+        total: existingOrder.total,
+        deliveryAddress: existingOrder.deliveryAddress,
+      }).catch((err) => console.error("[email] error al enviar confirmación:", err));
 
       return NextResponse.json({
         success: true,

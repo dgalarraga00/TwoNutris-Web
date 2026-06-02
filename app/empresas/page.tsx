@@ -6,6 +6,7 @@ import { CheckCircle2, Users, TrendingUp, Smile } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { WhatsAppButton } from "@/components/shop/WhatsAppButton";
 
 const STATS = [
   {
@@ -105,14 +106,13 @@ export default function EmpresasPage() {
               <div className="relative flex items-center justify-center min-h-[460px]">
                 {/* Blob decorativo */}
                 <div
-                  className="absolute pointer-events-none"
+                  className="absolute pointer-events-none opacity-[0.07]"
                   style={{
                     width: "80%",
                     height: "80%",
                     top: "10%",
                     left: "10%",
                     backgroundColor: "#144400",
-                    opacity: 0.07,
                     borderRadius: "40% 60% 55% 45% / 55% 45% 60% 40%",
                   }}
                 />
@@ -123,8 +123,7 @@ export default function EmpresasPage() {
                     src="/images/img-equipo1.jpeg"
                     alt="Equipo disfrutando comida twonutris"
                     fill
-                    className="object-cover"
-                    style={{ objectPosition: "center" }}
+                    className="object-cover object-center"
                     sizes="(max-width: 768px) 100vw, 480px"
                   />
                 </div>
@@ -350,8 +349,8 @@ export default function EmpresasPage() {
 
             {/* Horario */}
             <p
-              className="text-xs text-center mt-6 font-poppins"
-              style={{ color: "#144400", opacity: 0.45 }}
+              className="text-xs text-center mt-6 font-poppins opacity-45"
+              style={{ color: "#144400" }}
             >
               Lunes a viernes · 8:00 — 18:00 · Respuesta en menos de 1 hora
             </p>
@@ -362,6 +361,7 @@ export default function EmpresasPage() {
 
       <Footer onManageCookies={() => setCookiesOpen(true)} />
       <CookieBanner open={cookiesOpen} onClose={() => setCookiesOpen(false)} />
+      <WhatsAppButton />
     </>
   );
 }

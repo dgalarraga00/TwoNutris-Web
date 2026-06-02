@@ -72,6 +72,7 @@ export function ConfirmacionClient() {
     }
 
     confirm();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (status === "loading") {

@@ -14,6 +14,7 @@ import {
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { WhatsAppButton } from "@/components/shop/WhatsAppButton";
 
 const VALORES = [
   {
@@ -122,8 +123,7 @@ export default function SobreNosotrosPage() {
                   src="/images/img-equipo4.jpeg"
                   alt="El equipo de twonutris"
                   fill
-                  className="object-cover"
-                  style={{ objectPosition: "top" }}
+                  className="object-cover object-top"
                   sizes="(max-width: 768px) 100vw, 560px"
                 />
               </div>
@@ -179,8 +179,8 @@ export default function SobreNosotrosPage() {
                   "Creemos que comer sano no debería ser complicado ni mucho menos aburrido."
                 </p>
                 <p
-                  className="text-sm font-poppins"
-                  style={{ color: "#144400", opacity: 0.65 }}
+                  className="text-sm font-poppins opacity-65"
+                  style={{ color: "#144400" }}
                 >
                   — Cami & David, fundadores de twonutris
                 </p>
@@ -196,8 +196,8 @@ export default function SobreNosotrosPage() {
                     +30.000
                   </p>
                   <p
-                    className="text-sm mt-1 font-poppins"
-                    style={{ color: "#144400", opacity: 0.7 }}
+                    className="text-sm mt-1 font-poppins opacity-70"
+                    style={{ color: "#144400" }}
                   >
                     comidas entregadas
                   </p>
@@ -210,8 +210,8 @@ export default function SobreNosotrosPage() {
                     4 años
                   </p>
                   <p
-                    className="text-sm mt-1 font-poppins"
-                    style={{ color: "#144400", opacity: 0.7 }}
+                    className="text-sm mt-1 font-poppins opacity-70"
+                    style={{ color: "#144400" }}
                   >
                     de experiencia
                   </p>
@@ -392,6 +392,7 @@ export default function SobreNosotrosPage() {
 
       <Footer onManageCookies={() => setCookiesOpen(true)} />
       <CookieBanner open={cookiesOpen} onClose={() => setCookiesOpen(false)} />
+      <WhatsAppButton />
     </>
   );
 }

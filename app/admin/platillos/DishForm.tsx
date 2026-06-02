@@ -8,7 +8,7 @@ import { createClient } from "@/utils/supabase/client";
 import type { DishTemplate } from "@/lib/generated/prisma";
 import { DishTemplateCategory } from "@/lib/generated/prisma";
 
-type DishFormValues = {
+interface DishFormValues {
   name: string;
   description: string;
   category: DishTemplateCategory;
@@ -29,11 +29,10 @@ type DishFormValues = {
   sugarTotal: string;
   sugarAdded: string;
   isActive: boolean;
-};
+}
 
 const CATEGORY_OPTIONS: { value: DishTemplateCategory; label: string }[] = [
   { value: "CLASICO", label: "Clásico" },
-  { value: "LOW_CARB", label: "Low Carb" },
   { value: "VEGETARIANO", label: "Vegetariano" },
   { value: "PREMIUM", label: "Premium" },
 ];
@@ -117,8 +116,8 @@ export function DishForm({ dish }: { dish?: DishTemplate }) {
       const { data } = supabase.storage.from("dish-images").getPublicUrl(path);
       set("image", data.publicUrl);
     } catch (err) {
+      console.error("[DishForm] upload error:", err);
       setError("Error al subir la imagen. Intentá de nuevo.");
-      console.error(err);
     } finally {
       setUploading(false);
     }
@@ -164,7 +163,7 @@ export function DishForm({ dish }: { dish?: DishTemplate }) {
       });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = await res.json() as { error?: string };
         throw new Error(data.error ?? "Error al guardar");
       }
 

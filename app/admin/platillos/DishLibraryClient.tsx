@@ -13,14 +13,13 @@ type ActiveFilter = "TODOS" | "ACTIVO" | "INACTIVO";
 const CATEGORY_FILTERS: { key: CategoryFilter; label: string }[] = [
   { key: "TODOS", label: "Todos" },
   { key: "CLASICO", label: "Clásico" },
-  { key: "LOW_CARB", label: "Low Carb" },
   { key: "VEGETARIANO", label: "Vegetariano" },
   { key: "PREMIUM", label: "Premium" },
 ];
 
 const CATEGORY_LABELS: Record<DishTemplateCategory, string> = {
   CLASICO: "Clásico",
-  LOW_CARB: "Low Carb",
+  LOW_CARB: "Clásico",
   VEGETARIANO: "Vegetariano",
   PREMIUM: "Premium",
 };

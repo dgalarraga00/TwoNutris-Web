@@ -1,11 +1,4 @@
-/**
- * Determina la zona de entrega basándose en los componentes de dirección
- * que devuelve Google Places API.
- *
- * URBAN ($3):   Quito Centro, Norte, Noroccidente, La Delicia, etc.
- * PERIPHERAL ($4): Cumbayá, Tumbaco, Los Chillos, Valle, Sur extremo,
- *                  Calderón, San Antonio, Pomasqui, y todo lo demás.
- */
+// Returns delivery zone (URBAN $3 / PERIPHERAL $4) from coordinate components
 
 export type Zone = "URBAN" | "PERIPHERAL";
 
@@ -52,53 +45,6 @@ const PERIPHERAL_LOCALITIES = new Set([
   "rumiñahui",
   "mejía",
 ]);
-
-/**
- * Tipos de componente de Google Places que representan
- * barrios, parroquias o localidades — los únicos relevantes
- * para detectar la zona de entrega.
- */
-const RELEVANT_TYPES = new Set([
-  "sublocality",
-  "sublocality_level_1",
-  "sublocality_level_2",
-  "neighborhood",
-  "locality",
-  "administrative_area_level_3",
-  "administrative_area_level_4",
-]);
-
-/**
- * Recibe los `address_components` de un Place de Google Maps
- * y devuelve la zona de entrega.
- *
- * Solo analiza componentes de tipo barrio/parroquia/localidad
- * para evitar falsos positivos con calles, números o países.
- */
-export function detectZone(
-  components: google.maps.GeocoderAddressComponent[]
-): Zone {
-  // Filtramos solo los componentes relevantes
-  const relevant = components.filter((c) =>
-    c.types.some((t) => RELEVANT_TYPES.has(t))
-  );
-
-  const names = relevant
-    .flatMap((c) => [c.long_name, c.short_name])
-    .map((n) => n.toLowerCase().trim());
-
-  for (const name of names) {
-    // Exacto
-    if (PERIPHERAL_LOCALITIES.has(name)) return "PERIPHERAL";
-    // El componente contiene el nombre de una localidad periférica
-    // (ej: "parroquia cumbayá" contiene "cumbayá")
-    for (const p of PERIPHERAL_LOCALITIES) {
-      if (name.includes(p)) return "PERIPHERAL";
-    }
-  }
-
-  return "URBAN";
-}
 
 /**
  * Fallback: si no hay componentes, detecta la zona por coordenadas.

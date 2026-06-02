@@ -1,22 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { Minus, Plus, Flame, Beef, Wheat, Droplets } from "lucide-react";
+import { Minus, Plus, Flame, Beef, Wheat, Droplets, Leaf } from "lucide-react";
 import { CatalogDish, DishType } from "@/lib/catalog";
 import { ALLERGEN_MAP } from "@/lib/allergens";
-import { Leaf } from "lucide-react";
 import { useCart } from "./CartProvider";
 
 const TYPE_LABEL: Record<DishType, string> = {
-  VEGETARIANO: "Vegetariano",
-  LOW_CARB: "Low Carb",
   NORMAL: "Clásico",
+  VEGETARIANO: "Vegetariano",
+  PREMIUM: "Premium",
 };
 
 const TYPE_STYLE: Record<DishType, string> = {
+  NORMAL: "bg-white/80 text-leaf border border-leaf/20",
   VEGETARIANO: "bg-leaf text-cream",
-  LOW_CARB: "bg-amber text-leaf",
-  NORMAL: "bg-white/90 text-leaf",
+  PREMIUM: "bg-gradient-to-r from-yellow-400 to-amber-500 text-white shadow-md",
 };
 
 export function DishCard({

@@ -9,11 +9,11 @@ export const metadata = {
     "Elegí los platos de la semana y recibí tu box saludable en Quito.",
 };
 
-const CAT_MAP: Record<DishTemplateCategory, "NORMAL" | "LOW_CARB" | "VEGETARIANO"> = {
+const CAT_MAP: Record<DishTemplateCategory, "NORMAL" | "VEGETARIANO" | "PREMIUM"> = {
   CLASICO: "NORMAL",
-  LOW_CARB: "LOW_CARB",
+  LOW_CARB: "NORMAL",
   VEGETARIANO: "VEGETARIANO",
-  PREMIUM: "NORMAL",
+  PREMIUM: "PREMIUM",
 };
 
 export default async function PedirPage() {
@@ -36,17 +36,25 @@ export default async function PedirPage() {
       ingredients: dish.ingredients ?? dish.description,
       type: CAT_MAP[dish.category],
       price: dish.price,
-      extendedNutrition: {
-        servingSize: dish.servingSize ?? undefined,
-        servingUnit: dish.servingUnit ?? undefined,
-        fatSaturated: dish.fatSaturated ?? undefined,
-        fatTrans: dish.fatTrans ?? undefined,
-        cholesterol: dish.cholesterol ?? undefined,
-        sodium: dish.sodium ?? undefined,
-        fiber: dish.fiber ?? undefined,
-        sugarTotal: dish.sugarTotal ?? undefined,
-        sugarAdded: dish.sugarAdded ?? undefined,
-      },
+      ...(
+        dish.servingSize != null || dish.fatSaturated != null || dish.fatTrans != null ||
+        dish.cholesterol != null || dish.sodium != null || dish.fiber != null ||
+        dish.sugarTotal != null || dish.sugarAdded != null
+          ? {
+              extendedNutrition: {
+                servingSize: dish.servingSize ?? undefined,
+                servingUnit: dish.servingUnit ?? undefined,
+                fatSaturated: dish.fatSaturated ?? undefined,
+                fatTrans: dish.fatTrans ?? undefined,
+                cholesterol: dish.cholesterol ?? undefined,
+                sodium: dish.sodium ?? undefined,
+                fiber: dish.fiber ?? undefined,
+                sugarTotal: dish.sugarTotal ?? undefined,
+                sugarAdded: dish.sugarAdded ?? undefined,
+              },
+            }
+          : {}
+      ),
     }));
   } else {
     dishes = [];

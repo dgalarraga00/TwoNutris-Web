@@ -5,28 +5,36 @@ import { Plus, Minus } from "lucide-react";
 
 const FAQS = [
   {
-    q: "¿Cómo funciona twonutris?",
-    a: "Fácil. Elige el plan que mejor se ajuste a lo que necesitas, escoge tu menú semanal SIEMPRE 1 día antes de recibirlo, cuéntanos dónde quieres que sea la entrega, y empieza a disfrutar de tus comidas.",
+    q: "¿Cuándo se entregan los pedidos?",
+    a: "Las entregas son los domingos. Preparamos todos los platos de la semana y los llevamos a tu puerta ese día para que tengas tus comidas listas del lunes al viernes.",
   },
   {
-    q: "¿Cuánto cuesta twonutris?",
-    a: "¡Tú eliges! El precio va a variar dependiendo del plan que quieras contratar. A partir de ahí recibirás tus pedidos todos los días.",
+    q: "¿Hasta cuándo puedo hacer mi pedido?",
+    a: "Podés pedir hasta el miércoles a medianoche. Una vez cerrado ese plazo, comenzamos con la preparación y ya no es posible agregar ni modificar pedidos para esa semana.",
   },
   {
-    q: "¿Puedo cancelar o pausar el plan cuando quiera?",
-    a: "¡Por supuesto! Tienes el control total de tu calendario. Sabemos que tu agenda cambia: viajes, reuniones fuera o simplemente un día que prefieres otra cosa.\n\nTu plan incluye 20 comidas, pero te damos una vigencia de 30 días laborables para consumirlas. Esto significa que tienes un margen de 10 días extra.\n\nPara pausar: puedes saltarte cualquier día desde tu perfil. Solo asegúrate de hacerlo antes de las 23:59 del día anterior. Ese crédito se guarda para que lo uses otro día.\n\nVigencia del plan: tienes hasta 30 días hábiles (aprox. 6 semanas) para disfrutar tus 20 platos. Pasados los 30 días, los créditos no consumidos expiran automáticamente.",
+    q: "¿Cómo funciona el pago?",
+    a: "Aceptamos pagos con tarjeta de crédito o débito a través de PayPhone, una plataforma de pagos segura. El cobro se procesa al momento de confirmar tu pedido.",
   },
   {
-    q: "¿En qué ciudad se entrega twonutris?",
-    a: "Por el momento entregamos a todo Quito y sus Valles. Seguimos creciendo cada año para poder llegar a más sitios.",
+    q: "¿Cuál es el pedido mínimo?",
+    a: "El pedido mínimo es de $20. Podés armar tu pedido eligiendo los platos que quieras del menú semanal hasta llegar a ese monto.",
   },
   {
-    q: "¿Si me olvido de pedir, puedo hacerlo por llamada o WhatsApp?",
-    a: "No, todos los pedidos que entren serán 100% desde nuestra página web.",
+    q: "¿Cuánto cuesta el delivery?",
+    a: "El costo de delivery es de $3 por pedido, independientemente de la cantidad de platos que pidas.",
   },
   {
-    q: "¿Tienen opciones vegetarianas?",
-    a: "Sí, cada semana incluimos varias opciones vegetarianas en nuestro menú. Puedes identificarlas con el símbolo 🌱 en la página del menú.",
+    q: "¿En qué zonas entregan?",
+    a: "Por el momento entregamos en Quito. Si tenés dudas sobre si llegamos a tu sector, escribinos por WhatsApp antes de hacer tu pedido.",
+  },
+  {
+    q: "¿Puedo cancelar o cambiar mi pedido?",
+    a: "Podés cancelar o modificar tu pedido hasta el miércoles a medianoche. Pasado ese horario, el pedido entra en producción y no es posible hacer cambios.",
+  },
+  {
+    q: "¿Qué pasa si no estoy en casa al momento de la entrega?",
+    a: "Te pedimos que al momento del pedido indiques instrucciones de entrega (como dejarlos con el guardia o en la puerta). También te contactaremos por WhatsApp el día de la entrega para coordinar.",
   },
 ];
 
@@ -34,19 +42,13 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section
-      className="pt-36 pb-24 bg-white rounded-t-[4rem] -mt-16"
-    >
+    <section className="pt-36 pb-24 bg-white rounded-t-[4rem] -mt-16">
       <div className="max-w-[780px] mx-auto px-6">
 
-        {/* Cabecera */}
         <div className="text-center mb-14">
           <span
             className="inline-block text-xs font-bold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full font-poppins"
-            style={{
-              backgroundColor: "#FFFBE4",
-              color: "#144400",
-            }}
+            style={{ backgroundColor: "#FFFBE4", color: "#144400" }}
           >
             FAQ
           </span>
@@ -58,15 +60,11 @@ export function FAQ() {
           </h2>
         </div>
 
-        {/* Acordeón */}
         <div className="flex flex-col">
           {FAQS.map((faq, i) => {
             const isOpen = open === i;
             return (
-              <div
-                key={i}
-                style={{ borderBottom: "1px solid #e5e7eb" }}
-              >
+              <div key={i} className="border-b border-gray-200">
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
@@ -85,14 +83,10 @@ export function FAQ() {
                       color: isOpen ? "#FFFBE4" : "#144400",
                     }}
                   >
-                    {isOpen
-                      ? <Minus size={16} strokeWidth={2.5} />
-                      : <Plus size={16} strokeWidth={2.5} />
-                    }
+                    {isOpen ? <Minus size={16} strokeWidth={2.5} /> : <Plus size={16} strokeWidth={2.5} />}
                   </span>
                 </button>
 
-                {/* Respuesta con animación */}
                 <div
                   className="overflow-hidden transition-all duration-300 ease-in-out"
                   style={{ maxHeight: isOpen ? "600px" : "0px" }}

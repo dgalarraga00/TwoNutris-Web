@@ -2,9 +2,10 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { prisma } from "@/lib/prisma";
 import { calculateDeliveryDate } from "@/lib/delivery";
+import { MIN_ORDER, DELIVERY_FEE } from "@/lib/catalog";
 
 interface OrderPayload {
-  items: { id: string; name: string; price: number; quantity: number }[];
+  items: { id: string; name: string; quantity: number }[];
   deliveryAddress: string;
   deliveryInstructions?: string;
   fullName?: string;
@@ -12,8 +13,6 @@ interface OrderPayload {
   taxIdType: string;
   taxId: string;
 }
-
-const DELIVERY_FEE = 3;
 
 export async function POST(request: Request) {
   try {
@@ -49,10 +48,35 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Datos de facturación requeridos" }, { status: 400 });
     }
 
-    const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
-    const delivery = DELIVERY_FEE;
-    const commission = Math.round((subtotal + delivery) * 0.0575 * 100) / 100;
-    const total = subtotal + delivery + commission;
+    // Leer precios desde la DB — nunca confiar en precios del cliente
+    const dishIds = items.map((i) => i.id);
+    const dishes = await prisma.dishTemplate.findMany({
+      where: { id: { in: dishIds }, isActive: true },
+      select: { id: true, name: true, price: true },
+    });
+
+    if (dishes.length !== dishIds.length) {
+      return NextResponse.json({ error: "Uno o más platos no están disponibles" }, { status: 400 });
+    }
+
+    const priceMap = new Map(dishes.map((d) => [d.id, d]));
+
+    const resolvedItems = items.map((i) => {
+      const dish = priceMap.get(i.id)!;
+      return { id: dish.id, name: dish.name, price: dish.price, quantity: i.quantity };
+    });
+
+    const subtotal = resolvedItems.reduce((s, i) => s + i.price * i.quantity, 0);
+
+    if (subtotal < MIN_ORDER) {
+      return NextResponse.json(
+        { error: `El pedido mínimo es $${MIN_ORDER}` },
+        { status: 400 }
+      );
+    }
+
+    const commission = Math.round((subtotal + DELIVERY_FEE) * 0.0575 * 100) / 100;
+    const total = subtotal + DELIVERY_FEE + commission;
 
     const profileUpdate: { fullName?: string; whatsapp?: string } = {};
     if (fullName) profileUpdate.fullName = fullName;
@@ -78,7 +102,7 @@ export async function POST(request: Request) {
         taxIdType,
         taxId: taxId.trim(),
         items: {
-          create: items.map((i) => ({
+          create: resolvedItems.map((i) => ({
             dishId: i.id,
             dishName: i.name,
             quantity: i.quantity,
