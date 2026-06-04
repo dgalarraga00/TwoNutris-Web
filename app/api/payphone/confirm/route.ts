@@ -76,27 +76,28 @@ export async function POST(request: Request) {
     });
 
     if (approved) {
-      emitDatilInvoice({
-        id: existingOrder.id,
-        invoiceNumber: existingOrder.invoiceNumber,
-        total: existingOrder.total,
-        deliveryAddress: existingOrder.deliveryAddress,
-        customerEmail: user.email ?? "",
-        customerName: existingOrder.profile?.fullName,
-        customerPhone: existingOrder.profile?.whatsapp,
-        taxIdType: existingOrder.taxIdType,
-        taxId: existingOrder.taxId,
-        items: existingOrder.items,
-      }).catch((err) => console.error("[datil] error al emitir factura:", err));
-
-      sendOrderConfirmationEmail({
-        orderId: existingOrder.id,
-        customerName: existingOrder.profile?.fullName,
-        customerEmail: user.email ?? "",
-        items: existingOrder.items,
-        total: existingOrder.total,
-        deliveryAddress: existingOrder.deliveryAddress,
-      }).catch((err) => console.error("[email] error al enviar confirmación:", err));
+      await Promise.allSettled([
+        emitDatilInvoice({
+          id: existingOrder.id,
+          invoiceNumber: existingOrder.invoiceNumber,
+          total: existingOrder.total,
+          deliveryAddress: existingOrder.deliveryAddress,
+          customerEmail: user.email ?? "",
+          customerName: existingOrder.profile?.fullName,
+          customerPhone: existingOrder.profile?.whatsapp,
+          taxIdType: existingOrder.taxIdType,
+          taxId: existingOrder.taxId,
+          items: existingOrder.items,
+        }).catch((err) => console.error("[datil] error al emitir factura:", err)),
+        sendOrderConfirmationEmail({
+          orderId: existingOrder.id,
+          customerName: existingOrder.profile?.fullName,
+          customerEmail: user.email ?? "",
+          items: existingOrder.items,
+          total: existingOrder.total,
+          deliveryAddress: existingOrder.deliveryAddress,
+        }).catch((err) => console.error("[email] error al enviar confirmación:", err)),
+      ]);
 
       return NextResponse.json({
         success: true,
