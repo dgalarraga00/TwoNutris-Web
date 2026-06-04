@@ -16,20 +16,20 @@ const CATEGORY_LABELS: Record<string, string> = {
   PREMIUM: "Premium",
 };
 
-function getNextMonday(): string {
+function getNextThursday(): string {
   const today = new Date();
   const day = today.getDay();
-  const diff = day === 0 ? 1 : 8 - day;
-  const next = new Date(today);
-  next.setDate(today.getDate() + diff);
-  return next.toISOString().split("T")[0];
+  const diff = (4 - day + 7) % 7 || 7;
+  const thursday = new Date(today);
+  thursday.setDate(today.getDate() + diff);
+  return thursday.toISOString().split("T")[0];
 }
 
-function getNextFriday(): string {
-  const monday = new Date(getNextMonday());
-  const friday = new Date(monday);
-  friday.setDate(monday.getDate() + 4);
-  return friday.toISOString().split("T")[0];
+function getNextWednesday(): string {
+  const thursday = new Date(getNextThursday());
+  const wednesday = new Date(thursday);
+  wednesday.setDate(thursday.getDate() + 6);
+  return wednesday.toISOString().split("T")[0];
 }
 
 export function WeeklyMenuClient({
@@ -44,10 +44,10 @@ export function WeeklyMenuClient({
   const initialDishIds = currentMenu?.items.map((i) => i.dish.id) ?? [];
 
   const [weekStart, setWeekStart] = useState(
-    currentMenu ? new Date(currentMenu.weekStart).toISOString().split("T")[0] : getNextMonday()
+    currentMenu ? new Date(currentMenu.weekStart).toISOString().split("T")[0] : getNextThursday()
   );
   const [weekEnd, setWeekEnd] = useState(
-    currentMenu ? new Date(currentMenu.weekEnd).toISOString().split("T")[0] : getNextFriday()
+    currentMenu ? new Date(currentMenu.weekEnd).toISOString().split("T")[0] : getNextWednesday()
   );
   const [selectedIds, setSelectedIds] = useState<string[]>(initialDishIds);
   const [search, setSearch] = useState("");
@@ -75,8 +75,8 @@ export function WeeklyMenuClient({
 
   function handleNewMenu() {
     setSelectedIds([]);
-    setWeekStart(getNextMonday());
-    setWeekEnd(getNextFriday());
+    setWeekStart(getNextThursday());
+    setWeekEnd(getNextWednesday());
     setStatus(null);
     setError(null);
   }
