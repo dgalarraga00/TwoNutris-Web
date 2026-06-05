@@ -51,6 +51,12 @@ export function DishCard({
         >
           {TYPE_LABEL[dish.type]}
         </span>
+        {/* Badge consumo rápido */}
+        {(dish.allergens.includes("Pescado") || dish.allergens.includes("Mariscos")) && (
+          <span className="absolute bottom-3 left-3 flex items-center gap-1 text-[11px] font-semibold font-poppins px-2.5 py-1 rounded-full bg-blue-500/90 text-white backdrop-blur-sm">
+            🐟 Consumir en 2 días
+          </span>
+        )}
       </div>
 
       {/* Contenido */}

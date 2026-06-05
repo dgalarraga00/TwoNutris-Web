@@ -146,6 +146,17 @@ export function DishDetailModal({
             ))}
           </div>
 
+          {/* Badge consumo rápido */}
+          {(dish.allergens.includes("Pescado") || dish.allergens.includes("Mariscos")) && (
+            <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-blue-50 border border-blue-100">
+              <span className="text-base">🐟</span>
+              <div>
+                <p className="text-xs font-bold font-poppins text-blue-700">Consumir en los primeros 2 días</p>
+                <p className="text-[11px] font-poppins text-blue-500">Por ser mariscos o pescado fresco, recomendamos consumirlo el lunes o martes.</p>
+              </div>
+            </div>
+          )}
+
           {/* Alérgenos — debajo de los stats */}
           {dish.allergens.length > 0 && (
             <div className="flex items-center gap-2 flex-wrap">
