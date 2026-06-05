@@ -16,20 +16,27 @@ const CATEGORY_LABELS: Record<string, string> = {
   PREMIUM: "Premium",
 };
 
+function localDateStr(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 function getNextThursday(): string {
   const today = new Date();
-  const day = today.getDay();
-  const diff = (4 - day + 7) % 7 || 7;
+  const dow = today.getDay();
+  const diff = (4 - dow + 7) % 7 || 7;
   const thursday = new Date(today);
   thursday.setDate(today.getDate() + diff);
-  return thursday.toISOString().split("T")[0];
+  return localDateStr(thursday);
 }
 
 function getNextWednesday(): string {
-  const thursday = new Date(getNextThursday());
+  const thursday = new Date(getNextThursday() + "T12:00:00");
   const wednesday = new Date(thursday);
   wednesday.setDate(thursday.getDate() + 6);
-  return wednesday.toISOString().split("T")[0];
+  return localDateStr(wednesday);
 }
 
 export function WeeklyMenuClient({
@@ -44,10 +51,10 @@ export function WeeklyMenuClient({
   const initialDishIds = currentMenu?.items.map((i) => i.dish.id) ?? [];
 
   const [weekStart, setWeekStart] = useState(
-    currentMenu ? new Date(currentMenu.weekStart).toISOString().split("T")[0] : getNextThursday()
+    currentMenu ? localDateStr(new Date(currentMenu.weekStart)) : getNextThursday()
   );
   const [weekEnd, setWeekEnd] = useState(
-    currentMenu ? new Date(currentMenu.weekEnd).toISOString().split("T")[0] : getNextWednesday()
+    currentMenu ? localDateStr(new Date(currentMenu.weekEnd)) : getNextWednesday()
   );
   const [selectedIds, setSelectedIds] = useState<string[]>(initialDishIds);
   const [search, setSearch] = useState("");
