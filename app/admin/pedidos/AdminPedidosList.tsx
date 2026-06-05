@@ -90,7 +90,15 @@ function OrderRow({ order }: { order: OrderWithRelations }) {
             )}
             <div className="flex items-start gap-2 text-gray-600">
               <MapPin size={13} className="text-gray-400 shrink-0 mt-0.5" />
-              <span>{order.deliveryAddress}</span>
+              <span className="flex-1">{order.deliveryAddress}</span>
+              <a
+                href={`https://maps.google.com/?q=${encodeURIComponent(order.deliveryAddress)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 text-[11px] font-semibold font-poppins px-2.5 py-1 rounded-lg bg-leaf/10 text-leaf hover:bg-leaf/20 transition-colors"
+              >
+                Ver mapa
+              </a>
             </div>
             {order.deliveryInstructions && (
               <p className="text-xs text-gray-400 bg-gray-50 rounded-xl px-3 py-2 ml-5">
