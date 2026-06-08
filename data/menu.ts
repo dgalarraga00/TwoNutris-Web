@@ -113,7 +113,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "mie-p3",
     name: "Fettuccini al funghi",
-    image: "/images/Fotos-menu/Fettuccini al funghi.png",
+    image: "/images/Fotos-menu/Fettuccini al funghi.webp",
     calories: 710,
     macros: { protein: 19, carbs: 88, fat: 30 },
     allergens: ["Gluten", "Huevo", "Soya"],
@@ -125,7 +125,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "jue-p1",
     name: "Pollo en salsa agridulce y arroz",
-    image: "/images/Fotos-menu/Pollo en salsa agridulce y arroz.png",
+    image: "/images/Fotos-menu/Pollo en salsa agridulce y arroz.webp",
     calories: 680,
     macros: { protein: 30, carbs: 80, fat: 20 },
     allergens: ["Soya", "Gluten", "Sulfitos", "Huevo"],
@@ -135,7 +135,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "jue-p2",
     name: "Risotto a la carbonara",
-    image: "/images/Fotos-menu/Risotto a la carbonara.png",
+    image: "/images/Fotos-menu/Risotto a la Carbonara.png",
     calories: 793,
     macros: { protein: 16, carbs: 49, fat: 60 },
     allergens: ["Lácteos", "Huevo", "Sulfitos", "Gluten"],
@@ -145,7 +145,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "jue-p3",
     name: "Pad thai de tofu y verduras",
-    image: "/images/Fotos-menu/Pad thai de tofu y verduras.png",
+    image: "/images/Fotos-menu/Pad Thai de tofu y verduras.png",
     calories: 556,
     macros: { protein: 20, carbs: 83, fat: 14 },
     allergens: ["Maní", "Soya", "Huevo"],
@@ -177,7 +177,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "vie-p3",
     name: "Bowl Buddha mediterráneo",
-    image: "/images/Fotos-menu/Bowl Buddha mediterráneo.png",
+    image: "/images/Fotos-menu/Bowl Buddha mediterraneo.webp",
     calories: 510,
     macros: { protein: 21, carbs: 45, fat: 25 },
     allergens: ["Sésamo", "Lácteos", "Gluten"],
@@ -289,7 +289,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "vie-e2",
     name: "Tradición renovada",
-    image: "/images/Fotos-menu/Tradición renovada.png",
+    image: "/images/Fotos-menu/Tradicion renovada.png",
     calories: 62,
     macros: { protein: 3, carbs: 10, fat: 0 },
     allergens: [],
@@ -301,7 +301,7 @@ export const weeklyMenu: MenuItem[] = [
   {
     id: "pos-1",
     name: "Mix de Frutas Frescas (Del día)",
-    image: "/images/Fotos-menu/Mix de Frutas Frescas.png",
+    image: "/images/Fotos-menu/Mix de Frutas Frescas (Solo Sandía).png",
     calories: 70,
     macros: { protein: 0, carbs: 15, fat: 0 },
     allergens: [],
