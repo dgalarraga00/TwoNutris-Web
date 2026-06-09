@@ -5,15 +5,15 @@ import { isAdmin } from "@/utils/admin";
 
 export async function GET() {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+
+  const [{ data: { user } }, dishes] = await Promise.all([
+    supabase.auth.getUser(),
+    prisma.dishTemplate.findMany({ orderBy: { createdAt: "desc" } }),
+  ]);
 
   if (!isAdmin(user?.email)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-
-  const dishes = await prisma.dishTemplate.findMany({
-    orderBy: { createdAt: "desc" },
-  });
 
   return NextResponse.json(dishes);
 }

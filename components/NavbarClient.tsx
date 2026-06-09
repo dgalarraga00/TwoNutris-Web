@@ -22,18 +22,6 @@ function useAuthUser(): AuthUser | null {
   useEffect(() => {
     const supabase = createClient();
 
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) {
-        setUser({
-          email: data.user.email ?? "",
-          name:
-            data.user.user_metadata?.full_name ??
-            data.user.user_metadata?.name ??
-            null,
-        });
-      }
-    });
-
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {

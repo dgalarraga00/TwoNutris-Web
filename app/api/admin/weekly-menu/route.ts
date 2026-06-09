@@ -11,22 +11,24 @@ interface MenuWithItems extends WeeklyMenu {
 
 export async function GET() {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+
+  const [{ data: { user } }, draft] = await Promise.all([
+    supabase.auth.getUser(),
+    prisma.weeklyMenu.findFirst({
+      where: { status: WeeklyMenuStatus.DRAFT },
+      include: {
+        items: {
+          include: { dish: true },
+          orderBy: { position: "asc" },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    }),
+  ]);
 
   if (!isAdmin(user?.email)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-
-  const draft = await prisma.weeklyMenu.findFirst({
-    where: { status: WeeklyMenuStatus.DRAFT },
-    include: {
-      items: {
-        include: { dish: true },
-        orderBy: { position: "asc" },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-  });
 
   if (draft) {
     return NextResponse.json(draft);

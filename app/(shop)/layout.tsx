@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { CartProvider } from "@/components/shop/CartProvider";
 import { CartSlideOver } from "@/components/shop/CartSlideOver";
 import { ShopHeader } from "@/components/shop/ShopHeader";
@@ -8,7 +8,9 @@ export default function ShopLayout({ children }: { children: ReactNode }) {
   return (
     <CartProvider>
       <div className="min-h-screen bg-white">
-        <ShopHeader />
+        <Suspense fallback={null}>
+          <ShopHeader />
+        </Suspense>
         <main>{children}</main>
       </div>
       <CartSlideOver />

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { prisma } from "@/lib/prisma";
 import { CatalogClient } from "./CatalogClient";
 import { WeeklyMenuStatus, DishTemplateCategory } from "@/lib/generated/prisma";
@@ -16,7 +17,7 @@ const CAT_MAP: Record<DishTemplateCategory, "NORMAL" | "VEGETARIANO" | "PREMIUM"
   PREMIUM: "PREMIUM",
 };
 
-export default async function PedirPage() {
+async function CatalogData() {
   const publishedMenu = await prisma.weeklyMenu.findFirst({
     where: { status: WeeklyMenuStatus.PUBLISHED },
     include: { items: { include: { dish: true }, orderBy: { position: "asc" } } },
@@ -61,4 +62,18 @@ export default async function PedirPage() {
   }
 
   return <CatalogClient dishes={dishes} />;
+}
+
+export default function PedirPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-[50vh] text-base font-poppins text-[#144400]">
+          Cargando menú...
+        </div>
+      }
+    >
+      <CatalogData />
+    </Suspense>
+  );
 }

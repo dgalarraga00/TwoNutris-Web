@@ -1,37 +1,19 @@
-import { prisma } from "@/lib/prisma";
-import { WeeklyMenuStatus } from "@/lib/generated/prisma";
-import type { PublicDish } from "@/app/api/weekly-menu/route";
+import type { PublicDish, PublicWeeklyMenu } from "@/app/api/weekly-menu/route";
 import { HomepageMenuCarousel } from "@/components/HomepageMenuCarousel";
 
 async function fetchPublishedDishes(): Promise<PublicDish[]> {
-  const menu = await prisma.weeklyMenu.findFirst({
-    where: { status: WeeklyMenuStatus.PUBLISHED },
-    include: {
-      items: {
-        include: { dish: true },
-        orderBy: { position: "asc" },
-      },
-    },
-    orderBy: { weekStart: "desc" },
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const res = await fetch(`${baseUrl}/api/weekly-menu`, {
+    next: { revalidate: 300 },
   });
+
+  if (!res.ok) return [];
+
+  const menu: PublicWeeklyMenu | null = await res.json();
 
   if (!menu) return [];
 
-  return menu.items.map(({ dish }) => ({
-    id: dish.id,
-    name: dish.name,
-    image: dish.image ?? null,
-    calories: dish.calories ?? null,
-    macros: {
-      protein: dish.protein ?? null,
-      carbs: dish.carbs ?? null,
-      fat: dish.fat ?? null,
-    },
-    allergens: dish.allergens,
-    category: dish.category,
-    price: dish.price,
-    ingredients: dish.description ?? null,
-  }));
+  return menu.dishes;
 }
 
 export async function HomepageMenuShowcase() {
