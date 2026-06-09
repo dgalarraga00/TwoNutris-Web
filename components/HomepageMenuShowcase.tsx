@@ -1,23 +1,41 @@
-import type { PublicDish, PublicWeeklyMenu } from "@/app/api/weekly-menu/route";
+import { unstable_cache } from "next/cache";
+import { prisma } from "@/lib/prisma";
+import { WeeklyMenuStatus } from "@/lib/generated/prisma";
+import type { PublicDish } from "@/app/api/weekly-menu/route";
 import { HomepageMenuCarousel } from "@/components/HomepageMenuCarousel";
 
-async function fetchPublishedDishes(): Promise<PublicDish[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  const res = await fetch(`${baseUrl}/api/weekly-menu`, {
-    next: { revalidate: 300 },
-  });
-
-  if (!res.ok) return [];
-
-  const menu: PublicWeeklyMenu | null = await res.json();
-
-  if (!menu) return [];
-
-  return menu.dishes;
-}
+const getPublishedDishes = unstable_cache(
+  async (): Promise<PublicDish[]> => {
+    const menu = await prisma.weeklyMenu.findFirst({
+      where: { status: WeeklyMenuStatus.PUBLISHED },
+      include: {
+        items: { include: { dish: true }, orderBy: { position: "asc" } },
+      },
+      orderBy: { weekStart: "desc" },
+    });
+    if (!menu) return [];
+    return menu.items.map(({ dish }) => ({
+      id: dish.id,
+      name: dish.name,
+      image: dish.image ?? null,
+      calories: dish.calories ?? null,
+      macros: {
+        protein: dish.protein ?? null,
+        carbs: dish.carbs ?? null,
+        fat: dish.fat ?? null,
+      },
+      allergens: dish.allergens,
+      category: dish.category,
+      price: dish.price,
+      ingredients: dish.description ?? null,
+    }));
+  },
+  ["homepage-published-menu"],
+  { revalidate: 300 }
+);
 
 export async function HomepageMenuShowcase() {
-  const dishes = await fetchPublishedDishes();
+  const dishes = await getPublishedDishes();
 
   return (
     <section
@@ -25,16 +43,10 @@ export async function HomepageMenuShowcase() {
       style={{ backgroundColor: "#144400" }}
     >
       <div
-        className="absolute -top-32 -right-32 pointer-events-none bg-leaf-dark w-[500px] h-[500px] opacity-40"
-        style={{
-          borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
-        }}
+        className="absolute -top-32 -right-32 pointer-events-none bg-leaf-dark w-[500px] h-[500px] opacity-40 rounded-[60%_40%_30%_70%_/_60%_30%_70%_40%]"
       />
       <div
-        className="absolute -bottom-24 -left-24 pointer-events-none bg-leaf-dark w-[360px] h-[360px] opacity-30"
-        style={{
-          borderRadius: "40% 60% 70% 30% / 40% 70% 30% 60%",
-        }}
+        className="absolute -bottom-24 -left-24 pointer-events-none bg-leaf-dark w-[360px] h-[360px] opacity-30 rounded-[40%_60%_70%_30%_/_40%_70%_30%_60%]"
       />
 
       {dishes.length === 0 ? (
@@ -67,8 +79,8 @@ export async function HomepageMenuShowcase() {
               El menú de esta semana ya viene
             </p>
             <p
-              className="text-sm font-poppins max-w-xs"
-              style={{ color: "#FFFBE4", opacity: 0.55 }}
+              className="text-sm font-poppins max-w-xs opacity-[55%]"
+              style={{ color: "#FFFBE4" }}
             >
               Estamos preparando los platos. Volvé pronto para ver las novedades.
             </p>
