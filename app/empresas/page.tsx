@@ -50,6 +50,19 @@ export default function EmpresasPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Inicio", item: "https://home.twonutris.net/" },
+              { "@type": "ListItem", position: 2, name: "Empresas", item: "https://home.twonutris.net/empresas" },
+            ],
+          }),
+        }}
+      />
       <Navbar />
 
       <main>
@@ -105,14 +118,9 @@ export default function EmpresasPage() {
               <div className="relative flex items-center justify-center min-h-[460px]">
                 {/* Blob decorativo */}
                 <div
-                  className="absolute pointer-events-none"
+                  className="absolute pointer-events-none w-4/5 h-4/5 top-[10%] left-[10%] opacity-[0.07]"
                   style={{
-                    width: "80%",
-                    height: "80%",
-                    top: "10%",
-                    left: "10%",
                     backgroundColor: "#144400",
-                    opacity: 0.07,
                     borderRadius: "40% 60% 55% 45% / 55% 45% 60% 40%",
                   }}
                 />
@@ -123,8 +131,7 @@ export default function EmpresasPage() {
                     src="/images/img-equipo1.jpeg"
                     alt="Equipo disfrutando comida twonutris"
                     fill
-                    className="object-cover"
-                    style={{ objectPosition: "center" }}
+                    className="object-cover object-center"
                     sizes="(max-width: 768px) 100vw, 480px"
                   />
                 </div>

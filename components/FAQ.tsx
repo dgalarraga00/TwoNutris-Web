@@ -30,6 +30,19 @@ const FAQS = [
   },
 ];
 
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a,
+    },
+  })),
+};
+
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
@@ -65,7 +78,7 @@ export function FAQ() {
             return (
               <div
                 key={i}
-                style={{ borderBottom: "1px solid #e5e7eb" }}
+                className="border-b border-gray-200"
               >
                 <button
                   type="button"
@@ -98,8 +111,7 @@ export function FAQ() {
                   style={{ maxHeight: isOpen ? "600px" : "0px" }}
                 >
                   <p
-                    className="pb-6 text-sm md:text-base leading-relaxed whitespace-pre-line font-poppins text-gray-700"
-                    style={{ opacity: 0.8 }}
+                    className="pb-6 text-sm md:text-base leading-relaxed whitespace-pre-line font-poppins text-gray-700 opacity-80"
                   >
                     {faq.a}
                   </p>
@@ -110,6 +122,11 @@ export function FAQ() {
         </div>
 
       </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }}
+      />
     </section>
   );
 }

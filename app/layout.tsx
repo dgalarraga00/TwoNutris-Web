@@ -44,25 +44,12 @@ export const metadata: Metadata = {
     title: "TwoNutris | Alimentación a tu medida",
     description:
       "Comida real, cocinada a fuego lento, lista para devorar toda la semana. Meal prep saludable con delivery en Quito.",
-    images: [
-      {
-        url: "/icons/Imagotipo.png",
-        width: 1200,
-        height: 630,
-        alt: "TwoNutris — Logo",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "TwoNutris | Alimentación a tu medida",
     description:
       "Comida real, cocinada a fuego lento, lista para devorar toda la semana. Meal prep saludable con delivery en Quito.",
-    images: ["/icons/Imagotipo.png"],
-  },
-  icons: {
-    icon: "/icons/Isotipo.png",
-    apple: "/icons/Isotipo.png",
   },
   alternates: {
     canonical: BASE_URL,
@@ -113,7 +100,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={`${poppins.variable} ${ibrand.variable}`}>
+    <html lang="es-EC" className={`${poppins.variable} ${ibrand.variable}`}>
       <head>
         <script
           type="application/ld+json"

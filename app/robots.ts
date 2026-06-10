@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 
+const BASE_URL = "https://home.twonutris.net";
+
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
-    sitemap: "https://home.twonutris.net/sitemap.xml",
+    rules: [{ userAgent: "*", allow: "/" }],
+    sitemap: `${BASE_URL}/sitemap.xml`,
+    host: BASE_URL,
   };
 }

@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import {
   Award,
@@ -12,8 +9,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { CookieBanner } from "@/components/CookieBanner";
+import { CookieBannerSlot } from "@/components/CookieBannerSlot";
 
 const VALORES = [
   {
@@ -71,10 +67,21 @@ const PASOS = [
 ];
 
 export default function SobreNosotrosPage() {
-  const [cookiesOpen, setCookiesOpen] = useState(false);
-
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Inicio", item: "https://home.twonutris.net/" },
+              { "@type": "ListItem", position: 2, name: "Sobre nosotros", item: "https://home.twonutris.net/sobre-nosotros" },
+            ],
+          }),
+        }}
+      />
       <Navbar />
 
       <main className="bg-white">
@@ -122,8 +129,7 @@ export default function SobreNosotrosPage() {
                   src="/images/img-equipo4.jpeg"
                   alt="El equipo de twonutris"
                   fill
-                  className="object-cover"
-                  style={{ objectPosition: "top" }}
+                  className="object-cover object-top"
                   sizes="(max-width: 768px) 100vw, 560px"
                 />
               </div>
@@ -390,8 +396,7 @@ export default function SobreNosotrosPage() {
 
       </main>
 
-      <Footer onManageCookies={() => setCookiesOpen(true)} />
-      <CookieBanner open={cookiesOpen} onClose={() => setCookiesOpen(false)} />
+      <CookieBannerSlot />
     </>
   );
 }
