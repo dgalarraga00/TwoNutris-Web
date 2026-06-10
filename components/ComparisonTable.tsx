@@ -39,7 +39,11 @@ const ROWS: ComparisonRow[] = [
 ];
 
 /* ── Icono de resultado ─────────────────────────────────────────── */
-function ResultIcon({ value }: { value: Result }) {
+interface ResultIconProps {
+  value: Result;
+}
+
+function ResultIcon({ value }: ResultIconProps) {
   if (value === "yes-brand") {
     return <CheckCircle2 size={24} strokeWidth={2} style={{ color: "#144400" }} />;
   }
@@ -59,7 +63,7 @@ export function ComparisonTable() {
         <div className="text-center mb-14">
           <span
             className="inline-block text-xs font-bold tracking-widest uppercase mb-4 font-poppins"
-            style={{ color: "#144400", opacity: 0.45 }}
+            style={{ color: "#144400", opacity: 0.75 }}
           >
             ¿Listo para recuperar tu tiempo?
           </span>
@@ -81,10 +85,9 @@ export function ComparisonTable() {
               <div className="px-4 py-3" />
 
               {/* Col 2 — twonutris (destacada) */}
-              <div className="relative flex flex-col items-center px-4 pt-10 pb-4 mx-1"
+              <div className="relative flex flex-col items-center px-4 pt-10 pb-4 mx-1 rounded-t-3xl"
                 style={{
                   backgroundColor: "#FFFBE4",
-                  borderRadius: "1.5rem 1.5rem 0 0",
                 }}
               >
                 {/* Badge "Mejor opción" */}
@@ -109,7 +112,7 @@ export function ComparisonTable() {
               {/* Col 3 — Apps de delivery */}
               <div className="flex flex-col items-center justify-end px-4 pb-4">
                 <span
-                  className="text-xs font-bold tracking-widest uppercase text-center font-poppins text-gray-400"
+                  className="text-xs font-bold tracking-widest uppercase text-center font-poppins text-gray-600"
                 >
                   Apps de<br />delivery
                 </span>
@@ -118,7 +121,7 @@ export function ComparisonTable() {
               {/* Col 4 — Cocinar en casa */}
               <div className="flex flex-col items-center justify-end px-4 pb-4">
                 <span
-                  className="text-xs font-bold tracking-widest uppercase text-center font-poppins text-gray-400"
+                  className="text-xs font-bold tracking-widest uppercase text-center font-poppins text-gray-600"
                 >
                   Cocinar<br />en casa
                 </span>
@@ -129,10 +132,7 @@ export function ComparisonTable() {
             {ROWS.map((row, i) => (
               <div
                 key={i}
-                className="grid grid-cols-4 group transition-colors duration-200"
-                style={{
-                  borderTop: "1px solid #f3f4f6",
-                }}
+                className="grid grid-cols-4 group transition-colors duration-200 border-t border-gray-100"
               >
                 {/* Característica */}
                 <div

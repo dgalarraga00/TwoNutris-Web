@@ -82,6 +82,9 @@ export function FAQ() {
               >
                 <button
                   type="button"
+                  id={`faq-question-${i}`}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${i}`}
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="w-full flex items-center justify-between gap-6 py-6 text-left cursor-pointer border-0 bg-transparent"
                 >
@@ -107,8 +110,12 @@ export function FAQ() {
 
                 {/* Respuesta con animación */}
                 <div
+                  id={`faq-answer-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${i}`}
+                  hidden={!isOpen}
                   className="overflow-hidden transition-all duration-300 ease-in-out"
-                  style={{ maxHeight: isOpen ? "600px" : "0px" }}
+                  style={{ maxHeight: isOpen ? "1000px" : "0" }}
                 >
                   <p
                     className="pb-6 text-sm md:text-base leading-relaxed whitespace-pre-line font-poppins text-gray-700 opacity-80"

@@ -149,3 +149,19 @@ html {
   background-repeat: repeat;
   background-size: 150px 150px;
 }
+
+/* ── Focus visible global ───────────────────────────────────────── */
+
+@layer base {
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid #FFB000;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}

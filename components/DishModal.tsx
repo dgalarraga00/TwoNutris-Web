@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { X, Wheat, Milk, Egg, Fish, Leaf, Flame, Sprout, FlaskConical, Waves, Vegan, Salad, Bean, Dot, Nut } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -24,7 +25,34 @@ export const ALLERGEN_MAP: Record<string, { icon: LucideIcon; label: string }> =
   Mariscos:        { icon: Waves,        label: "Mariscos" },
 };
 
-export function DishModal({ plate, onClose }: { plate: MenuItem; onClose: () => void }) {
+interface DishModalProps {
+  plate: MenuItem;
+  onClose: () => void;
+}
+
+export function DishModal({ plate, onClose }: DishModalProps) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [onClose]);
+
   const stats = [
     { label: "KCAL",  value: `${plate.calories}` },
     { label: "G",     value: `${plate.macros.fat}g` },
@@ -34,6 +62,9 @@ export function DishModal({ plate, onClose }: { plate: MenuItem; onClose: () => 
 
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="dish-modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/55 backdrop-blur"
       onClick={onClose}
     >
@@ -62,13 +93,16 @@ export function DishModal({ plate, onClose }: { plate: MenuItem; onClose: () => 
           {/* Título + cerrar */}
           <div className="flex items-start justify-between gap-4">
             <h3
+              id="dish-modal-title"
               className="text-2xl leading-tight font-ibrand text-gray-900"
             >
               {plate.name}
             </h3>
             <button
+              ref={closeButtonRef}
               type="button"
               onClick={onClose}
+              aria-label="Cerrar"
               className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full border-0 cursor-pointer transition-all duration-200 hover:scale-110 bg-gray-100 text-gray-700"
             >
               <X size={16} strokeWidth={2.5} />

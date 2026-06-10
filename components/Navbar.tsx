@@ -40,17 +40,10 @@ export function Navbar() {
             <li key={label}>
               <a
                 href={href}
-                className="text-base transition-all duration-200 relative group no-underline font-ibrand"
+                className="text-base transition-all duration-200 relative group no-underline font-ibrand opacity-90 hover:opacity-100 focus-visible:opacity-100"
                 style={{
                   color: "#144400",
-                  opacity: 0.9,
                 }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.opacity = "1")
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.opacity = "0.9")
-                }
               >
                 {label}
                 <span
@@ -82,7 +75,9 @@ export function Navbar() {
           <button
             className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg border-0 cursor-pointer bg-transparent"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Abrir menú"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
           >
             {[0, 1, 2].map((i) => (
               <span
@@ -97,6 +92,7 @@ export function Navbar() {
 
       {/* ── Mobile Menu ─────────────────────────────────────── */}
       <div
+        id="mobile-menu"
         className="md:hidden overflow-hidden transition-all duration-300"
         style={{
           maxHeight: mobileOpen ? "300px" : "0",

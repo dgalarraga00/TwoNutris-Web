@@ -1,5 +1,3 @@
-"use client";
-
 import {
   CheckCircle2,
   Building2,
@@ -146,7 +144,7 @@ export function Planes() {
 
               {/* Nombre */}
               <p
-                className={`text-xs font-bold tracking-widest uppercase mb-1 text-center font-poppins${plan.featured ? "" : " text-gray-400"}`}
+                className={`text-xs font-bold tracking-widest uppercase mb-1 text-center font-poppins${plan.featured ? "" : " text-gray-600"}`}
                 style={plan.featured ? { color: "rgba(255,251,228,0.6)" } : undefined}
               >
                 {plan.name}
@@ -163,7 +161,7 @@ export function Planes() {
                   {plan.price}
                 </span>
                 <span
-                  className={`text-sm ml-1 font-poppins${plan.featured ? "" : " text-gray-400"}`}
+                  className={`text-sm ml-1 font-poppins${plan.featured ? "" : " text-gray-600"}`}
                   style={plan.featured ? { color: "rgba(255,251,228,0.5)" } : undefined}
                 >
                   {plan.period}
@@ -253,14 +251,13 @@ export function Planes() {
               </p>
             </div>
           </div>
-          <button
-            type="button"
+          <a
+            href="/empresas"
             className="flex-shrink-0 px-7 py-3.5 rounded-full text-sm font-bold border-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] font-poppins no-underline"
             style={{ backgroundColor: "#144400", color: "#FFFBE4" }}
-            onClick={() => window.location.href = "/empresas"}
           >
             Ver planes empresariales
-          </button>
+          </a>
         </div>
       </div>
 

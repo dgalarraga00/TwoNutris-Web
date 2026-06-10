@@ -94,7 +94,7 @@ export default function EmpresasPage() {
                 <ul className="flex flex-col gap-3 mb-10">
                   {BENEFICIOS.map((b) => (
                     <li key={b} className="flex items-center gap-3">
-                      <CheckCircle2 size={18} strokeWidth={2} style={{ color: "#144400", flexShrink: 0 }} />
+                      <CheckCircle2 size={18} strokeWidth={2} className="shrink-0" style={{ color: "#144400" }} />
                       <span className="text-sm font-poppins text-gray-700">
                         {b}
                       </span>
@@ -311,11 +311,11 @@ export default function EmpresasPage() {
               </h3>
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 {[
-                  { name: "empresa",       label: "Nombre de la empresa",    type: "text",   placeholder: "Ej. Empresa ABC S.A." },
-                  { name: "colaboradores", label: "Número de colaboradores", type: "number", placeholder: "Ej. 25" },
-                  { name: "email",         label: "Correo electrónico",      type: "email",  placeholder: "contacto@empresa.com" },
-                  { name: "telefono",      label: "Teléfono / WhatsApp",     type: "tel",    placeholder: "+593 99 000 0000" },
-                ].map(({ name, label, type, placeholder }) => (
+                  { name: "empresa",       label: "Nombre de la empresa",    type: "text",   placeholder: "Ej. Empresa ABC S.A.",  autoComplete: "organization" },
+                  { name: "colaboradores", label: "Número de colaboradores", type: "number", placeholder: "Ej. 25",                autoComplete: "off" },
+                  { name: "email",         label: "Correo electrónico",      type: "email",  placeholder: "contacto@empresa.com",  autoComplete: "email" },
+                  { name: "telefono",      label: "Teléfono / WhatsApp",     type: "tel",    placeholder: "+593 99 000 0000",      autoComplete: "tel" },
+                ].map(({ name, label, type, placeholder, autoComplete }) => (
                   <div key={name} className="flex flex-col gap-1.5">
                     <label
                       htmlFor={name}
@@ -329,15 +329,11 @@ export default function EmpresasPage() {
                       name={name}
                       type={type}
                       placeholder={placeholder}
+                      autoComplete={autoComplete}
                       required
                       value={form[name as keyof typeof form]}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 font-poppins text-gray-900 bg-white"
-                      style={{
-                        border: "1.5px solid rgba(20,68,0,0.15)",
-                      }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "#144400")}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(20,68,0,0.15)")}
+                      className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 font-poppins text-gray-900 bg-white border-[1.5px] border-[rgba(20,68,0,0.15)] focus:border-[#144400]"
                     />
                   </div>
                 ))}
@@ -358,7 +354,7 @@ export default function EmpresasPage() {
             {/* Horario */}
             <p
               className="text-xs text-center mt-6 font-poppins"
-              style={{ color: "#144400", opacity: 0.45 }}
+              style={{ color: "#144400", opacity: 0.75 }}
             >
               Lunes a viernes · 8:00 — 18:00 · Respuesta en menos de 1 hora
             </p>
