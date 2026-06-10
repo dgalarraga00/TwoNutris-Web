@@ -53,12 +53,9 @@ function BigFeatureCard() {
       {/* Blob decorativo */}
       <div
         ref={blobRef}
-        className="absolute -bottom-16 -left-16 transition-all duration-700 pointer-events-none bg-leaf-dark"
+        className="absolute -bottom-16 -left-16 w-[260px] h-[260px] opacity-50 transition-all duration-700 pointer-events-none bg-leaf-dark"
         style={{
-          width: 260,
-          height: 260,
           borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
-          opacity: 0.5,
         }}
       />
 
@@ -66,10 +63,8 @@ function BigFeatureCard() {
       <div className="relative z-10 flex flex-col gap-6 h-full justify-between">
         {/* Icono */}
         <div
-          className="flex items-center justify-center rounded-2xl"
+          className="flex items-center justify-center w-[72px] h-[72px] rounded-2xl"
           style={{
-            width: 72,
-            height: 72,
             backgroundColor: "rgba(255, 176, 0, 0.15)",
           }}
         >
@@ -78,27 +73,24 @@ function BigFeatureCard() {
             alt="Ahorra tiempo"
             width={44}
             height={44}
-            style={{ filter: "brightness(0) invert(1)" }}
+            className="brightness-0 invert"
           />
         </div>
 
         {/* Texto */}
         <div className="flex flex-col gap-4">
           <h3
-            className="font-ibrand"
+            className="font-ibrand text-[clamp(2rem,3.5vw,3rem)] leading-[1.05]"
             style={{
-              fontSize: "clamp(2rem, 3.5vw, 3rem)",
-              lineHeight: 1.05,
               color: "#FFFBE4",
             }}
           >
             Ahorra<br />Tiempo
           </h3>
           <p
-            className="text-base leading-relaxed max-w-[320px] font-poppins"
+            className="text-base leading-relaxed max-w-[320px] opacity-70 font-poppins"
             style={{
               color: "#FFFBE4",
-              opacity: 0.7,
             }}
           >
             Comodidad, sin preparar, cocinar, limpiar.{" "}
@@ -138,8 +130,8 @@ function SmallFeatureCard({
 
   return (
     <div
-      className="relative rounded-3xl overflow-hidden flex flex-col justify-between cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-      style={{ backgroundColor: bg, padding: "2rem", flex: 1 }}
+      className="relative rounded-3xl overflow-hidden flex flex-col justify-between cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-xl p-8 flex-1"
+      style={{ backgroundColor: bg }}
       onMouseEnter={() => {
         if (blobRef.current)
           blobRef.current.style.borderRadius = "40% 60% 70% 30% / 40% 70% 30% 60%";
@@ -152,23 +144,18 @@ function SmallFeatureCard({
       {/* Blob */}
       <div
         ref={blobRef}
-        className="absolute -top-10 -right-10 transition-all duration-700 pointer-events-none"
+        className="absolute -top-10 -right-10 w-40 h-40 opacity-35 transition-all duration-700 pointer-events-none"
         style={{
-          width: 160,
-          height: 160,
           borderRadius: "70% 30% 50% 50% / 40% 60% 30% 70%",
           backgroundColor: blobColor,
-          opacity: 0.35,
         }}
       />
 
       {/* Contenido */}
       <div className="relative z-10 flex flex-col gap-3">
         <div
-          className="flex items-center justify-center rounded-xl"
+          className="flex items-center justify-center w-[52px] h-[52px] rounded-xl"
           style={{
-            width: 52,
-            height: 52,
             backgroundColor: `${textColor}18`,
           }}
         >
@@ -181,10 +168,9 @@ function SmallFeatureCard({
           {title}
         </h3>
         <p
-          className="text-sm leading-relaxed font-poppins"
+          className="text-sm leading-relaxed opacity-80 font-poppins"
           style={{
             color: subtextColor,
-            opacity: 0.8,
           }}
         >
           {text}
@@ -208,8 +194,7 @@ function StepCard({
     <div className="flex flex-col items-center text-center gap-4">
       {/* Círculo irregular con icono */}
       <div
-        className="relative flex items-center justify-center cursor-default"
-        style={{ width: 140, height: 140 }}
+        className="relative flex items-center justify-center w-[140px] h-[140px] cursor-default"
         onMouseEnter={() => {
           if (circleRef.current) {
             circleRef.current.style.transform = `rotate(${rotateDeg + 8}deg) scale(1.06)`;
@@ -262,9 +247,9 @@ function StepCard({
 /* ── Treasure Map Steps ─────────────────────────────────────────── */
 function TreasureMapSteps() {
   const positions = [
-    { left: "6%",  top: "0px"   },
-    { left: "56%", top: "200px" },
-    { left: "6%",  top: "400px" },
+    "left-[6%] top-0",
+    "left-[56%] top-[200px]",
+    "left-[6%] top-[400px]",
   ];
 
   return (
@@ -306,8 +291,7 @@ function TreasureMapSteps() {
         {STEPS.map((step, i) => (
           <div
             key={step.title}
-            className="absolute w-[220px] z-[10]"
-            style={{ left: positions[i].left, top: positions[i].top }}
+            className={`absolute w-[220px] z-[10] ${positions[i]}`}
           >
             <StepCard {...step} />
           </div>
@@ -380,7 +364,7 @@ export function HowItWorks() {
             SEPARADOR
         ══════════════════════════════════════ */}
         <div className="flex items-center gap-4 my-24">
-          <div className="flex-1 h-px" style={{ backgroundColor: "#E5E7EB" }} />
+          <div className="flex-1 h-px bg-gray-200" />
           <div
             className="w-2 h-2 rounded-full flex-shrink-0"
             style={{ backgroundColor: "#FFB000" }}
@@ -393,7 +377,7 @@ export function HowItWorks() {
             className="w-2 h-2 rounded-full flex-shrink-0"
             style={{ backgroundColor: "#FFB000" }}
           />
-          <div className="flex-1 h-px" style={{ backgroundColor: "#E5E7EB" }} />
+          <div className="flex-1 h-px bg-gray-200" />
         </div>
 
         {/* ══════════════════════════════════════
@@ -426,16 +410,10 @@ export function HowItWorks() {
             href="https://www.twonutris.net/registrate"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-3 font-bold rounded-full border-0 cursor-pointer transition-all duration-300 no-underline font-poppins inline-flex"
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.transform = "translateY(-3px) scale(1.02)";
-              el.style.boxShadow = "0 16px 40px rgba(255, 176, 0, 0.5)";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.transform = "translateY(0) scale(1)";
-              el.style.boxShadow = "0 8px 32px rgba(255, 176, 0, 0.35)";
+            className="group inline-flex items-center gap-3 px-7 py-3.5 font-bold rounded-full border-0 cursor-pointer transition-all duration-200 ease-out no-underline font-poppins shadow-[0_8px_32px_rgba(255,176,0,0.35)] hover:shadow-[0_16px_40px_rgba(255,176,0,0.5)] hover:-translate-y-[3px] hover:scale-[1.02]"
+            style={{
+              backgroundColor: "#FFB000",
+              color: "#144400",
             }}
           >
             Quiero empezar ahora

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import Image from "next/image";
 import { Flame, Leaf, Salad, Cookie, CalendarOff } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
@@ -10,7 +10,12 @@ import { DishModal, ALLERGEN_MAP } from "@/components/DishModal";
 import { weeklyMenu, DAYS, type MenuItem, type CategoryKey } from "@/data/menu";
 
 /* ── Tarjeta de plato ───────────────────────────────────────────── */
-function DishCard({ plate, onClick }: { plate: MenuItem; onClick: () => void }) {
+interface DishCardProps {
+  plate: MenuItem;
+  onClick: () => void;
+}
+
+function DishCard({ plate, onClick }: DishCardProps) {
   return (
     <button
       type="button"
@@ -80,6 +85,15 @@ function DishCard({ plate, onClick }: { plate: MenuItem; onClick: () => void }) 
 }
 
 /* ── Sección por categoría ──────────────────────────────────────── */
+interface CategorySectionProps {
+  title: string;
+  icon: ReactNode;
+  accentColor: string;
+  category: CategoryKey;
+  items: MenuItem[];
+  onSelect: (p: MenuItem) => void;
+}
+
 function CategorySection({
   title,
   icon,
@@ -87,14 +101,7 @@ function CategorySection({
   category,
   items,
   onSelect,
-}: {
-  title: string;
-  icon: React.ReactNode;
-  accentColor: string;
-  category: CategoryKey;
-  items: MenuItem[];
-  onSelect: (p: MenuItem) => void;
-}) {
+}: CategorySectionProps) {
   const isPostre = category === "postre";
 
   return (
@@ -181,20 +188,58 @@ function CategorySection({
 }
 
 /* ── Helpers ────────────────────────────────────────────────────── */
-function getWeekRange() {
+function getWeekRange(): string {
+  const tz = "America/Guayaquil";
   const now = new Date();
-  const day = now.getDay();
-  const diffToMonday = day === 0 ? 1 : day === 6 ? 2 : 1 - day;
-  const monday = new Date(now);
-  monday.setDate(now.getDate() + diffToMonday);
-  const friday = new Date(monday);
-  friday.setDate(monday.getDate() + 4);
-  const fmt = (d: Date) => d.toLocaleDateString("es-EC", { day: "numeric", month: "long" });
-  return `${fmt(monday)} — ${fmt(friday)}`;
+
+  // Extraemos Y/M/D + weekday en la TZ de Guayaquil para que SSR (UTC en Vercel)
+  // y cliente (UTC-5) produzcan exactamente el mismo string y evitemos hydration mismatch.
+  const dtf = new Intl.DateTimeFormat("en-CA", {
+    timeZone: tz,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    weekday: "short",
+  });
+  const parts = dtf.formatToParts(now);
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "";
+  const year = Number(get("year"));
+  const month = Number(get("month"));
+  const day = Number(get("day"));
+  const weekday = get("weekday").toLowerCase(); // sun,mon,tue,wed,thu,fri,sat
+
+  // Mapeamos al día de semana JS (0=Sun..6=Sat) sin depender de la TZ local del runtime.
+  const weekdayMap: Record<string, number> = {
+    sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6,
+  };
+  const dow = weekdayMap[weekday] ?? 0;
+
+  // Reconstruimos un Date "ancla" usando UTC (sin TZ shift) para hacer aritmética estable.
+  // Lo importante es que monday/saturday sean determinísticos respecto a la fecha de Guayaquil.
+  const base = new Date(Date.UTC(year, month - 1, day));
+  const diffToMonday = dow === 0 ? -6 : 1 - dow;
+  const monday = new Date(base);
+  monday.setUTCDate(base.getUTCDate() + diffToMonday);
+  const saturday = new Date(monday);
+  saturday.setUTCDate(monday.getUTCDate() + 5);
+
+  // Formateamos en español usando UTC para que coincida con la fecha ya proyectada en Guayaquil.
+  const fmt = new Intl.DateTimeFormat("es-EC", {
+    timeZone: "UTC",
+    day: "numeric",
+    month: "long",
+  });
+  return `${fmt.format(monday)} — ${fmt.format(saturday)}`;
 }
 
 /* ── Página ─────────────────────────────────────────────────────── */
-const CATEGORY_TABS: { key: CategoryKey; label: string; icon: React.ReactNode }[] = [
+interface CategoryTab {
+  key: CategoryKey;
+  label: string;
+  icon: ReactNode;
+}
+
+const CATEGORY_TABS: CategoryTab[] = [
   { key: "principal", label: "Platos Principales", icon: <Flame size={15} strokeWidth={2.5} /> },
   { key: "ensalada",  label: "Ensaladas",          icon: <Salad size={15} strokeWidth={2.5} /> },
   { key: "postre",    label: "Postres",             icon: <Cookie size={15} strokeWidth={2.5} /> },

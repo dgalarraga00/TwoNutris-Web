@@ -4,12 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 const NAV_LINKS = [
-  { label: "Inicio",                  href: "#" },
-  { label: "Sobre Nosotros",          href: "#" },
-  { label: "Menú",                    href: "#menu" },
+  { label: "Inicio",                  href: "/" },
+  { label: "Sobre Nosotros",          href: "/sobre-nosotros" },
+  { label: "Menú",                    href: "/menu" },
   { label: "Planes",                  href: "#planes" },
   { label: "twonutris para empresas", href: "/empresas" },
-  { label: "Contacto",                href: "#" },
+  { label: "Contacto",                href: "mailto:info@twonutris.net" },
 ];
 
 function Instagram() {
@@ -46,7 +46,11 @@ function TikTok() {
   );
 }
 
-export function Footer({ onManageCookies }: { onManageCookies: () => void }) {
+interface FooterProps {
+  onManageCookies: () => void;
+}
+
+export function Footer({ onManageCookies }: FooterProps) {
   return (
     <footer
       style={{ backgroundColor: "#FFFBE4" }} className="rounded-t-[4rem] -mt-16"

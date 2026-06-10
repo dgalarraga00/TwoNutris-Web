@@ -11,7 +11,12 @@ interface CookiePrefs {
 
 const COOKIE_KEY = "tw_cookie_consent";
 
-export function CookieBanner({ open, onClose }: { open: boolean; onClose: () => void }) {
+interface CookieBannerProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export function CookieBanner({ open, onClose }: CookieBannerProps) {
   const [showBanner, setShowBanner] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [prefs, setPrefs] = useState<CookiePrefs>({
@@ -22,10 +27,16 @@ export function CookieBanner({ open, onClose }: { open: boolean; onClose: () => 
 
   useEffect(() => {
     const saved = localStorage.getItem(COOKIE_KEY);
-    if (!saved) setShowBanner(true);
-    else {
+    if (!saved) {
+      setShowBanner(true);
+      return;
+    }
+    try {
       const parsed = JSON.parse(saved) as CookiePrefs;
       setPrefs(parsed);
+    } catch {
+      // Cookie corrupta: asumimos que el usuario no aceptó y mostramos el banner de nuevo
+      setShowBanner(true);
     }
   }, []);
 
@@ -129,8 +140,7 @@ export function CookieBanner({ open, onClose }: { open: boolean; onClose: () => 
       {/* ── Modal de gestión ────────────────────────────────────── */}
       {showModal && (
         <div
-          className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-4"
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.45)", backdropFilter: "blur(4px)" }}
+          className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-4 bg-black/45 backdrop-blur-sm"
           onClick={() => { setShowModal(false); onClose(); }}
         >
           <div
@@ -186,11 +196,10 @@ export function CookieBanner({ open, onClose }: { open: boolean; onClose: () => 
                     type="button"
                     disabled={locked}
                     onClick={() => !locked && setPrefs((p) => ({ ...p, [key]: !p[key] }))}
-                    className={`flex-shrink-0 relative w-11 h-6 rounded-full transition-colors duration-200${prefs[key] ? "" : " bg-gray-300"}`}
+                    className={`flex-shrink-0 relative w-11 h-6 rounded-full border-0 transition-colors duration-200${prefs[key] ? "" : " bg-gray-300"}`}
                     style={{
                       backgroundColor: prefs[key] ? "#144400" : undefined,
                       cursor: locked ? "not-allowed" : "pointer",
-                      border: "none",
                       opacity: locked ? 0.6 : 1,
                     }}
                   >
