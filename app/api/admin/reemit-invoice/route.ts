@@ -7,7 +7,7 @@ import { createClient } from "@/utils/supabase/server";
 export async function POST(request: Request) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user || !(await isAdmin(user.email))) {
+  if (!user || !isAdmin(user.email)) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
 
@@ -25,12 +25,21 @@ export async function POST(request: Request) {
   if (!order) return NextResponse.json({ error: "Orden no encontrada" }, { status: 404 });
   if (order.status !== "PAID") return NextResponse.json({ error: "La orden no está pagada" }, { status: 400 });
 
+  // Usar el email del CLIENTE guardado en la orden — NO el del admin que re-emite.
+  // Órdenes previas a la captura de email no se pueden re-emitir automáticamente.
+  if (!order.customerEmail) {
+    return NextResponse.json(
+      { error: "La orden no tiene email del cliente registrado. Re-emite la factura manualmente desde Dátil." },
+      { status: 422 }
+    );
+  }
+
   await emitDatilInvoice({
     id: order.id,
     invoiceNumber: order.invoiceNumber,
     total: order.total,
     deliveryAddress: order.deliveryAddress,
-    customerEmail: user.email ?? "",
+    customerEmail: order.customerEmail,
     customerName: order.profile?.fullName,
     customerPhone: order.profile?.whatsapp,
     taxIdType: order.taxIdType,

@@ -2598,6 +2598,7 @@ export namespace Prisma {
     deliveryDate: Date | null
     taxIdType: string | null
     taxId: string | null
+    customerEmail: string | null
     invoiceNumber: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2614,6 +2615,7 @@ export namespace Prisma {
     deliveryDate: Date | null
     taxIdType: string | null
     taxId: string | null
+    customerEmail: string | null
     invoiceNumber: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2630,6 +2632,7 @@ export namespace Prisma {
     deliveryDate: number
     taxIdType: number
     taxId: number
+    customerEmail: number
     invoiceNumber: number
     createdAt: number
     updatedAt: number
@@ -2658,6 +2661,7 @@ export namespace Prisma {
     deliveryDate?: true
     taxIdType?: true
     taxId?: true
+    customerEmail?: true
     invoiceNumber?: true
     createdAt?: true
     updatedAt?: true
@@ -2674,6 +2678,7 @@ export namespace Prisma {
     deliveryDate?: true
     taxIdType?: true
     taxId?: true
+    customerEmail?: true
     invoiceNumber?: true
     createdAt?: true
     updatedAt?: true
@@ -2690,6 +2695,7 @@ export namespace Prisma {
     deliveryDate?: true
     taxIdType?: true
     taxId?: true
+    customerEmail?: true
     invoiceNumber?: true
     createdAt?: true
     updatedAt?: true
@@ -2793,6 +2799,7 @@ export namespace Prisma {
     deliveryDate: Date | null
     taxIdType: string
     taxId: string
+    customerEmail: string | null
     invoiceNumber: number
     createdAt: Date
     updatedAt: Date
@@ -2828,6 +2835,7 @@ export namespace Prisma {
     deliveryDate?: boolean
     taxIdType?: boolean
     taxId?: boolean
+    customerEmail?: boolean
     invoiceNumber?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2847,6 +2855,7 @@ export namespace Prisma {
     deliveryDate?: boolean
     taxIdType?: boolean
     taxId?: boolean
+    customerEmail?: boolean
     invoiceNumber?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2864,6 +2873,7 @@ export namespace Prisma {
     deliveryDate?: boolean
     taxIdType?: boolean
     taxId?: boolean
+    customerEmail?: boolean
     invoiceNumber?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2881,12 +2891,13 @@ export namespace Prisma {
     deliveryDate?: boolean
     taxIdType?: boolean
     taxId?: boolean
+    customerEmail?: boolean
     invoiceNumber?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "status" | "total" | "deliveryAddress" | "deliveryInstructions" | "payphoneTransactionId" | "deliveryDate" | "taxIdType" | "taxId" | "invoiceNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "status" | "total" | "deliveryAddress" | "deliveryInstructions" | "payphoneTransactionId" | "deliveryDate" | "taxIdType" | "taxId" | "customerEmail" | "invoiceNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
     items?: boolean | Order$itemsArgs<ExtArgs>
@@ -2916,6 +2927,7 @@ export namespace Prisma {
       deliveryDate: Date | null
       taxIdType: string
       taxId: string
+      customerEmail: string | null
       invoiceNumber: number
       createdAt: Date
       updatedAt: Date
@@ -3354,6 +3366,7 @@ export namespace Prisma {
     readonly deliveryDate: FieldRef<"Order", 'DateTime'>
     readonly taxIdType: FieldRef<"Order", 'String'>
     readonly taxId: FieldRef<"Order", 'String'>
+    readonly customerEmail: FieldRef<"Order", 'String'>
     readonly invoiceNumber: FieldRef<"Order", 'Int'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly updatedAt: FieldRef<"Order", 'DateTime'>
@@ -8543,6 +8556,7 @@ export namespace Prisma {
     deliveryDate: 'deliveryDate',
     taxIdType: 'taxIdType',
     taxId: 'taxId',
+    customerEmail: 'customerEmail',
     invoiceNumber: 'invoiceNumber',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -8822,6 +8836,7 @@ export namespace Prisma {
     deliveryDate?: DateTimeNullableFilter<"Order"> | Date | string | null
     taxIdType?: StringFilter<"Order"> | string
     taxId?: StringFilter<"Order"> | string
+    customerEmail?: StringNullableFilter<"Order"> | string | null
     invoiceNumber?: IntFilter<"Order"> | number
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
@@ -8840,6 +8855,7 @@ export namespace Prisma {
     deliveryDate?: SortOrderInput | SortOrder
     taxIdType?: SortOrder
     taxId?: SortOrder
+    customerEmail?: SortOrderInput | SortOrder
     invoiceNumber?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8861,6 +8877,7 @@ export namespace Prisma {
     deliveryDate?: DateTimeNullableFilter<"Order"> | Date | string | null
     taxIdType?: StringFilter<"Order"> | string
     taxId?: StringFilter<"Order"> | string
+    customerEmail?: StringNullableFilter<"Order"> | string | null
     invoiceNumber?: IntFilter<"Order"> | number
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
@@ -8879,6 +8896,7 @@ export namespace Prisma {
     deliveryDate?: SortOrderInput | SortOrder
     taxIdType?: SortOrder
     taxId?: SortOrder
+    customerEmail?: SortOrderInput | SortOrder
     invoiceNumber?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8903,6 +8921,7 @@ export namespace Prisma {
     deliveryDate?: DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
     taxIdType?: StringWithAggregatesFilter<"Order"> | string
     taxId?: StringWithAggregatesFilter<"Order"> | string
+    customerEmail?: StringNullableWithAggregatesFilter<"Order"> | string | null
     invoiceNumber?: IntWithAggregatesFilter<"Order"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
@@ -9313,6 +9332,7 @@ export namespace Prisma {
     deliveryDate?: Date | string | null
     taxIdType: string
     taxId: string
+    customerEmail?: string | null
     invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9331,6 +9351,7 @@ export namespace Prisma {
     deliveryDate?: Date | string | null
     taxIdType: string
     taxId: string
+    customerEmail?: string | null
     invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9347,6 +9368,7 @@ export namespace Prisma {
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9365,6 +9387,7 @@ export namespace Prisma {
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9382,6 +9405,7 @@ export namespace Prisma {
     deliveryDate?: Date | string | null
     taxIdType: string
     taxId: string
+    customerEmail?: string | null
     invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9397,6 +9421,7 @@ export namespace Prisma {
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9413,6 +9438,7 @@ export namespace Prisma {
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9999,6 +10025,7 @@ export namespace Prisma {
     deliveryDate?: SortOrder
     taxIdType?: SortOrder
     taxId?: SortOrder
+    customerEmail?: SortOrder
     invoiceNumber?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -10020,6 +10047,7 @@ export namespace Prisma {
     deliveryDate?: SortOrder
     taxIdType?: SortOrder
     taxId?: SortOrder
+    customerEmail?: SortOrder
     invoiceNumber?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -10036,6 +10064,7 @@ export namespace Prisma {
     deliveryDate?: SortOrder
     taxIdType?: SortOrder
     taxId?: SortOrder
+    customerEmail?: SortOrder
     invoiceNumber?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11082,6 +11111,7 @@ export namespace Prisma {
     deliveryDate?: Date | string | null
     taxIdType: string
     taxId: string
+    customerEmail?: string | null
     invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11098,6 +11128,7 @@ export namespace Prisma {
     deliveryDate?: Date | string | null
     taxIdType: string
     taxId: string
+    customerEmail?: string | null
     invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11144,6 +11175,7 @@ export namespace Prisma {
     deliveryDate?: DateTimeNullableFilter<"Order"> | Date | string | null
     taxIdType?: StringFilter<"Order"> | string
     taxId?: StringFilter<"Order"> | string
+    customerEmail?: StringNullableFilter<"Order"> | string | null
     invoiceNumber?: IntFilter<"Order"> | number
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
@@ -11264,6 +11296,7 @@ export namespace Prisma {
     deliveryDate?: Date | string | null
     taxIdType: string
     taxId: string
+    customerEmail?: string | null
     invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11281,6 +11314,7 @@ export namespace Prisma {
     deliveryDate?: Date | string | null
     taxIdType: string
     taxId: string
+    customerEmail?: string | null
     invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11312,6 +11346,7 @@ export namespace Prisma {
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11329,6 +11364,7 @@ export namespace Prisma {
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11606,6 +11642,7 @@ export namespace Prisma {
     deliveryDate?: Date | string | null
     taxIdType: string
     taxId: string
+    customerEmail?: string | null
     invoiceNumber?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11621,6 +11658,7 @@ export namespace Prisma {
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11637,6 +11675,7 @@ export namespace Prisma {
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11653,6 +11692,7 @@ export namespace Prisma {
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invoiceNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

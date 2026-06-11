@@ -101,6 +101,7 @@ export async function POST(request: Request) {
         deliveryDate,
         taxIdType,
         taxId: taxId.trim(),
+        customerEmail: user.email ?? null,
         items: {
           create: resolvedItems.map((i) => ({
             dishId: i.id,

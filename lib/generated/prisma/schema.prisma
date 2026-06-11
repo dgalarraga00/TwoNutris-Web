@@ -43,6 +43,7 @@ model Order {
   deliveryDate          DateTime?   @map("delivery_date")
   taxIdType             String      @map("tax_id_type")
   taxId                 String      @map("tax_id")
+  customerEmail         String?     @map("customer_email")
   invoiceNumber         Int         @default(autoincrement()) @map("invoice_number")
   createdAt             DateTime    @default(now()) @map("created_at")
   updatedAt             DateTime    @updatedAt @map("updated_at")
