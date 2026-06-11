@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -8,12 +5,9 @@ import { HomepageMenuShowcase } from "@/components/HomepageMenuShowcase";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { Planes } from "@/components/Planes";
 import { FAQ } from "@/components/FAQ";
-import { Footer } from "@/components/Footer";
-import { CookieBanner } from "@/components/CookieBanner";
+import { CookieBannerSlot } from "@/components/CookieBannerSlot";
 
 export default function Home() {
-  const [cookiesOpen, setCookiesOpen] = useState(false);
-
   return (
     <>
       <Navbar />
@@ -25,8 +19,7 @@ export default function Home() {
         <Planes />
         <FAQ />
       </main>
-      <Footer onManageCookies={() => setCookiesOpen(true)} />
-      <CookieBanner open={cookiesOpen} onClose={() => setCookiesOpen(false)} />
+      <CookieBannerSlot />
     </>
   );
 }

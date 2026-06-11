@@ -53,7 +53,7 @@ interface FooterProps {
 export function Footer({ onManageCookies }: FooterProps) {
   return (
     <footer
-      style={{ backgroundColor: "#FFFBE4" }} className="rounded-t-[4rem] -mt-16"
+      className="rounded-t-[4rem] -mt-16 bg-cream"
     >
       {/* ── Sección superior: columnas de info ─────────────────── */}
       <div className="max-w-[1200px] mx-auto px-6 pt-20 pb-12">
@@ -68,16 +68,24 @@ export function Footer({ onManageCookies }: FooterProps) {
               Navegación
             </span>
             <nav className="flex flex-col gap-3">
-              {NAV_LINKS.map(({ label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="text-sm w-fit transition-opacity duration-200 hover:opacity-100 no-underline font-poppins"
-                  style={{ color: "#144400", opacity: 0.6 }}
-                >
-                  {label}
-                </a>
-              ))}
+              {NAV_LINKS.map(({ label, href }) => {
+                const isExternal = href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("http");
+                const isAnchor = href.startsWith("#");
+                const className = "text-sm w-fit transition-opacity duration-200 hover:opacity-100 no-underline font-poppins text-leaf opacity-60";
+
+                if (isExternal || isAnchor) {
+                  return (
+                    <a key={label} href={href} className={className}>
+                      {label}
+                    </a>
+                  );
+                }
+                return (
+                  <Link key={label} href={href} className={className}>
+                    {label}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
 
@@ -96,14 +104,14 @@ export function Footer({ onManageCookies }: FooterProps) {
                 { label: "Tel",    value: "+593 98 339 2007",   href: "tel:+593983392007" },
               ].map(({ label, value, href }) => (
                 <p key={label} className="text-sm font-poppins">
-                  <span style={{ color: "#144400", fontWeight: 700 }}>{label}: </span>
+                  <span className="font-bold" style={{ color: "#144400" }}>{label}: </span>
                   {href ? (
-                    <a href={href} className="hover:opacity-100 transition-opacity no-underline"
-                      style={{ color: "#FFB000", opacity: 0.85 }}>
+                    <a href={href} className="hover:opacity-100 transition-opacity no-underline opacity-85"
+                      style={{ color: "#FFB000" }}>
                       {value}
                     </a>
                   ) : (
-                    <span style={{ color: "#FFB000", opacity: 0.85 }}>{value}</span>
+                    <span className="opacity-85" style={{ color: "#FFB000" }}>{value}</span>
                   )}
                 </p>
               ))}
@@ -158,8 +166,7 @@ export function Footer({ onManageCookies }: FooterProps) {
 
       {/* ── Logo grande centrado ────────────────────────────────── */}
       <div
-        className="w-full flex items-center justify-center py-10 px-6"
-        style={{ borderTop: "1px solid rgba(20,68,0,0.08)", borderBottom: "1px solid rgba(20,68,0,0.08)" }}
+        className="w-full flex items-center justify-center py-10 px-6 border-t border-b border-[rgba(20,68,0,0.08)]"
       >
         <Image
           src="/icons/logo.png"
@@ -174,8 +181,8 @@ export function Footer({ onManageCookies }: FooterProps) {
       {/* ── Barra inferior ──────────────────────────────────────── */}
       <div className="max-w-[1200px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 flex-wrap">
         <p
-          className="text-xs font-poppins"
-          style={{ color: "#144400", opacity: 0.7 }}
+          className="text-xs font-poppins opacity-70"
+          style={{ color: "#144400" }}
         >
           © 2026 twonutris. Todos los derechos reservados.
         </p>
@@ -188,18 +195,18 @@ export function Footer({ onManageCookies }: FooterProps) {
             <Link
               key={label}
               href={href}
-              className="text-xs hover:opacity-100 transition-opacity no-underline font-poppins"
-              style={{ color: "#144400", opacity: 0.7 }}
+              className="text-xs hover:opacity-100 transition-opacity no-underline font-poppins opacity-70"
+              style={{ color: "#144400" }}
             >
               {label}
             </Link>
           ))}
-          <span style={{ color: "#144400", opacity: 0.2 }}>|</span>
+          <span className="opacity-20" style={{ color: "#144400" }}>|</span>
           <button
             type="button"
             onClick={onManageCookies}
-            className="text-xs hover:opacity-100 transition-opacity cursor-pointer bg-transparent border-0 font-poppins"
-            style={{ color: "#144400", opacity: 0.7 }}
+            className="text-xs hover:opacity-100 transition-opacity cursor-pointer bg-transparent border-0 font-poppins opacity-70"
+            style={{ color: "#144400" }}
           >
             Cookies
           </button>
@@ -207,7 +214,7 @@ export function Footer({ onManageCookies }: FooterProps) {
             type="button"
             onClick={onManageCookies}
             className="text-xs hover:opacity-100 transition-opacity cursor-pointer bg-transparent border-0 font-poppins"
-            style={{ color: "#FFB000", opacity: 1 }}
+            style={{ color: "#FFB000" }}
           >
             Gestionar mis cookies
           </button>
@@ -216,14 +223,14 @@ export function Footer({ onManageCookies }: FooterProps) {
 
       {/* Crédito */}
       <div className="pb-6 flex justify-center">
-        <p className="text-xs font-poppins" style={{ color: "#144400", opacity: 0.75 }}>
+        <p className="text-xs font-poppins opacity-75" style={{ color: "#144400" }}>
           Designed in Ecuador by{" "}
           <a
             href="https://www.instagram.com/promethex.tech?igsh=bDgzNXhtdHBtejZy"
             target="_blank"
             rel="noopener noreferrer"
             className="no-underline"
-            style={{ opacity: 1, color: "#FFB000" }}
+            style={{ color: "#FFB000" }}
           >Promethex</a>
         </p>
       </div>

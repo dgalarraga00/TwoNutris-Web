@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   CheckCircle2,
   Building2,
@@ -86,8 +87,7 @@ export function Planes() {
   return (
     <section
       id="planes"
-      style={{ backgroundColor: "#FFFBE4" }}
-      className="pb-28 overflow-hidden"
+      className="pb-28 overflow-hidden bg-cream"
     >
       {/* ── Cabecera ─────────────────────────────────────────────── */}
       <div className="max-w-[1200px] mx-auto px-6 pt-24 pb-4 text-center">
@@ -104,8 +104,7 @@ export function Planes() {
           Planes para tu estilo de vida
         </h2>
         <p
-          className="text-base max-w-lg mx-auto font-poppins text-gray-700"
-          style={{ opacity: 0.75 }}
+          className="text-base max-w-lg mx-auto font-poppins text-gray-700 opacity-75"
         >
           Sin contratos, sin ataduras. Cancela o pausa cuando quieras.
         </p>
@@ -129,13 +128,7 @@ export function Planes() {
               {/* Pildora "Más elegido" */}
               {plan.featured && (
                 <div
-                  className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap font-poppins"
-                  style={{
-                    backgroundColor: "#FFB000",
-                    color: "#144400",
-                    transform: "translateX(-50%) rotate(-2deg)",
-                    boxShadow: "0 4px 12px rgba(255, 176, 0, 0.4)",
-                  }}
+                  className="absolute -top-4 left-1/2 -translate-x-1/2 -rotate-2 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap font-poppins bg-amber text-leaf shadow-[0_4px_12px_rgba(255,176,0,0.4)]"
                 >
                   ⭐ Más elegido
                 </div>
@@ -206,12 +199,7 @@ export function Planes() {
                 href={`https://wa.me/593983392007?text=${encodeURIComponent(`Hola, quiero el ${plan.name} (${plan.price}${plan.period}). ¿Me pueden dar más información?`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-full py-3 rounded-full text-sm font-bold cursor-pointer transition-all duration-200 hover:scale-[1.02] flex items-center justify-center font-poppins no-underline ${plan.featured ? "" : "bg-transparent"}`}
-                style={
-                  plan.featured
-                    ? { backgroundColor: "#FFB000", color: "#144400" }
-                    : { color: "#144400", border: "1.5px solid rgba(20,68,0,0.25)" }
-                }
+                className={`w-full py-3 rounded-full text-sm font-bold cursor-pointer transition-all duration-200 hover:scale-[1.02] flex items-center justify-center font-poppins no-underline text-leaf ${plan.featured ? "bg-amber" : "bg-transparent border-[1.5px] border-[rgba(20,68,0,0.25)]"}`}
               >
                 Elegir este plan
               </a>
@@ -223,11 +211,7 @@ export function Planes() {
       {/* ── Banner empresas ──────────────────────────────────────── */}
       <div className="max-w-[1200px] mx-auto px-6 mt-20">
         <div
-          className="flex flex-col md:flex-row items-center justify-between gap-6 px-8 py-8"
-          style={{
-            backgroundColor: "#FFB000",
-            borderRadius: "1.5rem 4rem 1.5rem 4rem",
-          }}
+          className="flex flex-col md:flex-row items-center justify-between gap-6 px-8 py-8 bg-amber rounded-[1.5rem_4rem_1.5rem_4rem]"
         >
           <div className="flex items-center gap-4">
             <div
@@ -244,20 +228,19 @@ export function Planes() {
                 ¿Tu empresa tiene más de 10 colaboradores?
               </p>
               <p
-                className="text-sm font-poppins"
-                style={{ color: "#144400", opacity: 0.75 }}
+                className="text-sm font-poppins opacity-75"
+                style={{ color: "#144400" }}
               >
                 Descubrí descuentos especiales y beneficios exclusivos para equipos.
               </p>
             </div>
           </div>
-          <a
+          <Link
             href="/empresas"
-            className="flex-shrink-0 px-7 py-3.5 rounded-full text-sm font-bold border-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] font-poppins no-underline"
-            style={{ backgroundColor: "#144400", color: "#FFFBE4" }}
+            className="flex-shrink-0 px-7 py-3.5 rounded-full text-sm font-bold border-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] font-poppins no-underline bg-leaf text-cream"
           >
             Ver planes empresariales
-          </a>
+          </Link>
         </div>
       </div>
 

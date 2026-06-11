@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { CheckCircle2, Users, TrendingUp, Smile } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -68,7 +69,7 @@ export default function EmpresasPage() {
       <main>
 
         {/* ── 1. Hero ───────────────────────────────────────────── */}
-        <section style={{ backgroundColor: "#FFFBE4" }} className="pt-32 pb-24 overflow-hidden">
+        <section className="pt-32 pb-24 overflow-hidden bg-cream">
           <div className="max-w-[1200px] mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-16 items-center">
 
@@ -118,11 +119,7 @@ export default function EmpresasPage() {
               <div className="relative flex items-center justify-center min-h-[460px]">
                 {/* Blob decorativo */}
                 <div
-                  className="absolute pointer-events-none w-4/5 h-4/5 top-[10%] left-[10%] opacity-[0.07]"
-                  style={{
-                    backgroundColor: "#144400",
-                    borderRadius: "40% 60% 55% 45% / 55% 45% 60% 40%",
-                  }}
+                  className="absolute pointer-events-none w-4/5 h-4/5 top-[10%] left-[10%] opacity-[0.07] rounded-[40%_60%_55%_45%_/_55%_45%_60%_40%] bg-leaf"
                 />
                 <div
                   className="relative w-full overflow-hidden rounded-[3rem] max-w-[480px] aspect-[4/5]"
@@ -231,10 +228,7 @@ export default function EmpresasPage() {
                 >
                   Cocinamos bajo pedido, trabajamos con productores locales de Quito y los valles, y reducimos el desperdicio al mínimo.
                 </p>
-                <p
-                  className="text-sm leading-relaxed mb-8 font-poppins"
-                  style={{ color: "rgba(255,255,255,0.6)" }}
-                >
+                <p className="text-sm leading-relaxed mb-8 font-poppins text-white/60">
                   Cada plato que sale de nuestra cocina es el resultado de un proceso consciente: compras ajustadas a la demanda real, ingredientes de temporada y empaques pensados para reducir residuos. Porque cuidar a tu equipo y cuidar el entorno no son cosas distintas.
                 </p>
 
@@ -262,7 +256,7 @@ export default function EmpresasPage() {
                         <p className="text-sm font-bold mb-0.5 font-poppins text-white">
                           {title}
                         </p>
-                        <p className="text-xs leading-relaxed font-poppins" style={{ color: "rgba(255,255,255,0.5)" }}>
+                        <p className="text-xs leading-relaxed font-poppins text-white/50">
                           {desc}
                         </p>
                       </div>
@@ -270,16 +264,12 @@ export default function EmpresasPage() {
                   ))}
                 </div>
 
-                <a
+                <Link
                   href="/sobre-nosotros"
-                  className="inline-flex items-center px-7 py-3.5 rounded-full text-sm font-bold transition-all duration-200 hover:scale-[1.03] no-underline font-poppins"
-                  style={{
-                    backgroundColor: "#FFB000",
-                    color: "#144400",
-                  }}
+                  className="inline-flex items-center px-7 py-3.5 rounded-full text-sm font-bold transition-all duration-200 hover:scale-[1.03] no-underline font-poppins bg-amber text-leaf"
                 >
                   Conocé nuestra historia
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -353,8 +343,8 @@ export default function EmpresasPage() {
 
             {/* Horario */}
             <p
-              className="text-xs text-center mt-6 font-poppins"
-              style={{ color: "#144400", opacity: 0.75 }}
+              className="text-xs text-center mt-6 font-poppins opacity-75"
+              style={{ color: "#144400" }}
             >
               Lunes a viernes · 8:00 — 18:00 · Respuesta en menos de 1 hora
             </p>

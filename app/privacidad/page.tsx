@@ -104,7 +104,7 @@ export default function PrivacidadPage() {
       <main className="bg-white min-h-screen">
 
         {/* Header */}
-        <div style={{ backgroundColor: "#FFFBE4" }} className="pt-24 pb-12">
+        <div className="pt-24 pb-12 bg-cream">
           <div className="max-w-[780px] mx-auto px-6">
             <p
               className="text-xs font-bold tracking-widest uppercase mb-4 font-poppins"
@@ -150,8 +150,7 @@ export default function PrivacidadPage() {
                   {items.map(({ subtitle, text, highlight }, i) => (
                     <div
                       key={i}
-                      className={highlight ? "p-4 rounded-2xl" : ""}
-                      style={highlight ? { backgroundColor: "#FFFBE4", borderLeft: "3px solid #FFB000" } : {}}
+                      className={highlight ? "p-4 rounded-2xl bg-cream border-l-[3px] border-[#FFB000]" : ""}
                     >
                       {subtitle && (
                         <p
