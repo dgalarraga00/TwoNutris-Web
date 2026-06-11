@@ -92,39 +92,28 @@ export default function SobreNosotrosPage() {
 
             {/* Texto */}
             <div>
-              <span
-                className="inline-block text-xs font-bold tracking-widest uppercase mb-5 px-4 py-1.5 rounded-full font-poppins"
-                style={{ backgroundColor: "#FFB000", color: "#144400" }}
-              >
+              <span className="inline-block text-xs font-bold tracking-widest uppercase mb-5 px-4 py-1.5 rounded-full font-poppins bg-amber text-leaf">
                 Quiénes somos
               </span>
-              <h1
-                className="text-5xl md:text-6xl leading-tight mb-6 font-ibrand"
-                style={{ color: "#144400" }}
-              >
+              <h1 className="text-5xl md:text-6xl leading-tight mb-6 font-ibrand text-leaf">
                 Nuestra Historia
               </h1>
-              <div
-                className="flex flex-col gap-4 text-base leading-relaxed font-poppins text-gray-700"
-              >
+              <div className="flex flex-col gap-4 text-base leading-relaxed font-poppins text-gray-700">
                 <p>
-                  Somos <strong style={{ color: "#144400" }}>Cami y David</strong>, y sabemos que comer bien a diario de forma rica y saludable es fundamental — pero también uno de los mayores desafíos del ritmo de vida moderno.
+                  Somos <strong className="text-leaf">Cami y David</strong>, y sabemos que comer bien a diario de forma rica y saludable es fundamental — pero también uno de los mayores desafíos del ritmo de vida moderno.
                 </p>
                 <p>
                   Vivimos en carne propia esa lucha: entre el trabajo, las responsabilidades y el tiempo que nunca alcanza, terminábamos eligiendo lo rápido sobre lo nutritivo. La comida rápida, los pedidos de último momento, los almuerzos saltados.
                 </p>
                 <p>
-                  Fue así que nació <strong style={{ color: "#144400" }}>twonutris</strong>: la convicción de que todos merecen acceder a comida casera, auténtica y equilibrada sin sacrificar tiempo ni sabor. No somos una dieta, somos tu aliado del día a día.
+                  Fue así que nació <strong className="text-leaf">twonutris</strong>: la convicción de que todos merecen acceder a comida casera, auténtica y equilibrada sin sacrificar tiempo ni sabor. No somos una dieta, somos tu aliado del día a día.
                 </p>
               </div>
             </div>
 
             {/* Composición de 3 fotos */}
             <div className="flex flex-col gap-4">
-              {/* Foto principal grande */}
-              <div
-                className="relative w-full overflow-hidden rounded-[2rem] aspect-[16/10]"
-              >
+              <div className="relative w-full overflow-hidden rounded-[2rem] aspect-[16/10]">
                 <Image
                   src="/images/img-equipo4.jpeg"
                   alt="El equipo de twonutris"
@@ -133,11 +122,8 @@ export default function SobreNosotrosPage() {
                   sizes="(max-width: 768px) 100vw, 560px"
                 />
               </div>
-              {/* Dos fotos pequeñas */}
               <div className="grid grid-cols-2 gap-4">
-                <div
-                  className="relative overflow-hidden rounded-[1.5rem] aspect-square"
-                >
+                <div className="relative overflow-hidden rounded-[1.5rem] aspect-square">
                   <Image
                     src="/images/img-equipo2.jpeg"
                     alt="twonutris cocina"
@@ -146,9 +132,7 @@ export default function SobreNosotrosPage() {
                     sizes="260px"
                   />
                 </div>
-                <div
-                  className="relative overflow-hidden rounded-[1.5rem] aspect-square"
-                >
+                <div className="relative overflow-hidden rounded-[1.5rem] aspect-square">
                   <Image
                     src="/images/img-equipo3.jpeg"
                     alt="twonutris platos"
@@ -165,29 +149,15 @@ export default function SobreNosotrosPage() {
 
         {/* ── 2. Banner de autoridad ────────────────────────────── */}
         <div className="px-4 my-8">
-          <div
-            className="max-w-[1200px] mx-auto px-8 md:px-14 py-14 relative overflow-hidden rounded-[3rem]"
-            style={{ backgroundColor: "#FFFBE4" }}
-          >
-            {/* Blob decorativo */}
-            <div
-              className="absolute -top-20 -right-20 pointer-events-none rounded-full"
-            />
-
+          <div className="max-w-[1200px] mx-auto px-8 md:px-14 py-14 relative overflow-hidden rounded-[3rem] bg-cream">
             <div className="grid md:grid-cols-3 gap-10 items-center relative z-10">
 
               {/* Cita */}
               <div className="md:col-span-2">
-                <p
-                  className="text-2xl md:text-3xl font-bold italic leading-snug mb-6 font-ibrand"
-                  style={{ color: "#144400" }}
-                >
+                <p className="text-2xl md:text-3xl font-bold italic leading-snug mb-6 font-ibrand text-leaf">
                   "Creemos que comer sano no debería ser complicado ni mucho menos aburrido."
                 </p>
-                <p
-                  className="text-sm font-poppins"
-                  style={{ color: "#144400", opacity: 0.65 }}
-                >
+                <p className="text-sm font-poppins opacity-65 text-leaf">
                   — Cami & David, fundadores de twonutris
                 </p>
               </div>
@@ -195,30 +165,18 @@ export default function SobreNosotrosPage() {
               {/* Stats */}
               <div className="flex md:flex-col gap-8 md:gap-6">
                 <div>
-                  <p
-                    className="text-5xl font-black leading-none font-ibrand"
-                    style={{ color: "#144400" }}
-                  >
+                  <p className="text-5xl font-black leading-none font-ibrand text-leaf">
                     +30.000
                   </p>
-                  <p
-                    className="text-sm mt-1 font-poppins"
-                    style={{ color: "#144400", opacity: 0.7 }}
-                  >
+                  <p className="text-sm mt-1 font-poppins opacity-70 text-leaf">
                     comidas entregadas
                   </p>
                 </div>
                 <div>
-                  <p
-                    className="text-5xl font-black leading-none font-ibrand"
-                    style={{ color: "#144400" }}
-                  >
+                  <p className="text-5xl font-black leading-none font-ibrand text-leaf">
                     4 años
                   </p>
-                  <p
-                    className="text-sm mt-1 font-poppins"
-                    style={{ color: "#144400", opacity: 0.7 }}
-                  >
+                  <p className="text-sm mt-1 font-poppins opacity-70 text-leaf">
                     de experiencia
                   </p>
                 </div>
@@ -232,15 +190,12 @@ export default function SobreNosotrosPage() {
         <div className="max-w-[1200px] mx-auto px-6 py-20">
           <div className="text-center mb-14">
             <span
-              className="inline-block text-xs font-bold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full font-poppins"
-              style={{ backgroundColor: "rgba(20,68,0,0.07)", color: "#144400" }}
+              className="inline-block text-xs font-bold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full font-poppins text-leaf"
+              style={{ backgroundColor: "rgba(20,68,0,0.07)" }}
             >
               Lo que nos mueve
             </span>
-            <h2
-              className="text-4xl md:text-5xl font-ibrand"
-              style={{ color: "#144400" }}
-            >
+            <h2 className="text-4xl md:text-5xl font-ibrand text-leaf">
               Nuestros Valores
             </h2>
           </div>
@@ -250,17 +205,13 @@ export default function SobreNosotrosPage() {
             {VALORES.slice(0, 3).map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="flex flex-col gap-4 p-7 rounded-3xl bg-white"
-                style={{ boxShadow: "0 4px 20px rgba(20,68,0,0.07)" }}
+                className="flex flex-col gap-4 p-7 rounded-3xl bg-white shadow-[0_4px_20px_rgba(20,68,0,0.07)]"
               >
-                <div
-                  className="flex items-center justify-center w-12 h-12 rounded-2xl"
-                  style={{ backgroundColor: "#FFFBE4" }}
-                >
-                  <Icon size={22} strokeWidth={1.8} style={{ color: "#144400" }} />
+                <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-cream">
+                  <Icon size={22} strokeWidth={1.8} className="text-leaf" />
                 </div>
                 <div>
-                  <p className="text-base font-bold mb-1 font-poppins" style={{ color: "#144400" }}>
+                  <p className="text-base font-bold mb-1 font-poppins text-leaf">
                     {title}
                   </p>
                   <p className="text-sm leading-relaxed font-poppins text-gray-500">
@@ -276,17 +227,13 @@ export default function SobreNosotrosPage() {
             {VALORES.slice(3).map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="flex flex-col gap-4 p-7 rounded-3xl bg-white"
-                style={{ boxShadow: "0 4px 20px rgba(20,68,0,0.07)" }}
+                className="flex flex-col gap-4 p-7 rounded-3xl bg-white shadow-[0_4px_20px_rgba(20,68,0,0.07)]"
               >
-                <div
-                  className="flex items-center justify-center w-12 h-12 rounded-2xl"
-                  style={{ backgroundColor: "#FFFBE4" }}
-                >
-                  <Icon size={22} strokeWidth={1.8} style={{ color: "#144400" }} />
+                <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-cream">
+                  <Icon size={22} strokeWidth={1.8} className="text-leaf" />
                 </div>
                 <div>
-                  <p className="text-base font-bold mb-1 font-poppins" style={{ color: "#144400" }}>
+                  <p className="text-base font-bold mb-1 font-poppins text-leaf">
                     {title}
                   </p>
                   <p className="text-sm leading-relaxed font-poppins text-gray-500">
@@ -306,15 +253,12 @@ export default function SobreNosotrosPage() {
               {/* Columna izquierda: el proceso */}
               <div className="md:col-span-7">
                 <span
-                  className="inline-block text-xs font-bold tracking-widest uppercase mb-5 px-4 py-1.5 rounded-full font-poppins"
-                  style={{ backgroundColor: "rgba(20,68,0,0.07)", color: "#144400" }}
+                  className="inline-block text-xs font-bold tracking-widest uppercase mb-5 px-4 py-1.5 rounded-full font-poppins text-leaf"
+                  style={{ backgroundColor: "rgba(20,68,0,0.07)" }}
                 >
                   El proceso
                 </span>
-                <h2
-                  className="text-4xl md:text-5xl mb-10 font-ibrand"
-                  style={{ color: "#144400" }}
-                >
+                <h2 className="text-4xl md:text-5xl mb-10 font-ibrand text-leaf">
                   ¿Cómo lo hacemos?
                 </h2>
 
@@ -323,10 +267,7 @@ export default function SobreNosotrosPage() {
                     <div key={paso.num} className="flex gap-5 items-start">
                       {/* Número + línea */}
                       <div className="flex flex-col items-center flex-shrink-0">
-                        <div
-                          className="flex items-center justify-center w-11 h-11 rounded-full text-sm font-black font-ibrand"
-                          style={{ backgroundColor: "#144400", color: "#FFFBE4" }}
-                        >
+                        <div className="flex items-center justify-center w-11 h-11 rounded-full text-sm font-black font-ibrand bg-leaf text-cream">
                           {paso.num}
                         </div>
                         {i < PASOS.length - 1 && (
@@ -334,7 +275,7 @@ export default function SobreNosotrosPage() {
                         )}
                       </div>
                       <div className="pb-2">
-                        <p className="text-base font-bold mb-1 font-poppins" style={{ color: "#144400" }}>
+                        <p className="text-base font-bold mb-1 font-poppins text-leaf">
                           {paso.title}
                         </p>
                         <p className="text-sm leading-relaxed font-poppins text-gray-500">
@@ -348,21 +289,12 @@ export default function SobreNosotrosPage() {
 
               {/* Columna derecha: zonas */}
               <div className="md:col-span-5">
-                <div
-                  className="p-8 rounded-3xl h-full"
-                  style={{ backgroundColor: "#FFFBE4" }}
-                >
+                <div className="p-8 rounded-3xl h-full bg-cream">
                   <div className="flex items-center gap-3 mb-6">
-                    <div
-                      className="flex items-center justify-center w-10 h-10 rounded-xl"
-                      style={{ backgroundColor: "#FFB000" }}
-                    >
-                      <MapPin size={18} strokeWidth={2} style={{ color: "#144400" }} />
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-amber">
+                      <MapPin size={18} strokeWidth={2} className="text-leaf" />
                     </div>
-                    <h3
-                      className="text-xl font-bold font-ibrand"
-                      style={{ color: "#144400" }}
-                    >
+                    <h3 className="text-xl font-bold font-ibrand text-leaf">
                       Zonas de entrega
                     </h3>
                   </div>
@@ -370,11 +302,8 @@ export default function SobreNosotrosPage() {
                   <div className="flex flex-col gap-3">
                     {ZONAS.map((zona) => (
                       <div key={zona} className="flex items-center gap-3">
-                        <CheckCircle2 size={18} strokeWidth={2} style={{ color: "#144400", flexShrink: 0 }} />
-                        <span
-                          className="text-sm font-medium font-poppins"
-                          style={{ color: "#144400" }}
-                        >
+                        <CheckCircle2 size={18} strokeWidth={2} className="shrink-0 text-leaf" />
+                        <span className="text-sm font-medium font-poppins text-leaf">
                           {zona}
                         </span>
                       </div>
@@ -382,8 +311,8 @@ export default function SobreNosotrosPage() {
                   </div>
 
                   <div
-                    className="mt-8 p-4 rounded-2xl text-sm font-poppins"
-                    style={{ backgroundColor: "rgba(20,68,0,0.06)", color: "#144400" }}
+                    className="mt-8 p-4 rounded-2xl text-sm font-poppins text-leaf"
+                    style={{ backgroundColor: "rgba(20,68,0,0.06)" }}
                   >
                     ¿No ves tu zona? Escribinos — estamos expandiendo continuamente.
                   </div>

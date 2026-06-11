@@ -17,7 +17,6 @@ const PLANS = [
     price: "$35",
     period: "/ semana",
     description: "Ideal para probar sin compromiso",
-    image: "/images/Bowl Buddha Mediterráneo.png",
     featured: false,
     features: [
       "5 almuerzos de lunes a viernes",
@@ -32,7 +31,6 @@ const PLANS = [
     price: "$115",
     period: "/ mes",
     description: "Tu almuerzo listo cada día",
-    image: "/images/Pollo al horno a las finas hierbas con papas.png",
     featured: false,
     features: [
       "20 almuerzos al mes",
@@ -47,7 +45,6 @@ const PLANS = [
     price: "$138",
     period: "/ mes",
     description: "El favorito de nuestros clientes",
-    image: "/images/hero-plate.png",
     featured: true,
     features: [
       "20 almuerzos al mes",
@@ -63,7 +60,6 @@ const PLANS = [
     price: "$213",
     period: "/ mes",
     description: "Nutrición completa todo el día",
-    image: "/images/Filete de res con arroz.png",
     featured: false,
     features: [
       "20 almuerzos + 20 cenas",
@@ -92,14 +88,12 @@ export function Planes() {
       {/* ── Cabecera ─────────────────────────────────────────────── */}
       <div className="max-w-[1200px] mx-auto px-6 pt-24 pb-4 text-center">
         <span
-          className="inline-block text-xs font-bold tracking-widest uppercase mb-5 px-4 py-1.5 rounded-full font-poppins"
-          style={{ backgroundColor: "#FFB000", color: "#144400" }}
+          className="inline-block text-xs font-bold tracking-widest uppercase mb-5 px-4 py-1.5 rounded-full font-poppins bg-amber text-leaf"
         >
           Precios
         </span>
         <h2
-          className="text-5xl md:text-6xl leading-tight mb-4 font-ibrand"
-          style={{ color: "#144400" }}
+          className="text-5xl md:text-6xl leading-tight mb-4 font-ibrand text-leaf"
         >
           Planes para tu estilo de vida
         </h2>
@@ -218,18 +212,16 @@ export function Planes() {
               className="flex items-center justify-center w-12 h-12 rounded-2xl flex-shrink-0"
               style={{ backgroundColor: "rgba(20,68,0,0.12)" }}
             >
-              <Building2 size={24} style={{ color: "#144400" }} />
+              <Building2 size={24} className="text-leaf" />
             </div>
             <div>
               <p
-                className="text-base font-bold leading-snug font-ibrand"
-                style={{ color: "#144400" }}
+                className="text-base font-bold leading-snug font-ibrand text-leaf"
               >
                 ¿Tu empresa tiene más de 10 colaboradores?
               </p>
               <p
-                className="text-sm font-poppins opacity-75"
-                style={{ color: "#144400" }}
+                className="text-sm font-poppins opacity-75 text-leaf"
               >
                 Descubrí descuentos especiales y beneficios exclusivos para equipos.
               </p>
@@ -250,8 +242,7 @@ export function Planes() {
           className="p-8 md:p-10 bg-white rounded-[2rem]"
         >
           <p
-            className="text-xs font-bold tracking-widest uppercase mb-8 text-center font-poppins"
-            style={{ color: "#FFB000" }}
+            className="text-xs font-bold tracking-widest uppercase mb-8 text-center font-poppins text-amber"
           >
             ¿Qué incluyen todos los planes?
           </p>
@@ -259,15 +250,13 @@ export function Planes() {
             {BENEFITS.map(({ icon: Icon, title, desc }) => (
               <div key={title} className="flex items-start gap-4">
                 <div
-                  className="flex items-center justify-center w-10 h-10 rounded-xl flex-shrink-0"
-                  style={{ backgroundColor: "#FFFBE4" }}
+                  className="flex items-center justify-center w-10 h-10 rounded-xl flex-shrink-0 bg-cream"
                 >
-                  <Icon size={20} strokeWidth={1.8} style={{ color: "#FFB000" }} />
+                  <Icon size={20} strokeWidth={1.8} className="text-amber" />
                 </div>
                 <div>
                   <p
-                    className="text-sm font-bold mb-0.5 font-poppins"
-                    style={{ color: "#144400" }}
+                    className="text-sm font-bold mb-0.5 font-poppins text-leaf"
                   >
                     {title}
                   </p>
