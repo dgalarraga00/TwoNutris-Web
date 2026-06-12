@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 export const metadata: Metadata = {
   title: "Política de Privacidad",
   description:
-    "Conocé cómo TwoNutris recopila, usa y protege tu información personal. Comprometidos con tu privacidad.",
+    "Conoce cómo TwoNutris recopila, usa y protege tu información personal. Comprometidos con tu privacidad.",
   alternates: {
     canonical: "https://www.twonutris.com/privacidad",
   },

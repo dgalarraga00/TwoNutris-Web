@@ -26,9 +26,9 @@ export function CatalogClient({ dishes }: { dishes: CatalogDish[] }) {
   const cutoffLabel = useMemo(() => {
     const c = cutoffDate();
     const days = Math.ceil((c.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-    if (days <= 0) return "Pedí hoy — último día";
+    if (days <= 0) return "Pide hoy — último día";
     if (days === 1) return "Cierra mañana";
-    return `Pedí antes del miércoles`;
+    return `Pide antes del miércoles`;
   }, []);
 
   const filtered =

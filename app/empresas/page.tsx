@@ -270,7 +270,7 @@ export default function EmpresasPage() {
                     color: "#144400",
                   }}
                 >
-                  Conocé nuestra historia
+                  Conoce nuestra historia
                 </a>
               </div>
             </div>
