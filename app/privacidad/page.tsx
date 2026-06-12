@@ -137,8 +137,8 @@ export default function PrivacidadPage() {
                   {items.map(({ subtitle, text, highlight }, i) => (
                     <div
                       key={i}
-                      className={highlight ? "p-4 rounded-2xl" : ""}
-                      style={highlight ? { backgroundColor: "#FFFBE4", borderLeft: "3px solid #FFB000" } : {}}
+                      className={highlight ? "p-4 rounded-2xl border-l-[3px]" : ""}
+                      style={highlight ? { backgroundColor: "#FFFBE4", borderLeftColor: "#FFB000" } : {}}
                     >
                       {subtitle && (
                         <p

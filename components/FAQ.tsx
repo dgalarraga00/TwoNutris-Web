@@ -92,8 +92,7 @@ export function FAQ() {
                   style={{ maxHeight: isOpen ? "600px" : "0px" }}
                 >
                   <p
-                    className="pb-6 text-sm md:text-base leading-relaxed whitespace-pre-line font-poppins text-gray-700"
-                    style={{ opacity: 0.8 }}
+                    className="pb-6 text-sm md:text-base leading-relaxed whitespace-pre-line font-poppins text-gray-700 opacity-80"
                   >
                     {faq.a}
                   </p>

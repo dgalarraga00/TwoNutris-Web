@@ -244,8 +244,7 @@ export default function SobreNosotrosPage() {
             {VALORES.slice(0, 3).map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="flex flex-col gap-4 p-7 rounded-3xl bg-white"
-                style={{ boxShadow: "0 4px 20px rgba(20,68,0,0.07)" }}
+                className="flex flex-col gap-4 p-7 rounded-3xl bg-white shadow-[0_4px_20px_rgba(20,68,0,0.07)]"
               >
                 <div
                   className="flex items-center justify-center w-12 h-12 rounded-2xl"
@@ -270,8 +269,7 @@ export default function SobreNosotrosPage() {
             {VALORES.slice(3).map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="flex flex-col gap-4 p-7 rounded-3xl bg-white"
-                style={{ boxShadow: "0 4px 20px rgba(20,68,0,0.07)" }}
+                className="flex flex-col gap-4 p-7 rounded-3xl bg-white shadow-[0_4px_20px_rgba(20,68,0,0.07)]"
               >
                 <div
                   className="flex items-center justify-center w-12 h-12 rounded-2xl"
@@ -364,7 +362,7 @@ export default function SobreNosotrosPage() {
                   <div className="flex flex-col gap-3">
                     {ZONAS.map((zona) => (
                       <div key={zona} className="flex items-center gap-3">
-                        <CheckCircle2 size={18} strokeWidth={2} style={{ color: "#144400", flexShrink: 0 }} />
+                        <CheckCircle2 size={18} strokeWidth={2} className="flex-shrink-0" style={{ color: "#144400" }} />
                         <span
                           className="text-sm font-medium font-poppins"
                           style={{ color: "#144400" }}
