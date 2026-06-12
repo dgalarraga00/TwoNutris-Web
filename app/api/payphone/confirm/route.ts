@@ -64,7 +64,32 @@ export async function POST(request: Request) {
     // Llamar a PayPhone confirm API
     const payphoneRes = await confirmPayphoneTransaction(id, clientTransactionId);
 
-    const approved = payphoneRes.statusCode === 3;
+    const paymentApproved = payphoneRes.statusCode === 3;
+
+    // Blindaje anti-manipulación: el monto confirmado por PayPhone debe coincidir
+    // con el total del pedido. Evita que el `id` de una transacción de OTRO pago
+    // (p. ej. de menor monto) sirva para confirmar este pedido. Solo bloqueamos si
+    // PayPhone devuelve un monto y NO coincide; si lo omite, no regresionamos el flujo.
+    const expectedCents = Math.round(existingOrder.total * 100);
+    const paidCents = payphoneRes.amount;
+    if (paymentApproved && typeof paidCents === "number" && paidCents !== expectedCents) {
+      console.error("[payphone/confirm] MONTO NO COINCIDE — posible manipulación", {
+        orderId: clientTransactionId,
+        payphoneTransactionId: id,
+        expectedCents,
+        paidCents,
+      });
+      await prisma.order.update({
+        where: { id: clientTransactionId },
+        data: { status: "FAILED", payphoneTransactionId: String(id) },
+      });
+      return NextResponse.json(
+        { success: false, status: "FAILED", message: "El monto del pago no coincide con el pedido." },
+        { status: 409 }
+      );
+    }
+
+    const approved = paymentApproved;
 
     // Actualizar la orden según el resultado
     const updatedOrder = await prisma.order.update({
