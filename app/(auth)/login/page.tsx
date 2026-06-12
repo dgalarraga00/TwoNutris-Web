@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
@@ -226,10 +227,10 @@ function LoginForm() {
       </div>
 
       <p className="text-center text-xs text-gray-400 font-poppins mt-4">
-        Al continuar aceptás nuestros{" "}
-        <a href="/terminos" className="underline hover:text-leaf">términos</a>{" "}
+        Al continuar aceptas nuestros{" "}
+        <Link href="/terminos" className="underline hover:text-leaf">términos</Link>{" "}
         y{" "}
-        <a href="/privacidad" className="underline hover:text-leaf">política de privacidad</a>.
+        <Link href="/privacidad" className="underline hover:text-leaf">política de privacidad</Link>.
       </p>
     </div>
   );

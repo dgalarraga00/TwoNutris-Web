@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 
@@ -87,7 +88,7 @@ export function NavbarClient() {
     >
       <nav className="max-w-[1200px] mx-auto px-6 h-[72px] flex items-center justify-between">
         {/* ── Logo ──────────────────────────────────────────── */}
-        <a href="/" className="flex items-center flex-shrink-0 group">
+        <Link href="/" className="flex items-center flex-shrink-0 group">
           <Image
             src="/icons/logo.png"
             alt="twonutris"
@@ -96,13 +97,13 @@ export function NavbarClient() {
             className="transition-opacity duration-300 group-hover:opacity-80 mix-blend-multiply"
             priority
           />
-        </a>
+        </Link>
 
         {/* ── Nav Links (desktop) ───────────────────────────── */}
         <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
           {NAV_LINKS.map(({ label, href }) => (
             <li key={label}>
-              <a
+              <Link
                 href={href}
                 className="text-base transition-all duration-200 relative group no-underline font-ibrand"
                 style={{ color: "#144400", opacity: 0.9 }}
@@ -118,7 +119,7 @@ export function NavbarClient() {
                   className="absolute -bottom-0.5 left-0 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full"
                   style={{ backgroundColor: "#FFB000" }}
                 />
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -128,7 +129,7 @@ export function NavbarClient() {
           {user ? (
             <>
               {/* Nombre → dashboard */}
-              <a
+              <Link
                 href="/dashboard/pedidos"
                 className="hidden md:flex items-center gap-2 text-sm font-semibold no-underline font-ibrand px-3 py-2 rounded-xl transition-colors hover:bg-[rgba(20,68,0,0.06)]"
                 style={{ color: "#144400" }}
@@ -140,10 +141,10 @@ export function NavbarClient() {
                   {(displayName?.[0] ?? "U").toUpperCase()}
                 </span>
                 <span className="max-w-[120px] truncate">{displayName}</span>
-              </a>
+              </Link>
 
               {/* Carrito → checkout */}
-              <a
+              <Link
                 href="/checkout"
                 className="hidden md:flex items-center gap-1.5 relative px-3 py-2 rounded-xl transition-colors hover:bg-[rgba(20,68,0,0.06)] no-underline"
                 style={{ color: "#144400" }}
@@ -158,12 +159,12 @@ export function NavbarClient() {
                     {cartCount}
                   </span>
                 )}
-              </a>
+              </Link>
             </>
           ) : (
             <>
               {/* Iniciar sesión */}
-              <a
+              <Link
                 href="/login"
                 className="hidden md:flex items-center text-sm font-semibold no-underline font-ibrand px-4 py-2.5 rounded-full border transition-colors"
                 style={{ color: "#144400", borderColor: "rgba(20,68,0,0.2)" }}
@@ -177,10 +178,10 @@ export function NavbarClient() {
                 }
               >
                 Iniciar sesión
-              </a>
+              </Link>
 
               {/* Pedir ahora */}
-              <a
+              <Link
                 href="/pedir"
                 className="animate-cta-wiggle hidden md:flex items-center gap-2 text-sm font-bold px-6 py-3 rounded-full cursor-pointer no-underline font-ibrand"
                 style={{
@@ -190,7 +191,7 @@ export function NavbarClient() {
                 }}
               >
                 Pedir ahora
-              </a>
+              </Link>
             </>
           )}
 
@@ -223,21 +224,21 @@ export function NavbarClient() {
         <ul className="flex flex-col list-none m-0 p-4 gap-1">
           {NAV_LINKS.map(({ label, href }) => (
             <li key={label}>
-              <a
+              <Link
                 href={href}
                 className="block px-4 py-3 rounded-xl text-sm font-semibold transition-colors duration-200 no-underline font-ibrand"
                 style={{ color: "#144400" }}
                 onClick={() => setMobileOpen(false)}
               >
                 {label}
-              </a>
+              </Link>
             </li>
           ))}
 
           {user ? (
             <>
               <li>
-                <a
+                <Link
                   href="/dashboard/pedidos"
                   className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold no-underline font-ibrand"
                   style={{ color: "#144400" }}
@@ -250,10 +251,10 @@ export function NavbarClient() {
                     {(displayName?.[0] ?? "U").toUpperCase()}
                   </span>
                   {displayName}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/checkout"
                   className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold no-underline font-ibrand"
                   style={{ color: "#144400" }}
@@ -261,30 +262,30 @@ export function NavbarClient() {
                 >
                   <ShoppingCart size={16} />
                   Carrito{cartCount > 0 ? ` (${cartCount})` : ""}
-                </a>
+                </Link>
               </li>
             </>
           ) : (
             <>
               <li className="mt-2">
-                <a
+                <Link
                   href="/login"
                   className="block w-full py-3 rounded-full text-sm font-bold text-center no-underline font-ibrand border"
                   style={{ color: "#144400", borderColor: "rgba(20,68,0,0.3)" }}
                   onClick={() => setMobileOpen(false)}
                 >
                   Iniciar sesión
-                </a>
+                </Link>
               </li>
               <li className="mt-1">
-                <a
+                <Link
                   href="/pedir"
                   className="block w-full py-3 rounded-full text-sm font-bold text-center no-underline font-ibrand"
                   style={{ backgroundColor: "#FFB000", color: "#144400" }}
                   onClick={() => setMobileOpen(false)}
                 >
                   Pedir ahora
-                </a>
+                </Link>
               </li>
             </>
           )}
