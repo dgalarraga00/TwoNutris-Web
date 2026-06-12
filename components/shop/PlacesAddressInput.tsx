@@ -98,7 +98,7 @@ export function PlacesAddressInput({ value, onChange, onPlaceSelect }: Props) {
           position: QUITO_CENTER,
           draggable: true,
           animation: google.maps.Animation.DROP,
-          title: "Arrastrá para ajustar tu ubicación",
+          title: "Arrastra para ajustar tu ubicación",
         });
 
         // Al arrastrar el pin → geocoding inverso + recalcula zona
@@ -175,7 +175,7 @@ export function PlacesAddressInput({ value, onChange, onPlaceSelect }: Props) {
           ref={inputRef}
           type="text"
           required
-          placeholder={error ? "Ingresá tu dirección manualmente" : "Av. Amazonas 123, Quito..."}
+          placeholder={error ? "Ingresa tu dirección manualmente" : "Av. Amazonas 123, Quito..."}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className="w-full border border-gray-200 rounded-xl px-4 py-3 pr-10 text-sm font-poppins text-gray-900 placeholder-gray-400 focus:outline-none focus:border-leaf transition-colors"
@@ -211,7 +211,7 @@ export function PlacesAddressInput({ value, onChange, onPlaceSelect }: Props) {
           {/* Instrucción */}
           {mapReady && (
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-[11px] font-poppins text-gray-600 shadow-sm whitespace-nowrap">
-              Arrastrá el pin o hacé click para ajustar
+              Arrastra el pin o haz clic para ajustar
             </div>
           )}
         </div>
@@ -220,7 +220,7 @@ export function PlacesAddressInput({ value, onChange, onPlaceSelect }: Props) {
       {error && (
         <div className="flex items-center gap-2 text-[11px] font-poppins text-amber-700 bg-amber-50 border border-amber-100 rounded-xl px-3 py-2">
           <AlertCircle size={13} />
-          Autocompletado no disponible — ingresá la dirección completa y seleccioná la zona manualmente.
+          Autocompletado no disponible — ingresa la dirección completa y selecciona la zona manualmente.
         </div>
       )}
     </div>

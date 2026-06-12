@@ -44,7 +44,7 @@ export function CatalogClient({ dishes }: { dishes: CatalogDish[] }) {
           Menú de esta semana
         </h1>
         <p className="font-poppins text-sm text-gray-500">
-          Elegí los platos que querés y armá tu box. Pedido mínimo{" "}
+          Elige los platos que quieres y arma tu box. Pedido mínimo{" "}
           <span className="font-semibold text-leaf">${MIN_ORDER}</span>.
         </p>
       </div>

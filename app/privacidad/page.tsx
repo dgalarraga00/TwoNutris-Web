@@ -78,7 +78,7 @@ const SECTIONS: PrivacySection[] = [
     items: [
       {
         subtitle: null,
-        text: "Podés acceder, rectificar o eliminar tus datos solicitándolo a info@twonutris.net",
+        text: "Puedes acceder, rectificar o eliminar tus datos solicitándolo a info@twonutris.net",
       },
     ],
   },
@@ -171,12 +171,12 @@ export default function PrivacidadPage() {
               className="text-lg font-bold mb-2 font-ibrand"
               style={{ color: "#144400" }}
             >
-              ¿Tenés preguntas sobre nuestra política de privacidad?
+              ¿Tienes preguntas sobre nuestra política de privacidad?
             </p>
             <p
               className="text-sm mb-6 font-poppins text-gray-700"
             >
-              Escribinos y respondemos a la brevedad.
+              Escríbenos y respondemos a la brevedad.
             </p>
             <a
               href="mailto:info@twonutris.net"

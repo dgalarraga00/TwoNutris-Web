@@ -85,7 +85,7 @@ function buildHtml(order: OrderConfirmationData): string {
             </table>
 
             <p style="margin:24px 0 0;font-size:13px;color:#888;text-align:center;">
-              ¿Tenés alguna duda? Escribinos por WhatsApp o respondé este email.<br/>
+              ¿Tienes alguna duda? Escríbenos por WhatsApp o responde este email.<br/>
               ¡Gracias por elegir TwoNutris!
             </p>
           </td>

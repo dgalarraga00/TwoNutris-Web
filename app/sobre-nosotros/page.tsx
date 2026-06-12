@@ -25,7 +25,7 @@ const VALORES = [
   {
     icon: Search,
     title: "Transparencia y Honestidad",
-    desc: "Sabés exactamente qué comés: ingredientes reales, macros visibles, sin letra chica.",
+    desc: "Sabes exactamente qué comes: ingredientes reales, macros visibles, sin letra chica.",
   },
   {
     icon: Leaf,
@@ -379,7 +379,7 @@ export default function SobreNosotrosPage() {
                     className="mt-8 p-4 rounded-2xl text-sm font-poppins"
                     style={{ backgroundColor: "rgba(20,68,0,0.06)", color: "#144400" }}
                   >
-                    ¿No ves tu zona? Escribinos — estamos expandiendo continuamente.
+                    ¿No ves tu zona? Escríbenos — estamos expandiendo continuamente.
                   </div>
                 </div>
               </div>

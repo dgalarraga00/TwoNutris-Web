@@ -10,7 +10,7 @@ const FAQS = [
   },
   {
     q: "¿Hasta cuándo puedo hacer mi pedido?",
-    a: "Podés pedir hasta el miércoles a medianoche. Una vez cerrado ese plazo, comenzamos con la preparación y ya no es posible agregar ni modificar pedidos para esa semana.",
+    a: "Puedes pedir hasta el miércoles a medianoche. Una vez cerrado ese plazo, comenzamos con la preparación y ya no es posible agregar ni modificar pedidos para esa semana.",
   },
   {
     q: "¿Cómo funciona el pago?",
@@ -18,7 +18,7 @@ const FAQS = [
   },
   {
     q: "¿Cuál es el pedido mínimo?",
-    a: "El pedido mínimo es de $20. Podés armar tu pedido eligiendo los platos que quieras del menú semanal hasta llegar a ese monto.",
+    a: "El pedido mínimo es de $20. Puedes armar tu pedido eligiendo los platos que quieras del menú semanal hasta llegar a ese monto.",
   },
   {
     q: "¿Cuánto cuesta el delivery?",
@@ -26,11 +26,11 @@ const FAQS = [
   },
   {
     q: "¿En qué zonas entregan?",
-    a: "Por el momento entregamos en Quito. Si tenés dudas sobre si llegamos a tu sector, escribinos por WhatsApp antes de hacer tu pedido.",
+    a: "Por el momento entregamos en Quito. Si tienes dudas sobre si llegamos a tu sector, escríbenos por WhatsApp antes de hacer tu pedido.",
   },
   {
     q: "¿Puedo cancelar o cambiar mi pedido?",
-    a: "Podés cancelar o modificar tu pedido hasta el miércoles a medianoche. Pasado ese horario, el pedido entra en producción y no es posible hacer cambios.",
+    a: "Puedes cancelar o modificar tu pedido hasta el miércoles a medianoche. Pasado ese horario, el pedido entra en producción y no es posible hacer cambios.",
   },
   {
     q: "¿Qué pasa si no estoy en casa al momento de la entrega?",

@@ -215,10 +215,10 @@ export default function TerminosPage() {
               className="text-lg font-bold mb-2 font-ibrand"
               style={{ color: "#144400" }}
             >
-              ¿Tenés preguntas sobre estos términos?
+              ¿Tienes preguntas sobre estos términos?
             </p>
             <p className="text-sm mb-6 font-poppins text-gray-700">
-              Estamos para ayudarte. Escribinos y respondemos a la brevedad.
+              Estamos para ayudarte. Escríbenos y respondemos a la brevedad.
             </p>
             <a
               href="mailto:info@twonutris.net"

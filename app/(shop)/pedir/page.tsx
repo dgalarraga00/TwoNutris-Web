@@ -5,9 +5,9 @@ import { WeeklyMenuStatus, DishTemplateCategory } from "@/lib/generated/prisma";
 import type { CatalogDish } from "@/lib/catalog";
 
 export const metadata = {
-  title: "Pedí tu menú | TwoNutris",
+  title: "Pide tu menú | TwoNutris",
   description:
-    "Elegí los platos de la semana y recibí tu box saludable en Quito.",
+    "Elige los platos de la semana y recibe tu box saludable en Quito.",
 };
 
 const CAT_MAP: Record<DishTemplateCategory, "NORMAL" | "VEGETARIANO" | "PREMIUM"> = {

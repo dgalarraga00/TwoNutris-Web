@@ -23,7 +23,7 @@ export default async function PedidosPage() {
           <span className="text-2xl">🛍️</span>
         </div>
         <p className="text-gray-500 font-poppins text-sm">
-          Todavía no tenés pedidos.
+          Todavía no tienes pedidos.
         </p>
         <a
           href="/pedir"

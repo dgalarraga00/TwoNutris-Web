@@ -63,7 +63,7 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
   useEffect(() => {
     if (!pendingPayment || !payphoneReady) return;
     const PP = window.PPaymentButtonBox;
-    if (!PP) { setError("Sistema de pagos no disponible. Recargá la página."); return; }
+    if (!PP) { setError("Sistema de pagos no disponible. Recarga la página."); return; }
     new PP({
       token: process.env.NEXT_PUBLIC_PAYPHONE_TOKEN,
       clientTransactionId: pendingPayment.orderId,
@@ -92,22 +92,22 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
     setError(null);
 
     if (!address.trim()) {
-      setError("Ingresá tu dirección de entrega.");
+      setError("Ingresa tu dirección de entrega.");
       return;
     }
 
     if (!fullName.trim()) {
-      setError("Ingresá tu nombre completo.");
+      setError("Ingresa tu nombre completo.");
       return;
     }
 
     if (!phone.trim()) {
-      setError("Ingresá tu número de teléfono.");
+      setError("Ingresa tu número de teléfono.");
       return;
     }
 
     if (!taxId.trim()) {
-      setError("Ingresá tu número de cédula / RUC para la factura.");
+      setError("Ingresa tu número de cédula / RUC para la factura.");
       return;
     }
 
