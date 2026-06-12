@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@/lib/generated/prisma";
 import { createClient } from "@/utils/supabase/server";
 import { isAdmin } from "@/utils/admin";
 
@@ -70,6 +71,19 @@ export async function DELETE(
 
     return NextResponse.json({ success: true });
   } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      // FK: el plato está referenciado por uno o más menús semanales
+      if (err.code === "P2003") {
+        return NextResponse.json(
+          { error: "No se puede eliminar: el plato está en uno o más menús semanales. Desactívalo en su lugar." },
+          { status: 409 }
+        );
+      }
+      // Registro inexistente
+      if (err.code === "P2025") {
+        return NextResponse.json({ error: "Plato no encontrado" }, { status: 404 });
+      }
+    }
     console.error("[dishes DELETE]", err);
     return NextResponse.json({ error: "Error interno" }, { status: 500 });
   }
