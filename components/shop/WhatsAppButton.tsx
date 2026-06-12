@@ -1,12 +1,21 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 export function WhatsAppButton() {
+  const pathname = usePathname();
+
+  // En el checkout el FAB queda fijo sobre el "Total" del resumen y lo tapa.
+  // Es un flujo de pago enfocado: ocultamos el botón ahí.
+  if (pathname === "/checkout") return null;
+
   return (
     <a
       href="https://wa.me/593983392007"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"
-      className="fixed bottom-24 md:bottom-6 right-6 z-50 flex items-center justify-center rounded-full shadow-lg transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#25D366]"
-      style={{ width: 56, height: 56, backgroundColor: "#25D366" }}
+      className="fixed bottom-24 md:bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] shadow-lg transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#25D366]"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
