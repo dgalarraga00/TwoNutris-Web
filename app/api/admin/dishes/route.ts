@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { createClient } from "@/utils/supabase/server";
 import { isAdmin } from "@/utils/admin";
+import { dishCreateSchema } from "@/lib/schemas/dish";
 
 export async function GET() {
   const supabase = await createClient();
@@ -27,7 +28,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body = await request.json();
+    const parsed = dishCreateSchema.safeParse(await request.json());
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: parsed.error.issues[0]?.message ?? "Datos inválidos" },
+        { status: 400 }
+      );
+    }
+    const body = parsed.data;
 
     const dish = await prisma.dishTemplate.create({
       data: {
