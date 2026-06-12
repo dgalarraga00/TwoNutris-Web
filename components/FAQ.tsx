@@ -68,7 +68,10 @@ export function FAQ() {
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-6 py-6 text-left cursor-pointer border-0 bg-transparent"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${i}`}
+                  id={`faq-question-${i}`}
+                  className="w-full flex items-center justify-between gap-6 py-6 text-left cursor-pointer border-0 bg-transparent rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#144400] focus-visible:ring-offset-2"
                 >
                   <span
                     className="text-base md:text-lg font-semibold leading-snug font-poppins"
@@ -88,6 +91,9 @@ export function FAQ() {
                 </button>
 
                 <div
+                  id={`faq-answer-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${i}`}
                   className="overflow-hidden transition-all duration-300 ease-in-out"
                   style={{ maxHeight: isOpen ? "600px" : "0px" }}
                 >
