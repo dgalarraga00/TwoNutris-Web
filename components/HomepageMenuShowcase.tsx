@@ -1,7 +1,7 @@
 import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { WeeklyMenuStatus } from "@/lib/generated/prisma";
-import type { PublicDish } from "@/app/api/weekly-menu/route";
+import type { PublicDish } from "@/lib/weekly-menu";
 import { HomepageMenuCarousel } from "@/components/HomepageMenuCarousel";
 
 const getPublishedDishes = unstable_cache(

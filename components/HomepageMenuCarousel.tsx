@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Info, Leaf, Flame, X } from "lucide-react";
-import type { PublicDish } from "@/app/api/weekly-menu/route";
+import type { PublicDish } from "@/lib/weekly-menu";
 import { ALLERGEN_MAP } from "@/lib/allergens";
 
 function DishCard({
