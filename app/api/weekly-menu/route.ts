@@ -60,7 +60,7 @@ export async function GET() {
       allergens: dish.allergens,
       category: dish.category,
       price: dish.price,
-      ingredients: dish.description ?? null,
+      ingredients: dish.ingredients ?? dish.description,
     })),
   };
 

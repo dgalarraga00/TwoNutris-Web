@@ -27,7 +27,7 @@ const getPublishedDishes = unstable_cache(
       allergens: dish.allergens,
       category: dish.category,
       price: dish.price,
-      ingredients: dish.description ?? null,
+      ingredients: dish.ingredients ?? dish.description,
     }));
   },
   ["homepage-published-menu"],
