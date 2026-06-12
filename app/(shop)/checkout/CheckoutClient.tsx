@@ -8,7 +8,7 @@ declare global {
   }
 }
 import { useRouter } from "next/navigation";
-import { ShoppingBag, ChevronRight, Loader2, MapPin, User, Truck, Receipt } from "lucide-react";
+import { ShoppingBag, ChevronRight, Loader2, MapPin, User, Truck, Receipt, X } from "lucide-react";
 import { useCart } from "@/components/shop/CartProvider";
 import { PlacesAddressInput } from "@/components/shop/PlacesAddressInput";
 import { calculateDeliveryDate, cutoffDate, formatDeliveryDate } from "@/lib/delivery";
@@ -390,15 +390,28 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
     </div>
 
     {pendingPayment && (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
-        <div className="bg-white rounded-2xl p-3 sm:p-6 w-full max-w-md shadow-xl relative">
-          <button
-            onClick={() => setPendingPayment(null)}
-            className="absolute top-3 right-3 p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
-            aria-label="Cerrar"
-          >
-            ✕
-          </button>
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+        onClick={() => setPendingPayment(null)}
+      >
+        <div
+          className="bg-white rounded-2xl p-3 sm:p-6 w-full max-w-md shadow-xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header con cierre — siempre visible, encima de la caja de PayPhone */}
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-sm font-semibold font-poppins text-gray-700">
+              Pago seguro
+            </span>
+            <button
+              type="button"
+              onClick={() => setPendingPayment(null)}
+              className="-mr-1 p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+              aria-label="Cerrar"
+            >
+              <X size={20} />
+            </button>
+          </div>
           <div id="pp-button" />
         </div>
       </div>
