@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Conocé cómo TwoNutris recopila, usa y protege tu información personal. Comprometidos con tu privacidad.",
   alternates: {
-    canonical: "https://home.twonutris.net/privacidad",
+    canonical: "https://www.twonutris.com/privacidad",
   },
 };
 

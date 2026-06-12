@@ -8,10 +8,10 @@ export const metadata: Metadata = {
     title: "Menú Semanal | Platos saludables y variados - TwoNutris",
     description:
       "Explorá el menú semanal de TwoNutris. Platos variados, con macros visibles, sin conservantes y listos para calentar.",
-    url: "https://home.twonutris.net/menu",
+    url: "https://www.twonutris.com/menu",
   },
   alternates: {
-    canonical: "https://home.twonutris.net/menu",
+    canonical: "https://www.twonutris.com/menu",
   },
 };
 

@@ -16,7 +16,7 @@ const ibrand = localFont({
   display: "swap",
 });
 
-const BASE_URL = "https://home.twonutris.net";
+const BASE_URL = "https://www.twonutris.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -73,10 +73,10 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "FoodEstablishment",
   name: "TwoNutris",
-  url: "https://home.twonutris.net",
+  url: "https://www.twonutris.com",
   description:
     "Comida real, cocinada a fuego lento, con delivery semanal en Quito. Meal prep saludable sin estrés.",
-  image: "https://home.twonutris.net/icons/Imagotipo.png",
+  image: "https://www.twonutris.com/icons/Imagotipo.png",
   servesCuisine: "Saludable, Meal Prep",
   priceRange: "$$",
   address: {
@@ -96,7 +96,7 @@ const jsonLd = {
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Menú Semanal TwoNutris",
-    url: "https://home.twonutris.net/menu",
+    url: "https://www.twonutris.com/menu",
   },
   contactPoint: {
     "@type": "ContactPoint",

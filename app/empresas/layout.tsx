@@ -8,10 +8,10 @@ export const metadata: Metadata = {
     title: "TwoNutris Corporativo | Beneficios de alimentación para tu equipo",
     description:
       "Planes corporativos de alimentación para empresas en Quito. Menú variado, facturación centralizada y descuentos por volumen.",
-    url: "https://home.twonutris.net/empresas",
+    url: "https://www.twonutris.com/empresas",
   },
   alternates: {
-    canonical: "https://home.twonutris.net/empresas",
+    canonical: "https://www.twonutris.com/empresas",
   },
 };
 

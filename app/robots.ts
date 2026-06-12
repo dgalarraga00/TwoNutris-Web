@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://home.twonutris.net/sitemap.xml",
+    sitemap: "https://www.twonutris.com/sitemap.xml",
   };
 }
