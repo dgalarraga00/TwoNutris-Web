@@ -26,7 +26,11 @@ const FAQS = [
   },
   {
     q: "¿En qué zonas entregan?",
-    a: "Por el momento entregamos en Quito. Si tienes dudas sobre si llegamos a tu sector, escríbenos por WhatsApp antes de hacer tu pedido.",
+    a: "Llegamos a todo Quito y Valles (Cumbayá, Tumbaco, Valle de los Chillos, etc.). Si tienes dudas sobre si llegamos a tu sector, escríbenos por WhatsApp antes de hacer tu pedido.",
+  },
+  {
+    q: "¿Cómo conservo mi comida y cuánto dura?",
+    a: "Nuestros platos son 100% reales y sin conservantes artificiales. Debes refrigerarlos inmediatamente al recibirlos entre 0°C y 4°C. Duran de 5 a 6 días en perfecto estado. Para consumirlos, solo calienta 2-3 min en el microondas.",
   },
   {
     q: "¿Puedo cancelar o cambiar mi pedido?",

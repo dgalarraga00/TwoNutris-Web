@@ -68,7 +68,7 @@ const SECTIONS: PrivacySection[] = [
     items: [
       {
         subtitle: null,
-        text: "No vendemos tus datos. Solo compartimos dirección y teléfono con nuestros repartidores para la entrega y con pasarelas de pago seguras (PayPhone/PayPal) para el cobro.",
+        text: "No vendemos tus datos. Solo compartimos dirección y teléfono con nuestros repartidores para la entrega y con pasarelas de pago seguras (PayPhone) para el cobro.",
       },
     ],
   },
@@ -79,6 +79,16 @@ const SECTIONS: PrivacySection[] = [
       {
         subtitle: null,
         text: "Puedes acceder, rectificar o eliminar tus datos solicitándolo a info@twonutris.net",
+      },
+    ],
+  },
+  {
+    num: "6",
+    title: "Uso de Cookies",
+    items: [
+      {
+        subtitle: null,
+        text: "Utilizamos cookies necesarias para el funcionamiento de la web, así como cookies analíticas y de marketing para mejorar tu experiencia de usuario. Puedes gestionar tus preferencias en cualquier momento desde nuestro banner de cookies.",
       },
     ],
   },
@@ -97,7 +107,7 @@ export default function PrivacidadPage() {
               className="text-xs font-bold tracking-widest uppercase mb-4 font-poppins"
               style={{ color: "#FFB000" }}
             >
-              Versión oficial · Abril 2026
+              Versión oficial · Junio 2026
             </p>
             <h1
               className="text-4xl md:text-5xl leading-tight mb-4 font-ibrand"

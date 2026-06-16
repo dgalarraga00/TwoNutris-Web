@@ -68,7 +68,7 @@ const SECTIONS: TermsSection[] = [
     items: [
       {
         subtitle: "Refrigeración Inmediata",
-        text: "Al recibir los alimentos para toda la semana, es obligación estricta y exclusiva del cliente refrigerar todos los empaques inmediatamente.",
+        text: "Al recibir los alimentos para toda la semana, es obligación estricta y exclusiva del cliente refrigerar todos los empaques inmediatamente. El producto debe mantenerse a una temperatura continua de entre 0°C y 4°C. Asimismo, una vez perforado o abierto el sello del envase, el alimento deberá ser consumido en un plazo máximo de 24 horas.",
       },
       {
         subtitle: "Frescura sin Conservantes",
