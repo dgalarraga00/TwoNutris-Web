@@ -9,7 +9,7 @@ import { z } from "zod";
 export const dishCreateSchema = z.object({
   name: z.string().min(1, "El nombre es requerido"),
   description: z.string().min(1, "La descripción es requerida"),
-  category: z.enum(["CLASICO", "LOW_CARB", "VEGETARIANO", "PREMIUM"]),
+  category: z.enum(["CLASICO", "VEGETARIANO", "PREMIUM"]),
   price: z.number().positive().optional(),
   calories: z.number().int().nullable().optional(),
   protein: z.number().nullable().optional(),

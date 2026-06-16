@@ -17,7 +17,6 @@ export const dynamic = "force-dynamic";
 
 const CAT_MAP: Record<DishTemplateCategory, "NORMAL" | "VEGETARIANO" | "PREMIUM"> = {
   CLASICO: "NORMAL",
-  LOW_CARB: "NORMAL",
   VEGETARIANO: "VEGETARIANO",
   PREMIUM: "PREMIUM",
 };

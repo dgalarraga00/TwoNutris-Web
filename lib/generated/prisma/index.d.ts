@@ -60,7 +60,6 @@ export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
 
 export const DishTemplateCategory: {
   CLASICO: 'CLASICO',
-  LOW_CARB: 'LOW_CARB',
   VEGETARIANO: 'VEGETARIANO',
   PREMIUM: 'PREMIUM'
 };

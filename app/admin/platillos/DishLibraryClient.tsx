@@ -19,7 +19,6 @@ const CATEGORY_FILTERS: { key: CategoryFilter; label: string }[] = [
 
 const CATEGORY_LABELS: Record<DishTemplateCategory, string> = {
   CLASICO: "Clásico",
-  LOW_CARB: "Clásico",
   VEGETARIANO: "Vegetariano",
   PREMIUM: "Premium",
 };

@@ -11,7 +11,6 @@ interface MenuWithItems extends WeeklyMenu { items: MenuItemWithDish[] }
 
 const CATEGORY_LABELS: Record<string, string> = {
   CLASICO: "Clásico",
-  LOW_CARB: "Clásico",
   VEGETARIANO: "Vegetariano",
   PREMIUM: "Premium",
 };
