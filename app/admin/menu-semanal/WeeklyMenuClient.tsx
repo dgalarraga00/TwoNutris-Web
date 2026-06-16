@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { X, Search } from "lucide-react";
+import { X, Search, Check } from "lucide-react";
 import type { DishTemplate, WeeklyMenu, WeeklyMenuItem, WeeklyMenuStatus } from "@/lib/generated/prisma";
 
 interface MenuItemWithDish extends WeeklyMenuItem { dish: DishTemplate }
@@ -21,6 +21,18 @@ function localDateStr(d: Date): string {
   const m = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
   return `${y}-${m}-${day}`;
+}
+
+const DOW = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+const MONTHS = [
+  "enero", "febrero", "marzo", "abril", "mayo", "junio",
+  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+];
+
+/** "2026-06-18" → "jueves 18 de junio" (mediodía local para evitar desfase de zona). */
+function formatMenuDate(dateStr: string): string {
+  const d = new Date(dateStr + "T12:00:00");
+  return `${DOW[d.getDay()]} ${d.getDate()} de ${MONTHS[d.getMonth()]}`;
 }
 
 function getNextThursday(): string {
@@ -61,7 +73,15 @@ export function WeeklyMenuClient({
   const [saving, setSaving] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const [status, setStatus] = useState<WeeklyMenuStatus | null>(currentMenu?.status ?? null);
+
+  // El mensaje de confirmación se oculta solo a los 6 segundos.
+  useEffect(() => {
+    if (!success) return;
+    const id = setTimeout(() => setSuccess(null), 6000);
+    return () => clearTimeout(id);
+  }, [success]);
 
   const selectedDishes = selectedIds
     .map((id) => allDishes.find((d) => d.id === id))
@@ -91,6 +111,7 @@ export function WeeklyMenuClient({
   async function saveDraft() {
     setSaving(true);
     setError(null);
+    setSuccess(null);
     try {
       const res = await fetch("/api/admin/weekly-menu", {
         method: "POST",
@@ -102,6 +123,7 @@ export function WeeklyMenuClient({
         throw new Error(data.error ?? "Error al guardar");
       }
       setStatus("DRAFT");
+      setSuccess(`Borrador guardado. Se publica automáticamente el ${formatMenuDate(weekStart)}.`);
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error inesperado");
@@ -113,6 +135,7 @@ export function WeeklyMenuClient({
   async function handlePublish() {
     setPublishing(true);
     setError(null);
+    setSuccess(null);
     try {
       const draftRes = await fetch("/api/admin/weekly-menu", {
         method: "POST",
@@ -130,6 +153,7 @@ export function WeeklyMenuClient({
         throw new Error(data.error ?? "Error al publicar");
       }
       setStatus("PUBLISHED");
+      setSuccess("Menú publicado. Ya está visible para tus clientes.");
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error inesperado");
@@ -154,6 +178,9 @@ export function WeeklyMenuClient({
               {status === "PUBLISHED" ? "Publicado" : "Borrador"}
             </span>
           )}
+          <span className="font-poppins text-sm text-gray-500">
+            Semana del {formatMenuDate(weekStart)}
+          </span>
         </div>
 
         <div className="flex gap-2 flex-wrap">
@@ -185,6 +212,13 @@ export function WeeklyMenuClient({
           <p className="font-poppins text-sm text-amber-700">
             El menú no tiene platos. Agregá al menos uno antes de guardar o publicar.
           </p>
+        </div>
+      )}
+
+      {success && (
+        <div className="bg-green-50 border border-green-200 rounded-xl px-4 py-3 mb-4 flex items-center gap-2">
+          <Check size={16} className="text-green-600 shrink-0" />
+          <p className="font-poppins text-sm font-medium text-green-700">{success}</p>
         </div>
       )}
 
