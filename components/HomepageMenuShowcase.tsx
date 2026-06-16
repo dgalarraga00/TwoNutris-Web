@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { WeeklyMenuStatus } from "@/lib/generated/prisma";
 import type { PublicDish } from "@/lib/weekly-menu";
 import { HomepageMenuCarousel } from "@/components/HomepageMenuCarousel";
+import { isBeforeLaunch } from "@/lib/launch";
 
 const getPublishedDishes = unstable_cache(
   async (): Promise<PublicDish[]> => {
@@ -35,7 +36,8 @@ const getPublishedDishes = unstable_cache(
 );
 
 export async function HomepageMenuShowcase() {
-  const dishes = await getPublishedDishes();
+  // Antes del lanzamiento se muestra el teaser, no los platos del menú.
+  const dishes = isBeforeLaunch() ? [] : await getPublishedDishes();
 
   return (
     <section
@@ -82,7 +84,7 @@ export async function HomepageMenuShowcase() {
               className="text-sm font-poppins max-w-xs opacity-[55%]"
               style={{ color: "#FFFBE4" }}
             >
-              Estamos preparando los platos. Volvé pronto para ver las novedades.
+              Estamos preparando los platos. Vuelve pronto para ver las novedades.
             </p>
           </div>
         </div>

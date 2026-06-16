@@ -3,12 +3,17 @@ import { prisma } from "@/lib/prisma";
 import { CatalogClient } from "./CatalogClient";
 import { WeeklyMenuStatus, DishTemplateCategory } from "@/lib/generated/prisma";
 import type { CatalogDish } from "@/lib/catalog";
+import { isBeforeLaunch } from "@/lib/launch";
+import { ComingSoon } from "@/components/ComingSoon";
 
 export const metadata = {
   title: "Pide tu menú | TwoNutris",
   description:
     "Elige los platos de la semana y recibe tu box saludable en Quito.",
 };
+
+// El gate de lanzamiento y el menú publicado se evalúan por request.
+export const dynamic = "force-dynamic";
 
 const CAT_MAP: Record<DishTemplateCategory, "NORMAL" | "VEGETARIANO" | "PREMIUM"> = {
   CLASICO: "NORMAL",
@@ -65,6 +70,11 @@ async function CatalogData() {
 }
 
 export default function PedirPage() {
+  // Antes del lanzamiento, el menú no se renderiza ni se envía al cliente.
+  if (isBeforeLaunch()) {
+    return <ComingSoon />;
+  }
+
   return (
     <Suspense
       fallback={
