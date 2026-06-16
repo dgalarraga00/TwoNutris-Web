@@ -128,9 +128,10 @@ export function NavbarClient() {
         <div className="flex items-center gap-3">
           {user ? (
             <>
-              {/* Nombre → dashboard */}
+              {/* Nombre → el server decide: admin va a /admin, cliente a /dashboard */}
               <Link
-                href="/dashboard/pedidos"
+                href="/auth/redirect?next=/dashboard/pedidos"
+                prefetch={false}
                 className="hidden md:flex items-center gap-2 text-sm font-semibold no-underline font-ibrand px-3 py-2 rounded-xl transition-colors hover:bg-[rgba(20,68,0,0.06)]"
                 style={{ color: "#144400" }}
               >
@@ -214,11 +215,10 @@ export function NavbarClient() {
 
       {/* ── Mobile Menu ─────────────────────────────────────── */}
       <div
-        className="md:hidden overflow-hidden transition-all duration-300"
+        className="md:hidden overflow-hidden transition-all duration-300 backdrop-blur-lg"
         style={{
           maxHeight: mobileOpen ? "360px" : "0",
           backgroundColor: "rgba(255, 251, 228, 0.97)",
-          backdropFilter: "blur(16px)",
         }}
       >
         <ul className="flex flex-col list-none m-0 p-4 gap-1">
@@ -239,7 +239,8 @@ export function NavbarClient() {
             <>
               <li>
                 <Link
-                  href="/dashboard/pedidos"
+                  href="/auth/redirect?next=/dashboard/pedidos"
+                  prefetch={false}
                   className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold no-underline font-ibrand"
                   style={{ color: "#144400" }}
                   onClick={() => setMobileOpen(false)}
