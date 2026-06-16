@@ -75,8 +75,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const commission = Math.round((subtotal + DELIVERY_FEE) * 0.0575 * 100) / 100;
-    const total = subtotal + DELIVERY_FEE + commission;
+    const iva = Math.round((subtotal + DELIVERY_FEE) * 0.15 * 100) / 100;
+    const total = subtotal + DELIVERY_FEE + iva;
 
     const profileUpdate: { fullName?: string; whatsapp?: string } = {};
     if (fullName) profileUpdate.fullName = fullName;

@@ -21,12 +21,8 @@ function r2(n: number) {
   return Math.round(n * 100) / 100;
 }
 
-function sinIva(conIva: number) {
-  return r2(conIva / (1 + IVA_RATE));
-}
-
-function buildLineItem(descripcion: string, precioConIvaUnit: number, cantidad: number) {
-  const unitSin = sinIva(precioConIvaUnit);
+function buildLineItem(descripcion: string, precioBaseUnit: number, cantidad: number) {
+  const unitSin = r2(precioBaseUnit);
   const totalSin = r2(unitSin * cantidad);
   const ivaVal = r2(totalSin * IVA_RATE);
   const codigo = descripcion
@@ -77,14 +73,17 @@ export async function emitDatilInvoice(order: InvoiceOrder): Promise<void> {
   const now = new Date();
   const fechaEmision = now.toISOString();
 
-  const itemsSubtotal = r2(
+  const itemsBase = r2(
     order.items.reduce((s, i) => s + i.unitPrice * i.quantity, 0)
   );
-  const otrosCargos = r2(order.total - itemsSubtotal);
+  // order.total ya incluye IVA: base imponible total = total / (1 + IVA).
+  // El resto sobre los platos es la base del envío (también gravada con IVA).
+  const totalBase = r2(order.total / (1 + IVA_RATE));
+  const enviosBase = r2(totalBase - itemsBase);
 
   const lineItems = [
     ...order.items.map((i) => buildLineItem(i.dishName, i.unitPrice, i.quantity)),
-    ...(otrosCargos > 0 ? [buildLineItem("Envío y cargos", otrosCargos, 1)] : []),
+    ...(enviosBase > 0 ? [buildLineItem("Envío", enviosBase, 1)] : []),
   ];
 
   const totalSinImpuestos = r2(lineItems.reduce((s, i) => s + i.impuestos[0].base_imponible, 0));

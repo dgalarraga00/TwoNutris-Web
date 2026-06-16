@@ -15,7 +15,7 @@ import { calculateDeliveryDate, cutoffDate, formatDeliveryDate } from "@/lib/del
 import { DELIVERY_FEE } from "@/lib/catalog";
 import type { Zone } from "@/utils/delivery-zones";
 import Image from "next/image";
-const PAYPHONE_RATE = 0.0575;
+const IVA_RATE = 0.15;
 
 export function CheckoutClient({ userEmail }: { userEmail: string }) {
   const { items, total: subtotal } = useCart();
@@ -80,8 +80,8 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
   }, [pendingPayment, payphoneReady]);
 
   const delivery = DELIVERY_FEE;
-  const commission = Math.round((subtotal + delivery) * PAYPHONE_RATE * 100) / 100;
-  const total = subtotal + delivery + commission;
+  const iva = Math.round((subtotal + delivery) * IVA_RATE * 100) / 100;
+  const total = subtotal + delivery + iva;
 
   function handlePlaceSelect(formattedAddress: string, _zone: Zone, _lat: number, _lng: number) {
     setAddress(formattedAddress);
@@ -357,8 +357,8 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
             <span>${delivery.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-sm font-poppins text-gray-500">
-            <span>Cargo por pago online (5.75%)</span>
-            <span>${commission.toFixed(2)}</span>
+            <span>IVA (15%)</span>
+            <span>${iva.toFixed(2)}</span>
           </div>
           <div className="flex justify-between font-bold font-poppins text-gray-900 text-base mt-1">
             <span>Total</span>
