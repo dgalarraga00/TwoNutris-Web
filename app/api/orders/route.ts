@@ -7,6 +7,7 @@ import { MIN_ORDER, DELIVERY_FEE } from "@/lib/catalog";
 interface OrderPayload {
   items: { id: string; name: string; quantity: number }[];
   deliveryAddress: string;
+  deliverySlot: "MORNING" | "AFTERNOON";
   deliveryInstructions?: string;
   fullName?: string;
   phone?: string;
@@ -29,6 +30,7 @@ export async function POST(request: Request) {
     const {
       items,
       deliveryAddress,
+      deliverySlot,
       deliveryInstructions,
       fullName,
       phone,
@@ -42,6 +44,10 @@ export async function POST(request: Request) {
 
     if (!deliveryAddress?.trim()) {
       return NextResponse.json({ error: "Dirección de entrega requerida" }, { status: 400 });
+    }
+
+    if (deliverySlot !== "MORNING" && deliverySlot !== "AFTERNOON") {
+      return NextResponse.json({ error: "Franja de entrega inválida" }, { status: 400 });
     }
 
     if (!taxIdType || !taxId?.trim()) {
@@ -97,6 +103,7 @@ export async function POST(request: Request) {
         status: "PENDING",
         total,
         deliveryAddress: deliveryAddress.trim(),
+        deliverySlot,
         deliveryInstructions: deliveryInstructions?.trim() ?? null,
         deliveryDate,
         taxIdType,

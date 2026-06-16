@@ -24,6 +24,7 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
   const formRef = useRef<HTMLFormElement>(null);
 
   const [address, setAddress] = useState("");
+  const [deliverySlot, setDeliverySlot] = useState<"MORNING" | "AFTERNOON" | "">("");
   const [instructions, setInstructions] = useState("");
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -96,6 +97,11 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
       return;
     }
 
+    if (!deliverySlot) {
+      setError("Elige una franja de entrega.");
+      return;
+    }
+
     if (!fullName.trim()) {
       setError("Ingresa tu nombre completo.");
       return;
@@ -123,6 +129,7 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
             quantity: i.quantity,
           })),
           deliveryAddress: address.trim(),
+          deliverySlot,
           deliveryInstructions: instructions.trim() || undefined,
           fullName: fullName.trim() || undefined,
           phone: phone.trim() || undefined,
@@ -185,6 +192,45 @@ export function CheckoutClient({ userEmail }: { userEmail: string }) {
               onChange={(v) => setAddress(v)}
               onPlaceSelect={handlePlaceSelect}
             />
+          </div>
+
+          {/* Franja horaria */}
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-semibold font-poppins text-gray-500 uppercase tracking-wide">
+              Franja de entrega
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setDeliverySlot("MORNING")}
+                aria-pressed={deliverySlot === "MORNING"}
+                className={`flex flex-col items-start gap-0.5 rounded-xl border px-4 py-3 text-left transition-colors ${
+                  deliverySlot === "MORNING"
+                    ? "border-leaf bg-leaf/5"
+                    : "border-gray-200 hover:border-leaf/40"
+                }`}
+              >
+                <span className="text-sm font-semibold font-poppins text-gray-900">Mañana</span>
+                <span className="text-xs font-poppins text-gray-500">09:00 a 15:30</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setDeliverySlot("AFTERNOON")}
+                aria-pressed={deliverySlot === "AFTERNOON"}
+                className={`flex flex-col items-start gap-0.5 rounded-xl border px-4 py-3 text-left transition-colors ${
+                  deliverySlot === "AFTERNOON"
+                    ? "border-leaf bg-leaf/5"
+                    : "border-gray-200 hover:border-leaf/40"
+                }`}
+              >
+                <span className="text-sm font-semibold font-poppins text-gray-900">Tarde</span>
+                <span className="text-xs font-poppins text-gray-500">15:00 a 20:00</span>
+              </button>
+            </div>
+            <p className="text-xs font-poppins text-gray-400">
+              No es posible asegurar ni agendar una hora específica de entrega
+              dentro de la franja elegida.
+            </p>
           </div>
 
           {/* Zona */}

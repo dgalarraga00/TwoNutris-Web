@@ -2596,6 +2596,7 @@ export namespace Prisma {
     deliveryInstructions: string | null
     payphoneTransactionId: string | null
     deliveryDate: Date | null
+    deliverySlot: string | null
     taxIdType: string | null
     taxId: string | null
     customerEmail: string | null
@@ -2613,6 +2614,7 @@ export namespace Prisma {
     deliveryInstructions: string | null
     payphoneTransactionId: string | null
     deliveryDate: Date | null
+    deliverySlot: string | null
     taxIdType: string | null
     taxId: string | null
     customerEmail: string | null
@@ -2630,6 +2632,7 @@ export namespace Prisma {
     deliveryInstructions: number
     payphoneTransactionId: number
     deliveryDate: number
+    deliverySlot: number
     taxIdType: number
     taxId: number
     customerEmail: number
@@ -2659,6 +2662,7 @@ export namespace Prisma {
     deliveryInstructions?: true
     payphoneTransactionId?: true
     deliveryDate?: true
+    deliverySlot?: true
     taxIdType?: true
     taxId?: true
     customerEmail?: true
@@ -2676,6 +2680,7 @@ export namespace Prisma {
     deliveryInstructions?: true
     payphoneTransactionId?: true
     deliveryDate?: true
+    deliverySlot?: true
     taxIdType?: true
     taxId?: true
     customerEmail?: true
@@ -2693,6 +2698,7 @@ export namespace Prisma {
     deliveryInstructions?: true
     payphoneTransactionId?: true
     deliveryDate?: true
+    deliverySlot?: true
     taxIdType?: true
     taxId?: true
     customerEmail?: true
@@ -2797,6 +2803,7 @@ export namespace Prisma {
     deliveryInstructions: string | null
     payphoneTransactionId: string | null
     deliveryDate: Date | null
+    deliverySlot: string | null
     taxIdType: string
     taxId: string
     customerEmail: string | null
@@ -2833,6 +2840,7 @@ export namespace Prisma {
     deliveryInstructions?: boolean
     payphoneTransactionId?: boolean
     deliveryDate?: boolean
+    deliverySlot?: boolean
     taxIdType?: boolean
     taxId?: boolean
     customerEmail?: boolean
@@ -2853,6 +2861,7 @@ export namespace Prisma {
     deliveryInstructions?: boolean
     payphoneTransactionId?: boolean
     deliveryDate?: boolean
+    deliverySlot?: boolean
     taxIdType?: boolean
     taxId?: boolean
     customerEmail?: boolean
@@ -2871,6 +2880,7 @@ export namespace Prisma {
     deliveryInstructions?: boolean
     payphoneTransactionId?: boolean
     deliveryDate?: boolean
+    deliverySlot?: boolean
     taxIdType?: boolean
     taxId?: boolean
     customerEmail?: boolean
@@ -2889,6 +2899,7 @@ export namespace Prisma {
     deliveryInstructions?: boolean
     payphoneTransactionId?: boolean
     deliveryDate?: boolean
+    deliverySlot?: boolean
     taxIdType?: boolean
     taxId?: boolean
     customerEmail?: boolean
@@ -2897,7 +2908,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "status" | "total" | "deliveryAddress" | "deliveryInstructions" | "payphoneTransactionId" | "deliveryDate" | "taxIdType" | "taxId" | "customerEmail" | "invoiceNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "status" | "total" | "deliveryAddress" | "deliveryInstructions" | "payphoneTransactionId" | "deliveryDate" | "deliverySlot" | "taxIdType" | "taxId" | "customerEmail" | "invoiceNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profile?: boolean | ProfileDefaultArgs<ExtArgs>
     items?: boolean | Order$itemsArgs<ExtArgs>
@@ -2925,6 +2936,7 @@ export namespace Prisma {
       deliveryInstructions: string | null
       payphoneTransactionId: string | null
       deliveryDate: Date | null
+      deliverySlot: string | null
       taxIdType: string
       taxId: string
       customerEmail: string | null
@@ -3364,6 +3376,7 @@ export namespace Prisma {
     readonly deliveryInstructions: FieldRef<"Order", 'String'>
     readonly payphoneTransactionId: FieldRef<"Order", 'String'>
     readonly deliveryDate: FieldRef<"Order", 'DateTime'>
+    readonly deliverySlot: FieldRef<"Order", 'String'>
     readonly taxIdType: FieldRef<"Order", 'String'>
     readonly taxId: FieldRef<"Order", 'String'>
     readonly customerEmail: FieldRef<"Order", 'String'>
@@ -8554,6 +8567,7 @@ export namespace Prisma {
     deliveryInstructions: 'deliveryInstructions',
     payphoneTransactionId: 'payphoneTransactionId',
     deliveryDate: 'deliveryDate',
+    deliverySlot: 'deliverySlot',
     taxIdType: 'taxIdType',
     taxId: 'taxId',
     customerEmail: 'customerEmail',
@@ -8834,6 +8848,7 @@ export namespace Prisma {
     deliveryInstructions?: StringNullableFilter<"Order"> | string | null
     payphoneTransactionId?: StringNullableFilter<"Order"> | string | null
     deliveryDate?: DateTimeNullableFilter<"Order"> | Date | string | null
+    deliverySlot?: StringNullableFilter<"Order"> | string | null
     taxIdType?: StringFilter<"Order"> | string
     taxId?: StringFilter<"Order"> | string
     customerEmail?: StringNullableFilter<"Order"> | string | null
@@ -8853,6 +8868,7 @@ export namespace Prisma {
     deliveryInstructions?: SortOrderInput | SortOrder
     payphoneTransactionId?: SortOrderInput | SortOrder
     deliveryDate?: SortOrderInput | SortOrder
+    deliverySlot?: SortOrderInput | SortOrder
     taxIdType?: SortOrder
     taxId?: SortOrder
     customerEmail?: SortOrderInput | SortOrder
@@ -8875,6 +8891,7 @@ export namespace Prisma {
     deliveryInstructions?: StringNullableFilter<"Order"> | string | null
     payphoneTransactionId?: StringNullableFilter<"Order"> | string | null
     deliveryDate?: DateTimeNullableFilter<"Order"> | Date | string | null
+    deliverySlot?: StringNullableFilter<"Order"> | string | null
     taxIdType?: StringFilter<"Order"> | string
     taxId?: StringFilter<"Order"> | string
     customerEmail?: StringNullableFilter<"Order"> | string | null
@@ -8894,6 +8911,7 @@ export namespace Prisma {
     deliveryInstructions?: SortOrderInput | SortOrder
     payphoneTransactionId?: SortOrderInput | SortOrder
     deliveryDate?: SortOrderInput | SortOrder
+    deliverySlot?: SortOrderInput | SortOrder
     taxIdType?: SortOrder
     taxId?: SortOrder
     customerEmail?: SortOrderInput | SortOrder
@@ -8919,6 +8937,7 @@ export namespace Prisma {
     deliveryInstructions?: StringNullableWithAggregatesFilter<"Order"> | string | null
     payphoneTransactionId?: StringNullableWithAggregatesFilter<"Order"> | string | null
     deliveryDate?: DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
+    deliverySlot?: StringNullableWithAggregatesFilter<"Order"> | string | null
     taxIdType?: StringWithAggregatesFilter<"Order"> | string
     taxId?: StringWithAggregatesFilter<"Order"> | string
     customerEmail?: StringNullableWithAggregatesFilter<"Order"> | string | null
@@ -9330,6 +9349,7 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    deliverySlot?: string | null
     taxIdType: string
     taxId: string
     customerEmail?: string | null
@@ -9349,6 +9369,7 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    deliverySlot?: string | null
     taxIdType: string
     taxId: string
     customerEmail?: string | null
@@ -9366,6 +9387,7 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliverySlot?: NullableStringFieldUpdateOperationsInput | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
     customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9385,6 +9407,7 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliverySlot?: NullableStringFieldUpdateOperationsInput | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
     customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9403,6 +9426,7 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    deliverySlot?: string | null
     taxIdType: string
     taxId: string
     customerEmail?: string | null
@@ -9419,6 +9443,7 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliverySlot?: NullableStringFieldUpdateOperationsInput | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
     customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9436,6 +9461,7 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliverySlot?: NullableStringFieldUpdateOperationsInput | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
     customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10023,6 +10049,7 @@ export namespace Prisma {
     deliveryInstructions?: SortOrder
     payphoneTransactionId?: SortOrder
     deliveryDate?: SortOrder
+    deliverySlot?: SortOrder
     taxIdType?: SortOrder
     taxId?: SortOrder
     customerEmail?: SortOrder
@@ -10045,6 +10072,7 @@ export namespace Prisma {
     deliveryInstructions?: SortOrder
     payphoneTransactionId?: SortOrder
     deliveryDate?: SortOrder
+    deliverySlot?: SortOrder
     taxIdType?: SortOrder
     taxId?: SortOrder
     customerEmail?: SortOrder
@@ -10062,6 +10090,7 @@ export namespace Prisma {
     deliveryInstructions?: SortOrder
     payphoneTransactionId?: SortOrder
     deliveryDate?: SortOrder
+    deliverySlot?: SortOrder
     taxIdType?: SortOrder
     taxId?: SortOrder
     customerEmail?: SortOrder
@@ -11109,6 +11138,7 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    deliverySlot?: string | null
     taxIdType: string
     taxId: string
     customerEmail?: string | null
@@ -11126,6 +11156,7 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    deliverySlot?: string | null
     taxIdType: string
     taxId: string
     customerEmail?: string | null
@@ -11173,6 +11204,7 @@ export namespace Prisma {
     deliveryInstructions?: StringNullableFilter<"Order"> | string | null
     payphoneTransactionId?: StringNullableFilter<"Order"> | string | null
     deliveryDate?: DateTimeNullableFilter<"Order"> | Date | string | null
+    deliverySlot?: StringNullableFilter<"Order"> | string | null
     taxIdType?: StringFilter<"Order"> | string
     taxId?: StringFilter<"Order"> | string
     customerEmail?: StringNullableFilter<"Order"> | string | null
@@ -11294,6 +11326,7 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    deliverySlot?: string | null
     taxIdType: string
     taxId: string
     customerEmail?: string | null
@@ -11312,6 +11345,7 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    deliverySlot?: string | null
     taxIdType: string
     taxId: string
     customerEmail?: string | null
@@ -11344,6 +11378,7 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliverySlot?: NullableStringFieldUpdateOperationsInput | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
     customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11362,6 +11397,7 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliverySlot?: NullableStringFieldUpdateOperationsInput | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
     customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11640,6 +11676,7 @@ export namespace Prisma {
     deliveryInstructions?: string | null
     payphoneTransactionId?: string | null
     deliveryDate?: Date | string | null
+    deliverySlot?: string | null
     taxIdType: string
     taxId: string
     customerEmail?: string | null
@@ -11656,6 +11693,7 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliverySlot?: NullableStringFieldUpdateOperationsInput | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
     customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11673,6 +11711,7 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliverySlot?: NullableStringFieldUpdateOperationsInput | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
     customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11690,6 +11729,7 @@ export namespace Prisma {
     deliveryInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     payphoneTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliverySlot?: NullableStringFieldUpdateOperationsInput | string | null
     taxIdType?: StringFieldUpdateOperationsInput | string
     taxId?: StringFieldUpdateOperationsInput | string
     customerEmail?: NullableStringFieldUpdateOperationsInput | string | null

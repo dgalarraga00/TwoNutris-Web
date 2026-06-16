@@ -41,6 +41,7 @@ model Order {
   deliveryInstructions String?     @map("delivery_instructions")
   payphoneTransactionId String?    @map("payphone_transaction_id")
   deliveryDate         DateTime?   @map("delivery_date")
+  deliverySlot         String?     @map("delivery_slot") // "MORNING" | "AFTERNOON"
   taxIdType            String      @map("tax_id_type")
   taxId                String      @map("tax_id")
   customerEmail        String?     @map("customer_email")

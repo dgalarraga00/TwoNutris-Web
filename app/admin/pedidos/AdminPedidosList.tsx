@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, MapPin, Phone, User } from "lucide-react";
+import { ChevronDown, Clock, MapPin, Phone, User } from "lucide-react";
 import { Order, OrderItem, OrderStatus, Profile } from "@/lib/generated/prisma";
 
 const MONTHS = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
@@ -16,6 +16,11 @@ interface OrderWithRelations extends Order {
   items: OrderItem[];
   profile: Profile | null;
 }
+
+const SLOT_LABEL: Record<string, string> = {
+  MORNING: "Mañana (09:00–15:30)",
+  AFTERNOON: "Tarde (15:00–20:00)",
+};
 
 const STATUS_LABEL: Record<OrderStatus, string> = {
   PENDING: "Pendiente",
@@ -86,6 +91,12 @@ function OrderRow({ order }: { order: OrderWithRelations }) {
               <div className="flex items-center gap-2 text-gray-600">
                 <Phone size={13} className="text-gray-400 shrink-0" />
                 <span>{order.profile.whatsapp}</span>
+              </div>
+            )}
+            {order.deliverySlot && SLOT_LABEL[order.deliverySlot] && (
+              <div className="flex items-center gap-2 text-gray-600">
+                <Clock size={13} className="text-gray-400 shrink-0" />
+                <span>{SLOT_LABEL[order.deliverySlot]}</span>
               </div>
             )}
             <div className="flex items-start gap-2 text-gray-600">
