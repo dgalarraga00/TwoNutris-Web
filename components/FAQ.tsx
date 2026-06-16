@@ -34,7 +34,7 @@ const FAQS = [
   },
   {
     q: "¿Puedo cancelar o cambiar mi pedido?",
-    a: "Puedes cancelar o modificar tu pedido hasta el miércoles a medianoche. Pasado ese horario, el pedido entra en producción y no es posible hacer cambios.",
+    a: "Sí. Por el momento, para cancelar o modificar tu pedido debes escribirnos por WhatsApp (todavía no se puede hacer directamente desde la web). Puedes solicitarlo hasta el miércoles a medianoche; pasado ese horario, el pedido entra en producción y ya no es posible hacer cambios.",
   },
   {
     q: "¿Qué pasa si no estoy en casa al momento de la entrega?",

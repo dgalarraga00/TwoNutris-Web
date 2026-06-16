@@ -76,7 +76,7 @@ const SECTIONS: TermsSection[] = [
       },
       {
         subtitle: "Empaques",
-        text: "Utilizamos envases eco-friendly aptos para microondas, diseñados para mantener la integridad del alimento en refrigeración durante los días estipulados del menú.",
+        text: "Utilizamos envases eco-friendly aptos para microondas, diseñados para mantener la integridad del alimento en refrigeración durante 5 a 6 días (el período estipulado del menú semanal).",
       },
     ],
   },
@@ -90,7 +90,7 @@ const SECTIONS: TermsSection[] = [
       },
       {
         subtitle: "Cancelaciones",
-        text: "Se aceptan cancelaciones con reembolso o reprogramación únicamente antes del cierre del miércoles a las 23:59. Una vez que el sistema hace el corte e inicia el proceso de compra de ingredientes (jueves), no se realizarán devoluciones parciales ni totales.",
+        text: "Se aceptan cancelaciones con reembolso o reprogramación únicamente antes del cierre del miércoles a las 23:59, solicitándolas vía WhatsApp. Una vez que el sistema hace el corte e inicia el proceso de compra de ingredientes (jueves), no se realizarán devoluciones parciales ni totales.",
       },
       {
         subtitle: "Subjetividad Gastronómica",
