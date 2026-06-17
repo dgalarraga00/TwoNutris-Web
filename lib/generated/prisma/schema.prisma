@@ -52,6 +52,8 @@ model Order {
   profile Profile     @relation(fields: [profileId], references: [id])
   items   OrderItem[]
 
+  @@index([createdAt]) // filtro por fecha + orden por defecto en el panel admin
+  @@index([profileId]) // historial de pedidos por cliente (las FK no indexan solas en Postgres)
   @@map("orders")
 }
 
