@@ -23,6 +23,7 @@ export const ALLERGEN_MAP: Record<string, { icon: LucideIcon; label: string }> =
   Maíz:            { icon: Wheat,        label: "Maíz" },
   Leguminosas:     { icon: Bean,         label: "Leguminosas" },
   Mariscos:        { icon: Waves,        label: "Mariscos" },
+  Coco:            { icon: Nut,          label: "Coco" },
 };
 
 interface DishModalProps {
@@ -136,14 +137,13 @@ export function DishModal({ plate, onClose }: DishModalProps) {
 
           {/* Stats */}
           <div
-            className="grid rounded-2xl border border-gray-200"
+            className="grid divide-x divide-gray-200 rounded-2xl border border-gray-200"
             style={{ gridTemplateColumns: `repeat(${stats.length}, 1fr)` }}
           >
-            {stats.map(({ label, value }, i) => (
+            {stats.map(({ label, value }) => (
               <div
                 key={label}
                 className="flex flex-col items-center py-3 px-1"
-                style={{ borderRight: i < stats.length - 1 ? "1px solid #e5e7eb" : "none" }}
               >
                 <span className="text-sm font-bold leading-none font-poppins text-gray-900">
                   {value}
