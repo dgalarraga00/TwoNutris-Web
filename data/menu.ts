@@ -194,8 +194,8 @@ export const weeklyMenu: MenuItem[] = [
     image: "/images/Fotos-menu/La Andina Crocante.png",
     calories: 55,
     macros: { protein: 3, carbs: 8, fat: 1 },
-    allergens: [],
-    ingredients: "Este plato está hecho con: Mellocos, tomate riñón (en gajos), cebolla paiteña (encurtida) y chochos. Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.",
+    allergens: ["Leguminosas"],
+    ingredients: "Este plato está hecho con: Mellocos, tomate riñón (en gajos), cebolla paiteña (encurtida) y chochos. Alérgenos: Leguminosas (chochos). Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.",
     category: "ensalada", day: "lunes",
   },
   {
@@ -292,8 +292,8 @@ export const weeklyMenu: MenuItem[] = [
     image: "/images/Fotos-menu/Tradicion renovada.png",
     calories: 62,
     macros: { protein: 3, carbs: 10, fat: 0 },
-    allergens: [],
-    ingredients: "Este plato está hecho con: Habas (tiernas, peladas y cocidas), tomate cherry y lechuga. Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.",
+    allergens: ["Leguminosas"],
+    ingredients: "Este plato está hecho con: Habas (tiernas, peladas y cocidas), tomate cherry y lechuga. Alérgenos: Leguminosas (habas). Este plato puede contener otros alérgenos ya que, por el momento, todos los platos se elaboran artesanalmente en el mismo obrador.",
     category: "ensalada", day: "viernes",
   },
 
