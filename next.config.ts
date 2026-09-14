@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
     imageSizes: [64, 96, 128, 256, 384, 512],
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
+    // Real dish cover images come from Cloudinary (`Dish.cover_image_url`,
+    // B2's `menu/api/serializers.py`) — required for F6's menu preview
+    // screen to render real photos via `next/image` instead of throwing
+    // "hostname not configured".
+    remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com" }],
   },
   async headers() {
     return [

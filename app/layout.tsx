@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
+import { Providers } from "@/components/Providers";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -111,7 +112,7 @@ export default function RootLayout({
         className="grain font-poppins antialiased"
         style={{ backgroundColor: "#FFFBE4" }}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
