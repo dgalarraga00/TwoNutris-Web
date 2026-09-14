@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── shadcn Sidebar → brand tokens (design D7, order-flow-wizard) ──────
+   shadcn's sidebar primitives consume `hsl(var(--sidebar-*))`; these are
+   HSL triples of the existing brand colors (tailwind.config.ts), not
+   shadcn's default gray/black scale. Background stays the app's own
+   cream — the sidebar is never a separate color block. */
+@layer base {
+  :root {
+    --sidebar-background: 51 100% 95%; /* cream #FFFBE4 */
+    --sidebar-foreground: 102 100% 13%; /* leaf #144400 */
+    --sidebar-primary: 102 100% 13%; /* leaf (active item) */
+    --sidebar-primary-foreground: 51 100% 95%; /* cream */
+    --sidebar-accent: 87 61% 77%; /* leaf-light #c8e8a0 (hover/active row) */
+    --sidebar-accent-foreground: 102 100% 20%; /* leaf-dark #1e6600 */
+    --sidebar-border: 87 61% 77%; /* leaf-light */
+    --sidebar-ring: 41 100% 50%; /* amber #FFB000 — matches global focus-visible */
+  }
+}
+
 /* ── Animaciones personalizadas ─────────────────────────────────── */
 
 @keyframes blob-morph {
