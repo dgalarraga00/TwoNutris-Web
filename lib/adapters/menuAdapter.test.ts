@@ -36,7 +36,7 @@ const baseDto: MenuDishCardDto = {
 };
 
 describe("toMenuItem", () => {
-  it("maps a normal main dish, combining description/notes/disclaimer into ingredients", () => {
+  it("maps a normal main dish, combining description/notes into ingredients (allergen_disclaimer is deliberately excluded — feedback-round-2: it gets its own warning box in DishModal, fed straight from the DTO instead)", () => {
     const item = toMenuItem(baseDto);
 
     expect(item.id).toBe("101");
@@ -47,7 +47,7 @@ describe("toMenuItem", () => {
     expect(item.category).toBe("principal");
     expect(item.day).toBeNull();
     expect(item.ingredients).toBe(
-      "Pechuga de pollo marinada al estilo mediterráneo.\n\nBajo en carbohidratos.\n\nEste plato puede contener trazas de otros alérgenos.",
+      "Pechuga de pollo marinada al estilo mediterráneo.\n\nBajo en carbohidratos.",
     );
   });
 
@@ -77,7 +77,7 @@ describe("toMenuItem", () => {
     expect(item.image).toBe("/images/plate-2.png");
   });
 
-  it("drops empty description/notes/disclaimer parts instead of leaving blank paragraphs", () => {
+  it("drops empty description/notes parts instead of leaving blank paragraphs", () => {
     const item = toMenuItem({
       ...baseDto,
       dish: { ...baseDto.dish, nutrition_notes: "", allergen_disclaimer: "" },

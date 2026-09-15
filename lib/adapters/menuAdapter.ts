@@ -28,8 +28,16 @@ const CATEGORY_BY_KIND: Record<MenuDishCardDto["dish"]["kind"], MenuItem["catego
   snack: "principal",
 };
 
+/**
+ * Live-feedback fix (feedback-round-2): `allergen_disclaimer` is no longer
+ * folded into this joined string. It is legal/safety text that deserves its
+ * own visually-distinct warning box (`DishModal`'s new `Alert` variant=
+ * "warning" section, fed directly from the DTO) instead of being buried as
+ * plain text at the tail of a long ingredients paragraph — still NEVER
+ * dropped, just surfaced in its rightful place. See `DishModal.tsx`.
+ */
 const composeIngredients = (dish: MenuDishCardDto["dish"]): string =>
-  [dish.description, dish.nutrition_notes, dish.allergen_disclaimer]
+  [dish.description, dish.nutrition_notes]
     .map((part) => part.trim())
     .filter((part) => part.length > 0)
     .join("\n\n");
@@ -63,10 +71,11 @@ const composeIngredients = (dish: MenuDishCardDto["dish"]): string =>
  *   instead of surfacing it. `NutritionFactsPanel`, fed from the DTO
  *   directly, shows its own "empty" state for this exact case instead of
  *   this adapter faking non-zero numbers.
- * - `ingredients`: `description` + `nutrition_notes` + `allergen_disclaimer`
- *   joined with blank lines (`DishModal` renders this field with
- *   `whitespace-pre-line`, so blank lines become visible paragraph breaks).
- *   `allergen_disclaimer` is legal/safety text and is NEVER dropped.
+ * - `ingredients`: `description` + `nutrition_notes` joined with blank lines
+ *   (`DishModal` renders this field with `whitespace-pre-line`, so blank
+ *   lines become visible paragraph breaks). `allergen_disclaimer` is
+ *   deliberately NOT part of this field (feedback-round-2) — `DishModal`
+ *   reads it straight off the DTO for its own dedicated warning box instead.
  * - `allergens`: mapped through `allergenLabel()` (`lib/adapters/
  *   allergenLabels.ts`) from the DTO's raw backend codes (e.g. `"peanut"`)
  *   to the Spanish labels `DishModal`'s `ALLERGEN_MAP` keys on (e.g.

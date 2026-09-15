@@ -52,7 +52,9 @@ export function DishSlot({ main, availableSalads, lines, disabled, onOpenDrawer 
         )}
       </div>
 
-      {showDetail && <DishModal plate={toMenuItem(main)} onClose={() => setShowDetail(false)} />}
+      {showDetail && (
+        <DishModal plate={toMenuItem(main)} onClose={() => setShowDetail(false)} dto={main} />
+      )}
 
       <button
         type="button"

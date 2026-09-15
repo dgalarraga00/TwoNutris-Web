@@ -1,8 +1,11 @@
+"use client";
+
+import { Fragment, useState } from "react";
 import Image from "next/image";
 import { Leaf } from "lucide-react";
 import type { MenuDishCardDto } from "@/lib/api/menu";
 import { toMenuItem } from "@/lib/adapters/menuAdapter";
-import { ALLERGEN_MAP } from "@/components/DishModal";
+import { ALLERGEN_MAP, DishModal } from "@/components/DishModal";
 
 interface SaladPickerProps {
   salads: MenuDishCardDto[];
@@ -35,29 +38,44 @@ interface SaladPickerProps {
  * a calorie badge, fed by `toMenuItem()`'s existing `calories`/`allergens`
  * fields — no new "ingredients" field invented; calories/macros/allergens
  * remain the only nutrition data this product models.
+ *
+ * Live-feedback fix (feedback-round-2): each row's outer element changed
+ * from a single `<button>` wrapping the whole card to a `<div>` with TWO
+ * sibling interactive controls — the row is no longer one giant tap target
+ * that also had to somehow host a second "Ver detalles" action, which would
+ * have meant an invalid `<button>`-inside-`<button>`. The large selection
+ * button (photo + name + macros) keeps its full tap area; the new "Ver
+ * detalles" button lives in the allergen-icon row and opens the same
+ * `DishModal` (ingredients, full nutrition table, allergen disclaimer) used
+ * elsewhere in the app.
  */
 export function SaladPicker({ salads, selectedId, onSelect }: SaladPickerProps) {
+  const [detailSalad, setDetailSalad] = useState<MenuDishCardDto | null>(null);
+
   return (
-    <ul
-      role="group"
-      aria-label="Elegí tu ensalada de acompañamiento"
-      className="flex flex-col gap-3 sm:grid sm:grid-cols-2 lg:gap-4"
-    >
+    <Fragment>
+      <ul
+        role="group"
+        aria-label="Elegí tu ensalada de acompañamiento"
+        className="flex flex-col gap-3 sm:grid sm:grid-cols-2 lg:gap-4"
+      >
       {salads.map((salad) => {
         const plate = toMenuItem(salad);
         const isSelected = salad.dish.id === selectedId;
         return (
           <li key={salad.menu_dish_id}>
-            <button
-              type="button"
-              onClick={() => onSelect(salad)}
-              aria-label={salad.dish.name}
-              aria-pressed={isSelected}
-              className={`flex w-full flex-col gap-2 rounded-2xl border-2 bg-white p-2 text-left transition-colors duration-200 lg:p-3 ${
+            <div
+              className={`flex w-full flex-col gap-2 rounded-2xl border-2 bg-white p-2 transition-colors duration-200 lg:p-3 ${
                 isSelected ? "border-amber bg-amber/5" : "border-leaf/10 hover:bg-leaf-light/20"
               }`}
             >
-              <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => onSelect(salad)}
+                aria-label={salad.dish.name}
+                aria-pressed={isSelected}
+                className="flex items-center gap-3 rounded-xl text-left"
+              >
                 <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl lg:h-28 lg:w-28">
                   <Image
                     src={plate.image}
@@ -79,30 +97,47 @@ export function SaladPicker({ salads, selectedId, onSelect }: SaladPickerProps) 
                     P {plate.macros.protein}g · C {plate.macros.carbs}g · G {plate.macros.fat}g
                   </span>
                 </div>
+              </button>
+              <div className="flex items-center justify-between gap-2 border-t border-leaf/10 pt-2">
+                <div className="flex min-w-0 items-center gap-1.5">
+                  {plate.allergens.length === 0 ? (
+                    <span className="font-poppins text-xs text-leaf/40">Sin alérgenos</span>
+                  ) : (
+                    plate.allergens.slice(0, 5).map((a) => {
+                      const entry = ALLERGEN_MAP[a];
+                      const Icon = entry?.icon ?? Leaf;
+                      return (
+                        <div
+                          key={a}
+                          title={a}
+                          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-leaf-light/30"
+                        >
+                          <Icon size={12} strokeWidth={2} className="text-leaf" />
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setDetailSalad(salad)}
+                  className="shrink-0 font-poppins text-xs font-bold text-leaf/60 underline underline-offset-2 transition-colors duration-200 hover:text-leaf"
+                >
+                  Ver detalles
+                </button>
               </div>
-              <div className="flex items-center gap-1.5 border-t border-leaf/10 pt-2">
-                {plate.allergens.length === 0 ? (
-                  <span className="font-poppins text-xs text-leaf/40">Sin alérgenos</span>
-                ) : (
-                  plate.allergens.slice(0, 5).map((a) => {
-                    const entry = ALLERGEN_MAP[a];
-                    const Icon = entry?.icon ?? Leaf;
-                    return (
-                      <div
-                        key={a}
-                        title={a}
-                        className="flex h-6 w-6 items-center justify-center rounded-full bg-leaf-light/30"
-                      >
-                        <Icon size={12} strokeWidth={2} className="text-leaf" />
-                      </div>
-                    );
-                  })
-                )}
-              </div>
-            </button>
+            </div>
           </li>
         );
       })}
-    </ul>
+      </ul>
+      {detailSalad && (
+        <DishModal
+          plate={toMenuItem(detailSalad)}
+          onClose={() => setDetailSalad(null)}
+          dto={detailSalad}
+        />
+      )}
+    </Fragment>
   );
 }

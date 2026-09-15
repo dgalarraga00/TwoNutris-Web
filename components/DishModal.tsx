@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { X, Wheat, Milk, Egg, Fish, Leaf, Flame, Sprout, FlaskConical, Waves, Vegan, Salad, Bean, Dot, Nut } from "lucide-react";
+import { X, Wheat, Milk, Egg, Fish, Leaf, Flame, Sprout, FlaskConical, Waves, Vegan, Salad, Bean, Dot, Nut, ChevronDown } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { MenuItem } from "@/data/menu";
+import type { MenuDishCardDto } from "@/lib/api/menu";
+import { NutritionFactsPanel } from "@/components/NutritionFactsPanel";
+import { Alert } from "@/components/ui/Alert";
 
 export const ALLERGEN_MAP: Record<string, { icon: LucideIcon; label: string }> = {
   Gluten:          { icon: Wheat,        label: "Gluten" },
@@ -29,10 +32,21 @@ export const ALLERGEN_MAP: Record<string, { icon: LucideIcon; label: string }> =
 interface DishModalProps {
   plate: MenuItem;
   onClose: () => void;
+  /**
+   * Live-feedback fix (feedback-round-2): the full dish-card DTO, present
+   * only for real weekly-grid/API dishes (never the static marketing
+   * `weeklyMenu` data in `data/menu.ts`, which has no DTO to carry). Feeds
+   * the expandable "Ver tabla nutrimental" section (`NutritionFactsPanel`,
+   * previously built but mounted nowhere in the app) and the allergen
+   * disclaimer warning box. Both sections are skipped entirely when this is
+   * absent, so the homepage/menu-preview modal renders exactly as before.
+   */
+  dto?: MenuDishCardDto;
 }
 
-export function DishModal({ plate, onClose }: DishModalProps) {
+export function DishModal({ plate, onClose, dto }: DishModalProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [showNutrition, setShowNutrition] = useState(false);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -66,7 +80,11 @@ export function DishModal({ plate, onClose }: DishModalProps) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="dish-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/55 backdrop-blur"
+      // Live-feedback fix (feedback-round-2): this modal is now also opened
+      // FROM WITHIN the step drawer (`DishStepDrawer`'s Vaul overlay/content
+      // both sit at z-50), so it needs a strictly higher stacking context to
+      // render on top of an already-open drawer instead of underneath it.
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/55 backdrop-blur"
       onClick={onClose}
     >
       <div
@@ -166,6 +184,45 @@ export function DishModal({ plate, onClose }: DishModalProps) {
               {plate.ingredients}
             </p>
           </div>
+
+          {/*
+            Live-feedback fix (feedback-round-2): allergen disclaimer,
+            promoted from buried plain text into its own warning box
+            (`Alert` variant="warning") — only rendered for real dishes
+            (`dto` present) that actually carry disclaimer text.
+          */}
+          {dto && dto.dish.allergen_disclaimer.trim().length > 0 && (
+            <Alert variant="warning">{dto.dish.allergen_disclaimer}</Alert>
+          )}
+
+          {/*
+            Live-feedback fix (feedback-round-2): full nutrition breakdown,
+            expandable in place so it stays usable at ~400px without forcing
+            an always-open, cramped table. `NutritionFactsPanel` was already
+            fully built (task 4.9) but mounted nowhere in the app until now.
+          */}
+          {dto && (
+            <div className="flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={() => setShowNutrition((open) => !open)}
+                aria-expanded={showNutrition}
+                className="flex w-full items-center justify-between gap-2 rounded-2xl border border-gray-200 px-4 py-3 text-left transition-colors duration-200 hover:bg-gray-50"
+              >
+                <span className="text-sm font-bold font-poppins text-gray-900">
+                  Ver tabla nutrimental
+                </span>
+                <ChevronDown
+                  size={18}
+                  aria-hidden="true"
+                  className={`shrink-0 text-gray-500 transition-transform duration-200 ${showNutrition ? "rotate-180" : ""}`}
+                />
+              </button>
+              {showNutrition && (
+                <NutritionFactsPanel isPending={false} isError={false} data={dto} refetch={() => {}} />
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
