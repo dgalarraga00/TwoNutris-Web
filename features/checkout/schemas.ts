@@ -16,18 +16,29 @@ import { z } from "zod";
 const ALLOWED_RECEIPT_TYPES = ["image/jpeg", "image/png", "application/pdf"];
 const MAX_RECEIPT_SIZE_BYTES = 10 * 1024 * 1024;
 
-export const checkoutSchema = z.object({
+/**
+ * Extracted (feedback-round-1) so `AddressFieldset` can be reused verbatim
+ * by the profile screen's new address-EDIT drawer, which has no
+ * payment/receipt fields at all — `checkoutSchema` below now `.extend()`s
+ * this instead of duplicating the same 5 fields, and `CheckoutFormValues`'s
+ * shape is unchanged byte-for-byte.
+ */
+export const addressFieldsSchema = z.object({
   // Kept as a plain `string` (not `z.coerce.number()`) even though `zone`
   // is really a numeric FK: a `<select>` value is always a string in the
   // DOM, and `z.coerce` here would give the schema a different input vs.
   // output type, which `zodResolver`'s generics reject against a single
-  // `useForm<CheckoutFormValues>()` type parameter. The numeric conversion
-  // happens once, at the `createAddress()` call site in `CheckoutForm`.
+  // `useForm<T>()` type parameter. The numeric conversion happens once, at
+  // each call site's own `create`/`updateAddress()` call.
   zone: z.string().min(1, "Selecciona una zona."),
   label: z.string().min(1, "Ingresa un nombre para tu dirección."),
   street: z.string().min(1, "Ingresa tu dirección."),
   reference: z.string().min(1, "Ingresa una referencia."),
   is_default: z.boolean(),
+});
+export type AddressFieldsetValues = z.infer<typeof addressFieldsSchema>;
+
+export const checkoutSchema = addressFieldsSchema.extend({
   source_bank: z.string().min(1, "Ingresa el banco de origen."),
   transfer_date: z.string().min(1, "Ingresa la fecha de la transferencia."),
   receipt: z

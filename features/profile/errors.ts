@@ -50,3 +50,19 @@ export function cancelOrderErrorMessage(error: unknown): string {
   }
   return "No pudimos cancelar tu pedido. Intenta de nuevo.";
 }
+
+/**
+ * `PATCH /api/me/addresses/{id}` (feedback-round-1: address editing).
+ * `AddressDetailView` (backend, read directly this session) is a plain
+ * `generics.UpdateAPIView` with no domain exception codes of its own — just
+ * DRF field validation (malformed `zone`/`street`/etc., already a
+ * customer-facing Spanish string via `error.detail`) or a 404 when the id
+ * isn't one of `request.user`'s own addresses. Same passthrough convention
+ * as `cancelOrderErrorMessage`.
+ */
+export function updateAddressErrorMessage(error: unknown): string {
+  if (error instanceof ApiError) {
+    return error.detail;
+  }
+  return "No pudimos guardar tu dirección. Intenta de nuevo.";
+}

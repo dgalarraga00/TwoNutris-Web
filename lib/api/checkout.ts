@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { httpClient } from "@/lib/http/httpClient";
 import { createQueryKeys } from "@/lib/query/keys";
 import type { PortionSize } from "@/lib/pricing/bagPricing";
@@ -94,6 +94,36 @@ export async function getAddresses(): Promise<AddressDto[]> {
 
 export function useAddresses() {
   return useQuery({ queryKey: addressKeys.all, queryFn: getAddresses });
+}
+
+/**
+ * `PATCH /api/me/addresses/{id}` (live-feedback fix, feedback-round-1):
+ * `customers/api/views.py::AddressDetailView(generics.UpdateAPIView)`, read
+ * directly this session — own-resource scoped (`get_queryset()` filters to
+ * `request.user.addresses`, so a foreign id 404s), plain DRF field
+ * validation on `zone`/`label`/`street`/etc. (no domain exception codes to
+ * special-case, same as `createAddress`). Same editable field set as
+ * creation — the customer edits label/street/zone/default-flag together,
+ * one PATCH.
+ */
+export type UpdateAddressInput = CreateAddressInput;
+
+export async function updateAddress(id: number, input: UpdateAddressInput): Promise<AddressDto> {
+  const response = await httpClient(`${CHECKOUT_API_BASE_URL}/api/me/addresses/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(input),
+  });
+  const data: unknown = await response.json();
+  return addressDtoSchema.parse(data);
+}
+
+/** Same `useInvalidateOrdersAndBalance`-style convention (`lib/api/
+ * orders.ts`): after a successful edit, the addresses list is stale. */
+export function useInvalidateAddresses() {
+  const queryClient = useQueryClient();
+  return () => {
+    void queryClient.invalidateQueries({ queryKey: addressKeys.all });
+  };
 }
 
 // --------------------------------------------------------------------------
