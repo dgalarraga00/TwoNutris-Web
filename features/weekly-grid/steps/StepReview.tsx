@@ -60,12 +60,17 @@ export function StepReview({
   }
 
   return (
-    <ul className="flex flex-col gap-2 px-4 py-4">
+    <ul className="flex flex-col gap-2 px-4 py-4 md:px-6 lg:px-8 lg:py-6">
       {groups.map((line) => (
         <DishLineRow
           key={line.id}
           line={line}
-          showSaladName={groups.length > 1}
+          // Live-feedback fix (feedback-round-1): always show which salad
+          // was picked here, even when every unit shares the same salad
+          // (groups.length === 1) — the customer should never have to guess
+          // what they're reviewing. This call site only; DishLineRow's own
+          // `showSaladName` prop and its other caller are unchanged.
+          showSaladName
           disabled={disabled}
           onIncrement={() => onIncrementGroup(line.saladDishId)}
           onDecrement={() => onDecrementGroup(line.saladDishId)}

@@ -270,7 +270,18 @@ export function AppShell({ children }: { children: ReactNode }) {
           <SidebarTrigger className="size-11" />
           <Image src="/icons/logo.png" alt="TwoNutris" width={96} height={32} />
         </header>
-        <div className="min-w-0 flex-1 overflow-x-clip bg-cream">{children}</div>
+        {/* Live-feedback fix (feedback-round-1): the marketing homepage's
+            subtle brand-texture background (`HeroSection`, same exact asset
+            + treatment) was missing from the authenticated app shell. Mounted
+            once here so every route rendered inside `AppShell` (not just
+            `/semana`) gets it, instead of each page re-adding its own. */}
+        <div className="relative min-w-0 flex-1 overflow-x-clip bg-cream">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[url('/patterns/patron-negro.png')] bg-[length:700px] bg-repeat opacity-[0.05]"
+          />
+          <div className="relative">{children}</div>
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

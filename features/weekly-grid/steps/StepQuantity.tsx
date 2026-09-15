@@ -22,11 +22,11 @@ export function StepQuantity({ main, quantity, onChange }: StepQuantityProps) {
   const plate = toMenuItem(main);
 
   return (
-    <div className="flex flex-col items-center gap-6 px-4 py-4">
-      <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl">
-        <Image src={plate.image} alt="" fill className="object-cover" sizes="96px" />
+    <div className="flex flex-col items-center gap-6 px-4 py-4 md:px-6 lg:px-8 lg:py-6">
+      <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl lg:h-32 lg:w-32">
+        <Image src={plate.image} alt="" fill className="object-cover" sizes="(min-width: 1024px) 128px, 96px" />
       </div>
-      <p className="text-center font-ibrand text-lg text-leaf">{main.dish.name}</p>
+      <p className="text-center font-ibrand text-lg text-leaf lg:text-xl">{main.dish.name}</p>
 
       <div className="flex items-center gap-5">
         <button

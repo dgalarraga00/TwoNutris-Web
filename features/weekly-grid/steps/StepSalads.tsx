@@ -19,7 +19,7 @@ interface StepSaladsProps {
  */
 export function StepSalads({ salads, unitIndex, totalUnits, selectedId, onSelect }: StepSaladsProps) {
   return (
-    <div className="flex flex-col gap-4 px-4 py-4">
+    <div className="flex flex-col gap-4 px-4 py-4 md:px-6 lg:px-8 lg:py-6">
       <div className="flex flex-col items-center gap-2">
         <p className="font-poppins text-sm font-semibold text-leaf/70">
           Unidad {unitIndex + 1} de {totalUnits}

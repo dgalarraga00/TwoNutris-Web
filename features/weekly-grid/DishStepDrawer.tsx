@@ -32,9 +32,15 @@ const STEP_LABELS: Record<1 | 2 | 3, string> = {
  * handle (24px), a "Paso N de 3" header with the running total ALWAYS
  * visible (56px), a body that scrolls only if it must, and a two-button
  * footer with safe-area padding (72px + `env(safe-area-inset-bottom)`) —
- * identical on all 3 steps. Mobile is the primary target (390x844);
- * desktop is the SAME tree constrained to `sm:max-w-md sm:mx-auto`, never a
- * separate layout.
+ * identical on all 3 steps. Mobile is the primary target (390x844) and stays
+ * the SAME tree at every breakpoint, never a separate layout.
+ *
+ * Live-feedback fix (feedback-round-1): `sm:max-w-md` alone pinned the
+ * drawer to 448px on every non-mobile width, including large desktop
+ * viewports — a small centered box floating in mostly-empty space. Width now
+ * grows progressively past `sm` (`md:max-w-xl lg:max-w-2xl`) so desktop gets
+ * real breathing room; the step bodies (`StepSalads`'s salad grid especially)
+ * use the extra width for bigger content, not just wider empty padding.
  */
 export function DishStepDrawer({
   open,
@@ -91,11 +97,11 @@ export function DishStepDrawer({
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 z-50 bg-black/40" />
         <Drawer.Content
-          className="fixed inset-x-0 bottom-0 z-50 flex max-h-[92dvh] flex-col rounded-t-3xl bg-cream outline-none sm:mx-auto sm:max-w-md"
+          className="fixed inset-x-0 bottom-0 z-50 flex max-h-[92dvh] flex-col rounded-t-3xl bg-cream outline-none sm:mx-auto sm:max-w-md md:max-w-xl lg:max-w-2xl"
         >
           <div className="mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-full bg-leaf/20" aria-hidden="true" />
 
-          <div className="flex shrink-0 flex-col items-center gap-0.5 px-4 py-3">
+          <div className="flex shrink-0 flex-col items-center gap-0.5 px-4 py-3 md:px-6 lg:px-8">
             <Drawer.Title className="font-ibrand text-base text-leaf">
               Paso {state.step} de 3 · {STEP_LABELS[state.step]}
             </Drawer.Title>
@@ -130,7 +136,7 @@ export function DishStepDrawer({
             )}
           </div>
 
-          <div className="flex shrink-0 items-center gap-3 border-t border-leaf/10 px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+          <div className="flex shrink-0 items-center gap-3 border-t border-leaf/10 px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:px-6 lg:px-8">
             <button
               type="button"
               onClick={handleBack}
