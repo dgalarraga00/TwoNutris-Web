@@ -39,6 +39,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/shadcn/dropdown-menu";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Avatar } from "@/components/Avatar";
 import { useMe } from "@/lib/api/me";
 import { logoutCustomer } from "@/lib/api/auth";
 import { ApiError } from "@/lib/http/errors";
@@ -70,19 +71,6 @@ const ACCOUNT_LINKS: NavLinkItem[] = [
   { label: "Mi dirección", href: "/perfil", icon: MapPin },
   { label: "Términos y condiciones", href: "/terminos", icon: FileText },
 ];
-
-/** Design's account-avatar slot (PR5 wires a deterministic blobatar here;
- * this slice only needs the slot to exist, per the design's own note). */
-function AccountAvatarPlaceholder() {
-  return (
-    <span
-      aria-hidden="true"
-      className="flex size-6 shrink-0 items-center justify-center rounded-full bg-leaf-light text-leaf"
-    >
-      <UserRound className="size-4" />
-    </span>
-  );
-}
 
 /**
  * Footer account item (design D8): inline `SidebarMenuSub` expansion on
@@ -147,10 +135,11 @@ function AccountMenu() {
       <SidebarMenu>
         <SidebarMenuItem>
           <SidebarMenuButton
+            size="lg"
             onClick={() => setSubOpen((open) => !open)}
             aria-expanded={subOpen}
           >
-            <AccountAvatarPlaceholder />
+            <Avatar seed={me?.email ?? "mi-cuenta"} size={32} title={displayName} />
             <span className="truncate">{displayName}</span>
             <ChevronDown
               className={`ml-auto size-4 transition-transform ${subOpen ? "rotate-180" : ""}`}
@@ -194,7 +183,7 @@ function AccountMenu() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton>
-              <AccountAvatarPlaceholder />
+              <Avatar seed={me?.email ?? "mi-cuenta"} size={24} title={displayName} />
               <span className="truncate">{displayName}</span>
             </SidebarMenuButton>
           </DropdownMenuTrigger>

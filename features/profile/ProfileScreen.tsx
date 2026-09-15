@@ -1,6 +1,8 @@
 "use client";
 
+import { Avatar } from "@/components/Avatar";
 import { Card } from "@/components/ui/Card";
+import { useMe } from "@/lib/api/me";
 import { BalanceSection } from "./BalanceSection";
 import { DeliveryHistorySection } from "./DeliveryHistorySection";
 import { AddressesSection } from "./AddressesSection";
@@ -16,8 +18,22 @@ import { PortionOptionList } from "./PortionOptionList";
  * zero change to any section's own data/business logic.
  */
 export function ProfileScreen() {
+  // `account-avatar` spec: the avatar MUST also appear on the "Mi cuenta"
+  // screen. Same `useMe()` + fallback-name convention `AppShell`'s
+  // `AccountMenu` already established — not re-derived differently here.
+  const { data: me } = useMe();
+  const displayName = me?.first_name?.trim() || me?.email || "Mi cuenta";
+
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-8">
+      <div className="flex items-center gap-4">
+        <Avatar seed={me?.email ?? "mi-cuenta"} size={64} title={displayName} />
+        <div className="flex min-w-0 flex-col">
+          <h1 className="font-ibrand truncate text-2xl text-leaf">{displayName}</h1>
+          {me?.email && <p className="truncate text-sm text-leaf/70">{me.email}</p>}
+        </div>
+      </div>
+
       <Card padding="lg" className="flex flex-col gap-4">
         <h2 className="font-ibrand text-xl text-leaf">Tu saldo</h2>
         <BalanceSection />
