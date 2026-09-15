@@ -124,7 +124,7 @@ export function CheckoutForm() {
     <form
       onSubmit={(event) => void handleSubmit(onSubmit)(event)}
       noValidate
-      className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-4 bg-cream p-4 md:p-6"
+      className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-4 p-4 md:p-6"
     >
       <h1 className="font-ibrand text-2xl text-leaf md:text-3xl">Finalizar compra</h1>
 

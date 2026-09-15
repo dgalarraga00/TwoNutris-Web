@@ -33,7 +33,7 @@ export function BagScreen() {
   const bagPriceCents = MEAL_BAG_BASE_PRICE_CENTS[portionSize];
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 bg-cream p-4 md:p-6">
+    <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 p-4 md:p-6">
       <h1 className="font-ibrand text-2xl text-leaf md:text-3xl">Tu bolsa</h1>
 
       {/*

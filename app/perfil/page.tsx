@@ -11,7 +11,7 @@ import { ProfileScreen } from "@/features/profile/ProfileScreen";
 export default function PerfilPage() {
   return (
     <AppShell>
-      <main className="min-h-screen bg-cream px-4 py-8 md:px-8 md:py-10">
+      <main className="min-h-screen px-4 py-8 md:px-8 md:py-10">
         <div className="mx-auto max-w-3xl">
           <h1 className="mb-8 font-ibrand text-3xl text-leaf md:text-4xl">Tu perfil</h1>
           <ProfileScreen />
