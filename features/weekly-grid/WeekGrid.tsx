@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import { AsyncBoundary } from "@/components/AsyncBoundary";
 import { createOrder, useInvalidateOrdersAndBalance } from "@/lib/api/orders";
 import { useWeekMenu } from "./useWeekMenu";
@@ -10,6 +11,7 @@ import { BalanceSummary } from "./BalanceSummary";
 import { AddressSelector } from "./AddressSelector";
 import { DayColumn } from "./DayColumn";
 import { RepeatLastWeekPanel } from "./RepeatLastWeekPanel";
+import { formatDayLabel } from "./dateLabels";
 import { isCapacityRaceError, weeklyGridErrorMessage } from "./errors";
 import type { DraftLine } from "./types";
 
@@ -55,6 +57,7 @@ export function WeekGrid() {
       });
       draft.clearDay(date);
       invalidateOrdersAndBalance();
+      toast.success(`Pedido confirmado para el ${formatDayLabel(date)}.`);
     } catch (error) {
       // Task 6.2: the page-load `is_sold_out` hint can go stale by submit
       // time — re-sync with a real refetch (not just showing text) and drop
