@@ -98,7 +98,7 @@ export function WeekGrid() {
 
   return (
     <div className="flex flex-col gap-6">
-      <BalanceSummary />
+      <BalanceSummary draftedMealQuantity={draft.totalQuantity} />
 
       <AsyncBoundary
         isPending={weekQuery.isPending}

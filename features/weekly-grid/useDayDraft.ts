@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { draftLineId, type DraftLine, type NewDraftLine } from "./types";
 
 export interface DayDraftApi {
@@ -10,6 +10,18 @@ export interface DayDraftApi {
   setQuantity: (date: string, lineId: string, quantity: number) => void;
   setLinesFor: (date: string, lines: DraftLine[]) => void;
   clearDay: (date: string) => void;
+  /**
+   * Live-feedback fix (feedback-round-2): the sum of every draft line's
+   * `quantity` across EVERY day currently held in state, before any day is
+   * submitted. Every `DraftLine` today represents a MEAL credit (see
+   * `types.ts` — a salad is a paired side, never its own credit-consuming
+   * line), so this is directly comparable to the wallet's `meal.available`.
+   * `WeekGrid` feeds this to `BalanceSummary` so the customer sees a running
+   * total instead of only discovering an over-budget day one submission at
+   * a time (`InsufficientCredits`/422, still the real server-side
+   * enforcement point — this is a UI signal, not a new guard).
+   */
+  totalQuantity: number;
 }
 
 /**
@@ -79,5 +91,10 @@ export function useDayDraft(): DayDraftApi {
     setByDate((prev) => ({ ...prev, [date]: [] }));
   }, []);
 
-  return { linesFor, addLine, removeLine, setQuantity, setLinesFor, clearDay };
+  const totalQuantity = useMemo(
+    () => Object.values(byDate).reduce((sum, lines) => sum + lines.reduce((s, l) => s + l.quantity, 0), 0),
+    [byDate],
+  );
+
+  return { linesFor, addLine, removeLine, setQuantity, setLinesFor, clearDay, totalQuantity };
 }
