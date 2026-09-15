@@ -43,7 +43,7 @@ export function StepQuantity({ main, quantity, onChange }: StepQuantityProps) {
       >
         Ver detalles completos
       </button>
-      {showDetail && <DishModal plate={plate} onClose={() => setShowDetail(false)} dto={main} />}
+      {showDetail && <DishModal plate={plate} onClose={() => setShowDetail(false)} dto={main} nested />}
 
       <div className="flex items-center gap-5">
         <button

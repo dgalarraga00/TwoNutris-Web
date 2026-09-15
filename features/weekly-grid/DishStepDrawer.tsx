@@ -35,12 +35,22 @@ const STEP_LABELS: Record<1 | 2 | 3, string> = {
  * identical on all 3 steps. Mobile is the primary target (390x844) and stays
  * the SAME tree at every breakpoint, never a separate layout.
  *
- * Live-feedback fix (feedback-round-1): `sm:max-w-md` alone pinned the
- * drawer to 448px on every non-mobile width, including large desktop
- * viewports — a small centered box floating in mostly-empty space. Width now
- * grows progressively past `sm` (`md:max-w-xl lg:max-w-2xl`) so desktop gets
- * real breathing room; the step bodies (`StepSalads`'s salad grid especially)
- * use the extra width for bigger content, not just wider empty padding.
+ * Live-feedback fix (feedback-round-1, superseded by feedback-round-3):
+ * `sm:max-w-md` alone pinned the drawer to 448px on every non-mobile width —
+ * a small centered box floating in mostly-empty space. A first pass widened
+ * it progressively (`md:max-w-xl lg:max-w-2xl`), but that was still a capped
+ * floating box, not what was asked for.
+ *
+ * Live-feedback fix (feedback-round-3): the drawer's own sheet (`Drawer.
+ * Content`, `bg-cream`, rounded top, backdrop) is now full viewport width at
+ * every breakpoint, mobile through desktop — no `max-w`/`mx-auto` on
+ * `Drawer.Content` itself, no empty side margins, no floating centered card.
+ * Readability on very wide desktop screens is handled one level in, by
+ * capping the actual header/body/footer content to `max-w-3xl` (centered)
+ * — the same "full-bleed sheet, readable inner column" split an edge-to-edge
+ * page uses for its text column — so `StepQuantity`'s centered stepper
+ * doesn't stretch edge-to-edge on a 1920px screen while the sheet chrome
+ * itself still does.
  */
 export function DishStepDrawer({
   open,
@@ -97,61 +107,70 @@ export function DishStepDrawer({
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 z-50 bg-black/40" />
         <Drawer.Content
-          className="fixed inset-x-0 bottom-0 z-50 flex max-h-[92dvh] flex-col rounded-t-3xl bg-cream outline-none sm:mx-auto sm:max-w-md md:max-w-xl lg:max-w-2xl"
+          className="fixed inset-x-0 bottom-0 z-50 flex max-h-[92dvh] flex-col rounded-t-3xl bg-cream outline-none"
         >
           <div className="mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-full bg-leaf/20" aria-hidden="true" />
 
-          <div className="flex shrink-0 flex-col items-center gap-0.5 px-4 py-3 md:px-6 lg:px-8">
-            <Drawer.Title className="font-ibrand text-base text-leaf">
-              Paso {state.step} de 3 · {STEP_LABELS[state.step]}
-            </Drawer.Title>
-            <Drawer.Description className="font-poppins text-xs font-bold text-leaf/60">
-              {main.dish.name} · Total: {totalUnits}
-            </Drawer.Description>
-          </div>
+          {/*
+            Live-feedback fix (feedback-round-3): `Drawer.Content` above is
+            now full viewport width (no `max-w`/`mx-auto`) so the sheet itself
+            is edge-to-edge at every breakpoint. This inner wrapper keeps the
+            actual header/body/footer readable on very wide desktop screens
+            without shrinking the sheet chrome around it.
+          */}
+          <div className="mx-auto flex w-full min-h-0 max-w-3xl flex-1 flex-col">
+            <div className="flex shrink-0 flex-col items-center gap-0.5 px-4 py-3 md:px-6 lg:px-8">
+              <Drawer.Title className="font-ibrand text-base text-leaf">
+                Paso {state.step} de 3 · {STEP_LABELS[state.step]}
+              </Drawer.Title>
+              <Drawer.Description className="font-poppins text-xs font-bold text-leaf/60">
+                {main.dish.name} · Total: {totalUnits}
+              </Drawer.Description>
+            </div>
 
-          <div className="min-h-0 flex-1 overflow-y-auto">
-            {state.step === 1 && (
-              <StepQuantity main={main} quantity={state.quantity} onChange={flow.setQuantity} />
-            )}
-            {state.step === 2 && (
-              <StepSalads
-                salads={salads}
-                unitIndex={flow.unitIndex}
-                totalUnits={totalUnits}
-                selectedId={state.unitSalads[flow.unitIndex] ?? null}
-                onSelect={flow.selectSaladForUnit}
-              />
-            )}
-            {state.step === 3 && (
-              <StepReview
-                main={main}
-                salads={salads}
-                unitSalads={state.unitSalads}
-                disabled={disabled}
-                onIncrementGroup={flow.incrementGroup}
-                onDecrementGroup={flow.decrementGroup}
-                onRemoveGroup={flow.removeGroup}
-              />
-            )}
-          </div>
+            <div className="min-h-0 flex-1 overflow-y-auto">
+              {state.step === 1 && (
+                <StepQuantity main={main} quantity={state.quantity} onChange={flow.setQuantity} />
+              )}
+              {state.step === 2 && (
+                <StepSalads
+                  salads={salads}
+                  unitIndex={flow.unitIndex}
+                  totalUnits={totalUnits}
+                  selectedId={state.unitSalads[flow.unitIndex] ?? null}
+                  onSelect={flow.selectSaladForUnit}
+                />
+              )}
+              {state.step === 3 && (
+                <StepReview
+                  main={main}
+                  salads={salads}
+                  unitSalads={state.unitSalads}
+                  disabled={disabled}
+                  onIncrementGroup={flow.incrementGroup}
+                  onDecrementGroup={flow.decrementGroup}
+                  onRemoveGroup={flow.removeGroup}
+                />
+              )}
+            </div>
 
-          <div className="flex shrink-0 items-center gap-3 border-t border-leaf/10 px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:px-6 lg:px-8">
-            <button
-              type="button"
-              onClick={handleBack}
-              className="h-12 flex-1 rounded-full border-2 border-leaf/20 font-bold font-ibrand text-sm text-leaf transition-colors duration-200 hover:bg-leaf-light/30"
-            >
-              Atrás
-            </button>
-            <button
-              type="button"
-              onClick={handlePrimary}
-              disabled={primaryDisabled || disabled}
-              className="h-12 flex-[2] rounded-full bg-amber font-bold font-ibrand text-sm text-leaf shadow-[0_4px_16px_rgba(255,176,0,0.35)] transition-all duration-200 hover:scale-[1.02] disabled:opacity-40 disabled:pointer-events-none"
-            >
-              {primaryLabel}
-            </button>
+            <div className="flex shrink-0 items-center gap-3 border-t border-leaf/10 px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:px-6 lg:px-8">
+              <button
+                type="button"
+                onClick={handleBack}
+                className="h-12 flex-1 rounded-full border-2 border-leaf/20 font-bold font-ibrand text-sm text-leaf transition-colors duration-200 hover:bg-leaf-light/30"
+              >
+                Atrás
+              </button>
+              <button
+                type="button"
+                onClick={handlePrimary}
+                disabled={primaryDisabled || disabled}
+                className="h-12 flex-[2] rounded-full bg-amber font-bold font-ibrand text-sm text-leaf shadow-[0_4px_16px_rgba(255,176,0,0.35)] transition-all duration-200 hover:scale-[1.02] disabled:opacity-40 disabled:pointer-events-none"
+              >
+                {primaryLabel}
+              </button>
+            </div>
           </div>
         </Drawer.Content>
       </Drawer.Portal>

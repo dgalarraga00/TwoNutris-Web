@@ -136,6 +136,7 @@ export function SaladPicker({ salads, selectedId, onSelect }: SaladPickerProps) 
           plate={toMenuItem(detailSalad)}
           onClose={() => setDetailSalad(null)}
           dto={detailSalad}
+          nested
         />
       )}
     </Fragment>
