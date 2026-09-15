@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -27,6 +28,9 @@ const registerSchema = z.object({
   email: z.string().email("Ingresa un correo electrónico válido."),
   phone: z.string().min(7, "Ingresa un teléfono válido."),
   password: z.string().min(8, "La contraseña debe tener al menos 8 caracteres."),
+  accepted_terms: z.boolean().refine((v) => v, {
+    message: "Debes aceptar los términos y condiciones para continuar.",
+  }),
 });
 
 export type RegisterFormValues = z.infer<typeof registerSchema>;
@@ -58,7 +62,12 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
   const onSubmit = async (values: RegisterFormValues): Promise<void> => {
     setServerError(null);
     try {
-      await registerCustomer({ ...values, kind: customerKind });
+      // `accepted_terms` gates submission client-side only — the backend's
+      // register endpoint has no such field (checked this session), so it
+      // is deliberately never sent, same convention as `kind`/`customerKind`
+      // fields that stay purely client-side.
+      const { accepted_terms: _acceptedTerms, ...registerValues } = values;
+      await registerCustomer({ ...registerValues, kind: customerKind });
       const accessToken = await loginCustomer({ email: values.email, password: values.password });
       setAccessToken(accessToken);
       setSucceeded(true);
@@ -159,6 +168,26 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
         error={errors.password?.message}
         {...register("password")}
       />
+
+      <div className="flex flex-col gap-1">
+        <label className="flex items-start gap-2 font-poppins text-sm text-leaf/80">
+          <input
+            type="checkbox"
+            className="mt-0.5 accent-leaf"
+            {...register("accepted_terms")}
+          />
+          <span>
+            Acepto los{" "}
+            <Link href="/terminos" target="_blank" className="font-medium text-leaf underline underline-offset-2">
+              términos y condiciones
+            </Link>
+            .
+          </span>
+        </label>
+        {errors.accepted_terms && (
+          <p className="font-poppins text-xs text-red-600">{errors.accepted_terms.message}</p>
+        )}
+      </div>
 
       {serverError && <Alert variant="error">{serverError}</Alert>}
 

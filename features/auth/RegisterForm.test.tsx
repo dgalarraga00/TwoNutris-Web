@@ -19,6 +19,7 @@ const fillCommonFields = async (user: ReturnType<typeof userEvent.setup>): Promi
   await user.type(screen.getByLabelText("Correo electrónico"), "ana@test.com");
   await user.type(screen.getByLabelText("Teléfono"), "0991234567");
   await user.type(screen.getByLabelText("Contraseña"), "hunter22");
+  await user.click(screen.getByRole("checkbox"));
 };
 
 describe("RegisterForm", () => {
@@ -226,6 +227,43 @@ describe("RegisterForm", () => {
       await screen.findByText("La contraseña debe tener al menos 8 caracteres."),
     ).toBeInTheDocument();
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("blocks submission client-side when the terms checkbox is unchecked, with no fetch call", async () => {
+    const user = userEvent.setup();
+    render(<RegisterForm />);
+    await user.type(screen.getByLabelText("Nombre"), "Ana");
+    await user.type(screen.getByLabelText("Apellido"), "Pérez");
+    await user.type(screen.getByLabelText("Correo electrónico"), "ana@test.com");
+    await user.type(screen.getByLabelText("Teléfono"), "0991234567");
+    await user.type(screen.getByLabelText("Contraseña"), "hunter22");
+    // Checkbox deliberately left unchecked.
+    await user.click(screen.getByRole("button", { name: "Crear cuenta" }));
+
+    expect(
+      await screen.findByText("Debes aceptar los términos y condiciones para continuar."),
+    ).toBeInTheDocument();
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("never sends accepted_terms to the backend — it is a client-side-only gate", async () => {
+    fetchMock.mockImplementation((input: RequestInfo | URL) => {
+      const url = input.toString();
+      if (url.includes("/api/auth/register")) return Promise.resolve(jsonResponse(201, {}));
+      return Promise.resolve(jsonResponse(200, { accessToken: "tok" }));
+    });
+
+    const user = userEvent.setup();
+    render(<RegisterForm />);
+    await fillCommonFields(user);
+    await user.click(screen.getByRole("button", { name: "Crear cuenta" }));
+
+    await screen.findByRole("status");
+    const registerCall = fetchMock.mock.calls.find(([input]) =>
+      input.toString().includes("/api/auth/register"),
+    );
+    const registerBody = JSON.parse((registerCall?.[1] as RequestInit).body as string);
+    expect(registerBody).not.toHaveProperty("accepted_terms");
   });
 
   it("renders a server-side password-too-short error when the backend rejects it", async () => {

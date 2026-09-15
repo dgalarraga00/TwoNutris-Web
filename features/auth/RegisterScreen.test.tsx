@@ -52,6 +52,7 @@ describe("RegisterScreen — funnel navigation (final integration unit)", () => 
     await user.type(screen.getByLabelText("Correo electrónico"), "ana@test.com");
     await user.type(screen.getByLabelText("Teléfono"), "0991234567");
     await user.type(screen.getByLabelText("Contraseña"), "hunter22");
+    await user.click(screen.getByRole("checkbox"));
     await user.click(screen.getByRole("button", { name: "Crear cuenta" }));
 
     await screen.findByRole("status");
