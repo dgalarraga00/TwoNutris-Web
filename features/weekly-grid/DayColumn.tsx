@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import type { MenuDayDto } from "@/lib/api/menu";
 import { Button } from "@/components/ui/Button";
 import { Alert } from "@/components/ui/Alert";
 import { useCutoffCountdown } from "./useCutoffCountdown";
 import { formatDayLabel } from "./dateLabels";
 import { DishSlot } from "./DishSlot";
+import { DishStepDrawer } from "./DishStepDrawer";
 import type { DraftLine, NewDraftLine } from "./types";
 
 interface DayColumnProps {
@@ -44,6 +46,15 @@ export function DayColumn({
   const isPastCutoff = day.is_past_cutoff || countdown.isPastCutoff;
   const dayLabel = formatDayLabel(day.date);
   const totalQuantity = lines.reduce((sum, line) => sum + line.quantity, 0);
+  const availableSalads = day.salads.filter((salad) => !salad.is_sold_out && salad.portion !== null);
+
+  // `activeDishId` is deliberately never reset to `null` on close (only
+  // ever overwritten by the NEXT dish opened) so `DishStepDrawer` stays
+  // mounted through Vaul's own close animation instead of unmounting mid-
+  // transition; `drawerOpen` alone drives the actual open/closed state.
+  const [activeDishId, setActiveDishId] = useState<number | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const activeMain = day.mains.find((main) => main.menu_dish_id === activeDishId) ?? null;
 
   if (day.is_closed) {
     return (
@@ -76,12 +87,13 @@ export function DayColumn({
             <DishSlot
               key={main.menu_dish_id}
               main={main}
-              salads={day.salads}
+              availableSalads={availableSalads}
               lines={lines.filter((line) => line.menuDishId === main.menu_dish_id)}
               disabled={isPastCutoff}
-              onAdd={(line) => onAddLine(line)}
-              onSetQuantity={onSetQuantity}
-              onRemoveLine={onRemoveLine}
+              onOpenDrawer={() => {
+                setActiveDishId(main.menu_dish_id);
+                setDrawerOpen(true);
+              }}
             />
           ))}
         </ul>
@@ -94,6 +106,20 @@ export function DayColumn({
       )}
 
       {submitError && <Alert variant="error">{submitError}</Alert>}
+
+      {activeMain && (
+        <DishStepDrawer
+          open={drawerOpen}
+          onOpenChange={setDrawerOpen}
+          main={activeMain}
+          salads={availableSalads}
+          existingLines={lines.filter((line) => line.menuDishId === activeMain.menu_dish_id)}
+          disabled={isPastCutoff}
+          onAdd={onAddLine}
+          onSetQuantity={onSetQuantity}
+          onRemoveLine={onRemoveLine}
+        />
+      )}
     </section>
   );
 }

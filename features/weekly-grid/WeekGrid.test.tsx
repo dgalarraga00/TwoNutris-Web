@@ -1,10 +1,20 @@
 // @vitest-environment jsdom
 import "@testing-library/jest-dom/vitest";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WeekGrid } from "./WeekGrid";
+
+// jsdom has no Pointer Events capture API; Vaul's drag-to-dismiss handling
+// calls `setPointerCapture`/`releasePointerCapture` on every press inside
+// the drawer, so DishStepDrawer interactions throw without this stub (same
+// per-file-polyfill convention as AppShell.test.tsx's `matchMedia` mock).
+if (typeof Element !== "undefined" && !Element.prototype.setPointerCapture) {
+  Element.prototype.setPointerCapture = () => {};
+  Element.prototype.releasePointerCapture = () => {};
+  Element.prototype.hasPointerCapture = () => false;
+}
 
 const jsonResponse = (status: number, body: unknown): Response =>
   new Response(JSON.stringify(body), {
@@ -193,7 +203,7 @@ describe("WeekGrid", () => {
     expect(screen.getByText("Créditos de snack: 2")).toBeInTheDocument();
   });
 
-  it("never lets a meal line exist without a resolved salad — the picker gates the add", async () => {
+  it("never lets a meal line exist without a resolved salad — the step drawer gates the add behind quantity -> salad -> review", async () => {
     fetchMock.mockImplementation(async (input: RequestInfo | URL) => {
       const url = input.toString();
       if (url.includes("/api/menu/current")) return jsonResponse(200, weekFixture());
@@ -206,86 +216,102 @@ describe("WeekGrid", () => {
     const user = userEvent.setup();
     renderWeekGrid();
 
-    const addButton = await screen.findByRole("button", {
-      name: "Agregar Pollo a la griega al pedido",
-    });
-    await user.click(addButton);
-
-    // Two salads exist in the fixture — the picker must appear, and no
-    // "Confirmar pedido" submit button exists yet because no line was
-    // actually added.
-    expect(
-      screen.getByRole("group", { name: "Elegí tu ensalada de acompañamiento" }),
-    ).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: /Confirmar pedido/ })).not.toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: "Citricos y Hojas" }));
-
-    // Only now does the line exist — as a per-line quantity row (design-
-    // refinement pass: a stepper, not a single "Quitar" toggle).
-    expect(
-      await screen.findByRole("button", { name: "Quitar Pollo a la griega con Citricos y Hojas" }),
-    ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Confirmar pedido (1)" })).toBeInTheDocument();
-  });
-
-  it("supports a quantity stepper and per-unit salad choice for the same dish", async () => {
-    fetchMock.mockImplementation(async (input: RequestInfo | URL) => {
-      const url = input.toString();
-      if (url.includes("/api/menu/current")) return jsonResponse(200, weekFixture());
-      if (url.includes("/api/me/balance")) return balanceResponse();
-      if (url.includes("/api/me/addresses")) return addressesResponse();
-      if (url.includes("/api/me/orders")) return emptyOrdersResponse();
-      throw new Error(`Unexpected fetch: ${url}`);
-    });
-
-    const user = userEvent.setup();
-    renderWeekGrid();
-
-    // First unit: 2 salads exist, picker gates it.
     await user.click(
       await screen.findByRole("button", { name: "Agregar Pollo a la griega al pedido" }),
     );
+
+    // Step 1 of 3: quantity only — no salad picker yet, no staged line has
+    // been committed to the day's draft (design D2: staged locally, only
+    // regrouped into `useDayDraft` at step 3).
+    expect(screen.getByText(/Paso 1 de 3/)).toBeInTheDocument();
+    expect(
+      screen.queryByRole("group", { name: "Elegí tu ensalada de acompañamiento" }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Confirmar pedido/ })).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
+
+    // Step 2 of 3: two salads exist in the fixture — the picker gates it,
+    // and still no committed line, no submit button.
+    expect(screen.getByText("Unidad 1 de 1")).toBeInTheDocument();
+    const picker = screen.getByRole("group", { name: "Elegí tu ensalada de acompañamiento" });
+    expect(screen.queryByRole("button", { name: /Confirmar pedido/ })).not.toBeInTheDocument();
+
+    await user.click(within(picker).getByRole("button", { name: "Citricos y Hojas" }));
+    await user.click(screen.getByRole("button", { name: "Revisar" }));
+
+    // Step 3 of 3: review shows the resolved line; only "Confirmar" regroups
+    // it into the day's draft and closes the drawer.
+    expect(
+      screen.getByRole("group", { name: "Cantidad de Pollo a la griega" }),
+    ).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Confirmar (1)" }));
+
+    expect(await screen.findByRole("button", { name: "Confirmar pedido (1)" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Editar Pollo a la griega" })).toBeInTheDocument();
+  });
+
+  it("supports a quantity stepper and per-unit salad choice for the same dish, regrouping on every confirm", async () => {
+    fetchMock.mockImplementation(async (input: RequestInfo | URL) => {
+      const url = input.toString();
+      if (url.includes("/api/menu/current")) return jsonResponse(200, weekFixture());
+      if (url.includes("/api/me/balance")) return balanceResponse();
+      if (url.includes("/api/me/addresses")) return addressesResponse();
+      if (url.includes("/api/me/orders")) return emptyOrdersResponse();
+      throw new Error(`Unexpected fetch: ${url}`);
+    });
+
+    const user = userEvent.setup();
+    renderWeekGrid();
+
+    // Round 1: quantity 2, both units the SAME salad -> one line, qty 2.
+    await user.click(
+      await screen.findByRole("button", { name: "Agregar Pollo a la griega al pedido" }),
+    );
+    await user.click(screen.getByRole("button", { name: "2" }));
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
     await user.click(screen.getByRole("button", { name: "Citricos y Hojas" }));
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
+    await user.click(screen.getByRole("button", { name: "Citricos y Hojas" }));
+    await user.click(screen.getByRole("button", { name: "Revisar" }));
+    await user.click(screen.getByRole("button", { name: "Confirmar (2)" }));
 
-    // Incrementing the SAME line's stepper bumps quantity, no new line.
-    await user.click(
-      screen.getByRole("button", { name: "Agregar una unidad de Pollo a la griega" }),
-    );
-    expect(screen.getByRole("button", { name: "Confirmar pedido (2)" })).toBeInTheDocument();
-    expect(
-      screen.queryByRole("button", { name: "Quitar Pollo a la griega con Verde y Fresca" }),
-    ).not.toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: "Confirmar pedido (2)" })).toBeInTheDocument();
 
-    // "+ Agregar otra unidad" opens the picker again for a DIFFERENT salad —
-    // this creates a SECOND, separate line for the same dish (user-confirmed
-    // per-unit salad split), not a merge into the first line.
-    await user.click(screen.getByRole("button", { name: "+ Agregar otra unidad" }));
+    // Round 2: re-opening seeds staging from the existing line (spec:
+    // step-back editing is free) — bump to 3 and give the new unit a
+    // DIFFERENT salad -> two composite-id lines survive, 2 + 1.
+    await user.click(screen.getByRole("button", { name: "Editar Pollo a la griega" }));
+    await user.click(screen.getByRole("button", { name: "Agregar una unidad" }));
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
+    // Units 1-2 were already seeded as Citricos; step through them.
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
     await user.click(screen.getByRole("button", { name: "Verde y Fresca" }));
+    await user.click(screen.getByRole("button", { name: "Revisar" }));
 
-    expect(
-      screen.getByRole("button", { name: "Quitar Pollo a la griega con Citricos y Hojas" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Quitar Pollo a la griega con Verde y Fresca" }),
-    ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Confirmar pedido (3)" })).toBeInTheDocument();
+    expect(screen.getByText("con Citricos y Hojas")).toBeInTheDocument();
+    expect(screen.getByText("con Verde y Fresca")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Confirmar (3)" }));
 
-    // Decrementing the first line's stepper back to 0 removes only that
-    // line — the second (different-salad) line survives untouched.
+    expect(await screen.findByRole("button", { name: "Confirmar pedido (3)" })).toBeInTheDocument();
+
+    // Round 3: decrementing ONLY the Citricos group's stepper in review
+    // (2 -> 1) must not touch the separate Verde line.
+    await user.click(screen.getByRole("button", { name: "Editar Pollo a la griega" }));
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
+    await user.click(screen.getByRole("button", { name: "Revisar" }));
+
+    const citricosRow = screen.getByText("con Citricos y Hojas").closest("li")!;
     await user.click(
-      screen.getAllByRole("button", { name: "Quitar una unidad de Pollo a la griega" })[0]!,
+      within(citricosRow).getByRole("button", { name: "Quitar una unidad de Pollo a la griega" }),
     );
-    await user.click(
-      screen.getAllByRole("button", { name: "Quitar una unidad de Pollo a la griega" })[0]!,
-    );
-    expect(
-      screen.queryByRole("button", { name: "Quitar Pollo a la griega con Citricos y Hojas" }),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Quitar Pollo a la griega con Verde y Fresca" }),
-    ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Confirmar pedido (1)" })).toBeInTheDocument();
+    expect(screen.getByText("con Verde y Fresca")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Confirmar (2)" }));
+
+    expect(await screen.findByRole("button", { name: "Confirmar pedido (2)" })).toBeInTheDocument();
   });
 
   it("submits the salad-paired line, then handles a capacity-race by refetching the week and surfacing the real backend message", async () => {
@@ -313,8 +339,11 @@ describe("WeekGrid", () => {
     await user.click(
       await screen.findByRole("button", { name: "Agregar Pollo a la griega al pedido" }),
     );
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
     await user.click(screen.getByRole("button", { name: "Citricos y Hojas" }));
-    await user.click(screen.getByRole("button", { name: "Confirmar pedido (1)" }));
+    await user.click(screen.getByRole("button", { name: "Revisar" }));
+    await user.click(screen.getByRole("button", { name: "Confirmar (1)" }));
+    await user.click(await screen.findByRole("button", { name: "Confirmar pedido (1)" }));
 
     const orderCall = await waitFor(() =>
       fetchMock.mock.calls.find(([input]) => input.toString().includes("/api/orders")),
@@ -369,14 +398,17 @@ describe("WeekGrid", () => {
     await user.click(
       await screen.findByRole("button", { name: "Agregar Pollo a la griega al pedido" }),
     );
+    await user.click(screen.getByRole("button", { name: "3" }));
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
     await user.click(screen.getByRole("button", { name: "Citricos y Hojas" }));
-    await user.click(
-      screen.getByRole("button", { name: "Agregar una unidad de Pollo a la griega" }),
-    );
-    await user.click(screen.getByRole("button", { name: "+ Agregar otra unidad" }));
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
+    await user.click(screen.getByRole("button", { name: "Citricos y Hojas" }));
+    await user.click(screen.getByRole("button", { name: "Siguiente" }));
     await user.click(screen.getByRole("button", { name: "Verde y Fresca" }));
+    await user.click(screen.getByRole("button", { name: "Revisar" }));
+    await user.click(screen.getByRole("button", { name: "Confirmar (3)" }));
 
-    await user.click(screen.getByRole("button", { name: "Confirmar pedido (3)" }));
+    await user.click(await screen.findByRole("button", { name: "Confirmar pedido (3)" }));
 
     const orderCall = await waitFor(() =>
       fetchMock.mock.calls.find(
