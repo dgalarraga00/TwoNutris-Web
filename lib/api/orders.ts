@@ -54,6 +54,12 @@ export const orderDtoSchema = z
     id: z.coerce.number(),
     status: z.string(),
     delivery_date: z.string(),
+    /** `OrderSerializer.cutoff_at` (backend: `orders/api/serializers.py`,
+     * `source="menu_day.cutoff_at"`, read-only) — read directly this
+     * session, already live on `main` (commit `be3b8a7`). Feeds
+     * `features/profile/useRefundPreview.ts`: the refund preview is
+     * backend-sourced from this field, not a client-side guess. */
+    cutoff_at: z.string(),
     items: z.array(orderItemDtoSchema),
     created_at: z.string(),
   })
@@ -88,6 +94,23 @@ export async function getMyOrders(): Promise<OrderDto[]> {
 /** Feeds task 6.3 ("repeat last week"). */
 export function useMyOrders() {
   return useQuery({ queryKey: ordersKeys.mine(), queryFn: getMyOrders });
+}
+
+/**
+ * `PATCH /api/orders/{id}` -> `OrderDetailView.patch()` -> `orders/services
+ * .py::cancel_order()` (backend, read directly this session). Both PATCH
+ * and DELETE run the SAME cancellation; this client only ever calls PATCH
+ * since it needs the returned `OrderSerializer` body to know which of the
+ * two real outcomes happened (`cancelled_refunded` vs `cancelled_no_refund`,
+ * decided server-side by `now < order.menu_day.cutoff_at`) — a DELETE's
+ * 204 response would throw that truth away.
+ */
+export async function cancelOrder(id: number): Promise<OrderDto> {
+  const response = await httpClient(`${ORDERS_API_BASE_URL}/api/orders/${id}`, {
+    method: "PATCH",
+  });
+  const data: unknown = await response.json();
+  return orderDtoSchema.parse(data);
 }
 
 /** After a successful order submission, both the wallet balance and the

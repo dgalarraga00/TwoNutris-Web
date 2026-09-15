@@ -32,3 +32,21 @@ export function portionChangeErrorMessage(error: unknown): string {
   }
   return "No pudimos procesar tu solicitud. Intenta de nuevo.";
 }
+
+/**
+ * `PATCH /api/orders/{id}` -> `cancel_order()` guard chain (backend, read
+ * directly this session): `order_already_cancelled` (409) is the one real
+ * domain code — `config/api.py::DOMAIN_STATUS` maps `OrderAlreadyCancelled`
+ * to it. Every other `ApiError`'s `detail` is already a precise
+ * customer-facing Spanish string (same passthrough convention as
+ * `weeklyGridErrorMessage`).
+ */
+export function cancelOrderErrorMessage(error: unknown): string {
+  if (isCode(error, "order_already_cancelled")) {
+    return "Este pedido ya fue cancelado.";
+  }
+  if (error instanceof ApiError) {
+    return error.detail;
+  }
+  return "No pudimos cancelar tu pedido. Intenta de nuevo.";
+}

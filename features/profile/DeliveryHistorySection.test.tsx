@@ -41,6 +41,7 @@ describe("DeliveryHistorySection", () => {
           id: 501,
           status: "confirmed",
           delivery_date: "2026-09-15",
+          cutoff_at: "2026-09-14T18:00:00Z",
           items: [],
           created_at: "2026-09-10T00:00:00Z",
         },
@@ -60,5 +61,35 @@ describe("DeliveryHistorySection", () => {
 
     expect(await screen.findByText("Todavía no tienes pedidos.")).toBeInTheDocument();
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+
+  it("shows Cancelar only for a 'placed' order, never for an already-cancelled one", async () => {
+    fetchMock.mockImplementation(async () =>
+      jsonResponse(200, [
+        {
+          id: 501,
+          status: "placed",
+          delivery_date: "2026-09-15",
+          cutoff_at: "2099-01-01T00:00:00Z",
+          items: [],
+          created_at: "2026-09-10T00:00:00Z",
+        },
+        {
+          id: 502,
+          status: "cancelled_refunded",
+          delivery_date: "2026-09-16",
+          cutoff_at: "2026-09-15T18:00:00Z",
+          items: [],
+          created_at: "2026-09-10T00:00:00Z",
+        },
+      ]),
+    );
+
+    renderSection();
+
+    await screen.findByText("Pedido #501 — placed");
+    expect(screen.getAllByRole("button", { name: "Cancelar" })).toHaveLength(1);
+    expect(screen.getByText("Confirmado")).toBeInTheDocument();
+    expect(screen.getByText("Cancelado con reembolso")).toBeInTheDocument();
   });
 });

@@ -123,6 +123,7 @@ const lastWeekOrdersResponse = [
     id: 1,
     status: "confirmed",
     delivery_date: "2026-09-08",
+    cutoff_at: "2026-09-08T18:00:00Z",
     items: [
       { id: 10, dish: 1, dish_portion: 501, menu_dish: 101, quantity: 1, snapshot_name: "Pollo a la griega" },
       // Auto-created salad companion — `menu_dish: null`, must be skipped.
@@ -134,6 +135,7 @@ const lastWeekOrdersResponse = [
     id: 2,
     status: "confirmed",
     delivery_date: "2026-09-09",
+    cutoff_at: "2026-09-09T18:00:00Z",
     items: [
       { id: 12, dish: 2, dish_portion: 503, menu_dish: 102, quantity: 1, snapshot_name: "Guiso veggie de lentejas con arroz" },
     ],
@@ -143,6 +145,7 @@ const lastWeekOrdersResponse = [
     id: 3,
     status: "confirmed",
     delivery_date: "2026-09-10",
+    cutoff_at: "2026-09-10T18:00:00Z",
     items: [
       { id: 13, dish: 99, dish_portion: 999, menu_dish: 103, quantity: 1, snapshot_name: "Plato descontinuado" },
     ],
