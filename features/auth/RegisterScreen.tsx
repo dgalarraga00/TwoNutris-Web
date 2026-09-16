@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { BrandedScreen } from "@/components/BrandedScreen";
 import { RegisterForm } from "./RegisterForm";
 
 /**
@@ -17,12 +18,8 @@ export function RegisterScreen() {
   const router = useRouter();
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-cream">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[url('/patterns/patron-negro.png')] bg-[length:700px] bg-repeat opacity-[0.05]"
-      />
-      <div className="relative mx-auto flex min-h-screen max-w-2xl flex-col justify-center gap-6 p-4">
+    <BrandedScreen>
+      <div className="mx-auto flex min-h-screen max-w-2xl flex-col justify-center gap-6 p-4">
         <Image src="/icons/logo.png" alt="TwoNutris" width={140} height={47} className="mx-auto" priority />
         <h1 className="text-center font-ibrand text-3xl text-leaf">Crear cuenta</h1>
         <RegisterForm onSuccess={() => router.push("/checkout")} />
@@ -33,6 +30,6 @@ export function RegisterScreen() {
           </Link>
         </p>
       </div>
-    </div>
+    </BrandedScreen>
   );
 }

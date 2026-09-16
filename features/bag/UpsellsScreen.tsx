@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { BrandedScreen } from "@/components/BrandedScreen";
 import { Button } from "@/components/ui/Button";
 import {
   usePurchaseDraftPortionSize,
@@ -41,8 +43,10 @@ export function UpsellsScreen() {
   const breakdown = computeBagTotal({ portionSize, doubleProtein, snackQuantity });
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 bg-cream p-4 md:p-6">
-      <h1 className="font-ibrand text-2xl text-leaf md:text-3xl">Complementos</h1>
+    <BrandedScreen>
+      <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 p-4 md:p-6">
+        <Image src="/icons/logo.png" alt="TwoNutris" width={140} height={47} className="mx-auto" priority />
+        <h1 className="font-ibrand text-2xl text-leaf md:text-3xl">Complementos</h1>
 
       {customerKind === "individual" && (
         <label className="flex items-center justify-between rounded-2xl border border-leaf/10 bg-white p-4">
@@ -74,8 +78,9 @@ export function UpsellsScreen() {
 
       <PriceBreakdown breakdown={breakdown} />
 
-      <Button onClick={() => router.push("/registro")}>Siguiente</Button>
-    </div>
+        <Button onClick={() => router.push("/registro")}>Siguiente</Button>
+      </div>
+    </BrandedScreen>
   );
 }
 

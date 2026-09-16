@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
+import { BrandedScreen } from "@/components/BrandedScreen";
 import { Button } from "@/components/ui/Button";
 import { activityMultiplierFor } from "@/lib/nutrition/activity";
 import { requiresNutritionConsult } from "@/lib/nutrition/guards";
@@ -100,15 +102,20 @@ export function CalculatorWizard() {
 
   if (form.skipped) {
     return (
-      <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 bg-cream p-4">
-        <SkippedSummary />
-      </div>
+      <BrandedScreen>
+        <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 p-4">
+          <Image src="/icons/logo.png" alt="TwoNutris" width={140} height={47} className="mx-auto" priority />
+          <SkippedSummary />
+        </div>
+      </BrandedScreen>
     );
   }
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 bg-cream p-4">
-      <div className="flex items-center gap-2" role="progressbar" aria-valuenow={stepIndex + 1} aria-valuemin={1} aria-valuemax={STEPS.length}>
+    <BrandedScreen>
+      <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 p-4">
+        <Image src="/icons/logo.png" alt="TwoNutris" width={140} height={47} className="mx-auto" priority />
+        <div className="flex items-center gap-2" role="progressbar" aria-valuenow={stepIndex + 1} aria-valuemin={1} aria-valuemax={STEPS.length}>
         <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-leaf/10">
           <div
             className="h-full rounded-full bg-amber transition-all"
@@ -150,6 +157,7 @@ export function CalculatorWizard() {
           </Button>
         </div>
       )}
-    </div>
+      </div>
+    </BrandedScreen>
   );
 }
