@@ -71,9 +71,9 @@ describe("UpsellsScreen — double-protein default-unchecked (zero exceptions)",
     expect(checkbox).toBeChecked();
   });
 
-  it("explains that double-protein applies to the whole bag, not one dish at a time (live feedback)", () => {
+  it("explains what double-protein does and that it's a whole-bag setting, not one dish at a time (live feedback)", () => {
     renderUpsells();
-    expect(screen.getByText(/TODOS los platos de esta bolsa/)).toBeInTheDocument();
+    expect(screen.getByText(/Duplica la porción de proteína/)).toBeInTheDocument();
   });
 });
 

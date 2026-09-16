@@ -69,10 +69,10 @@ export function UpsellsScreen() {
             />
           </label>
           <p className="mt-2 font-poppins text-xs text-leaf/60">
-            Se aplica a TODOS los platos de esta bolsa de créditos, no uno a
-            la vez — igual que la cantidad de snacks que elegís abajo, es un
-            ajuste para toda la bolsa, no algo que se elige plato por plato
-            cada semana.
+            Duplica la porción de proteína (mismo tipo del plato, +120g) en
+            cada uno de tus pedidos mientras dure esta bolsa de créditos —
+            no se elige plato por plato, es un ajuste único para toda la
+            bolsa.
           </p>
         </div>
       )}
