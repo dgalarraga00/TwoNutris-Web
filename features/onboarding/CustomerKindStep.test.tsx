@@ -80,4 +80,9 @@ describe("CustomerKindStep — funnel navigation (final integration unit)", () =
     expect(routerPushMock).toHaveBeenCalledWith("/bolsa");
     expect(routerPushMock).not.toHaveBeenCalledWith("/calculadora");
   });
+
+  it("renders a shortcut to /entrar for a returning customer (bug fix, live feedback: no way to skip the funnel before)", () => {
+    render(<CustomerKindStep />);
+    expect(screen.getByRole("link", { name: "Inicia sesión" })).toHaveAttribute("href", "/entrar");
+  });
 });

@@ -8,14 +8,20 @@ import {
   usePurchaseDraftStore,
 } from "@/stores/purchaseDraftStore";
 import { MEAL_BAG_BASE_PRICE_CENTS, PORTION_SIZE_LABEL, formatCents } from "@/lib/pricing/bagPricing";
-import { CustomerKindToggle } from "./CustomerKindToggle";
 import { CouponDisclosure } from "./CouponDisclosure";
 
 /**
  * Bag screen (F7, task 5.5): shows the resolved LOW/MEDIUM/HIGH tier and its
- * price. This is purely INFORMATIONAL for individual customers — the tier
- * is derived from their calculator goal, never a free-pick UI (confirmed
- * decision) — and always MEDIUM for group, also not choosable.
+ * price. This is purely INFORMATIONAL — the customer already chose
+ * individual/group at `/empezar` (`CustomerKindStep`), and for an
+ * individual the tier is derived from their calculator goal — never a
+ * free-pick UI here. Bug fix (live feedback): this screen used to also
+ * render `CustomerKindToggle`, a placeholder built before `/empezar`
+ * existed to make the group path reachable/testable; it let the customer
+ * re-answer "¿para ti o para tu equipo?" a second time and silently
+ * overwrite the real choice already made, with no relation to the
+ * calculator path they may have already completed. Removed along with the
+ * now-dead `CustomerKindToggle.tsx`.
  *
  * `CouponDisclosure` is rendered here unwired (`onValidate` left
  * `undefined`) — see that component's own docstring for why
@@ -35,13 +41,6 @@ export function BagScreen() {
   return (
     <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 p-4 md:p-6">
       <h1 className="font-ibrand text-2xl text-leaf md:text-3xl">Tu bolsa</h1>
-
-      {/*
-        TODO(gap): stand-in for the real "¿para ti o para tu equipo?"
-        landing-page choice — the spec's actual first funnel step, not yet
-        built by any earlier unit. See apply-progress risk report.
-      */}
-      <CustomerKindToggle />
 
       <Card>
         <p className="font-poppins text-sm text-leaf/60">

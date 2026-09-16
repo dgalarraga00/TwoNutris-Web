@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BrandedScreen } from "@/components/BrandedScreen";
 import { usePurchaseDraftStore } from "@/stores/purchaseDraftStore";
@@ -78,6 +79,13 @@ export function CustomerKindStep() {
             </button>
           ))}
         </div>
+
+        <p className="text-center font-poppins text-sm text-leaf/60">
+          ¿Ya tienes cuenta?{" "}
+          <Link href="/entrar" className="font-medium text-leaf underline underline-offset-2">
+            Inicia sesión
+          </Link>
+        </p>
       </div>
     </BrandedScreen>
   );

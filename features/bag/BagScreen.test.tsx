@@ -55,16 +55,9 @@ describe("BagScreen — tier resolution (informational, never a free pick)", () 
     expect(screen.getByText("Tu equipo siempre recibe la porción Media.")).toBeInTheDocument();
   });
 
-  it("switches from individual to group tier resolution via the placeholder toggle", async () => {
-    usePurchaseDraftStore.getState().setGoal("gain_muscle");
-    const user = userEvent.setup();
+  it("does not render a customer-kind picker on this screen — that choice is made once at /empezar", () => {
     render(<BagScreen />);
-
-    expect(screen.getByText("Porción Alta")).toBeInTheDocument();
-
-    await user.click(screen.getByRole("radio", { name: "Para mi equipo" }));
-
-    expect(screen.getByText("Porción Media")).toBeInTheDocument();
+    expect(screen.queryByRole("radiogroup", { name: "Tipo de cliente" })).not.toBeInTheDocument();
   });
 });
 

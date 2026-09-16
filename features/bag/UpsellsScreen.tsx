@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BrandedScreen } from "@/components/BrandedScreen";
 import { Button } from "@/components/ui/Button";
+import { useMe } from "@/lib/api/me";
 import {
   usePurchaseDraftPortionSize,
   usePurchaseDraftStore,
@@ -27,12 +28,18 @@ import { PriceBreakdown } from "./PriceBreakdown";
  * the backend's `DoubleProteinNotAvailableForGroup` guard, plus the store's
  * own `setDoubleProtein()` guard (see `stores/purchaseDraftStore.ts`).
  *
- * Funnel navigation (final integration unit): "Siguiente" continues to
- * `/registro` — the first screen that requests an account (spec: account
- * MUST NOT be requested before this step).
+ * Funnel navigation: "Siguiente" continues to `/registro` for a brand-new
+ * visitor (spec: account MUST NOT be requested before this step) — but a
+ * CUSTOMER WHO ALREADY HAS AN ACCOUNT and reached this screen (e.g. buying
+ * an extra/renewal pack while logged in) must go straight to `/checkout`
+ * instead, never back through account creation. `useMe()` (already the
+ * app's one established way to detect auth state, per `AppShell`) tells us
+ * which case this is — bug fix, live-feedback: this previously hardcoded
+ * `/registro` unconditionally.
  */
 export function UpsellsScreen() {
   const router = useRouter();
+  const { data: me } = useMe();
   const customerKind = usePurchaseDraftStore((state) => state.customerKind);
   const doubleProtein = usePurchaseDraftStore((state) => state.doubleProtein);
   const setDoubleProtein = usePurchaseDraftStore((state) => state.setDoubleProtein);
@@ -49,17 +56,25 @@ export function UpsellsScreen() {
         <h1 className="font-ibrand text-2xl text-leaf md:text-3xl">Complementos</h1>
 
       {customerKind === "individual" && (
-        <label className="flex items-center justify-between rounded-2xl border border-leaf/10 bg-white p-4">
-          <span className="font-poppins text-sm font-medium text-leaf">
-            Doble proteína (+{formatCents(2500)})
-          </span>
-          <input
-            type="checkbox"
-            checked={doubleProtein}
-            onChange={(event) => setDoubleProtein(event.target.checked)}
-            className="h-4 w-4 accent-leaf"
-          />
-        </label>
+        <div className="rounded-2xl border border-leaf/10 bg-white p-4">
+          <label className="flex items-center justify-between">
+            <span className="font-poppins text-sm font-medium text-leaf">
+              Doble proteína (+{formatCents(2500)})
+            </span>
+            <input
+              type="checkbox"
+              checked={doubleProtein}
+              onChange={(event) => setDoubleProtein(event.target.checked)}
+              className="h-4 w-4 accent-leaf"
+            />
+          </label>
+          <p className="mt-2 font-poppins text-xs text-leaf/60">
+            Se aplica a TODOS los platos de esta bolsa de créditos, no uno a
+            la vez — igual que la cantidad de snacks que elegís abajo, es un
+            ajuste para toda la bolsa, no algo que se elige plato por plato
+            cada semana.
+          </p>
+        </div>
       )}
 
       <fieldset className="rounded-2xl border border-leaf/10 bg-white p-4">
@@ -78,7 +93,7 @@ export function UpsellsScreen() {
 
       <PriceBreakdown breakdown={breakdown} />
 
-        <Button onClick={() => router.push("/registro")}>Siguiente</Button>
+        <Button onClick={() => router.push(me ? "/checkout" : "/registro")}>Siguiente</Button>
       </div>
     </BrandedScreen>
   );
