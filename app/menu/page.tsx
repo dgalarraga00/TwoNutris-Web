@@ -10,6 +10,18 @@ import { DishModal, ALLERGEN_MAP } from "@/components/DishModal";
 import { weeklyMenu, DAYS, type MenuItem, type CategoryKey } from "@/data/menu";
 
 /* ── Tarjeta de plato ───────────────────────────────────────────── */
+
+// Photos are ~16:9 but the 4:3 card box crops them with object-cover, so the
+// rendered image is ~1.35x wider than the card. `sizes` must describe that
+// rendered width per grid layout (principal 1/2/3 cols, ensalada 1/2,
+// postre 1/3), otherwise the browser downloads a smaller variant and
+// upscales it (blurry cards).
+const CARD_IMAGE_SIZES: Record<CategoryKey, string> = {
+  principal: "(max-width: 640px) 135vw, (max-width: 1024px) 70vw, 450px",
+  ensalada: "(max-width: 640px) 135vw, (max-width: 1024px) 70vw, 690px",
+  postre: "(max-width: 640px) 135vw, (max-width: 1024px) 45vw, 500px",
+};
+
 interface DishCardProps {
   plate: MenuItem;
   onClick: () => void;
@@ -32,7 +44,7 @@ function DishCard({ plate, onClick }: DishCardProps) {
           alt={plate.name}
           fill
           className="group-hover:scale-105 object-cover transition-transform duration-[400ms] ease-in-out"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+          sizes={CARD_IMAGE_SIZES[plate.category]}
           quality={90}
         />
         <div

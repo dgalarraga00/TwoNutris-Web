@@ -31,7 +31,10 @@ function DishCard({
           alt={plate.name}
           fill
           className="object-cover"
-          sizes="300px"
+          // The 340px-wide 4:3 box crops ~16:9 photos with object-cover, so the
+          // rendered image is ~460px wide. A smaller `sizes` makes the browser
+          // download a smaller variant and upscale it (blurry card).
+          sizes="460px"
         />
         {/* Badge calorías */}
         <div
