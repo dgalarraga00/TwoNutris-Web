@@ -45,7 +45,6 @@ function DishCard({ plate, onClick }: DishCardProps) {
           fill
           className="group-hover:scale-105 object-cover transition-transform duration-[400ms] ease-in-out"
           sizes={CARD_IMAGE_SIZES[plate.category]}
-          quality={90}
         />
         <div
           className="absolute top-2 right-2 flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold font-poppins"

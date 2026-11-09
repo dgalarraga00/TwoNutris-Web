@@ -82,7 +82,6 @@ export function DishModal({ plate, onClose }: DishModalProps) {
               src={plate.image}
               alt={plate.name}
               fill
-              quality={90}
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 420px"
             />
