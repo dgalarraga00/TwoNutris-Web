@@ -244,12 +244,12 @@ export function Footer({ onManageCookies }: FooterProps) {
         <p className="text-xs font-poppins opacity-75" style={{ color: "#144400" }}>
           Designed in Ecuador by{" "}
           <a
-            href="https://www.instagram.com/promethex.tech?igsh=bDgzNXhtdHBtejZy"
+            href="https://www.instagram.com/dev.galarraga/"
             target="_blank"
             rel="noopener noreferrer"
             className="no-underline"
             style={{ color: "#FFB000" }}
-          >Promethex</a>
+          >dev.galarraga</a>
         </p>
       </div>
     </footer>
