@@ -165,3 +165,52 @@ html {
     border-radius: 4px;
   }
 }
+
+/* ── Christmas theme: snowfall ──────────────────────────────────── */
+
+@keyframes snow-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(24px, 50vh, 0) rotate(180deg);
+  }
+  100% {
+    transform: translate3d(-12px, 105vh, 0) rotate(360deg);
+  }
+}
+
+.snowflake {
+  animation-name: snow-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snowflake {
+    display: none;
+  }
+}
+
+/* ── Christmas theme: string lights ─────────────────────────────── */
+
+@keyframes bulb-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.xmas-bulb {
+  animation: bulb-twinkle 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xmas-bulb {
+    animation: none;
+  }
+}

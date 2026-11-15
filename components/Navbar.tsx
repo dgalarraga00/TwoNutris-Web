@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { SantaHat, StringLights } from "@/components/ChristmasDecor";
+import { CHRISTMAS_THEME_ENABLED } from "@/lib/seasonal";
 
 const NAV_LINKS = [
   { label: "Inicio", href: "/" },
@@ -55,11 +57,14 @@ export function Navbar() {
             href="https://www.twonutris.net/registrate"
             target="_blank"
             rel="noopener noreferrer"
-            className="animate-cta-wiggle hidden md:flex items-center gap-2 text-sm font-bold px-6 py-3 rounded-full cursor-pointer no-underline font-ibrand bg-amber text-leaf"
+            className="animate-cta-wiggle relative hidden md:flex items-center gap-2 text-sm font-bold px-6 py-3 rounded-full cursor-pointer no-underline font-ibrand bg-amber text-leaf"
             style={{
               boxShadow: "0 4px 16px rgba(255, 176, 0, 0.35)",
             }}
           >
+            {CHRISTMAS_THEME_ENABLED && (
+              <SantaHat className="absolute -top-[18px] -left-[10px] w-9 -rotate-[22deg]" />
+            )}
             Pedir ahora
           </a>
 
@@ -80,6 +85,8 @@ export function Navbar() {
           </button>
         </div>
       </nav>
+
+      {CHRISTMAS_THEME_ENABLED && !mobileOpen && <StringLights />}
 
       {/* ── Mobile Menu ─────────────────────────────────────── */}
       <div
@@ -107,8 +114,11 @@ export function Navbar() {
               href="https://www.twonutris.net/registrate"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full py-3 rounded-full text-sm font-bold text-center no-underline font-ibrand bg-amber text-leaf"
+              className="relative block w-full py-3 rounded-full text-sm font-bold text-center no-underline font-ibrand bg-amber text-leaf"
             >
+              {CHRISTMAS_THEME_ENABLED && (
+                <SantaHat className="absolute -top-[14px] left-3 w-8 -rotate-[22deg]" />
+              )}
               Pedir ahora
             </a>
           </li>

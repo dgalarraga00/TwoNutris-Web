@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { HollySprig } from "@/components/ChristmasDecor";
+import { CHRISTMAS_THEME_ENABLED } from "@/lib/seasonal";
 
 const NAV_LINKS = [
   { label: "Inicio",                  href: "/" },
@@ -168,14 +170,30 @@ export function Footer({ onManageCookies }: FooterProps) {
       <div
         className="w-full flex items-center justify-center py-10 px-6 border-t border-b border-[rgba(20,68,0,0.08)]"
       >
-        <Image
-          src="/icons/logo.png"
-          alt=""
-          aria-hidden="true"
-          width={600}
-          height={120}
-          className="w-full object-contain mix-blend-multiply max-w-[480px] h-auto"
-        />
+        <div className="flex flex-col items-center gap-5 w-full">
+          <div className="flex items-center justify-center gap-3 md:gap-6 w-full">
+            {CHRISTMAS_THEME_ENABLED && (
+              <HollySprig className="w-12 md:w-20 flex-shrink-0 -rotate-12" />
+            )}
+            <Image
+              src="/icons/logo.png"
+              alt=""
+              aria-hidden="true"
+              width={600}
+              height={120}
+              className="w-full object-contain mix-blend-multiply max-w-[480px] h-auto min-w-0"
+            />
+            {CHRISTMAS_THEME_ENABLED && (
+              <HollySprig className="w-12 md:w-20 flex-shrink-0 rotate-12 -scale-x-100" />
+            )}
+          </div>
+          {CHRISTMAS_THEME_ENABLED && (
+            <p className="text-sm md:text-base font-ibrand text-center text-leaf">
+              🎄 Felices fiestas y un próspero 2027 de parte de todo el equipo{" "}
+              <span className="text-berry">twonutris</span> ✨
+            </p>
+          )}
+        </div>
       </div>
 
       {/* ── Barra inferior ──────────────────────────────────────── */}

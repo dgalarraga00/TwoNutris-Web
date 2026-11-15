@@ -1,5 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HollySprig } from "@/components/ChristmasDecor";
+import { Snowfall } from "@/components/Snowfall";
+import { CHRISTMAS_THEME_ENABLED } from "@/lib/seasonal";
 
 /* ─────────────────────────────────────────────────────────────────
    HeroSection — twonutris
@@ -19,7 +22,8 @@ export function HeroSection() {
       <div
         className="absolute inset-0 pointer-events-none bg-[url('/patterns/patron-negro.png')] bg-[length:700px] bg-repeat opacity-[0.05]"
       />
-      <div className="max-w-[1200px] mx-auto w-full px-6 py-16 md:py-20">
+      {CHRISTMAS_THEME_ENABLED && <Snowfall />}
+      <div className="max-w-[1200px] mx-auto w-full px-6 py-16 md:py-20 relative z-[1]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-center">
 
           {/* ═══════════════════════════════════
@@ -36,9 +40,11 @@ export function HeroSection() {
             >
               <span
                 className="w-1.5 h-1.5 rounded-full animate-pulse"
-                style={{ backgroundColor: "#FFB000" }}
+                style={{ backgroundColor: CHRISTMAS_THEME_ENABLED ? "#FF6B5E" : "#FFB000" }}
               />
-              Menú nuevo cada semana
+              {CHRISTMAS_THEME_ENABLED
+                ? "🎄 Felices fiestas · Menú nuevo cada semana"
+                : "Menú nuevo cada semana"}
             </div>
 
             {/* H1 */}
@@ -168,6 +174,11 @@ export function HeroSection() {
                 />
               </div>
 
+              {/* ── Holly on the main plate (seasonal) ── */}
+              {CHRISTMAS_THEME_ENABLED && (
+                <HollySprig className="absolute z-[12] w-[84px] top-[78px] left-[58px] -rotate-[28deg]" />
+              )}
+
               {/* ── Plato 2 — MEDIANO, abajo a la derecha (beef stir fry) ── */}
               <div
                 className="absolute w-[195px] h-[195px] rounded-full overflow-hidden z-[9] bottom-[40px] right-[20px]"
@@ -217,6 +228,16 @@ export function HeroSection() {
                 <span className="text-base">🛵</span>
                 <span>Delivery semanal</span>
               </div>
+
+              {/* ── Sticker 4 — Christmas (seasonal) ── */}
+              {CHRISTMAS_THEME_ENABLED && (
+                <div
+                  className="absolute animate-float-delay-1 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm whitespace-nowrap font-poppins bg-berry text-cream rotate-[5deg] shadow-[0_8px_24px_rgba(0,0,0,0.15)] top-[250px] -right-4"
+                >
+                  <span className="text-base">🎁</span>
+                  <span>Felices fiestas</span>
+                </div>
+              )}
 
               {/* Dots decorativos */}
               <div className="absolute w-3 h-3 rounded-full z-[5]" />

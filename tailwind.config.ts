@@ -18,6 +18,7 @@ const config: Config = {
         "leaf-light": "#c8e8a0",
         "leaf-dark": "#1e6600",
         "leaf-check": "#6aab3a",
+        berry: "#C62828",
       },
       borderRadius: {
         "4xl": "2rem",

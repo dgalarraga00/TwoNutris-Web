@@ -11,6 +11,9 @@ import {
 } from "lucide-react";
 import { weeklyMenu, type MenuItem } from "@/data/menu";
 import { DishModal, ALLERGEN_MAP } from "@/components/DishModal";
+import { CandyStripe, HollySprig } from "@/components/ChristmasDecor";
+import { Snowfall } from "@/components/Snowfall";
+import { CHRISTMAS_THEME_ENABLED } from "@/lib/seasonal";
 
 /* ── Tarjeta de platillo ────────────────────────────────────────── */
 function DishCard({
@@ -24,8 +27,12 @@ function DishCard({
     <div
       className="flex-shrink-0 flex flex-col rounded-3xl overflow-hidden snap-start transition-transform duration-300 hover:-translate-y-1 bg-white w-[340px]"
     >
+      {CHRISTMAS_THEME_ENABLED && <CandyStripe />}
       {/* Imagen */}
       <div className="relative w-full overflow-hidden aspect-[4/3]">
+        {CHRISTMAS_THEME_ENABLED && (
+          <HollySprig className="absolute z-10 top-1 left-1 w-14 -rotate-12" />
+        )}
         <Image
           src={plate.image}
           alt={plate.name}
@@ -158,6 +165,7 @@ export function HomepageMenuShowcase() {
       className="py-24 overflow-hidden relative rounded-t-[2.5rem] -mt-10"
       style={{ backgroundColor: "#144400" }}
     >
+      {CHRISTMAS_THEME_ENABLED && <Snowfall variant="onDark" />}
       {/* Blob decorativo fondo */}
       <div
         className="absolute -top-32 -right-32 pointer-events-none bg-leaf-dark"
@@ -190,7 +198,7 @@ export function HomepageMenuShowcase() {
                 color: "#144400",
               }}
             >
-              Esta semana
+              {CHRISTMAS_THEME_ENABLED ? "🎄 Esta semana" : "Esta semana"}
             </span>
             <h2
               className="text-4xl md:text-5xl leading-tight font-ibrand"

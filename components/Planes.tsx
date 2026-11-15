@@ -9,6 +9,8 @@ import {
   Leaf,
   ShieldCheck,
 } from "lucide-react";
+import { HollySprig, SantaHat } from "@/components/ChristmasDecor";
+import { CHRISTMAS_THEME_ENABLED } from "@/lib/seasonal";
 
 const PLANS = [
   {
@@ -90,7 +92,7 @@ export function Planes() {
         <span
           className="inline-block text-xs font-bold tracking-widest uppercase mb-5 px-4 py-1.5 rounded-full font-poppins bg-amber text-leaf"
         >
-          Precios
+          {CHRISTMAS_THEME_ENABLED ? "🎄 Precios" : "Precios"}
         </span>
         <h2
           className="text-5xl md:text-6xl leading-tight mb-4 font-ibrand text-leaf"
@@ -119,6 +121,14 @@ export function Planes() {
                   : "0 4px 24px rgba(20, 68, 0, 0.08)",
               }}
             >
+              {/* Seasonal decoration */}
+              {CHRISTMAS_THEME_ENABLED &&
+                (plan.featured ? (
+                  <SantaHat className="absolute z-10 -top-7 -left-4 w-16 -rotate-[24deg]" />
+                ) : (
+                  <HollySprig className="absolute z-10 -top-4 -right-3 w-14 rotate-[14deg]" />
+                ))}
+
               {/* Pildora "Más elegido" */}
               {plan.featured && (
                 <div

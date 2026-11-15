@@ -7,6 +7,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { DishModal, ALLERGEN_MAP } from "@/components/DishModal";
+import { CandyStripe, HollySprig } from "@/components/ChristmasDecor";
+import { CHRISTMAS_THEME_ENABLED } from "@/lib/seasonal";
 import { weeklyMenu, DAYS, type MenuItem, type CategoryKey } from "@/data/menu";
 
 /* ── Tarjeta de plato ───────────────────────────────────────────── */
@@ -38,7 +40,11 @@ function DishCard({ plate, onClick }: DishCardProps) {
         border: "1px solid rgba(20,68,0,0.06)",
       }}
     >
+      {CHRISTMAS_THEME_ENABLED && <CandyStripe className="h-1" />}
       <div className="relative w-full overflow-hidden aspect-[4/3]">
+        {CHRISTMAS_THEME_ENABLED && (
+          <HollySprig className="absolute z-10 top-1 left-1 w-10 -rotate-12" />
+        )}
         <Image
           src={plate.image}
           alt={plate.name}
