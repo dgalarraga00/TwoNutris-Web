@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "twonutris — comida saludable a domicilio en Guayaquil";
+export const alt = "twonutris — comida saludable a domicilio en Ecuador";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -74,7 +74,7 @@ export default function OpengraphImage() {
             lineHeight: 1.2,
           }}
         >
-          Comida saludable a domicilio en Guayaquil
+          Comida saludable a domicilio en Ecuador
         </div>
 
         {/* Pie con acento */}

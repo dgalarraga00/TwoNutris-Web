@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "twonutris",
     short_name: "twonutris",
     description:
-      "Comida saludable a domicilio en Guayaquil — planes y menús semanales.",
+      "Comida saludable a domicilio en Ecuador — planes y menús semanales.",
     start_url: "/",
     display: "standalone",
     background_color: "#FFFBE4",
